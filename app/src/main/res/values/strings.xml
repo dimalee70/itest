@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">itest</string>
+    <string name="rus">Руский</string>
+    <string name="kaz">Қазақша</string>
+    <string name="sign_up">ЖАЛҒАСТЫРУ</string>
+    <string name="selectLanguage">ТІЛДІ ТАҢДАҢЫЗ</string>
+    <string name="login">Login</string>
+</resources>
