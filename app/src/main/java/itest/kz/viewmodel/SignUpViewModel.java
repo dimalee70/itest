@@ -1,188 +1,90 @@
 package itest.kz.viewmodel;
 
 
-import android.arch.lifecycle.ViewModel;
+import android.content.Context;
 import android.databinding.ObservableField;
-import android.text.BoringLayout;
+import android.widget.Toast;
 
 import io.reactivex.Observable;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.CompositeDisposable;
+import io.reactivex.disposables.Disposable;
 import io.reactivex.functions.Action;
-import io.reactivex.functions.BiFunction;
-import itest.kz.util.RxUtils;
+import io.reactivex.functions.Consumer;
 import io.reactivex.functions.Function3;
+import itest.kz.app.AppController;
+import itest.kz.model.RegisterResponse;
+import itest.kz.network.UserService;
+import itest.kz.viewmodel.actions.ValidateAction;
+import itest.kz.util.InputValidator;
+import itest.kz.util.RxUtils;
 
 
 public class SignUpViewModel
 {
+
+
+
+/**
+ * Created by jacksvarghese on 4/10/18.
+ */
+
+
+    private static final String TAG = "LoginViewModel";
+
     public ObservableField<String> login = new ObservableField<>();
-    public ObservableField<String> password = new ObservableField<>();
-    public ObservableField<Boolean> enableSignUp;
+    public ObservableField<String> password  = new ObservableField<>();
+    public ObservableField<String> confirmPassword  = new ObservableField<>();
+    public ObservableField<String> loginErr  = new ObservableField<>();
+    public ObservableField<String> passwordErr  = new ObservableField<>();
+    public ObservableField<String> confirmPasswordErr  = new ObservableField<>();
+    public ObservableField<Boolean> enableLogin;
+    public Action signIn;
+    private Context context;
+    private CompositeDisposable compositeDisposable = new CompositeDisposable();
 
-    public Action signUp;
-
-    public SignUpViewModel()
+    public SignUpViewModel(Context context)
     {
-        Observable <Boolean> result = Observable.combineLatest
-                (RxUtils.toObservable(login),
-                        RxUtils.toObservable(password),
-                        new BiFunction<String, String, Boolean>() {
-                            @Override
-                            public Boolean apply(String s, String s2) throws Exception
-                            {
-                                int failcount = 0;
-                                if (!isValidLogin(s))
-                                    ++failcount;
-                                if (!isValidPassword(s2))
-                                    ++failcount;
 
-                                System.out.println("failcount " + failcount );
+        this.context = context;
+        Observable result = Observable.combineLatest(RxUtils.toObservable(login),
+                RxUtils.toObservable(password),
+                RxUtils.toObservable(confirmPassword), new Function3<String, String, String, Boolean>() {
+                    @Override
+                    public Boolean apply(String userName, String password, String email) throws Exception {
+                        int failCount = 0;
+                        if (!InputValidator.validateUserName(userName)) {
+                            ++failCount;
+                            loginErr.set("Username format not correct");
+                        } else {
+                            loginErr.set("");
+                        }
 
+                        if (!InputValidator.validatePassword(password)) {
+                            ++failCount;
+                            passwordErr.set("Password format not correct");
+                        } else {
+                            passwordErr.set("");
+                        }
 
-                                return failcount == 0;
-                            }
-                        });
-        enableSignUp = RxUtils.toField(result);
+                        if (!InputValidator.validateEmail(email)) {
+                            ++failCount;
+                            confirmPasswordErr.set("Email format not correct");
+                        } else {
+                            confirmPasswordErr.set("");
+                        }
+                        return failCount == 0;
+                    }});
 
-        System.out.println("enable " + enableSignUp.get());
-        signUp = new Action()
-        {
-            @Override
-            public void run() throws Exception {
-                System.out.println("login " + login.get());
-            }
-        };
-    }
-    public Boolean isValidPassword(String password)
-    {
-        return true;
-    }
+        enableLogin = RxUtils.toField(result);
 
-    public Boolean isValidLogin(String login)
-    {
-        return true;
-    }
+        ValidateAction validateAction = new ValidateAction(login, password, confirmPassword, context);
 
-
-
-
-
-
-
-
-
-
-//    private Context context;
-//    public final ObservableField<String> login = new ObservableField<>("");
-//    public final ObservableField<String> password = new ObservableField<>("");
-//    public Observable<String> loginObservable = RxUtils.toObservable(login);
-//    public  Observable<String> passwordObservable = RxUtils.toObservable(password);
-//
-//    private CompositeDisposable compositeDisposable = new CompositeDisposable();
-//    public Observable<Boolean> result;
-//
-//
-//
-//
-//
-//
-//
-//    public SignUpViewModel()
-//    {
-//
-//        init();
-//    }
-//
-//    public void init()
-//    {
-//
-//        Observable<Boolean> result = Observable
-//                .combineLatest(loginObservable,
-//                        passwordObservable,
-//                        new BiFunction<String, String, Boolean>() {
-//                            @Override
-//                            public Boolean apply(String s, String s2) throws Exception {
-//                                return isValidPassword(s) && isValidPassword(s2);
-//                            }
-//                        });
-//
-//        this.result = result;
-//        Disposable disposable = result
-//                .subscribeOn(Schedulers.io())
-//                .observeOn(AndroidSchedulers.mainThread())
-//                .subscribe(new Consumer<Boolean>() {
-//                    @Override
-//                    public void accept(Boolean aBoolean) throws Exception {
-//                        System.out.println("changed");
-//                    }
-//                }, new Consumer<Throwable>() {
-//                    @Override
-//                    public void accept(Throwable throwable) throws Exception {
-//                        System.out.println("Error");
-//                    }
-//                });
-//
-//        compositeDisposable.add(disposable);
-//    }
-//
-//
-//
-////    private Boolean isValidForm(String s, String s2)
-////    {
-////    }
-//
-//    private Boolean isValidPassword(String password)
-//    {
-//        return password != null && !password.isEmpty();
-//    }
-//
-//    private Boolean isValidLogin(String login)
-//    {
-//        return login != null && !login.isEmpty();
-//    }
-//
-//
-    public void onLoginButtonClick()
-    {
-//        login = new ObservableField<>();
-//        password = new ObservableField<>();
-//        init();
-//        System.out.println("result " + result.get());
-        System.out.println("My Login " + login.get());
-//        System.out.println("My Password " + password.get());
+        signIn = validateAction;
     }
 
+    public void destroy()
+    {
 
-
-
-//    public Context getContext()
-//    {
-//        return context;
-//    }
-
-//    public void setContext(Context context)
-//    {
-//        this.context = context;
-//    }
-//
-//    public ObservableField<String> getLogin()
-//    {
-//        return login;
-//    }
-
-//    public void setLogin(ObservableField<String> login)
-//    {
-//        this.login = login;
-//    }
-
-//    public ObservableField<String> getPassword()
-//    {
-//        return password;
-//    }
-//
-//    public void setPassword(ObservableField<String> password)
-//    {
-//        this.password = password;
-//    }
-
-
+    }
 }

@@ -1,6 +1,7 @@
 package itest.kz.view.activity;
 
 import android.databinding.DataBindingUtil;
+import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -9,11 +10,15 @@ import android.view.MenuItem;
 
 import itest.kz.R;
 import itest.kz.databinding.ActivityMainBinding;
+import itest.kz.util.FragmentHelper;
+import itest.kz.view.fragments.LoginFragment;
 import itest.kz.viewmodel.MainViewModel;
 
 public class MainActivity extends AppCompatActivity
 {
     private MainViewModel mainViewModel;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -22,6 +27,7 @@ public class MainActivity extends AppCompatActivity
         ActivityMainBinding activityMainBinding = DataBindingUtil.setContentView(this, R.layout.activity_main);
         mainViewModel = new MainViewModel(this);
         activityMainBinding.setMainViewModel(mainViewModel);
+
 
     }
 
