@@ -7,19 +7,16 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.ViewPager;
-import android.support.v7.app.AppCompatActivity;
 
 import itest.kz.R;
 import itest.kz.databinding.ActivityTestBinding;
 import itest.kz.model.Subject;
 import itest.kz.util.Constant;
-import itest.kz.view.adapters.FragmentStateAdapter;
 import itest.kz.viewmodel.TestViewModel;
 
 public class TestActivity extends FragmentActivity
 {
     public ActivityTestBinding activityTestBinding;
-    private FragmentStateAdapter fragmentStateAdapter;
     private ViewPager viewPager;
 
     @Override
@@ -29,13 +26,6 @@ public class TestActivity extends FragmentActivity
         activityTestBinding = DataBindingUtil.setContentView(this,
                 R.layout.activity_test);
         getExtrasFromIntent();
-        fragmentStateAdapter = new FragmentStateAdapter(getSupportFragmentManager(),
-                activityTestBinding.getTest().getTestList().size());
-
-        setContentView(R.layout.fragment_test);
-
-        viewPager = findViewById(R.id.pager);
-        viewPager.setAdapter(fragmentStateAdapter);
 
 //        activityTestBinding.getTest().getTestList()
     }
