@@ -1,8 +1,18 @@
 package itest.kz.viewmodel;
 
+import android.app.Application;
+import android.arch.lifecycle.AndroidViewModel;
+import android.arch.lifecycle.LiveData;
+import android.arch.lifecycle.MutableLiveData;
+import android.arch.lifecycle.ViewModel;
 import android.content.Context;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentStatePagerAdapter;
+import android.support.v4.view.ViewPager;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Observable;
 
@@ -11,25 +21,51 @@ import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.functions.Consumer;
 import itest.kz.app.AppController;
+import itest.kz.model.Answer;
 import itest.kz.model.Subject;
 import itest.kz.model.Test;
 import itest.kz.network.SubjectService;
 import itest.kz.util.Constant;
+import itest.kz.view.activity.TestActivity;
+import itest.kz.view.fragments.TestFragment;
 
-public class TestViewModel extends Observable
+public class TestViewModel extends AndroidViewModel
 {
+    static final int ITEMS = 25;
+
+    private MutableLiveData<List<Test>> listMutableLiveData;
+
     private Subject subject;
-    private List<Test> testList = new ArrayList<>();
+    public List<Test> testList ;
     private CompositeDisposable compositeDisposable = new CompositeDisposable();
     private Context context;
 
-    public TestViewModel(Context context, Subject subject)
-    {
-        this.subject = subject;
-        this.context = context;
-//        this.testList = new ArrayList<>();
-        fetchTestList();
+
+    public LiveData<List<Test>> getTests() {
+        if (listMutableLiveData == null) {
+            listMutableLiveData = new MutableLiveData<List<Test>>();
+            fetchTestList();
+        }
+        return listMutableLiveData;
     }
+
+    public TestViewModel(Application application)
+    {
+        super(application);
+        testList = new ArrayList<>();
+//        this.subject = subject;
+        fetchTestList();
+
+    }
+//
+//    public TestViewModel(Context context, Subject subject)
+//    {
+//        this.subject = subject;
+//        this.context = context;
+//        this.testList = new ArrayList<>();
+////        testList.add(new Test(1,"2121","323232",111,12,1,2,2, 1, 1, Arrays.asList(new Answer[]{new Answer(1, 1, "2", 1, 1),})));
+//        fetchTestList();
+//    }
 
     public void setTestList(List<Test> testList)
     {
@@ -76,10 +112,12 @@ public class TestViewModel extends Observable
     private void updateTestDataList(List<Test> tests) {
 
         testList.addAll(tests);
+        listMutableLiveData.setValue(testList);
+//        setTestList(testList);
 
 //        System.out.println("hello world");
-        setChanged();
-        notifyObservers();
+//        setChanged();
+//        notifyObservers();
     }
 
     public List<Test> getTestList()
@@ -100,5 +138,7 @@ public class TestViewModel extends Observable
         compositeDisposable = null;
         context = null;
     }
+
+
 }
 

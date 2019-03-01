@@ -3,11 +3,11 @@ package itest.kz.model;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
-public class Test
-{
+public class Test implements Serializable {
     @SerializedName("id")
     @Expose
     private int id;
@@ -199,7 +199,8 @@ public class Test
         this.answerType = answerType;
     }
 
-    public List<Answer> getAnswers() {
+    public List<Answer> getAnswers()
+    {
         return answers;
     }
 

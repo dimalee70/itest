@@ -3,7 +3,9 @@ package itest.kz.model;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-class Answer
+import java.io.Serializable;
+
+public  class Answer implements Serializable
 {
     @SerializedName("id")
     @Expose
@@ -21,7 +23,7 @@ class Answer
     @Expose
     private int correct;
 
-    public Answer(int id, int questionId, String answer, int correct) {
+    public Answer(int id, int questionId, String answer, int i, int correct) {
         this.id = id;
         this.questionId = questionId;
         this.answer = answer;

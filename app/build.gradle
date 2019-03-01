@@ -13,6 +13,10 @@ project.ext {
     gsonVersion = "2.8.5"
     retrofit2Version = "2.3.0"
     retrofitRxJava2Version = "1.0.0"
+    lifecycleVersion = "1.1.1"
+    katexVersion = "1.0"
+    mathViewVersion = "0.0.6"
+
 
     daggerVersion = "2.15"
     butterKnifeVersion = "8.8.1"
@@ -21,6 +25,7 @@ project.ext {
     recycleVersion =  "26.1.0"
     circleImageViewVersion = "2.1.0"
     glideVersion = "4.7.1"
+
 }
 
 
@@ -76,5 +81,14 @@ dependencies {
     implementation "com.squareup.retrofit2:converter-scalars:$retrofit2Version"
     implementation "com.squareup.retrofit2:adapter-rxjava2:$retrofit2Version"
     implementation "com.jakewharton.retrofit:retrofit2-rxjava2-adapter:$retrofitRxJava2Version"
+
+    implementation "android.arch.lifecycle:extensions:$lifecycleVersion"
+    implementation "android.arch.lifecycle:viewmodel:$lifecycleVersion"
+
+    implementation "in.hourglass.mathrender:katexmathview:$katexVersion"
+
+    implementation "io.github.kexanie.library:MathView:$mathViewVersion"
+
+
 
 }
