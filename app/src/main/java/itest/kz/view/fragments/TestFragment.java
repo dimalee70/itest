@@ -5,6 +5,8 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.app.ListFragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -68,8 +70,11 @@ public class TestFragment extends Fragment
     public void onCreate(@Nullable Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
+
         fragVal = getArguments().get("val") != null ? getArguments().getInt("val") : 1;
         test = (Test) getArguments().getSerializable("test");
+
+
 
 //        final
     }
@@ -87,16 +92,26 @@ public class TestFragment extends Fragment
         // Construct the data source
 //        List<Answer> arrayOfAnswers = new test.getAnswers();
 // Create the adapter to convert the array to views
+
+
+
+
+
+
+
         AnswerAdapter adapter = new AnswerAdapter(this.getContext(), test.getAnswers());
 // Attach the adapter to a ListView
-        ListView listView = (ListView) fragmentTestBinding.getRoot().findViewById(R.id.answer_list);
-        listView.setAdapter(adapter);
+
+
+
+
+
 
 
 //        formula_two = (MathView) fragmentTestBinding.getRoot().findViewById(R.id.formula_two);
 //        formula_two.setText(test.getQuestion());
 
-//        WebView browser = (WebView) fragmentTestBinding.getRoot().findViewById(R.id.webview);
+        WebView browser = (WebView) fragmentTestBinding.getRoot().findViewById(R.id.webview);
 ////        web.getSettings().setDomStorageEnabled(true);
 //        browser.getSettings().setDomStorageEnabled(true);
 //
@@ -106,7 +121,21 @@ public class TestFragment extends Fragment
 //        browser.getSettings().setAppCacheEnabled(true);
 //        browser.getSettings().setLoadsImagesAutomatically(true);
 //        browser.getSettings().setMixedContentMode(WebSettings.MIXED_CONTENT_ALWAYS_ALLOW);
-//        browser.loadData(Constant.MATHJAX + test.getQuestion(), "text/html; charset=utf-8", "UTF-8");
+        browser.loadData(Constant.MATHJAX + test.getQuestion(), "text/html; charset=utf-8", "UTF-8");
+
+
+
+
+
+
+
+
+        ListView listView = (ListView) fragmentTestBinding.getRoot().findViewById(R.id.answer_list);
+        listView.setAdapter(adapter);
+
+
+
+
 
 //        System.out.println(test.getQuestion());
 

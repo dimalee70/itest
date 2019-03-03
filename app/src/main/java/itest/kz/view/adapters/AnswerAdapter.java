@@ -2,6 +2,7 @@ package itest.kz.view.adapters;
 
 import android.content.Context;
 import android.databinding.DataBindingUtil;
+import android.os.Build;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.text.Html;
@@ -60,7 +61,22 @@ public class AnswerAdapter extends ArrayAdapter<Answer>
 
 //        MathView formula_two = (MathView) convertView.findViewById(R.id.formula_two);
 //        formula_two.setText(answer.getAnswer());
-        WebView webView = (WebView) convertView.findViewById(R.id.answerText2);
+
+        String tex = "<p><span class=\"math-tex\">\\(x\\in(-\\infty;0)\\cup(3;+\\infty)\\)</span></p>";
+
+        WebView webView = (WebView) convertView.findViewById(R.id.answerText);
+        webView.getSettings().setJavaScriptEnabled(true);
+        if (Build.VERSION.SDK_INT >= 19) {
+            webView.setLayerType(View.LAYER_TYPE_HARDWARE, null);
+        }
+        else {
+            webView.setLayerType(View.LAYER_TYPE_SOFTWARE, null);
+        }
+//
+        webView.loadData( Constant.MATHJAX + answer.getAnswer(), Constant.HTML, Constant.UTF_8);
+
+
+
 //        webView.setScrollBarStyle(View.SCROLLBARS_INSIDE_INSET);
 
 //        TextView textView = (TextView) convertView.findViewById(R.id.textView);
@@ -69,7 +85,7 @@ public class AnswerAdapter extends ArrayAdapter<Answer>
 //
 //      textView.setText(Html.fromHtml("<h2>Title</h2><br><p>Description here</p>", Html.FROM_HTML_MODE_COMPACT));
 
-        webView.loadData("<p>Hello</p>", Constant.HTML, Constant.UTF_8);
+
 //        Constant.MATHJAX + answer.getAnswer()
 //
 //         webView.loadDataWithBaseURL(null, answer.getAnswer(), Constant.HTML, Constant.UTF_8, null);
