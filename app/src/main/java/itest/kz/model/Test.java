@@ -1,5 +1,8 @@
 package itest.kz.model;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
@@ -7,7 +10,7 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
-public class Test implements Serializable {
+public class Test implements Serializable, Parcelable {
     @SerializedName("id")
     @Expose
     private int id;
@@ -64,6 +67,8 @@ public class Test implements Serializable {
     @Expose
     private List<Answer> answers;
 
+
+
     public Test(int id, String question, String description, int nodeId, int subjectId, int langId, int examSubjectId, int difficultyLevel, int checked, int answerType, List<Answer> answers) {
         this.id = id;
         this.question = question;
@@ -78,6 +83,10 @@ public class Test implements Serializable {
         this.answers = answers;
     }
 
+//    private Test(Parcelable in)
+//    {
+//        this.id = in.rea
+//    }
 //        public Test(int id, String question, String description, int nodeId, int subjectId, int langId, int examSubjectId, int difficultyLevel, int checked, int answerType, Date createdAt, Date updatedAt, Date deletedAt, List<Answer> answers) {
 //        this.id = id;
 //        this.question = question;
@@ -208,6 +217,22 @@ public class Test implements Serializable {
         this.answers = answers;
     }
 
+
+    public Test (Parcel source)
+    {
+        this.id = source.readInt();
+        this.question = source.readString();
+        this.description = source.readString();
+        this.nodeId = source.readInt();
+        this.subjectId = source.readInt();
+        this.langId = source.readInt();
+        this.examSubjectId = source.readInt();
+        this.difficultyLevel = source.readInt();
+        this.checked = source.readInt();
+        this.answerType = source.readInt();
+        this.answers = source.readArrayList(Answer.class.getClassLoader());
+
+    }
     @Override
     public String toString() {
         return "Test{" +
@@ -224,4 +249,38 @@ public class Test implements Serializable {
                 ", answers=" + answers +
                 '}';
     }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags)
+    {
+        dest.writeInt(id);
+        dest.writeString(question);
+        dest.writeString(description);
+        dest.writeInt(nodeId);
+        dest.writeInt(langId);
+        dest.writeInt(examSubjectId);
+        dest.writeInt(examSubjectId);
+        dest.writeInt(difficultyLevel);
+        dest.writeInt(checked);
+        dest.writeInt(answerType);
+        dest.writeList(answers);
+
+    }
+    public static final Parcelable.Creator<Test> CREATOR = new
+            Parcelable.Creator<Test>(){
+                @Override
+                public Test createFromParcel(Parcel source) {
+                    return new Test(source);
+                }
+
+                @Override
+                public Test[] newArray(int size) {
+                    return new Test[size];
+                }
+            };
 }

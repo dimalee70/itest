@@ -6,11 +6,19 @@ public interface Constant
 
     public final String ACCEPT = "application/json";
 
+    public final String ATTESTATION = "attestation";
+
+    public final String SELECTED_LECTURE_RESPONSE = "SELECTED_LECTURE_RESPONSE";
+
+    public final String ENT = "ent";
+
     public final String HTML = "text/html; charset=utf-8";
 
     public final String UTF_8 = "UTF-8";
 
     public final String SELECTED_SUBJECT = "SELECTED_SUBJECT";
+
+    public final String SELECTED_NODE = "SELECTED_NODE";
 
     public final String MATHJAX = "<script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML' async></script>";
 

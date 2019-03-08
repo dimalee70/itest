@@ -15,10 +15,12 @@ public class MyAdapter extends FragmentStatePagerAdapter
 {
     public String question;
     public List<Test> test;
+    public static int NUM;
     public MyAdapter(FragmentManager fm, List<Test> test)
     {
         super(fm);
         this.test = test;
+        this.NUM = test.size();
 //            this.question = question;
     }
 
@@ -28,7 +30,7 @@ public class MyAdapter extends FragmentStatePagerAdapter
 
 //            return ArrayListFragment.init(i);
 
-        if (i >= 0 && i < 25)
+        if (i >= 0 && i < test.size())
         {
             return TestFragment.newInstance(i, test);
         }
@@ -47,6 +49,6 @@ public class MyAdapter extends FragmentStatePagerAdapter
 
     @Override
     public int getCount() {
-        return 25;
+        return test.size();
     }
 }

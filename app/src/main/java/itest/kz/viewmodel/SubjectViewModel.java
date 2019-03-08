@@ -19,8 +19,6 @@ import itest.kz.view.fragments.SubjectFragment;
 public class SubjectViewModel
 {
     private Context context;
-    public Action ent;
-    public Action certification;
 
     List<Fragment> mFragments;
     TabLayout mTabLayout;
@@ -29,7 +27,6 @@ public class SubjectViewModel
     public SubjectViewModel(Context context)
     {
         this.context = context;
-
 
     }
 

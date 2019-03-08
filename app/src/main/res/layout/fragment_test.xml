@@ -15,25 +15,36 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:paddingRight="10dp"
+        android:paddingLeft="10dp">
 
 
 
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-
-        <WebView
-            android:id="@+id/webview"
-            android:layout_width="match_parent"
+        <android.support.v7.widget.CardView
+            android:id="@+id/cardview1"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:loadData="@{test.data}"
-            android:clickable="false"
-            tools:ignore="MissingConstraints" />
+            android:orientation="horizontal"
+            app:cardBackgroundColor="@color/colorWhite"
+            app:cardCornerRadius="5dp"
+            app:cardUseCompatPadding="true"
+            tools:layout_marginBottom="16dp">
+    <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
 
-
-    </LinearLayout>
+            <WebView
+                android:id="@+id/webview"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:loadData="@{test.data}"
+                android:clickable="false"
+                android:longClickable="false"
+                tools:ignore="MissingConstraints" />
+        </LinearLayout>
+    </android.support.v7.widget.CardView>
 
 
 
@@ -41,13 +52,25 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_weight="50">
+
+
         <ListView
             android:id="@+id/answer_list"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             />
 
+        <!--android:onClick="@{test::onItemClick}"-->
+
+
+
+
     </LinearLayout>
+
+
+
+
+
 
         <!--<WebView-->
             <!--android:id="@+id/webview2"-->

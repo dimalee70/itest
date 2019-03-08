@@ -21,6 +21,7 @@ import itest.kz.model.Subject;
 import itest.kz.model.SubjectResponce;
 import itest.kz.network.SubjectService;
 import itest.kz.util.Constant;
+import itest.kz.view.activity.MaterialsActivity;
 import itest.kz.view.activity.TestActivity;
 
 public class ItemSubjectFragmentViewModel extends BaseObservable
@@ -75,42 +76,23 @@ public class ItemSubjectFragmentViewModel extends BaseObservable
         Log.d("dcsd","On Item Click");
     }
 
-//    private void fetchSubjectList()
-//    {
-//
-//        AppController appController = new AppController();
-//        SubjectService subjectService = appController.getSubjectService();
-//
-//
-//        Disposable disposable = subjectService.getSubjects("Bearer " + Constant.ACCESSTOKEN, Constant.ACCEPT, "ru")
-//                .subscribeOn(appController.subscribeScheduler())
-//                .observeOn(AndroidSchedulers.mainThread())
-//                .subscribe(new Consumer<SubjectResponce>() {
-//                    @Override
-//                    public void accept(SubjectResponce subjectResponce) throws Exception
-//                    {
-//                        updateSubjectDataList(subjectResponce.getList());
-//                        subjectRecycler.set(View.VISIBLE);
-//                    }
-//                });
-//
-//
-//        compositeDisposable.add(disposable);
-//    }
-
-//    private void updateSubjectDataList(List<Subject> subjects) {
-//
-//        subjectList.addAll(subjects);
-//        setChanged();
-//        notifyObservers();
-//    }
-
     public void clickTest(View view)
     {
 
         Intent intent = new Intent(getContext().getApplicationContext(), TestActivity.class);
+        intent.putExtra(Constant.SELECTED_SUBJECT, subject);
 //        context.startActivity(TestActivity.fillSelectedSubject(view.getContext(), subject));
         context.startActivity(intent);
+    }
+
+    public void clickMat(View view)
+    {
+        Intent intent = new Intent(getContext().getApplicationContext(), MaterialsActivity.class);
+//        System.out.println("Subject");
+//        System.out.println(subject.toString());
+        context.startActivity(MaterialsActivity.fillSelectedSubject(view.getContext(), subject));
+//        view.getContext().getApplicationContext().fini
+//        context.startActivity(intent);
     }
 
 }

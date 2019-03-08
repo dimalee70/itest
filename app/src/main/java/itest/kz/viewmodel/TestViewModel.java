@@ -109,8 +109,9 @@ public class TestViewModel extends AndroidViewModel
         compositeDisposable.add(disposable);
     }
 
-    private void updateTestDataList(List<Test> tests) {
-
+    private void updateTestDataList(List<Test> tests)
+    {
+        testList.clear();
         testList.addAll(tests);
         listMutableLiveData.setValue(testList);
 //        setTestList(testList);

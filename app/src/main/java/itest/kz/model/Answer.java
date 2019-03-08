@@ -5,8 +5,12 @@ import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
 
-public  class Answer implements Serializable
+public  class Answer implements Serializable, Comparable<Answer>
 {
+    public Integer answerResponce;
+
+    private String letter;
+
     @SerializedName("id")
     @Expose
     private int id;
@@ -28,6 +32,14 @@ public  class Answer implements Serializable
         this.questionId = questionId;
         this.answer = answer;
         this.correct = correct;
+    }
+
+    public String getLetter() {
+        return letter;
+    }
+
+    public void setLetter(String letter) {
+        this.letter = letter;
     }
 
     public int getId() {
@@ -60,5 +72,30 @@ public  class Answer implements Serializable
 
     public void setCorrect(int correct) {
         this.correct = correct;
+    }
+
+    @Override
+    public String toString() {
+        return "Answer{" +
+                "id=" + id +
+                ", questionId=" + questionId +
+                ", answer='" + answer + '\'' +
+                ", correct=" + correct +
+                ", letter="  + letter +
+                '}';
+    }
+
+    public Integer getAnswerResponce() {
+        return answerResponce;
+    }
+
+    public void setAnswerResponce(Integer answerResponce) {
+        this.answerResponce = answerResponce;
+    }
+
+    @Override
+    public int compareTo(Answer o)
+    {
+        return this.id - o.getId();
     }
 }

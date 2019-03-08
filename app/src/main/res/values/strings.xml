@@ -5,4 +5,6 @@
     <string name="sign_up">ЖАЛҒАСТЫРУ</string>
     <string name="selectLanguage">ТІЛДІ ТАҢДАҢЫЗ</string>
     <string name="login">Login</string>
+    <string name="signUpKaz">ТІРКЕЛУ</string>
+    <string name="logInKaz">КІРУ</string>
 </resources>

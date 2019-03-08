@@ -16,6 +16,7 @@ project.ext {
     lifecycleVersion = "1.1.1"
     katexVersion = "1.0"
     mathViewVersion = "0.0.6"
+    cardViewVersion = "28.0.0"
 
 
     daggerVersion = "2.15"
@@ -89,6 +90,7 @@ dependencies {
 
     implementation "io.github.kexanie.library:MathView:$mathViewVersion"
 
+    implementation "com.android.support:cardview-v7:$cardViewVersion"
 
 
 }

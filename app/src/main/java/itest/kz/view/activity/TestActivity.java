@@ -7,14 +7,19 @@ import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.view.ViewPager;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 
 import itest.kz.R;
 import itest.kz.databinding.ActivityTestBinding;
+import itest.kz.model.Answer;
 import itest.kz.model.Subject;
 import itest.kz.model.Test;
 import itest.kz.util.Constant;
@@ -26,13 +31,18 @@ public class TestActivity extends FragmentActivity
     public ActivityTestBinding activityTestBinding;
     private TestViewModel testViewModel;
     private ArrayList<Test> tests;
+    public static ArrayList<Answer> newAnswers = new ArrayList<>();
+
 
 
 
     MyAdapter mAdapter;
-    ViewPager mPager;
+    public ViewPager mPager;
 
-
+    public ViewPager getmPager()
+    {
+        return mPager;
+    }
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -49,21 +59,41 @@ public class TestActivity extends FragmentActivity
                     setContentView(R.layout.activity_test);
                     mPager = (ViewPager) findViewById(R.id.pager);
                     mPager.setAdapter(new MyAdapter(getSupportFragmentManager(), tests));
+//                    FragmentManager.
+//                    Intent startIntent = getIntent();
+//                    int questionPosition = startIntent.getIntExtra("questionPosition", 0);
+//                    mPager.setCurrentItem(questionPosition);
                 }
             }
 
         };
+
+
+
 
         testViewModel.getTests().observe(this, listObserver);
 
         activityTestBinding = DataBindingUtil.setContentView(this,
                 R.layout.activity_test);
 
-//        getExtrasFromIntent();
+        activityTestBinding.setTest(testViewModel);
+
+//        getE
 
 
 
 
+    }
+
+    public int getPosition()
+    {
+        return mPager.getCurrentItem();
+    }
+
+
+    public void setPosition (int pos)
+    {
+        mPager.setCurrentItem(pos);
     }
 
 //    private void getExtrasFromIntent()

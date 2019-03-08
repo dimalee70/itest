@@ -4,6 +4,7 @@ import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
+import java.util.List;
 
 public class Subject implements Serializable
 {
@@ -35,7 +36,16 @@ public class Subject implements Serializable
     @Expose
     public boolean isMain;
 
-    public Subject(int id, String title, String idForGenerateTest, String colorBg, String icon, String image, boolean isMain) {
+    @SerializedName("alias")
+    @Expose
+    private String alias;
+
+    @SerializedName("siblings")
+    @Expose
+    private List<String> sublings;
+
+
+    public Subject(int id, String title, String idForGenerateTest, String colorBg, String icon, String image, boolean isMain, String alias, List<String> sublings) {
         this.id = id;
         this.title = title;
         this.idForGenerateTest = idForGenerateTest;
@@ -43,6 +53,24 @@ public class Subject implements Serializable
         this.icon = icon;
         this.image = image;
         this.isMain = isMain;
+        this.alias = alias;
+        this.sublings = sublings;
+    }
+
+    public String getAlias() {
+        return alias;
+    }
+
+    public void setAlias(String alias) {
+        this.alias = alias;
+    }
+
+    public List<String> getSublings() {
+        return sublings;
+    }
+
+    public void setSublings(List<String> sublings) {
+        this.sublings = sublings;
     }
 
     public int getId() {

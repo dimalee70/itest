@@ -52,7 +52,7 @@
                         android:id="@+id/Button01"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:onClick="@{subjectFragmentViewModel.clickMat}">
+                        android:onClick="@{subjectFragmentViewModel::clickMat}">
                     </Button>
 
                     <Button
@@ -61,7 +61,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_toRightOf="@+id/Button01"
-                        android:onClick="@{subjectFragmentViewModel.clickTest}">
+                        android:onClick="@{subjectFragmentViewModel::clickTest}">
                     </Button>
 
                 </LinearLayout>
