@@ -7,4 +7,13 @@
     <string name="login">Login</string>
     <string name="signUpKaz">ТІРКЕЛУ</string>
     <string name="logInKaz">КІРУ</string>
+    <string name="profileInfoKaz">Өңдеу</string>
+    <string name="passwordKaz">Құпиясөз</string>
+    <string name="langKaz">Тіл</string>
+    <string name="agreementKaz">Анықтама бөлімі</string>
+    <string name="nameKaz">Аты: </string>
+
+    <string name="permission_granted">Permission granted</string>
+    <string name="permission_denied">Permission denied</string>
+
 </resources>

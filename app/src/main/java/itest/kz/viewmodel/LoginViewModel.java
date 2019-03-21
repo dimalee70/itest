@@ -9,6 +9,7 @@ import io.reactivex.functions.Action;
 import io.reactivex.functions.BiFunction;
 import itest.kz.util.InputValidator;
 import itest.kz.util.RxUtils;
+import itest.kz.viewmodel.actions.LoginAction;
 
 public class LoginViewModel
 {
@@ -49,5 +50,15 @@ public class LoginViewModel
                 });
 
         enableLogin = RxUtils.toField(result);
+
+        checkLogin();
+
     }
+
+    private void checkLogin()
+    {
+        LoginAction loginAction = new LoginAction(context, login, password);
+        logIn = loginAction;
+    }
+
 }

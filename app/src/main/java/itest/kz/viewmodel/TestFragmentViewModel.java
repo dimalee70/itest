@@ -52,6 +52,7 @@ public class TestFragmentViewModel extends Observable
 
         this.answers = test.getAnswers();
         this.subjectRecycler = new ObservableInt(View.VISIBLE);
+//        subjectRecycler.notifyChange();
     }
 
 
@@ -65,7 +66,7 @@ public class TestFragmentViewModel extends Observable
 
     public String getData()
     {
-        return  test.getQuestion();
+        return  Constant.MATHJAX + test.getQuestion();
     }
     public void setTestList(List<Test> testList)
     {

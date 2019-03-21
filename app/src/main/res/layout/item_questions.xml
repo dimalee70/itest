@@ -9,20 +9,32 @@
             type="itest.kz.viewmodel.ItemQuestionsViewModel"/>
     </data>
 
-    <LinearLayout
-    android:id="@+id/rl"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:padding="3dp"
-    android:orientation="horizontal">
-        <TextView
-        android:id="@+id/btn"
-        android:layout_width="45dp"
-        android:layout_height="39dp"
-        android:background="@drawable/white_circle"
-        android:text="C"
-        android:textAlignment="center"
-        android:textColor="#fff" />
 
-    </LinearLayout>
+        <LinearLayout
+            android:id="@+id/rl"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="3dp"
+            android:clickable="false"
+            android:focusable="false"
+            android:orientation="horizontal">
+
+            <itest.kz.view.customviews.CustomTextViewBold
+                android:id="@+id/btn"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:background="@drawable/white_circle"
+
+                android:textAlignment="center"
+                android:textSize="18sp"
+                android:gravity="center"
+                android:clickable="false"
+                android:focusable="false"
+                android:textColor="@color/colorBlack" />
+            <!--android:text="@{questions.letter}"-->
+
+        </LinearLayout>
+
+
+
 </layout>

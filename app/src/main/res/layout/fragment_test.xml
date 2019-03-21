@@ -8,9 +8,25 @@
             type="itest.kz.viewmodel.TestFragmentViewModel"/>
     </data>
 
+
     <!--<ScrollView-->
         <!--android:layout_width="match_parent"-->
         <!--android:layout_height="wrap_content">-->
+
+    <!--<android.support.v7.widget.Toolbar-->
+        <!--android:id="@+id/my_toolbar"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="?attr/actionBarSize"-->
+        <!--android:background="?attr/colorPrimary"-->
+        <!--android:elevation="4dp"-->
+        <!--android:contentInsetStart="0dp"-->
+        <!--android:theme="@style/ThemeOverlay.AppCompat.ActionBar"-->
+        <!--app:popupTheme="@style/ThemeOverlay.AppCompat.Light">-->
+        <!--&lt;!&ndash;<ImageView&ndash;&gt;-->
+        <!--&lt;!&ndash;android:src="@drawable/ic_answers"&ndash;&gt;-->
+        <!--&lt;!&ndash;android:layout_width="match_parent"&ndash;&gt;-->
+        <!--&lt;!&ndash;android:layout_height="wrap_content" />&ndash;&gt;-->
+    <!--</android.support.v7.widget.Toolbar>-->
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -18,6 +34,18 @@
         android:orientation="vertical"
         android:paddingRight="10dp"
         android:paddingLeft="10dp">
+
+        <!--<android.support.v7.widget.Toolbar-->
+            <!--android:id="@+id/my_toolbar"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="?attr/actionBarSize"-->
+            <!--android:background="?attr/colorPrimary"-->
+            <!--android:elevation="4dp"-->
+            <!--android:theme="@style/ThemeOverlay.AppCompat.ActionBar"-->
+            <!--app:popupTheme="@style/ThemeOverlay.AppCompat.Light"/>-->
+
+
+
 
 
 
@@ -35,7 +63,7 @@
             android:layout_height="match_parent"
             android:orientation="horizontal">
 
-            <WebView
+            <itest.kz.util.AnswerWebView
                 android:id="@+id/webview"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -48,17 +76,23 @@
 
 
 
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_weight="50">
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/answer_list"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                tools:listitem="@layout/item_answer">
 
-        <ListView
-            android:id="@+id/answer_list"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            />
+            </android.support.v7.widget.RecyclerView>
+        <!--<ListView-->
+            <!--android:id="@+id/answer_list"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="match_parent"-->
+            <!--/>-->
 
         <!--android:onClick="@{test::onItemClick}"-->
 

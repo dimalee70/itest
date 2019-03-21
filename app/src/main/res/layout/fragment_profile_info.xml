@@ -1,0 +1,390 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+    <data>
+        <variable
+            name="profile"
+            type="itest.kz.viewmodel.ProfileInfoViewModel"/>
+    </data>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar_profile"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="?attr/colorPrimary"
+            android:elevation="4dp"
+            app:theme="@style/ToolbarColoredBackArrow"
+            android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
+            app:popupTheme="@style/ThemeOverlay.AppCompat.Light">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=""
+                android:layout_marginLeft="20dp"
+                android:textSize="20sp"
+                android:layout_gravity="left"
+                android:id="@+id/toolbar_title" />
+
+            <itest.kz.view.customviews.CustomTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Сақтау"
+                android:textSize="20sp"
+                android:textColor="@color/colorWhite"
+                android:layout_gravity="right"
+                android:layout_marginRight="30dp"
+                android:id="@+id/toolbar_text_right" />
+
+        </android.support.v7.widget.Toolbar>
+
+        <ScrollView
+            android:layout_below="@+id/toolbar_profile"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <RelativeLayout
+                    android:id="@+id/profile_info_relative"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="0dp">
+
+                    <de.hdodenhof.circleimageview.CircleImageView
+                        android:id="@+id/profilePhoto"
+                        android:layout_width="120dp"
+                        android:layout_height="120dp"
+                        android:layout_centerInParent="true"
+                        android:src="@{profile.profileImage}" />
+
+                    <ImageView
+                        android:id="@+id/photo_image_view"
+                        android:layout_width="wrap_content"
+                        android:layout_height="40dp"
+                        android:layout_below="@+id/profilePhoto"
+                        android:layout_centerHorizontal="true"
+
+                        android:src="@drawable/ic_add_profile_photo_main" />
+                    <!--android:onClick="@{profile.clickOnPhoto}"-->
+                </RelativeLayout>
+
+                <android.support.v7.widget.CardView
+                    android:id="@+id/info_cardview"
+                    android:layout_marginTop="28dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/profile_info_relative">
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="10dp">
+
+                        <RelativeLayout
+
+                            android:id="@+id/name_relative"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="20dp"
+                            android:layout_marginRight="10dp">
+
+                            <android.support.v7.widget.CardView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content">
+
+                                <RelativeLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:layout_marginTop="10dp">
+
+                                    <RelativeLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content">
+                                        <TextView
+                                            android:id="@+id/name_text"
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:text="Аты: "
+                                            android:textColor="@color/colorPrimary"/>
+
+                                        <TextView
+                                            android:id="@+id/name_asterisk"
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:layout_toRightOf="@+id/name_text"
+                                            android:text="\u002A"
+                                            android:textColor="@color/colorRed"/>
+
+                                        <EditText
+                                            android:id="@+id/name_input"
+                                            android:layout_below="@+id/name_asterisk"
+                                            android:layout_height="wrap_content"
+                                            android:hint="Сіздің атыңыз"
+                                            android:text="@{profile.name}"
+                                            android:layout_width="match_parent"
+                                            android:inputType="text"/>
+
+                                    </RelativeLayout>
+
+
+                                </RelativeLayout>
+
+                            </android.support.v7.widget.CardView>
+
+
+                        </RelativeLayout>
+
+                        <RelativeLayout
+                            android:id="@+id/surname_relative"
+                            android:layout_below="@+id/name_relative"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="20dp"
+                            android:layout_marginRight="10dp">
+
+                            <android.support.v7.widget.CardView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content">
+
+                                <RelativeLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent">
+
+                                    <RelativeLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content">
+                                        <TextView
+                                            android:id="@+id/surname_text"
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:text="Тегі: "
+                                            android:textColor="@color/colorPrimary"/>
+
+                                        <TextView
+                                            android:id="@+id/surname_asterisk"
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:layout_toRightOf="@+id/surname_text"
+                                            android:text="\u002A"
+                                            android:textColor="@color/colorRed"/>
+
+                                        <EditText
+                                            android:id="@+id/surname_input"
+                                            android:layout_below="@+id/surname_asterisk"
+                                            android:layout_height="wrap_content"
+                                            android:hint="Сіздің тегіңіз"
+                                            android:text="@{profile.surname}"
+                                            android:layout_width="match_parent"
+                                            android:inputType="text"/>
+
+                                    </RelativeLayout>
+
+
+                                </RelativeLayout>
+
+                            </android.support.v7.widget.CardView>
+
+
+                        </RelativeLayout>
+
+                        <RelativeLayout
+                            android:id="@+id/date_relative"
+                            android:layout_below="@+id/surname_relative"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="20dp"
+                            android:layout_marginRight="10dp"
+                            android:layout_marginBottom="10dp">
+
+                            <android.support.v7.widget.CardView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content">
+
+                                <RelativeLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent">
+
+                                    <RelativeLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content">
+                                        <TextView
+                                            android:id="@+id/date_text"
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:text="Туған кун, жыл, ай: "
+                                            android:textColor="@color/colorPrimary"/>
+
+                                        <TextView
+                                            android:id="@+id/date_asterisk"
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:layout_toRightOf="@+id/date_text"
+                                            android:text="\u002A"
+                                            android:textColor="@color/colorRed"/>
+
+                                        <EditText
+                                            android:id="@+id/date_input"
+                                            android:layout_below="@+id/date_asterisk"
+                                            android:layout_height="wrap_content"
+                                            android:hint="Туған күніңіз (КК.АА.ЖЖЖЖ)"
+                                            android:text="@{profile.date}"
+                                            android:layout_width="match_parent"
+                                            android:inputType="text"/>
+
+                                    </RelativeLayout>
+
+
+                                </RelativeLayout>
+
+                            </android.support.v7.widget.CardView>
+
+                        </RelativeLayout>
+
+                    </RelativeLayout>
+
+                </android.support.v7.widget.CardView>
+
+                <TextView
+                    android:id="@+id/login_email_text"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Логин және Email:"
+                    android:layout_below="@+id/info_cardview"
+                    android:textColor="@color/colorBlack"
+                    android:layout_marginLeft="9dp"
+                    android:layout_marginTop="19dp"/>
+
+                <android.support.v7.widget.CardView
+                    android:id="@+id/login_cardview"
+                    android:layout_marginTop="19dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/login_email_text">
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="10dp">
+
+                        <RelativeLayout
+                            android:id="@+id/login_relative"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="20dp"
+                            android:layout_marginRight="10dp">
+
+                            <android.support.v7.widget.CardView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content">
+
+                                <RelativeLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent">
+
+                                    <RelativeLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginTop="10dp">
+                                        <TextView
+                                            android:id="@+id/login_text"
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:text="Логин: "
+                                            android:textColor="@color/colorPrimary"/>
+
+                                        <TextView
+                                            android:id="@+id/login_asterisk"
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:layout_toRightOf="@+id/login_text"
+                                            android:text="\u002A"
+                                            android:textColor="@color/colorRed"/>
+
+                                        <EditText
+                                            android:id="@+id/login_input"
+                                            android:layout_below="@+id/login_asterisk"
+                                            android:layout_height="wrap_content"
+                                            android:hint="Сіздің логиніңіз"
+                                            android:layout_width="match_parent"
+                                            android:inputType="text"/>
+
+                                    </RelativeLayout>
+
+
+                                </RelativeLayout>
+
+                            </android.support.v7.widget.CardView>
+
+
+                        </RelativeLayout>
+
+                        <RelativeLayout
+                            android:id="@+id/email_relative"
+                            android:layout_below="@+id/login_relative"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="20dp"
+                            android:layout_marginRight="10dp">
+
+                            <android.support.v7.widget.CardView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content">
+
+                                <RelativeLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent">
+
+                                    <RelativeLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content">
+                                        <TextView
+                                            android:id="@+id/email_text"
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:text="Email: "
+                                            android:textColor="@color/colorPrimary"/>
+
+                                        <TextView
+                                            android:id="@+id/email_asterisk"
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:layout_toRightOf="@+id/email_text"
+                                            android:text="\u002A"
+                                            android:textColor="@color/colorRed"/>
+
+                                        <EditText
+                                            android:id="@+id/email_input"
+                                            android:layout_below="@+id/email_asterisk"
+                                            android:layout_height="wrap_content"
+                                            android:hint="Сіздің email-іңіз"
+                                            android:layout_width="match_parent"
+                                            android:inputType="text"/>
+
+                                    </RelativeLayout>
+
+
+                                </RelativeLayout>
+
+                            </android.support.v7.widget.CardView>
+
+
+                        </RelativeLayout>
+
+                    </RelativeLayout>
+
+                </android.support.v7.widget.CardView>
+
+            </RelativeLayout>
+
+        </ScrollView>
+
+    </RelativeLayout>
+
+</layout>

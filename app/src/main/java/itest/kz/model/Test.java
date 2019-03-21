@@ -10,7 +10,11 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
-public class Test implements Serializable, Parcelable {
+public class Test implements Serializable, Parcelable
+{
+
+    public static int num = 1;
+
     @SerializedName("id")
     @Expose
     private int id;
@@ -223,13 +227,13 @@ public class Test implements Serializable, Parcelable {
         this.id = source.readInt();
         this.question = source.readString();
         this.description = source.readString();
-        this.nodeId = source.readInt();
-        this.subjectId = source.readInt();
-        this.langId = source.readInt();
-        this.examSubjectId = source.readInt();
-        this.difficultyLevel = source.readInt();
-        this.checked = source.readInt();
-        this.answerType = source.readInt();
+//        this.nodeId = source.readInt();
+//        this.subjectId = source.readInt();
+//        this.langId = source.readInt();
+//        this.examSubjectId = source.readInt();
+//        this.difficultyLevel = source.readInt();
+//        this.checked = source.readInt();
+//        this.answerType = source.readInt();
         this.answers = source.readArrayList(Answer.class.getClassLoader());
 
     }
@@ -261,13 +265,13 @@ public class Test implements Serializable, Parcelable {
         dest.writeInt(id);
         dest.writeString(question);
         dest.writeString(description);
-        dest.writeInt(nodeId);
-        dest.writeInt(langId);
-        dest.writeInt(examSubjectId);
-        dest.writeInt(examSubjectId);
-        dest.writeInt(difficultyLevel);
-        dest.writeInt(checked);
-        dest.writeInt(answerType);
+//        dest.writeInt(nodeId);
+//        dest.writeInt(langId);
+//        dest.writeInt(examSubjectId);
+//        dest.writeInt(examSubjectId);
+//        dest.writeInt(difficultyLevel);
+//        dest.writeInt(checked);
+//        dest.writeInt(answerType);
         dest.writeList(answers);
 
     }

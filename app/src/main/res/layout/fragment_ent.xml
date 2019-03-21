@@ -1,45 +1,218 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout>
+<layout xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
     <data>
         <variable
             name="ent"
             type="itest.kz.viewmodel.SubjectFragmentViewModel"/>
     </data>
 
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+
+    <!--<NestedScrollView-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:orientation = "vertical">-->
+
+    <ScrollView android:id="@+id/scroll_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <itest.kz.view.customviews.CustomTextView
-            style="@style/TextViewParagraph"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:text="
-        This is your blank fragment. Extend it with anything you see fit.
-        \n \n
-        Please notice that this haven't been initialized using Data Binding Library.
-        \n \n
-        Initialize it with proper ViewModel and such.
-        \n \n
-        You can refer to https://docs.google.com/presentation/d/1IyzTFO4-vBxSd-mog7k6yUKP8wVOGFqx7SuUfwY93bk for the style guide"
-            android:textAlignment="center"/>
 
-        <itest.kz.view.customviews.CustomTextView
+
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:gravity="center"
-            android:text="below are some sample of utils class usage"/>
+            android:layout_height="wrap_content">
 
-        <Button
-            android:id="@+id/btn_get_image"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:text="GET IMAGE"/>
+            <RelativeLayout
+                android:id="@+id/text_main_relative"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Негізгі пәндер"/>
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/main_subject_relative"
+                android:layout_width="match_parent"
+                android:layout_below="@+id/text_main_relative"
+                android:layout_height="wrap_content">
+
+                <android.support.v7.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="16dp"
+
+                    android:background="@color/colorWhite"
+                    >
+                    <android.support.v7.widget.RecyclerView
+                        android:id="@+id/list_subject_main"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:clipToPadding="false"
+
+                        android:background="@color/colorWhite"
+                        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+                        tools:listitem="@layout/item_ent"
+                        app:visibility="@{ent.subjectRecycler}"
+                        android:clickable="true"/>
+
+                    <!--android:scrollbars="vertical"-->
+                </android.support.v7.widget.CardView>
+
+            </RelativeLayout>
+
+
+
+
+            <RelativeLayout
+                android:id="@+id/text_relative"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/main_subject_relative">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Таңдау пәндері"/>
+            </RelativeLayout>
+
+            <!--<ScrollView-->
+                <!--android:layout_below="@+id/text_relative"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content">-->
+
+
+            <RelativeLayout
+                android:layout_below="@+id/text_relative"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                >
+
+                <android.support.v7.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="16dp"
+
+                    android:background="@color/colorWhite"
+                    >
+
+                    <RelativeLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+                        <android.support.v7.widget.RecyclerView
+                            android:id="@+id/list_subject"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:clipToPadding="false"
+                            android:background="@color/colorWhite"
+                            app:layout_behavior="@string/appbar_scrolling_view_behavior"
+                            tools:listitem="@layout/item_ent"
+                            app:visibility="@{ent.subjectRecycler}"
+                            android:clickable="true"/>
+                        <!--android:scrollbars="vertical"-->
+
+
+                        <!--<ScrollView-->
+                            <!--android:layout_width="match_parent"-->
+                            <!--android:layout_height="wrap_content"-->
+                            <!--android:layout_below="@+id/list_subject"-->
+                            <!--&gt;-->
+                        <android.support.v7.widget.CardView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/list_subject"
+                            android:background="@color/colorWhite"
+                            >
+
+
+
+                            <RelativeLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content">
+
+                                <TextView
+                                    android:id="@+id/text_view"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:textAlignment="center"
+                                    android:text="Отмена"
+                                    android:textStyle="bold"
+                                    android:textSize="16dp"
+                                    android:layout_centerInParent="true"
+                                    android:layout_margin="10dp"
+                                    android:onClick="@{() ->ent.onClickCancel()}"
+                                    />
+                                <!--android:onClick="@{ent.onClick}"-->
+                            </RelativeLayout>
+
+
+
+
+                        </android.support.v7.widget.CardView>
+
+                        <!--</ScrollView>-->
+                    </RelativeLayout>
+
+
+
+
+
+
+                </android.support.v7.widget.CardView>
+
+            </RelativeLayout>
+
+            <!--</ScrollView>-->
+
+        </RelativeLayout>
+
+
+        <!--android:onClick="@{ent.showHideButtons}"-->
+        <!--app:visibility="@{ent.subjectRecycler}"-->
+
+        <!--<itest.kz.view.customviews.CustomTextView-->
+            <!--style="@style/TextViewParagraph"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_gravity="center_horizontal"-->
+            <!--android:text="-->
+        <!--This is your blank fragment. Extend it with anything you see fit.-->
+        <!--\n \n-->
+        <!--Please notice that this haven't been initialized using Data Binding Library.-->
+        <!--\n \n-->
+        <!--Initialize it with proper ViewModel and such.-->
+        <!--\n \n-->
+        <!--You can refer to https://docs.google.com/presentation/d/1IyzTFO4-vBxSd-mog7k6yUKP8wVOGFqx7SuUfwY93bk for the style guide"-->
+            <!--android:textAlignment="center"/>-->
+
+        <!--<itest.kz.view.customviews.CustomTextView-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_gravity="center"-->
+            <!--android:gravity="center"-->
+            <!--android:text="below are some sample of utils class usage"/>-->
+
+        <!--<Button-->
+            <!--android:id="@+id/btn_get_image"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_gravity="center"-->
+            <!--android:text="GET IMAGE"/>-->
 
     </LinearLayout>
+
+    <!--</NestedScrollView>-->
+
+    </ScrollView>
 
 </layout>

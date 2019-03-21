@@ -9,7 +9,10 @@ import android.graphics.LightingColorFilter;
 import android.graphics.PorterDuff;
 import android.graphics.PorterDuffColorFilter;
 import android.graphics.drawable.Drawable;
+import android.graphics.drawable.DrawableContainer;
 import android.graphics.drawable.GradientDrawable;
+import android.graphics.drawable.LayerDrawable;
+import android.graphics.drawable.StateListDrawable;
 import android.support.annotation.NonNull;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.RecyclerView;
@@ -26,6 +29,7 @@ import itest.kz.databinding.ItemQuestionsBinding;
 import itest.kz.databinding.ItemResultBinding;
 import itest.kz.model.Answer;
 import itest.kz.model.Test;
+import itest.kz.util.LETTERS;
 import itest.kz.viewmodel.ItemQuestionsViewModel;
 import itest.kz.viewmodel.ItemResultViewModel;
 
@@ -33,6 +37,7 @@ public class QuestionsAdapter extends RecyclerView.Adapter<QuestionsAdapter.Ques
 //        RecyclerView.Adapter<ResultAdapter.ResultAdapterViewHolder>
 {
 
+    private LETTERS[] letters = LETTERS.values();
     private List<Answer> answers;
     private Context context;
     private ItemQuestionsBinding itemQuestionsBinding;
@@ -51,7 +56,9 @@ public class QuestionsAdapter extends RecyclerView.Adapter<QuestionsAdapter.Ques
                 .inflate(LayoutInflater.from(viewGroup.getContext()), R.layout.item_questions,viewGroup,false);
 
 
-
+//        String text = answers.get(i).getLetter();
+//        itemQuestionsBinding.btn.setText(letters[i].toString());
+//        System.out.println(i);
 
 
 //        setTextViewDrawableColor(txt, Color.BLACK);
@@ -71,25 +78,37 @@ public class QuestionsAdapter extends RecyclerView.Adapter<QuestionsAdapter.Ques
     public void onBindViewHolder(@NonNull QuestionAdapterViewHolder questionAdapterViewHolder, int i)
     {
 //
+//        notifyItemChanged(i);
         questionAdapterViewHolder.bindAnswer(answers.get(i));
-        if (answers.get(i).getAnswerResponce() != null) {
-            if (answers.get(i).getAnswerResponce() == answers.get(i).getId()
-            && answers.get(i).getCorrect() == 1)
-            {
-                ColorFilter filter = new LightingColorFilter(Color.YELLOW, Color.GREEN);
-//        myIcon.setColorFilter(filter);
+        itemQuestionsBinding.btn.setText(letters[i].toString());
+//        System.out.println("changed");
 
-                Drawable txt = itemQuestionsBinding.btn.getBackground();
-                txt.setColorFilter(filter);
+        if (answers.get(i).getAnswerResponce() != null)
+        {
+//            if (answers.get(i).getAnswerResponce() == answers.get(i).getId()
+//            && answers.get(i).getCorrect() == 1)
+//            {
 
-            } else {
-                ColorFilter filter = new LightingColorFilter(Color.GREEN, Color.BLACK);
-//        myIcon.setColorFilter(filter);
+            StateListDrawable gradientDrawable = (StateListDrawable) itemQuestionsBinding.btn.getBackground();
+            DrawableContainer.DrawableContainerState drawableContainerState = (DrawableContainer.DrawableContainerState) gradientDrawable.getConstantState();
+            Drawable[] children = drawableContainerState.getChildren();
+            GradientDrawable selectedItem = (GradientDrawable) children[0];
+//            LayerDrawable unselectedItem = (LayerDrawable) children[1];
+//            GradientDrawable selectedDrawable = (GradientDrawable) selectedItem.getDrawable(0);
+//            GradientDrawable unselectedDrawable = (GradientDrawable) unselectedItem.getDrawable(0);
+//            selectedItem.setStroke(1, Color.RED);
 
-                Drawable txt = itemQuestionsBinding.btn.getBackground();
-                txt.setColorFilter(filter);
+            selectedItem.setColor(Color.parseColor("#D2D0D3"));
+
+
+
             }
-        }
+//        else
+//            {
+//            ColorFilter filter = new LightingColorFilter(Color.GREEN, Color.BLACK);
+//            Drawable txt = itemQuestionsBinding.btn.getBackground();
+//            txt.setColorFilter(filter);
+//        }
 
 
     }
@@ -104,7 +123,8 @@ public class QuestionsAdapter extends RecyclerView.Adapter<QuestionsAdapter.Ques
         return answers;
     }
 
-    public void setAnswerList(List<Answer> answerList) {
+    public void setAnswerList(List<Answer> answerList)
+    {
         this.answers = answerList;
         notifyDataSetChanged();
     }

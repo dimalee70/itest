@@ -33,7 +33,8 @@ public class TestAdapter extends RecyclerView.Adapter<TestAdapter.TestAdapterVie
     @Override
     public void onBindViewHolder(@NonNull TestAdapterViewHolder testAdapterViewHolder, int i)
     {
-        testAdapterViewHolder.bindAnswer(answerList.get(i));
+        testAdapterViewHolder.bindAnswer(answerList.get(i), answerList);
+
     }
 
     @Override
@@ -92,13 +93,14 @@ public class TestAdapter extends RecyclerView.Adapter<TestAdapter.TestAdapterVie
             this.itemAnswerBinding = itemAnswerBinding;
         }
 
-        void bindAnswer(Answer answer)
+        void bindAnswer(Answer answer, List<Answer> answerList)
         {
             if (itemAnswerBinding.getAnswer() == null)
                 itemAnswerBinding.setAnswer
-                        (new ItemAnswerViewModel(itemView.getContext(), answer));
+                        (new ItemAnswerViewModel(itemView.getContext(), answer, answerList));
             else
                 itemAnswerBinding.getAnswer().setAnswer(answer);
+
         }
 //        ItemSubjectBinding itemSubjectBinding;
 

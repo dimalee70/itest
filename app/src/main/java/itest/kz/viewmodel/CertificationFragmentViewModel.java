@@ -33,13 +33,17 @@ public class CertificationFragmentViewModel extends Observable
 
 
     private CompositeDisposable compositeDisposable = new CompositeDisposable();
-//    public Action hideShow;
+    public Action hideShow;
 
     public CertificationFragmentViewModel(Context context)
     {
         this.context = context;
         this.subjectRecycler = new ObservableInt(View.GONE);
         this.subjectList = new ArrayList<>();
+//        showHideButtons = () ->
+//                {
+//                    System.out.println("Hello World");
+//                };
         fetchSubjectList();
     }
 
@@ -50,7 +54,8 @@ public class CertificationFragmentViewModel extends Observable
         SubjectService subjectService = appController.getSubjectService();
 
 
-        Disposable disposable = subjectService.getSubjects("Bearer " + Constant.ACCESSTOKEN, Constant.ACCEPT, "ru")
+        Disposable disposable = subjectService.getSubjects(Constant.ATTESTATION,
+                "Bearer " + Constant.ACCESSTOKEN, Constant.ACCEPT, "ru")
                 .subscribeOn(appController.subscribeScheduler())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Consumer<SubjectResponce>() {

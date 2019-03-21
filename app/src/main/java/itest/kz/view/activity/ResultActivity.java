@@ -34,7 +34,7 @@ public class ResultActivity extends AppCompatActivity implements Observer
     protected void onCreate(@Nullable Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
-        test = (Test)getIntent().getSerializableExtra("test");
+//        test = (Test)getIntent().getSerializableExtra("test");
         tests = getIntent().getParcelableArrayListExtra("tests");
 
         activityResultBinding = DataBindingUtil
@@ -49,7 +49,33 @@ public class ResultActivity extends AppCompatActivity implements Observer
     {
         resultViewModel = new ResultViewModel(this,tests);
         activityResultBinding.setResult(resultViewModel);
+
         ResultAdapter resultAdapter = new ResultAdapter(tests, this);
+
+//        recyclerView.setOnClickListener();
+
+//        resultAdapter.setOnItemListener(new ResultAdapter.OnItemClickListener()
+//        {
+//            @Override
+//            public void onItemClick(Test test,r )
+//            {
+//
+//            }
+//        });
+//        resultAdapter.setOnItemListener(new ResultAdapter.OnItemClickListener()
+//        {
+//            @Override
+//            public void onItemClick(Test test, List<Test> testList)
+//            {
+//                tests = testList;
+//                Intent intent = new Intent(getApplicationContext(), TestActivity.class);
+//////        intent.putExtra()
+//                intent.putExtra(Constant.SELECTED_TEST_POSITION_ID, num );
+//////        context.startActivity(TestActivity.fillSelectedSubject(view.etContext(), subject));
+//////                StartActivityForResult(intent, 0);
+////                context.startActivity(intent);
+//            }
+//        });
         recyclerView.setAdapter(resultAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
 

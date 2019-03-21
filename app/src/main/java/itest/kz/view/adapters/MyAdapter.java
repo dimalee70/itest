@@ -24,15 +24,23 @@ public class MyAdapter extends FragmentStatePagerAdapter
 //            this.question = question;
     }
 
+
     @Override
     public Fragment getItem(int i)
     {
 
 //            return ArrayListFragment.init(i);
 
-        if (i >= 0 && i < test.size())
+
+        if (i >= 0 && i < NUM)
         {
+//            TestFragment testFragment =
+//                    TestFragment.newInstance(i, test);
+//            if (i == test.size() - 1)
+//                testFragment.setTa
+//            Fragment fragment = TestFragment.newInstance(i, test);
             return TestFragment.newInstance(i, test);
+
         }
         return null;
 //            switch (i)

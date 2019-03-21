@@ -2,6 +2,30 @@ package itest.kz.util;
 
 public interface Constant
 {
+    public final String MULTIPART = "multipart/form-data";
+
+    public static String camera_permission_message   = "Access to camera is needed";
+
+    public static final int HTTP_NO_CONTENT       = 204;
+
+    public static final int CAMERA_REQUEST_CODE   = 999;
+
+    public static final int LOCATION_REQUEST_CODE = 998;
+
+    public static final int SPLASH_DISPLAY_LENGTH = 500;
+
+    public final String PROFILE = "PROFILE";
+
+    public final String EMPTY_PHOTO = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT-FDni2p-OnoELD2aN9f7JLkhqv4Dc02eTIjzlzFbhePuPVbDNbA";
+
+    public final  String MY_PREF = "MY_PREF";
+
+    public final String ACCESS_TOKEN = "ACCESS_TOKEN";
+
+    public final String IS_STARTED_FIRST = "IS_STARTED_FIRST";
+
+    public final String SELECTED_TEST_POSITION_ID = "SELECTED_TEST_POSITION_ID";
+
     public final  String BASE_URL = "http://dev.itest.kz/";
 
     public final String ACCEPT = "application/json";

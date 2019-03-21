@@ -7,21 +7,21 @@ public class LoginResponse
 {
     @SerializedName("access_token")
     @Expose
-    private String access_token;
+    private String accessToken;
 
-    public LoginResponse(String access_token, String errorMessage)
+    public LoginResponse(String accessToken, String errorMessage)
     {
-        this.access_token = access_token;
+        this.accessToken = accessToken;
     }
 
-    public String getAccess_token()
+    public String getAccessToken()
     {
-        return access_token;
+        return accessToken;
     }
 
-    public void setAccess_token(String access_token)
+    public void setAccessToken(String access_token)
     {
-        this.access_token = access_token;
+        this.accessToken = accessToken;
     }
 
 }

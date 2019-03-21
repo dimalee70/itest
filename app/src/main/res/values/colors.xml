@@ -7,4 +7,10 @@
     <color name="colorPrimaryLight">#C6E6FC</color>
     <color name="colorFrame">#0D5685</color>
     <color name="colorText">#D8D8D8</color>
+    <color name="colorBlack">#000000</color>
+    <color name="colorUnselectedTab">#D8D8D8</color>
+    <color name="colorDivider">#D8D8D8</color>
+    <color name="colorPhotoIcon">#E2ECF2</color>
+    <color name="colorRed">#FF0000</color>
+    <color name="colorGray">#D9DCE4FF</color>
 </resources>

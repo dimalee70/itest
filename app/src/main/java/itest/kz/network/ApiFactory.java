@@ -1,5 +1,8 @@
 package itest.kz.network;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+
 import itest.kz.model.Subject;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
@@ -11,9 +14,13 @@ public class ApiFactory
 {
     public static UserService create()
     {
+//        01.01.1970
+        Gson gson = new GsonBuilder()
+                .setDateFormat("dd.mm.yyyy")
+                .create();
 
         Retrofit retrofit = new Retrofit.Builder().baseUrl(BASE_URL)
-                .addConverterFactory(GsonConverterFactory.create())
+                .addConverterFactory(GsonConverterFactory.create(gson))
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .build();
         return retrofit.create(UserService.class);

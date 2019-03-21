@@ -8,6 +8,8 @@ import java.util.List;
 
 public class Subject implements Serializable
 {
+
+    private int isSelected = 0;
     @SerializedName("id")
     @Expose
     public int id;
@@ -55,6 +57,16 @@ public class Subject implements Serializable
         this.isMain = isMain;
         this.alias = alias;
         this.sublings = sublings;
+    }
+
+    public int getIsSelected()
+    {
+        return isSelected;
+    }
+
+    public void setIsSelected(int isSelected)
+    {
+        this.isSelected = isSelected;
     }
 
     public String getAlias() {
@@ -137,6 +149,7 @@ public class Subject implements Serializable
                 ", idForGenerateTest='" + idForGenerateTest + '\'' +
                 ", colorBg='" + colorBg + '\'' +
                 ", icon='" + icon + '\'' +
+                ", subkings = " + sublings.toString() + '\''+
                 ", image='" + image + '\'' +
                 ", isMain=" + isMain +
                 '}';

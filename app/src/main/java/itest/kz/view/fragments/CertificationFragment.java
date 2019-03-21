@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -16,8 +17,12 @@ import java.util.Observer;
 
 import itest.kz.R;
 import itest.kz.databinding.FragmentCertificationBinding;
+
+
 import itest.kz.view.adapters.SubjectAdapter;
 import itest.kz.viewmodel.CertificationFragmentViewModel;
+
+import static android.graphics.drawable.ClipDrawable.HORIZONTAL;
 
 public class CertificationFragment extends Fragment implements Observer
 {
@@ -51,9 +56,14 @@ public class CertificationFragment extends Fragment implements Observer
         }
     }
 
+
+
     // set up the list of user with recycler view
     private void setUpListOfSbjectsView(RecyclerView listSubject) {
         SubjectAdapter subjectAdapter = new SubjectAdapter();
+        DividerItemDecoration itemDecor = new DividerItemDecoration(getContext(), HORIZONTAL);
+//        itemDecor
+        listSubject.addItemDecoration(itemDecor);
         listSubject.setAdapter(subjectAdapter);
         listSubject.setLayoutManager(new LinearLayoutManager(getContext()));
     }

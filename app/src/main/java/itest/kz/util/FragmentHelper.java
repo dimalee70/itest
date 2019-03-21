@@ -14,7 +14,7 @@ public class FragmentHelper
     public static void openFragment(Context context, int frameId, Fragment fragment) {
         getFragmentManager(context).beginTransaction()
                 .replace(frameId, fragment, fragment.getClass().toString())
-//                .addToBackStack(null)
+                .addToBackStack(null)
                 .commit();
     }
 

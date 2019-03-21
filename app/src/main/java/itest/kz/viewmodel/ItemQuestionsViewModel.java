@@ -15,11 +15,14 @@ import java.util.List;
 
 import itest.kz.R;
 import itest.kz.model.Answer;
+import itest.kz.util.LETTERS;
 
 public class ItemQuestionsViewModel extends BaseObservable
 {
     private Context context;
     private Answer answer;
+    public LETTERS [] letters = LETTERS.values();
+    private int i = 0;
 
     public ItemQuestionsViewModel(Context context, Answer answers)
     {
@@ -29,6 +32,11 @@ public class ItemQuestionsViewModel extends BaseObservable
 //        Drawable myIcon = ContextCompat.getDrawable(context, R.drawable.white_circle);
 //        ColorFilter filter = new LightingColorFilter( Color.BLACK, Color.BLACK);
 //        myIcon.setColorFilter(filter);
+    }
+
+    public String getLetter()
+    {
+        return (answer.getLetter() != "" || answer.getLetter() == null)? answer.getLetter() : letters[i++].toString();
     }
 
     public Context getContext()
@@ -54,4 +62,5 @@ public class ItemQuestionsViewModel extends BaseObservable
 
         notifyChange();
     }
+//    public boolean exists
 }

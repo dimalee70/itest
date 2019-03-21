@@ -4,8 +4,10 @@ import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
-public  class Answer implements Serializable, Comparable<Answer>
+public  class Answer implements Serializable
 {
     public Integer answerResponce;
 
@@ -85,7 +87,7 @@ public  class Answer implements Serializable, Comparable<Answer>
                 '}';
     }
 
-    public Integer getAnswerResponce() {
+    public Integer  getAnswerResponce() {
         return answerResponce;
     }
 
@@ -93,9 +95,9 @@ public  class Answer implements Serializable, Comparable<Answer>
         this.answerResponce = answerResponce;
     }
 
-    @Override
-    public int compareTo(Answer o)
-    {
-        return this.id - o.getId();
-    }
+//    @Override
+//    public int compareTo(Answer o)
+//    {
+//        return this.id - o.getId();
+//    }
 }

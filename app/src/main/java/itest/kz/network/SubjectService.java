@@ -10,12 +10,14 @@ import itest.kz.model.SubjectResponce;
 import itest.kz.model.Test;
 import retrofit2.http.GET;
 import retrofit2.http.Header;
+import retrofit2.http.Part;
 import retrofit2.http.Path;
 
 public interface SubjectService
 {
-    @GET("api/attestation")
-    Observable<SubjectResponce> getSubjects(@Header("Authorization") String authorization,
+    @GET("api/{tag}")
+    Observable<SubjectResponce> getSubjects(@Path("tag") String tag,
+                                            @Header("Authorization") String authorization,
                                             @Header("Accept") String accept,
                                             @Header("X-Localization") String lang);
 
