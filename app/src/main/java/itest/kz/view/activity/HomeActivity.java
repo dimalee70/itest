@@ -127,13 +127,3 @@ public class HomeActivity extends AppCompatActivity
         finish();
     }
 }
-
-
-//    public void accept(RegisterResponse registerResponse) throws Exception
-//    {
-//        Toast toast;
-//        toast = Toast.makeText(context.getApplicationContext(),
-//                registerResponse.getMessage(),
-//                Toast.LENGTH_LONG);
-//        toast.show();
-//    }

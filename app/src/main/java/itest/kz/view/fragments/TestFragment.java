@@ -23,6 +23,7 @@ import java.util.Observer;
 import itest.kz.R;
 import itest.kz.databinding.FragmentTestBinding;
 import itest.kz.model.Answer;
+import itest.kz.model.Question;
 import itest.kz.model.Test;
 import itest.kz.view.activity.ResultActivity;
 import itest.kz.view.activity.TestActivity;
@@ -36,44 +37,37 @@ public class TestFragment extends Fragment implements Observer
     int mLastSelectedIndex = -1;
     private FragmentTestBinding fragmentTestBinding;
     private TestFragmentViewModel testFragmentViewModel;
-    private List<Test> testList;
-    private Test test;
+    public  Integer currentPosition;
+//    private List<Test> testList;
+//    private Test test;
+
+    private List<Question> testList;
+    private Question test;
 
     public boolean isStartedRecycle = false;
 
 
-    public Test getTest()
+//    public Test getTest()
+//    {
+//        return test;
+//    }
+
+//    public void setTest(Test test)
+//    {
+//        this.test = test;
+//    }
+
+
+    public void setTest(Question test)
+{
+    this.test = test;
+}
+
+    public Question getTest()
     {
         return test;
     }
 
-    public void setTest(Test test)
-    {
-        this.test = test;
-    }
-
-//    @Override
-//    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater)
-//    {
-//        super.onCreateOptionsMenu(menu, inflater);
-//        inflater.inflate(R.menu.main, menu);
-//    }
-
-    //    @Override
-//    public void onCreate(@Nullable Bundle savedInstanceState)
-//    {
-//        if (!isStarted)
-//        {
-//            super.onCreate(savedInstanceState);
-//            this.test = (Test) getArguments().getSerializable("test");
-////        tests = savedInstanceState.getParcelableArrayList("tests");
-//
-//            this.testList = getArguments().getParcelableArrayList("tests");
-//            isStarted = true;
-//        }
-
-//        System.out.println(testList);
-//    }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item)
@@ -83,8 +77,10 @@ public class TestFragment extends Fragment implements Observer
             case R.id.menu_github:
 
                 Intent intent = new Intent(getContext(), ResultActivity.class);
-//            intent.putExtra("test",(Serializable) test);
-                intent.putExtra("tests", (ArrayList<Test>) testList);
+
+//                intent.putExtra("tests", (ArrayList<Test>) testList);
+
+                intent.putExtra("tests", (ArrayList<Question>) testList);
 //                intent.setFlags(Intent.FLAG_ACTIVITY_BROUGHT_TO_FRONT | Intent.FLAG_ACTIVITY_SINGLE_TOP | Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
                 startActivity(intent);
                 return true;
@@ -96,12 +92,8 @@ public class TestFragment extends Fragment implements Observer
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState)
     {
-//            container.onInterceptTouchEvent(MotionEvent.ACTION_DOWN);
-
-//        Toolbar myToolbar = (Toolbar) this.findViewById(R.id.my_toolbar);
-//        setSupportActionBar(myToolbar);
-//        if (!isStarted) {
-            this.test = (Test) getArguments().getSerializable("test");
+            this.test = (Question) getArguments().getSerializable("test");
+            this.currentPosition = (Integer) getArguments().getInt("val");
 //        tests = savedInstanceState.getParcelableArrayList("tests");
 
             this.testList = getArguments().getParcelableArrayList("tests");
@@ -109,6 +101,7 @@ public class TestFragment extends Fragment implements Observer
                     container, false);
             testFragmentViewModel = new TestFragmentViewModel(getContext(), test);
             fragmentTestBinding.setTest(testFragmentViewModel);
+//            System.out.println(testList.toString());
 
 
 
@@ -123,87 +116,20 @@ public class TestFragment extends Fragment implements Observer
 
             setUpListOfAnswersView(fragmentTestBinding.answerList);
             setUpObserver(testFragmentViewModel);
-//            notify();
-//            isStarted = true;
-//        }
+
         TestActivity testActivity = ((TestActivity)getActivity());
-//        System.out.println("Position");
-//        System.out.println(testActivity.getPosition());
-//        if (testActivity.getPosition() == 4)
-//        {
-//            Intent intent = new Intent(getContext(), ResultActivity.class);
-////            intent.putExtra("test",(Serializable) test);
-//            intent.putExtra("tests", (ArrayList<Test>) testList);
-//            intent.setFlags(Intent.FLAG_ACTIVITY_BROUGHT_TO_FRONT | Intent.FLAG_ACTIVITY_SINGLE_TOP | Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
-//            startActivity(intent);
-//        }
         return fragmentTestBinding.getRoot();
 
     }
 
-
-//    @Override public boolean onCreateOptionsMenu(Menu menu) {
-//        getMenuInflater().inflate(R.menu.main, menu);
-//        return true;
-//    }
-//
-//    @Override public boolean onOptionsItemSelected(MenuItem item) {
-//        if (item.getItemId() == R.id.menu_github) {
-//            startActivityActionView();
-//            return true;
-//        }
-//        return super.onOptionsItemSelected(item);
-//    }
-
     private void setUpListOfAnswersView(RecyclerView listAnswers)
     {
-//        Answer testAdapter = new TestAdapter();
 
-//        if (!isStartedRecycle)
-//        {
 
             AnswerAdapter answerAdapter = new AnswerAdapter();
             List<Answer> answers = test.getAnswers();
             answerAdapter.setAnswerList(answers);
 
-//        dialeecyclerView.post(new Runnable()
-//        {
-//            @Override
-//            public void run() {
-//                myadapter.notifyDataSetChanged();
-//            }
-//        });
-//            listAnswers.
-
-//            answerAdapter.
-
-
-//            answerAdapter.registerAdapterDataObserver(new RecyclerView.AdapterDataObserver()
-//            {
-//                @Override
-//                public void onChanged()
-//                {
-//                    super.onChanged();
-//                }
-//            });
-
-//            answerAdapter.setTouchListener(new AnswerAdapter.OnItemTouchListener() {
-//                @Override
-//                public void OnItemTouch(Answer item, List<Answer> answerList)
-//                {
-//                                        System.out.println("Touch");
-////                    if (isStartedRecycle) {
-//                        for (Answer a : answerList) {
-//                            a.setAnswerResponce(null);
-//                            item.setAnswerResponce(item.getId());
-//                        }
-//
-//                        setUpListOfAnswersView(fragmentTestBinding.answerList);
-////                    }
-//                    item.setAnswerResponce(item.getId());
-//                    isStartedRecycle = true;
-//                }
-//            });
             answerAdapter.setOnItemListener(new AnswerAdapter. OnItemClickListener()
             {
 
@@ -217,7 +143,7 @@ public class TestFragment extends Fragment implements Observer
                             a.setAnswerResponce(null);
 
                         }
-                        item.setAnswerResponce(item.getId());
+                        item.setAnswerResponce(item.getAnswerId());
 
                         setUpListOfAnswersView(fragmentTestBinding.answerList);
                     }
@@ -232,7 +158,7 @@ public class TestFragment extends Fragment implements Observer
                             a.setAnswerResponce(null);
 
                         }
-                        item.setAnswerResponce(item.getId());
+                        item.setAnswerResponce(item.getAnswerId());
                         setUpListOfAnswersView(fragmentTestBinding.answerList);
                         isStartedRecycle = true;
                     }
@@ -334,15 +260,29 @@ public class TestFragment extends Fragment implements Observer
         observable.addObserver(this);
     }
 
-    public static TestFragment newInstance(int val, List<Test> tests)
+//    public static TestFragment newInstance(int val, List<Test> tests)
+//    {
+//
+//        Bundle args = new Bundle();
+//        args.putInt("val", val);
+//        TestFragment fragment = new TestFragment();
+//        fragment.setArguments(args);
+//        args.putSerializable("test", tests.get(val));
+//        args.putParcelableArrayList("tests", (ArrayList<Test>) tests);
+//        fragment.setArguments(args);
+//        return fragment;
+//    }
+
+    public static TestFragment newInstance(int val, List<Question> tests)
     {
 
         Bundle args = new Bundle();
         args.putInt("val", val);
+//        currentPosition = val;
         TestFragment fragment = new TestFragment();
         fragment.setArguments(args);
         args.putSerializable("test", tests.get(val));
-        args.putParcelableArrayList("tests", (ArrayList<Test>) tests);
+        args.putParcelableArrayList("tests", (ArrayList<Question>) tests);
         fragment.setArguments(args);
         return fragment;
     }
@@ -360,7 +300,24 @@ public class TestFragment extends Fragment implements Observer
             testAdapter.setAnswerList(testFragmentViewModel.getAnswers());
 
         }
+
     }
+
+//    public Integer getCurrentPosition()
+//    {
+//        return (Integer) getArguments().getInt("val") - 1;
+//    }
+
+
+    @Override
+    public void onDestroyView()
+    {
+//        System.out.println("Ondestroy");
+//        System.out.println(currentPosition);
+        super.onDestroyView();
+    }
+
+
 
 //    public  int
 

@@ -28,18 +28,6 @@ public class SubjectActivity extends AppCompatActivity
     TabLayout mTabLayout;
     ViewPager mViewPager;
 
-//    @Override
-//    public boolean onCreateOptionsMenu(Menu menu) {
-//        getMenuInflater().inflate(R.menu.main, menu);
-//        return true;
-//    }
-//    @Override public boolean onOptionsItemSelected(MenuItem item) {
-//        if (item.getItemId() == R.id.menu_github) {
-////            startActivityActionView();
-//            return true;
-//        }
-//        return super.onOptionsItemSelected(item);
-//    }
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState)
     {

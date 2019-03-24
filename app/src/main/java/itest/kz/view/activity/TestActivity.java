@@ -147,23 +147,19 @@ public class TestActivity extends AppCompatActivity
                 }
                 if (tests != null && tests.size() > 0)
                 {
-                    setContentView(R.layout.activity_test);
-                    mPager = (CustomViewPager) findViewById(R.id.pager);
-                    mPager.setOffscreenPageLimit(2);
-//                    if (isStartedFirst)
-//                    {
+//                    setContentView(R.layout.activity_test);
+//                    mPager = (CustomViewPager) findViewById(R.id.pager);
+//                    mPager.setOffscreenPageLimit(2);
+////                    if (isStartedFirst)
+////                    {
+//
+//                    mPager.setAdapter( new MyAdapter(getSupportFragmentManager(), tests));
+////                    }
+//
+//                    myToolbar = (Toolbar) findViewById(R.id.my_toolbar);
+//                    myToolbar.setTitle("");
+//                    setSupportActionBar(myToolbar);
 
-                    mPager.setAdapter( new MyAdapter(getSupportFragmentManager(), tests));
-//                    }
-
-                    myToolbar = (Toolbar) findViewById(R.id.my_toolbar);
-                    myToolbar.setTitle("");
-                    setSupportActionBar(myToolbar);
-
-//                    FragmentManager.
-//                    Intent startIntent = getIntent();
-//                    int questionPosition = startIntent.getIntExtra("questionPosition", 0);
-//                    mPager.setCurrentItem(questionPosition);
                 }
                 if (!isStartedFirst)
                 {

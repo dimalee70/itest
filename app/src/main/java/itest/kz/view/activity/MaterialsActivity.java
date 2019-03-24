@@ -10,6 +10,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
+import java.io.Serializable;
 import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
@@ -74,7 +75,7 @@ public class MaterialsActivity extends AppCompatActivity implements Observer
     public static Intent fillSelectedSubject(Context context, Subject subject)
     {
         Intent intent = new Intent(context, MaterialsActivity.class);
-        intent.putExtra(Constant.SELECTED_SUBJECT, subject);
+        intent.putExtra(Constant.SELECTED_SUBJECT, (Serializable) subject);
 
     return intent;
     }

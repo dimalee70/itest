@@ -1,5 +1,7 @@
 package itest.kz.viewmodel;
 
+import android.arch.lifecycle.LiveData;
+import android.arch.lifecycle.MutableLiveData;
 import android.content.Context;
 import android.databinding.ObservableInt;
 import android.support.v4.app.Fragment;
@@ -16,6 +18,7 @@ import io.reactivex.functions.Consumer;
 import itest.kz.app.AppController;
 import itest.kz.model.Subject;
 import itest.kz.model.SubjectResponce;
+import itest.kz.model.Test;
 import itest.kz.network.SubjectService;
 import itest.kz.util.Constant;
 
@@ -27,7 +30,7 @@ public class SubjectFragmentViewModel extends Observable
     private boolean isStartedFirst = false;
     private CompositeDisposable compositeDisposable = new CompositeDisposable();
     private Context context;
-
+    private ObservableInt entVisibleBtn;
 
     public void onClickCancel()
     {
@@ -36,20 +39,54 @@ public class SubjectFragmentViewModel extends Observable
         fetchSubjectList();
     }
 
+    private MutableLiveData<List<Subject>> listMutableLiveData;
+
+    public LiveData<List<Subject>> getTests() {
+        if (listMutableLiveData == null) {
+            listMutableLiveData = new MutableLiveData<List<Subject>>();
+            fetchSubjectList();
+        }
+        return listMutableLiveData;
+    }
+
+    public void setSubjectListMain(List<Subject> subjectListMain)
+    {
+        this.subjectListMain = subjectListMain;
+    }
+
+    public void setSubjectList(List<Subject> subjectList)
+    {
+        this.subjectList = subjectList;
+    }
+
     public SubjectFragmentViewModel(Context context)
     {
         this.context = context;
         this.subjectListMain = new ArrayList<>();
         this.subjectList = new ArrayList<>();
         this.subjectRecycler = new ObservableInt(View.GONE);
-        fetchSubjectList();
+        this.entVisibleBtn = new ObservableInt(View.VISIBLE);
+//        fetchSubjectList();
         isStartedFirst = true;
     }
 
+    public ObservableInt getEntVisibleBtn()
+    {
+        return entVisibleBtn;
+    }
+
+    public void setVisibilityGone()
+    {
+        entVisibleBtn.set(View.GONE);
+    }
+
+    public void setVisibilityVisible()
+    {
+        entVisibleBtn.set(View.VISIBLE);
+    }
 
 
-
-    private void fetchSubjectList()
+    public void fetchSubjectList()
     {
         AppController appController = new AppController();
         SubjectService subjectService = appController.getSubjectService();
@@ -76,7 +113,7 @@ public class SubjectFragmentViewModel extends Observable
         return subjectRecycler;
     }
 
-    private void updateSubjectDataList(List<Subject> list)
+    public void updateSubjectDataList(List<Subject> list)
     {
 
         for (Subject s : list)
@@ -86,7 +123,7 @@ public class SubjectFragmentViewModel extends Observable
             else
                 subjectList.add(s);
         }
-        System.out.println(subjectList.toString());
+//        System.out.println(subjectList.toString());
 //        subjectList.addAll(list);
         setChanged();
         notifyObservers();

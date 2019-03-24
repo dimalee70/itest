@@ -19,6 +19,7 @@ import io.reactivex.disposables.Disposable;
 import io.reactivex.functions.Consumer;
 import itest.kz.app.AppController;
 import itest.kz.model.Answer;
+import itest.kz.model.Question;
 import itest.kz.model.Subject;
 import itest.kz.model.Test;
 import itest.kz.network.SubjectService;
@@ -29,11 +30,11 @@ public class TestFragmentViewModel extends Observable
 {
 //    public ObservableField<String> url = new ObservableField<>();
     private Subject subject;
-    private List<Test> testList;
+    private List<Question> testList;
 //    private TestAdapter testAdapter;
     private CompositeDisposable compositeDisposable = new CompositeDisposable();
     private Context context;
-    private Test test;
+    private Question test;
     private  List<Answer> answers;
 
 
@@ -43,7 +44,7 @@ public class TestFragmentViewModel extends Observable
         return answers;
     }
 
-    public TestFragmentViewModel(Context context, Test test)
+    public TestFragmentViewModel(Context context, Question test)
     {
 
         this.context = context;
@@ -68,7 +69,7 @@ public class TestFragmentViewModel extends Observable
     {
         return  Constant.MATHJAX + test.getQuestion();
     }
-    public void setTestList(List<Test> testList)
+    public void setTestList(List<Question> testList)
     {
         this.testList = testList;
     }
@@ -88,7 +89,7 @@ public class TestFragmentViewModel extends Observable
         return String.valueOf(subject.getId());
     }
 
-    public List<Test> getTestList()
+    public List<Question> getTestList()
     {
 
         return testList;

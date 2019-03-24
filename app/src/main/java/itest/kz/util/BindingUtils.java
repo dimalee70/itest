@@ -61,6 +61,23 @@ public class BindingUtils {
     {
 //        view.getSettings().setDomStorageEnabled(true);
         view.getSettings().setJavaScriptEnabled(true);
+        view.setVerticalScrollBarEnabled(true);
+        view.setHorizontalScrollBarEnabled(true);
+////        .getSettings().setUseWideViewPort(true);
+//        view.getSettings().setAppCacheEnabled(true);
+//        view.getSettings().setMixedContentMode(WebSettings.MIXED_CONTENT_ALWAYS_ALLOW);
+
+//        browser.loadData(Constant.MATHJAX + test.getQuestion(), , "UTF-8");
+        view.loadData(Constant.MATHJAX + url, Constant.HTML, Constant.UTF_8 );
+    }
+
+    @BindingAdapter({"app:loadData"})
+    public static void loadData( WebView view, String url)
+    {
+//        view.getSettings().setDomStorageEnabled(true);
+        view.getSettings().setJavaScriptEnabled(true);
+        view.setVerticalScrollBarEnabled(true);
+        view.setHorizontalScrollBarEnabled(true);
 ////        .getSettings().setUseWideViewPort(true);
 //        view.getSettings().setAppCacheEnabled(true);
 //        view.getSettings().setMixedContentMode(WebSettings.MIXED_CONTENT_ALWAYS_ALLOW);

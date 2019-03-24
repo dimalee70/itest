@@ -9,9 +9,9 @@
     </data>
 
 
-    <!--<ScrollView-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="wrap_content">-->
+    <android.support.v4.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
     <!--<android.support.v7.widget.Toolbar-->
         <!--android:id="@+id/my_toolbar"-->
@@ -53,17 +53,16 @@
             android:id="@+id/cardview1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
+            android:orientation="vertical"
             app:cardBackgroundColor="@color/colorWhite"
             app:cardCornerRadius="5dp"
             app:cardUseCompatPadding="true"
             tools:layout_marginBottom="16dp">
     <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="horizontal">
+            android:layout_height="match_parent">
 
-            <itest.kz.util.AnswerWebView
+            <WebView
                 android:id="@+id/webview"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -78,13 +77,14 @@
 
         <LinearLayout
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:layout_height="match_parent">
 
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/answer_list"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:overScrollMode="never"
+                android:nestedScrollingEnabled="false"
                 tools:listitem="@layout/item_answer">
 
             </android.support.v7.widget.RecyclerView>
@@ -105,7 +105,6 @@
 
 
 
-
         <!--<WebView-->
             <!--android:id="@+id/webview2"-->
             <!--android:layout_width="match_parent"-->
@@ -114,5 +113,7 @@
             <!--tools:ignore="MissingConstraints" />-->
 
     </LinearLayout>
+
+    </android.support.v4.widget.NestedScrollView>
 </layout>
 

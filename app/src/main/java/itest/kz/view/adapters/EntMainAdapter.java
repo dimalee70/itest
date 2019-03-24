@@ -28,6 +28,10 @@ public class EntMainAdapter extends RecyclerView.Adapter<EntMainAdapter.EntMainA
 
     private List<Subject> subjectList;
 
+    public Subject getItem(int position)
+    {
+        return subjectList.get(position);
+    }
     @NonNull
     @Override
     public EntMainAdapterViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i)
@@ -50,6 +54,11 @@ public class EntMainAdapter extends RecyclerView.Adapter<EntMainAdapter.EntMainA
         if (subjectList != null)
             return subjectList.size();
         return 0;
+    }
+
+    public List<Subject> getSubjectListMain()
+    {
+        return subjectList;
     }
 
     public void setSubjectListMain(List<Subject> subjectList)

@@ -51,7 +51,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="16dp"
-
+                    android:focusable="true"
                     android:background="@color/colorWhite"
                     >
                     <android.support.v7.widget.RecyclerView
@@ -93,6 +93,7 @@
 
 
             <RelativeLayout
+                android:id="@+id/subject_relative"
                 android:layout_below="@+id/text_relative"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -150,8 +151,8 @@
                                     android:textSize="16dp"
                                     android:layout_centerInParent="true"
                                     android:layout_margin="10dp"
-                                    android:onClick="@{() ->ent.onClickCancel()}"
                                     />
+                                <!--android:onClick="@{() ->ent.onClickCancel()}"-->
                                 <!--android:onClick="@{ent.onClick}"-->
                             </RelativeLayout>
 
@@ -163,14 +164,42 @@
                         <!--</ScrollView>-->
                     </RelativeLayout>
 
-
-
-
-
-
                 </android.support.v7.widget.CardView>
 
             </RelativeLayout>
+
+            <android.support.v7.widget.CardView
+                android:id="@+id/ent_start_cardview"
+                android:layout_margin="16dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/subject_relative"
+                app:cardBackgroundColor="@color/colorBackgroundEntBtn"
+                app:cardCornerRadius="5dp"
+                >
+
+
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:id="@+id/ent_start_text_view"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textAlignment="center"
+                        android:text="Толық ҰБТ тапсыру"
+                        android:textSize="16dp"
+                        android:textColor="@color/colorWhite"
+                        android:layout_centerInParent="true"
+                        android:layout_margin="10dp"
+                        />
+                    <!--android:onClick="@{() ->ent.onClickCancel()}"-->
+                    <!--android:onClick="@{ent.onClick}"-->
+                </RelativeLayout>
+
+            </android.support.v7.widget.CardView>
 
             <!--</ScrollView>-->
 

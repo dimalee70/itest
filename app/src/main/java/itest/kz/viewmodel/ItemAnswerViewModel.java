@@ -109,7 +109,7 @@ public class ItemAnswerViewModel extends BaseObservable
                 a.setAnswerResponce(null);
             }
             answer.setAnswerResponce(null);
-            answer.setAnswerResponce(answer.getId());
+            answer.setAnswerResponce(answer.getAnswerId());
             color.set(Color.GREEN);
 
 

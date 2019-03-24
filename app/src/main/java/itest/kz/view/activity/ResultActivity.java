@@ -53,7 +53,7 @@ public class ResultActivity extends AppCompatActivity implements Observer
         ResultAdapter resultAdapter = new ResultAdapter(tests, this);
 
 //        recyclerView.setOnClickListener();
-
+//
 //        resultAdapter.setOnItemListener(new ResultAdapter.OnItemClickListener()
 //        {
 //            @Override

@@ -1,18 +1,21 @@
 package itest.kz.model;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
 import java.util.List;
 
-public class Subject implements Serializable
+public class Subject implements Serializable, Parcelable
 {
 
     private int isSelected = 0;
     @SerializedName("id")
     @Expose
-    public int id;
+    public Long id;
 
     @SerializedName("title")
     @Expose
@@ -47,7 +50,7 @@ public class Subject implements Serializable
     private List<String> sublings;
 
 
-    public Subject(int id, String title, String idForGenerateTest, String colorBg, String icon, String image, boolean isMain, String alias, List<String> sublings) {
+    public Subject(Long id, String title, String idForGenerateTest, String colorBg, String icon, String image, boolean isMain, String alias, List<String> sublings) {
         this.id = id;
         this.title = title;
         this.idForGenerateTest = idForGenerateTest;
@@ -85,11 +88,11 @@ public class Subject implements Serializable
         this.sublings = sublings;
     }
 
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -149,10 +152,51 @@ public class Subject implements Serializable
                 ", idForGenerateTest='" + idForGenerateTest + '\'' +
                 ", colorBg='" + colorBg + '\'' +
                 ", icon='" + icon + '\'' +
-                ", subkings = " + sublings.toString() + '\''+
+//                ", subkings = " + sublings.toString() + '\''+
                 ", image='" + image + '\'' +
                 ", isMain=" + isMain +
                 '}';
     }
+
+    public Subject (Parcel source)
+    {
+        this.id = source.readLong();
+        this.title = source.readString();
+//        this.nodeId = source.readInt();
+//        this.subjectId = source.readInt();
+//        this.langId = source.readInt();
+//        this.examSubjectId = source.readInt();
+//        this.difficultyLevel = source.readInt();
+//        this.checked = source.readInt();
+//        this.answerType = source.readInt();
+//        this.answers = source.readArrayList(Answer.class.getClassLoader());
+
+    }
+
+    @Override
+    public int describeContents()
+    {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags)
+    {
+        dest.writeLong(id);
+        dest.writeString(title);
+    }
+
+    public static final Parcelable.Creator<Subject> CREATOR = new
+            Parcelable.Creator<Subject>(){
+                @Override
+                public Subject createFromParcel(Parcel source) {
+                    return new Subject(source);
+                }
+
+                @Override
+                public Subject[] newArray(int size) {
+                    return new Subject[size];
+                }
+            };
 }
 

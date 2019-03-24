@@ -13,6 +13,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -127,7 +128,7 @@ public class ItemSubjectFragmentViewModel extends BaseObservable
     {
 
         Intent intent = new Intent(getContext().getApplicationContext(), TestActivity.class);
-        intent.putExtra(Constant.SELECTED_SUBJECT, subject);
+        intent.putExtra(Constant.SELECTED_SUBJECT,(Serializable) subject);
         intent.putExtra(Constant.IS_STARTED_FIRST, true);
 //        context.startActivity(TestActivity.fillSelectedSubject(view.getContext(), subject));
         context.startActivity(intent);

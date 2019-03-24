@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+    <data>
+        <variable
+            name="full"
+            type="itest.kz.viewmodel.FullTestViewModel"/>
+    </data>
+
+    <!--<ScrollView-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content">-->
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <RelativeLayout
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <android.support.v7.widget.Toolbar
+                android:id="@+id/my_toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                android:background="?attr/colorPrimary"
+                android:elevation="4dp"
+                android:contentInsetStart="0dp"
+                android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
+                app:popupTheme="@style/ThemeOverlay.AppCompat.Light">
+            </android.support.v7.widget.Toolbar>
+
+
+            <RelativeLayout
+                android:id="@+id/list_subject_relative"
+                android:layout_width="match_parent"
+                android:layout_below="@+id/my_toolbar"
+                android:layout_height="wrap_content">
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/list_subjects"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/colorWhite"
+                    android:clickable="false"
+                    android:clipToPadding="false"
+                    android:focusable="false"
+                    android:orientation="horizontal"
+                    android:scrollbars="vertical"
+                    app:layoutManager="android.support.v7.widget.LinearLayoutManager"
+                    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+                    tools:listitem="@layout/item_full_subject" />
+            </RelativeLayout>
+
+            <!--<android.support.v4.widget.NestedScrollView-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content">-->
+
+
+            <RelativeLayout
+                android:layout_below="@+id/list_subject_relative"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <itest.kz.util.CustomViewPager
+                    android:id="@+id/pager"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1" >
+                </itest.kz.util.CustomViewPager>
+            </RelativeLayout>
+
+            <!--</android.support.v4.widget.NestedScrollView>-->
+
+        </RelativeLayout>
+
+
+    </LinearLayout>
+    <!--</ScrollView>-->
+</layout>

@@ -19,6 +19,7 @@ import itest.kz.model.RegisterResponse;
 import itest.kz.network.UserService;
 import itest.kz.util.Constant;
 import itest.kz.view.activity.HomeActivity;
+import itest.kz.view.activity.MainHomeActivity;
 
 public class LoginAction implements Action
 {
@@ -84,9 +85,11 @@ public class LoginAction implements Action
                         }
                         else
                         {
-//                            System.out.println("Access_token");
-//                            System.out.println(loginResponse.getAccessToken());
-                            Intent intent = new Intent(context, HomeActivity.class);
+//                            Intent intent = new Intent(context, HomeActivity.class);
+//                            intent.putExtra(Constant.ACCESS_TOKEN, loginResponse.getAccessToken());
+//                            context.startActivity(intent);
+
+                            Intent intent = new Intent(context, MainHomeActivity.class);
                             intent.putExtra(Constant.ACCESS_TOKEN, loginResponse.getAccessToken());
                             context.startActivity(intent);
                         }
