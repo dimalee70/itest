@@ -54,7 +54,7 @@
                         android:layout_marginTop="50dp"
                         android:fontFamily="@font/opensans_regular"
                         android:gravity="center"
-                        android:text="@string/selectLanguage"
+                        android:text="@{mainViewModel.selectLanguage}"
                         android:textColor="@color/colorWhite"
                         android:textSize="18dp"
                         app:layout_constraintBottom_toBottomOf="parent"
@@ -76,12 +76,13 @@
                             android:width="221dp"
                             android:height="50dp"
                             android:alpha="0.91"
-                            android:background="@drawable/button_kaz"
+                            android:src="@{mainViewModel.colorKz}"
                             android:enabled="true"
                             android:fontFamily="@font/opensans_regular"
                             android:text="@string/kaz"
                             android:textSize="16dp"
                             android:onClick="@{mainViewModel.buttonKaz}"/>
+                        <!--android:background="@drawable/button_kaz"-->
 
                         <Button
                             android:id="@+id/buttonRus"
@@ -93,11 +94,13 @@
                             android:width="221dp"
                             android:height="50dp"
                             android:alpha="0.91"
-                            android:background="@drawable/button_rus"
+                            android:src="@{mainViewModel.colorRu}"
                             android:enabled="true"
                             android:fontFamily="@font/opensans_regular"
                             android:text="@string/rus"
-                            android:textSize="16dp" />
+                            android:textSize="16dp"
+                            android:onClick="@{mainViewModel.buttonRus}"/>
+                        <!--android:background="@drawable/button_rus"-->
 
                     </RelativeLayout>
 
@@ -113,7 +116,7 @@
                             android:clickable="true"
                             android:fontFamily="@font/opensans_regular"
                             android:gravity="center"
-                            android:text="@string/sign_up"
+                            android:text="@{mainViewModel.continue}"
                             android:textColor="@color/colorWhite"
                             android:textSize="16dp"
                             android:onClick="@{() -> mainViewModel.clickOnSignUp()}"

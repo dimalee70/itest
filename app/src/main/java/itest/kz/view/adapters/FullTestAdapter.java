@@ -9,19 +9,20 @@ import java.util.List;
 
 import itest.kz.model.Question;
 import itest.kz.model.Test;
+import itest.kz.model.Tests;
 import itest.kz.view.fragments.TestFragment;
 
 public class FullTestAdapter extends FragmentStatePagerAdapter
 {
 
     public String question;
-    public List<Question> test;
+    public Tests test;
     public int NUM;
-    public FullTestAdapter(FragmentManager fm, List<Question> test)
+    public FullTestAdapter(FragmentManager fm, Tests test)
     {
         super(fm);
         this.test = test;
-        this.NUM = test.size();
+        this.NUM = test.getQuestions().size();
 
     }
 
@@ -31,7 +32,7 @@ public class FullTestAdapter extends FragmentStatePagerAdapter
         if (i >= 0 && i < NUM)
         {
 
-            return TestFragment.newInstance(i, test);
+            return TestFragment.newInstance(i, test.getQuestions());
 
         }
         return null;
@@ -41,7 +42,7 @@ public class FullTestAdapter extends FragmentStatePagerAdapter
     public int getCount()
     {
         if (test != null)
-            return test.size();
+            return test.getQuestions().size();
         return 0;
     }
 }

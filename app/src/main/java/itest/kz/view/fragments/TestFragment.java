@@ -2,17 +2,23 @@ package itest.kz.view.fragments;
 
 import android.content.Intent;
 import android.databinding.DataBindingUtil;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.Html;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.OvershootInterpolator;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -20,6 +26,7 @@ import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
 
+import at.blogc.android.views.ExpandableTextView;
 import itest.kz.R;
 import itest.kz.databinding.FragmentTestBinding;
 import itest.kz.model.Answer;
@@ -38,13 +45,23 @@ public class TestFragment extends Fragment implements Observer
     private FragmentTestBinding fragmentTestBinding;
     private TestFragmentViewModel testFragmentViewModel;
     public  Integer currentPosition;
+    private ExpandableTextView expandableTextView;
 //    private List<Test> testList;
 //    private Test test;
 
     private List<Question> testList;
     private Question test;
-
     public boolean isStartedRecycle = false;
+
+//    @Override
+//    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater)
+//    {
+//        inflater.inflate(R.menu.main, menu);
+//        super.onCreateOptionsMenu(menu, inflater);
+//    }
+
+
+
 
 
 //    public Test getTest()
@@ -92,15 +109,62 @@ public class TestFragment extends Fragment implements Observer
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState)
     {
-            this.test = (Question) getArguments().getSerializable("test");
-            this.currentPosition = (Integer) getArguments().getInt("val");
+        this.test = (Question) getArguments().getSerializable("test");
+        this.currentPosition = (Integer) getArguments().getInt("val");
 //        tests = savedInstanceState.getParcelableArrayList("tests");
 
-            this.testList = getArguments().getParcelableArrayList("tests");
-            fragmentTestBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_test,
-                    container, false);
-            testFragmentViewModel = new TestFragmentViewModel(getContext(), test);
-            fragmentTestBinding.setTest(testFragmentViewModel);
+        this.testList = getArguments().getParcelableArrayList("tests");
+        fragmentTestBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_test,
+                container, false);
+        testFragmentViewModel = new TestFragmentViewModel(getContext(), test);
+        fragmentTestBinding.setTest(testFragmentViewModel);
+
+        expandableTextView = fragmentTestBinding.expandableTextView;
+
+        // set animation duration via code, but preferable in your layout files by using the animation_duration attribute
+        expandableTextView.setAnimationDuration(750L);
+
+        // set interpolators for both expanding and collapsing animations
+        expandableTextView.setInterpolator(new OvershootInterpolator());
+
+        fragmentTestBinding.expandedIcon.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(final View v)
+            {
+                if (expandableTextView.isExpanded())
+                {
+                    expandableTextView.collapse();
+//                        buttonToggle.setText(R.string.expand);
+                }
+                else
+                {
+                    expandableTextView.expand();
+//                        buttonToggle.setText(R.string.collapse);
+                }
+            }
+        });
+
+// or set them separately
+        expandableTextView.setExpandInterpolator(new OvershootInterpolator());
+        expandableTextView.setCollapseInterpolator(new OvershootInterpolator());
+
+        if (test.getText() == null || test.getText().equals(""))
+        {
+//                System.out.println("null");
+        }
+        else
+        {
+            fragmentTestBinding.textText.setVisibility(View.VISIBLE);
+            fragmentTestBinding.cadviewText.setVisibility(View.VISIBLE);
+            expandableTextView.setText(test.getText());
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                expandableTextView.setText(Html.fromHtml(test.getText(), Html.FROM_HTML_MODE_COMPACT));
+            } else {
+                expandableTextView.setText(Html.fromHtml(test.getText()));
+            }
+
+        }
 //            System.out.println(testList.toString());
 
 
@@ -112,12 +176,12 @@ public class TestFragment extends Fragment implements Observer
 //          Toolbar t = inflater.inflate(R.menu.main, );
 //            setSupportActionBar(myToolbar);
 
-            setHasOptionsMenu(true);
+        setHasOptionsMenu(true);
 
-            setUpListOfAnswersView(fragmentTestBinding.answerList);
-            setUpObserver(testFragmentViewModel);
+//        (AppCompatActivity)getActivity().
 
-        TestActivity testActivity = ((TestActivity)getActivity());
+        setUpListOfAnswersView(fragmentTestBinding.answerList);
+        setUpObserver(testFragmentViewModel);
         return fragmentTestBinding.getRoot();
 
     }

@@ -3,6 +3,8 @@ package itest.kz.viewmodel;
 import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.MutableLiveData;
 import android.content.Context;
+import android.content.SharedPreferences;
+import android.databinding.BaseObservable;
 import android.databinding.ObservableInt;
 import android.support.v4.app.Fragment;
 import android.view.View;
@@ -15,12 +17,15 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.functions.Consumer;
+import itest.kz.R;
 import itest.kz.app.AppController;
 import itest.kz.model.Subject;
 import itest.kz.model.SubjectResponce;
 import itest.kz.model.Test;
 import itest.kz.network.SubjectService;
 import itest.kz.util.Constant;
+
+import static android.content.Context.MODE_PRIVATE;
 
 public class SubjectFragmentViewModel extends Observable
 {
@@ -31,6 +36,7 @@ public class SubjectFragmentViewModel extends Observable
     private CompositeDisposable compositeDisposable = new CompositeDisposable();
     private Context context;
     private ObservableInt entVisibleBtn;
+    private String language;
 
     public void onClickCancel()
     {
@@ -57,6 +63,8 @@ public class SubjectFragmentViewModel extends Observable
     public void setSubjectList(List<Subject> subjectList)
     {
         this.subjectList = subjectList;
+        notifyObservers();
+//        notifyChange();
     }
 
     public SubjectFragmentViewModel(Context context)
@@ -68,6 +76,9 @@ public class SubjectFragmentViewModel extends Observable
         this.entVisibleBtn = new ObservableInt(View.VISIBLE);
 //        fetchSubjectList();
         isStartedFirst = true;
+        SharedPreferences settings = context.getSharedPreferences(Constant.MY_LANG, MODE_PRIVATE);
+//        settings.edit().clear().commit();
+        language = settings.getString(Constant.LANG, "kz");
     }
 
     public ObservableInt getEntVisibleBtn()
@@ -93,7 +104,7 @@ public class SubjectFragmentViewModel extends Observable
 
 
         Disposable disposable = subjectService.getSubjects(Constant.ENT,
-                "Bearer " + Constant.ACCESSTOKEN, Constant.ACCEPT, "ru")
+                "Bearer " + Constant.ACCESSTOKEN, Constant.ACCEPT, language)
                 .subscribeOn(appController.subscribeScheduler())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Consumer<SubjectResponce>() {
@@ -127,6 +138,7 @@ public class SubjectFragmentViewModel extends Observable
 //        subjectList.addAll(list);
         setChanged();
         notifyObservers();
+
     }
 
     public List<Subject> getSubjectListMain()
@@ -149,5 +161,34 @@ public class SubjectFragmentViewModel extends Observable
         unSubscribeFromObservable();
         compositeDisposable = null;
         context = null;
+    }
+
+    public int getRequiredSubjects()
+    {
+        if (language.equals(Constant.KZ))
+            return R.string.requiredSubjectsKz;
+        return R.string.requiredSubjectsRu;
+    }
+
+    public int getChosedSubjects()
+    {
+        if (language.equals(Constant.KZ))
+            return R.string.chosedSubjectsKz;
+        return R.string.chosedSubjectsRu;
+    }
+
+    public int getStartFullTest()
+    {
+        if (language.equals(Constant.KZ))
+            return R.string.fullTestStartKz;
+        return R.string.fullTestStartRu;
+
+    }
+
+    public int getCancel()
+    {
+        if (language.equals(Constant.KZ))
+            return R.string.cancelKz;
+        return R.string.cancelRu;
     }
 }

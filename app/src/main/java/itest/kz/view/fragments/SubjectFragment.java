@@ -23,10 +23,7 @@ import itest.kz.databinding.FragmentEntBinding;
 import itest.kz.model.Subject;
 import itest.kz.model.Test;
 import itest.kz.view.activity.FullTestActivity;
-import itest.kz.view.activity.ResultActivity;
 import itest.kz.view.adapters.EntMainAdapter;
-import itest.kz.view.adapters.SubjectAdapter;
-import itest.kz.viewmodel.CertificationFragmentViewModel;
 import itest.kz.viewmodel.SubjectFragmentViewModel;
 
 import static android.graphics.drawable.ClipDrawable.HORIZONTAL;
@@ -45,8 +42,8 @@ public class SubjectFragment extends Fragment implements Observer
 //            subjectList = selectedSubects;
             if (subjectList != null && subjectList.size() > 0)
             {
-                System.out.println("CouNt");
-                System.out.println(subjectList.toString());
+//                System.out.println("CouNt");
+//                System.out.println(subjectList.toString());
             }
         }
     };
@@ -85,7 +82,7 @@ public class SubjectFragment extends Fragment implements Observer
 //                    System.out.println(selectedSubects.toString());
 
                 Intent intent = new Intent(getContext(), FullTestActivity.class);
-//            intent.putExtra("test",(Serializable) test);
+
                 intent.putExtra("subjects", (ArrayList<Subject>) selectedSubects);
 //                intent.setFlags(Intent.FLAG_ACTIVITY_BROUGHT_TO_FRONT | Intent.FLAG_ACTIVITY_SINGLE_TOP | Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
                 startActivity(intent);
@@ -170,6 +167,8 @@ public class SubjectFragment extends Fragment implements Observer
 
                     s.setIsSelected(0);
                 }
+
+
                 subjectFragmentViewModel.setSubjectList(new ArrayList<Subject>());
                 subjectFragmentViewModel.setSubjectListMain(new ArrayList<Subject>());
                 selectedSubects = new ArrayList<>();

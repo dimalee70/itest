@@ -3,10 +3,12 @@ package itest.kz.util;
 import android.databinding.BindingAdapter;
 import android.databinding.BindingConversion;
 import android.graphics.Color;
+import android.graphics.drawable.Drawable;
 import android.support.v7.widget.CardView;
 import android.view.View;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
+import android.widget.Button;
 import android.widget.ImageView;
 
 import com.squareup.picasso.Picasso;
@@ -33,6 +35,12 @@ public class BindingUtils {
             return null;
         }
     }
+
+    @BindingAdapter("android:src")
+    public static void setImageResource(Button button, Drawable resource){
+        button.setBackground(resource);
+    }
+
 
 //    @BindingAdapter({"bind:imageUrl"})
 //    public static void loadImage(ImageView view, String imageUrl)

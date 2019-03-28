@@ -13,9 +13,19 @@ public class Subject implements Serializable, Parcelable
 {
 
     private int isSelected = 0;
+
+
     @SerializedName("id")
     @Expose
     public Long id;
+
+    @SerializedName("locale")
+    @Expose
+    public String locale;
+
+    @SerializedName("status")
+    @Expose
+    private int status;
 
     @SerializedName("title")
     @Expose

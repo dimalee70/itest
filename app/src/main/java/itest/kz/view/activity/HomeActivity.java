@@ -1,13 +1,24 @@
 package itest.kz.view.activity;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.databinding.DataBindingUtil;
+import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.design.widget.BottomNavigationView;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentActivity;
 import android.support.v7.app.AppCompatActivity;
+import android.view.LayoutInflater;
 import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
+import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Toast;
 
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -32,18 +43,69 @@ public class HomeActivity extends AppCompatActivity
     private HomeViewModel homeViewModel;
     private SharedPreferences sharedPreferences;
     private String accessToken;
+    private String language;
+    private BottomNavigationView bottomNavigationView;
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu)
-    {
-        getMenuInflater().inflate(R.menu.main, menu);
-        return true;
+//    @Override
+//    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater)
+//    {
+//        super.onCreateOptionsMenu(menu, inflater);
+//        inflater.inflate(R.menu.main, menu);
+//    }
+
+//    @Override
+//    public void onPrepareOptionsMenu(Menu menu)
+//    {
+//        if(Build.VERSION.SDK_INT > 11)
+//        {
+//            menu.findItem(R.id.menu_github).setVisible(false);
+//            menu.findItem(R.id.menu_github1).setVisible(false);
+//            menu.findItem(R.id.menu_github2).setVisible(false);
+//            menu.findItem(R.id.menu_save).setVisible(false);
+//            menu.findItem(R.id.menu_logout).setVisible(true);
+//        }
+//        super.onPrepareOptionsMenu(menu);
+//    }
+
+//    @Override
+//    public boolean onCreateOptionsMenu(Menu menu)
+//    {
+//        getMenuInflater().inflate(R.menu.main, menu);
+//        return true;
+//    }
+
+
+//    @Nullable
+//    @Override
+//    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState)
+//    {
+//        activityHomeBinding =
+//                DataBindingUtil.inflate(inflater,
+//                        R.layout.activity_home, container, false);
+//        homeViewModel = new HomeViewModel(getContext());
+//        sharedPreferences = getActivity().getSharedPreferences
+//                (Constant.MY_PREF, Context.MODE_PRIVATE);
+//        setAccessToken();
+//        fetchProfileInfo();
+//        return super.onCreateView(inflater, container, savedInstanceState);
+//    }
+
+    public void setNavigationVisibility(boolean visible) {
+        if (bottomNavigationView.isShown() && !visible) {
+            bottomNavigationView.setVisibility(View.GONE);
+        }
+        else if (!bottomNavigationView.isShown() && visible){
+            bottomNavigationView.setVisibility(View.VISIBLE);
+        }
     }
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
+        SharedPreferences settings = getSharedPreferences(Constant.MY_LANG, MODE_PRIVATE);
+//        settings.edit().clear().commit();
+        language = settings.getString(Constant.LANG, "kz");
         activityHomeBinding = DataBindingUtil.setContentView(this, R.layout.activity_home);
         homeViewModel = new HomeViewModel(this);
         activityHomeBinding.setHome(homeViewModel);
@@ -51,6 +113,48 @@ public class HomeActivity extends AppCompatActivity
         setAccessToken();
         fetchProfileInfo();
 
+        bottomNavigationView = (BottomNavigationView) activityHomeBinding.bottomNavigationView;
+
+
+        bottomNavigationView.setOnNavigationItemSelectedListener(
+                new BottomNavigationView.OnNavigationItemSelectedListener() {
+                    @Override
+                    public boolean onNavigationItemSelected(@NonNull MenuItem menuItem)
+                    {
+                        Intent intent = null;
+                        switch (menuItem.getItemId())
+                        {
+                            case R.id.item_test:
+//                                if (testFragment.isAdded())
+//                                {
+//                                    fragmentManager.beginTransaction().remove(testFragment).commit();
+//                                    System.out.println("Added");
+//                                }
+
+//                                else
+//                                fragmentManager.beginTransaction().replace(R.id.viewpager, testFragment)
+//                                        .commit();
+                                finish();
+                                intent = new Intent(HomeActivity.this,SubjectActivity.class);
+                                intent.putExtra(Constant.ACCESS_TOKEN, accessToken);
+                                startActivity(intent);
+                                break;
+                            case R.id.item_user:
+//                                fetchProfileInfo();
+//                                finish();
+//                                intent = new Intent(HomeActivity.this,HomeActivity.class);
+//                                intent.putExtra(Constant.ACCESS_TOKEN, accessToken);
+//                                startActivity(intent);
+//                                fragmentManager.beginTransaction().replace(R.id.viewpager, fragment).commit();
+                                break;
+
+                        }
+                        return true;
+                    }
+                }
+        );
+
+        bottomNavigationView.setSelectedItemId(R.id.item_user);
 
 
 
@@ -66,8 +170,6 @@ public class HomeActivity extends AppCompatActivity
         }
         else
         {
-//            System.out.println("Access ");
-//            System.out.println(accessToken);
 
             SharedPreferences.Editor editor = sharedPreferences.edit();
             editor.clear();
@@ -89,7 +191,7 @@ public class HomeActivity extends AppCompatActivity
 //        AppController appController = AppController.create(context);
         UserService userService = appController.getUserService();
 
-        Disposable disposable = userService.getProfile("ru", Constant.ACCEPT,
+        Disposable disposable = userService.getProfile(language, Constant.ACCEPT,
                 "Bearer " + accessToken)
                 .subscribeOn(appController.subscribeScheduler())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -118,12 +220,26 @@ public class HomeActivity extends AppCompatActivity
         FragmentHelper.openFragment(this,
                 R.id.frame_layout,
                 ProfileFragment.newInstance(profileResponse.getProfile()));
+
+
+//        ProfileFragment nextFrag= ProfileFragment.newInstance(profileResponse.getProfile());
+//        getSupportFragmentManager().beginTransaction()
+//                .replace(R.id.frame_layout, nextFrag, "findThisFragment")
+//                .addToBackStack(null)
+//                .commit();
+
+//        ProfileFragment nextFrag= ProfileFragment.newInstance(profileResponse.getProfile());
+//        getSupportFragmentManager().beginTransaction()
+//                .replace(R.id.frame_layout, nextFrag, "findThisFragment")
+//                .addToBackStack(null)
+//                .commit();
     }
 
     @Override
     public void onBackPressed()
     {
-//        super.onBackPressed();
         finish();
+        Intent intent = new Intent(this, MainActivity.class);
+        startActivity(intent);
     }
 }

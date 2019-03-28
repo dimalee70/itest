@@ -1,30 +1,125 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
     <data>
         <variable
             name="subject"
             type="itest.kz.viewmodel.SubjectViewModel"/>
     </data>
-    <RelativeLayout android:id="@+id/activity_main"
-        xmlns:android="http://schemas.android.com/apk/res/android"
+
+    <android.support.design.widget.CoordinatorLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-    >
+        android:layout_height="wrap_content">
 
-        <!--android:layout_marginRight="20dp"-->
-        <!--android:layout_marginBottom="5dp"-->
-        <!--android:layout_marginLeft="20dp"-->
-        <!--android:layout_marginTop="5dp"-->
-        <android.support.design.widget.TabLayout
-            android:id="@+id/tl_tabs_container"
+
+
+
+
+        <RelativeLayout
+            android:id="@+id/activity_main_relative"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+            android:layout_height="match_parent"
+            android:layout_marginBottom="55dp">
 
-        <android.support.v4.view.ViewPager
-            android:id="@+id/vp_fragments_container"
+            <android.support.design.widget.AppBarLayout
+                android:id="@+id/app_bar_layout"
+                android:layout_width="match_parent"
+                android:theme="@style/AppTheme.AppBarOverlay"
+                android:layout_height="wrap_content">
+
+                <!--android:theme="@style/AppTheme.AppBarOverlay"-->
+
+            <android.support.v7.widget.Toolbar
+                android:id="@+id/toolbar_subject_menu"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                android:background="?attr/colorPrimary"
+                app:layout_scrollFlags="scroll|enterAlways"
+                app:popupTheme="@style/AppTheme.PopupOverlay">
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="?attr/actionBarSize"-->
+                <!--android:background="?attr/colorPrimary"-->
+                <!--android:elevation="4dp"-->
+                <!--app:theme="@style/ToolbarColoredBackArrow"-->
+                <!--android:theme="@style/ThemeOverlay.AppCompat.ActionBar"-->
+                <!--app:layout_scrollFlags="scroll|enterAlways"-->
+                <!--app:popupTheme="@style/AppTheme.PopupOverlay">-->
+
+                <TextView
+                    android:id="@+id/toolbar_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@{subject.toolbarTitle}"
+                    android:layout_marginStart="73dp"
+                    android:textSize="20sp"
+                    android:textColor="@color/colorWhite"
+                    android:layout_gravity="left"/>
+
+            </android.support.v7.widget.Toolbar>
+
+            <!--<FrameLayout-->
+                <!--android:id="@+id/viewpager"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--app:layout_behavior="@string/appbar_scrolling_view_behavior"-->
+                <!--android:layout_marginBottom="55dp"-->
+                <!--android:visibility="visible"-->
+                <!--/>-->
+
+            <!--android:layout_marginRight="20dp"-->
+            <!--android:layout_marginBottom="5dp"-->
+            <!--android:layout_marginLeft="20dp"-->
+            <!--android:layout_marginTop="5dp"-->
+
+
+
+            <android.support.design.widget.TabLayout
+                android:id="@+id/tl_tabs_container"
+                android:layout_width="match_parent"
+                app:tabGravity="fill"
+                app:tabMode="fixed"
+                app:tabTextAppearance="@android:style/TextAppearance.Widget.TabWidget"
+                style="@style/MyStyle"
+                android:layout_height="wrap_content"/>
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--app:tabBackground = "@color/colorPrimary"-->
+                <!--app:tabIndicatorColor="@color/colorWhite"-->
+                <!--app:tabSelectedTextColor="@color/colorWhite"-->
+                <!--app:tabTextAppearance="@style/AppTabTextAppearanceSubject"-->
+                <!--android:minHeight="?attr/actionBarSize"-->
+                <!--app:tabGravity="fill"-->
+                <!--app:tabMode="fixed"-->
+                <!--android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar" />-->
+
+                <!--android:layout_below="@+id/toolbar_subject_menu"-->
+
+            </android.support.design.widget.AppBarLayout>
+
+            <android.support.v4.view.ViewPager
+                android:id="@+id/vp_fragments_container"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/app_bar_layout" />
+
+
+
+
+
+
+
+        </RelativeLayout>
+
+        <android.support.design.widget.BottomNavigationView
+            android:id="@+id/bottom_navigation_view"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/tl_tabs_container" />
+            android:layout_gravity="bottom"
+            android:background="@color/colorWhite"
+            app:labelVisibilityMode="unlabeled"
+            android:fitsSystemWindows="true"
+            app:menu="@menu/bottom_navigation_view_menu"/>
 
-    </RelativeLayout>
+    </android.support.design.widget.CoordinatorLayout>
 </layout>

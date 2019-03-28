@@ -31,9 +31,11 @@ import itest.kz.model.ProfileResponse;
 import itest.kz.model.Question;
 import itest.kz.model.QuestionResponce;
 import itest.kz.model.Subject;
+import itest.kz.model.Test;
 import itest.kz.model.TestGenerate;
 import itest.kz.model.TestGenerateCredentials;
 import itest.kz.model.TestGenerateResponse;
+import itest.kz.model.Tests;
 import itest.kz.network.SubjectService;
 import itest.kz.network.UserService;
 import itest.kz.util.Constant;
@@ -55,7 +57,7 @@ public class FullTestActivity extends AppCompatActivity
     private String accessToken;
     public CustomViewPager mPager;
     private Toolbar myToolbar;
-    private ArrayList<ArrayList<Question>> arrayListArrayListQuestions;
+    private ArrayList<Tests> arrayListArrayListQuestions;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState)
@@ -125,7 +127,7 @@ public class FullTestActivity extends AppCompatActivity
 
     public void fetchFullTestGenerate()
     {
-        System.out.println(getOwnersId());
+//        System.out.println(getOwnersId());
 
         TestGenerateCredentials credentials = new TestGenerateCredentials("ent", "full", getOwnersId());
         AppController appController = new AppController();
@@ -133,7 +135,7 @@ public class FullTestActivity extends AppCompatActivity
 //        AppController appController = AppController.create(context);
         SubjectService subjectService = appController.getSubjectService();
 
-        Disposable disposable = subjectService.getTestGenerate(Constant.ACCEPT,
+        Disposable disposable = subjectService.getTestGenerate(Constant.ACCEPT, "ru",
                 "Bearer " + accessToken, credentials)
                 .subscribeOn(appController.subscribeScheduler())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -150,46 +152,129 @@ public class FullTestActivity extends AppCompatActivity
         compositeDisposable.add(disposable);
     }
 
-    public  ArrayList<ArrayList<Question>> deserializeFromJson(TestGenerate testGenerate, JsonObject jsonObject) throws JSONException
+    public  ArrayList<Tests> deserializeFromJson(TestGenerate testGenerate, JsonObject jsonObject) throws JSONException
     {
-        ArrayList<ArrayList<Question>> arrayListsQuestions =
-                new ArrayList<>();
-        JSONObject jsonObject1 = new JSONObject(jsonObject.toString());
-        JSONObject tests = jsonObject1.getJSONObject("tests");
-        for (Long id : testGenerate.getOwners())
-        {
-            System.out.println("id ");
-            System.out.println(id);
-            JSONObject testId = tests.getJSONObject(id.toString());
-            JSONObject data = testId.getJSONObject("data");
-            JSONArray questions = data.getJSONArray("questions");
+//        ArrayList<ArrayList<Question>> arrayListsQuestions =
+//                new ArrayList<>();
 
-            Gson gson = new Gson();
+//        System.out.println(accessToken);
+        ArrayList<Tests> testsArrayList = new ArrayList<>();
+        JSONObject jsonObject1 = new JSONObject(jsonObject.toString());
+        JSONObject data = jsonObject1.getJSONObject("data");
+        JSONArray tests = data.getJSONArray("tests");
+
+        Gson gson = new Gson();
+        for (int i=0; i < tests.length(); i++)
+        {
+            JSONObject testItem = tests.getJSONObject(i);
+
+            JSONArray questions = testItem.getJSONArray("questions");
+            JSONObject test = testItem.getJSONObject("test");
+//            JSONObject subject = testItem.getJSONObject("subject");
+            Subject subject = gson.fromJson(testItem.getJSONObject("subject").toString(), Subject.class);
+            Long testId = test.getLong("id");
+
             ArrayList<Question> questionsList = new ArrayList<>();
-            for (int i=0; i < questions.length(); i++) {
-                Question obj = gson.fromJson(questions.getJSONObject(i).toString(),Question.class);
-                if (testId.has("texts"))
-                {
-                    JSONObject texts = testId.getJSONObject("texts");
-                    if (texts.has(obj.getQuestionId().toString()))
-                    {
-                        JSONObject textsId = texts.getJSONObject
-                                (obj.getQuestionId().toString());
-                        String t = textsId.getString("text");
-                        obj.setText(t);
+            for (int j = 0; j < questions.length(); j++) {
+                Question obj = gson.fromJson(questions.getJSONObject(j).toString(),Question.class);
+                if (testItem.has("texts")) {
+                    JSONObject texts = testItem.getJSONObject("texts");
+
+                    if (obj.getTextId() != null) {
+
+                        if (texts.has(obj.getTextId().toString())) {
+
+                            JSONObject textsId = texts.getJSONObject
+                                    (obj.getTextId().toString());
+                            String t = textsId.getString("text");
+                            obj.setText(t);
+                        }
                     }
 
                 }
                 questionsList.add(obj);
             }
-            arrayListsQuestions.add(questionsList);
 
+            testsArrayList.add(new Tests(questionsList, testId, subject));
+
+//            if (testItem.has("texts"))
+//            {
+//                JSONObject texts = testItem.getJSONObject("texts");
+//
+//            }
+
+
+
+
+//            System.out.println(test.toString());
+//            JSONArray questions = tests.getJSONArray(i);
+
+//            JSONObject test = tests.getJSONObject(i);
+//            System.out.println(test.toString());
+//
+//            System.out.println();
+//            System.out.println(i);
+//            System.out.println();
+//            Question obj = gson.fromJson(questions.getJSONObject(i).toString(),Question.class);
+//            if (testId.has("texts"))
+//            {
+//                JSONObject texts = testId.getJSONObject("texts");
+//                if (texts.has(obj.getQuestionId().toString()))
+//                {
+//                    JSONObject textsId = texts.getJSONObject
+//                            (obj.getQuestionId().toString());
+//                    String t = textsId.getString("text");
+//                    obj.setText(t);
+//                }
+//
+//            }
+//            questionsList.add(obj);
         }
 
+        return testsArrayList;
+//        arrayListsQuestions.add(questionsList);
+//
+//        System.out.println(tests.toJSONObject());
+
+
+
+
+
+//        JSONObject tests = jsonObject1.getJSONObject("tests");
+//        for (Long id : testGenerate.getOwners())
+//        {
+////            System.out.println("id ");
+////            System.out.println(id);
+//            JSONObject testId = tests.getJSONObject(id.toString());
+//            JSONObject data = testId.getJSONObject("data");
+//            JSONArray questions = data.getJSONArray("questions");
+//
+//            Gson gson = new Gson();
+//            ArrayList<Question> questionsList = new ArrayList<>();
+//            for (int i=0; i < questions.length(); i++) {
+//                Question obj = gson.fromJson(questions.getJSONObject(i).toString(),Question.class);
+//                if (testId.has("texts"))
+//                {
+//                    JSONObject texts = testId.getJSONObject("texts");
+//                    if (texts.has(obj.getQuestionId().toString()))
+//                    {
+//                        JSONObject textsId = texts.getJSONObject
+//                                (obj.getQuestionId().toString());
+//                        String t = textsId.getString("text");
+//                        obj.setText(t);
+//                    }
+//
+//                }
+//                questionsList.add(obj);
+//            }
+//            arrayListsQuestions.add(questionsList);
+//
+//        }
+//
 //        System.out.println("q");
 //        System.out.println(arrayListsQuestions);
 
-        return arrayListsQuestions;
+//        return arrayListsQuestions;
 
 
     }
@@ -211,13 +296,23 @@ public class FullTestActivity extends AppCompatActivity
                                @Override
                                public void accept(JsonObject jsonObject) throws Exception
                                {
-                                   ArrayList<ArrayList<Question>> questions =
+
+//                                   System.out.println(jsonObject.toString());
+                                   ArrayList<Tests> questions =
                                    deserializeFromJson(testGenerate, jsonObject);
-
+//
                                    setArraListArrayListQuestions(questions);
+//
+                                   Tests arrayList = questions.get(0);
 
-                                   ArrayList<Question> arrayList = questions.get(0);
-
+//                                   for (Tests t : questions)
+//                                   {
+//                                       for (Question q : t.getQuestions())
+//                                       {
+//                                           System.out.println(q.getText());
+//                                       }
+//                                   }
+////
                                    setFragment(arrayList);
 
                                }
@@ -235,12 +330,12 @@ public class FullTestActivity extends AppCompatActivity
         compositeDisposable.add(disposable);
     }
 
-    private void setArraListArrayListQuestions(ArrayList<ArrayList<Question>> questions)
+    private void setArraListArrayListQuestions(ArrayList<Tests> questions)
     {
         this.arrayListArrayListQuestions = questions;
     }
 
-    public void setFragment(ArrayList<Question> arrayList)
+    public void setFragment(Tests arrayList)
     {
         mPager = activityFullTestBinding.pager;
         mPager.setOffscreenPageLimit(2);

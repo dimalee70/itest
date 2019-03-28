@@ -38,7 +38,11 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Негізгі пәндер"/>
+                    android:layout_margin="16dp"
+                    android:textSize="14sp"
+                    android:textColor="@color/colorBlack"
+                    android:text="@{ent.requiredSubjects}"/>
+
             </RelativeLayout>
 
             <RelativeLayout
@@ -83,7 +87,11 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Таңдау пәндері"/>
+                    android:text="@{ent.chosedSubjects}"
+                    android:layout_margin="16dp"
+                    android:textSize="14sp"
+                    android:textColor="@color/colorBlack" />
+
             </RelativeLayout>
 
             <!--<ScrollView-->
@@ -146,7 +154,7 @@
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:textAlignment="center"
-                                    android:text="Отмена"
+                                    android:text="@{ent.cancel}"
                                     android:textStyle="bold"
                                     android:textSize="16dp"
                                     android:layout_centerInParent="true"
@@ -189,7 +197,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:textAlignment="center"
-                        android:text="Толық ҰБТ тапсыру"
+                        android:text="@{ent.startFullTest}"
                         android:textSize="16dp"
                         android:textColor="@color/colorWhite"
                         android:layout_centerInParent="true"

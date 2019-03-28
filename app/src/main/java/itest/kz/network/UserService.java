@@ -4,11 +4,14 @@ import android.databinding.ObservableField;
 
 import io.reactivex.Observable;
 import itest.kz.model.LoginResponse;
+import itest.kz.model.PasswordChangeResponce;
+import itest.kz.model.ProfileInfo;
 import itest.kz.model.ProfileResponse;
 import itest.kz.model.RegisterResponse;
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
 import okhttp3.ResponseBody;
+import retrofit2.http.Body;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
@@ -47,5 +50,26 @@ public interface UserService
 //                                          @Part("avatar")RequestBody requestBody
                                             );
 
+    @FormUrlEncoded
+    @POST("api/profile")
+    Observable<ProfileResponse> setProfile(@Header("Accept") String accept,
+                                           @Header("X-Localization") String lang,
+                                           @Header("Authorization") String accessToken,
+//                                           @Body ProfileInfo profileInfo
+                                           @Field("firstname") String firstname,
+                                           @Field("surname") String surname,
+                                           @Field("born_date") String bornDate,
+                                           @Field("login") String login,
+                                           @Field("email") String email
+                                           );
 
+    @FormUrlEncoded
+    @POST("api/change-password")
+    Observable<PasswordChangeResponce> changePassword(@Header("Accept") String accept,
+                                                      @Header("X-Localization") String lang,
+                                                      @Header("Authorization") String accessToken,
+                                                      @Field("old_password") String password,
+                                                      @Field("new_password") String newPassword,
+                                                      @Field("new_password_confirmation") String newPasswordConfirm
+                                                      );
 }

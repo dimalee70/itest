@@ -61,7 +61,11 @@ public class MaterialsViewModel extends Observable
 
 ////                                   nodeList = nodesBySubject.getNodes();
 //                                   System.out.println(nodesBySubject.getNodes().toString());
+
+//                                   System.out.println("nodes");
+//                                   System.out.println(nodesBySubject.getNodes().toString());
                                    updateNodeBySubjectData(nodesBySubject);
+
                                    material_list.set(View.VISIBLE);
                                }
                            }

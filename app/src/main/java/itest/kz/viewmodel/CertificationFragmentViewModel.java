@@ -1,6 +1,7 @@
 package itest.kz.viewmodel;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.databinding.ObservableInt;
 import android.view.View;
 
@@ -24,12 +25,15 @@ import itest.kz.util.Constant;
 import itest.kz.view.fragments.CertificationFragment;
 import itest.kz.view.fragments.SubjectFragment;
 
+import static android.content.Context.MODE_PRIVATE;
+
 public class CertificationFragmentViewModel extends Observable
 {
     public Context context;
     public ObservableInt subjectRecycler;
     private List<Subject> subjectList;
     public Action showHideButtons;
+    private String language;
 
 
     private CompositeDisposable compositeDisposable = new CompositeDisposable();
@@ -40,6 +44,9 @@ public class CertificationFragmentViewModel extends Observable
         this.context = context;
         this.subjectRecycler = new ObservableInt(View.GONE);
         this.subjectList = new ArrayList<>();
+        SharedPreferences settings = context.getSharedPreferences(Constant.MY_LANG, MODE_PRIVATE);
+//        settings.edit().clear().commit();
+        language = settings.getString(Constant.LANG, "kz");
 //        showHideButtons = () ->
 //                {
 //                    System.out.println("Hello World");
@@ -55,7 +62,7 @@ public class CertificationFragmentViewModel extends Observable
 
 
         Disposable disposable = subjectService.getSubjects(Constant.ATTESTATION,
-                "Bearer " + Constant.ACCESSTOKEN, Constant.ACCEPT, "ru")
+                "Bearer " + Constant.ACCESSTOKEN, Constant.ACCEPT, language)
                 .subscribeOn(appController.subscribeScheduler())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Consumer<SubjectResponce>() {

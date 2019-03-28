@@ -1,7 +1,9 @@
 package itest.kz.view.activity;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.databinding.DataBindingUtil;
+import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -20,6 +22,7 @@ import itest.kz.viewmodel.MainViewModel;
 public class MainActivity extends AppCompatActivity
 {
     private MainViewModel mainViewModel;
+
 
 //    @Override
 //    public boolean onCreateOptionsMenu(Menu menu) {
@@ -45,6 +48,10 @@ public class MainActivity extends AppCompatActivity
 //
 //        toast.show();
 
+//        SharedPreferences settings = getSharedPreferences(Constant.MY_PREF, MODE_PRIVATE);
+////        settings.edit().clear().commit();
+//        settings.getString(Constant.LANG, "kz");
+
         ActivityMainBinding activityMainBinding = DataBindingUtil.setContentView(this, R.layout.activity_main);
         mainViewModel = new MainViewModel(this);
         activityMainBinding.setMainViewModel(mainViewModel);
@@ -54,6 +61,14 @@ public class MainActivity extends AppCompatActivity
 //        System.out.println(value);
 
 
+    }
+
+    public void onBackPressed()
+    {
+        Intent a = new Intent(Intent.ACTION_MAIN);
+        a.addCategory(Intent.CATEGORY_HOME);
+        a.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(a);
     }
 
 }

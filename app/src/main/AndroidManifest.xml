@@ -38,10 +38,6 @@
             android:windowSoftInputMode="stateHidden"
             android:theme="@style/AppTheme">
         </activity>
-        <activity
-            android:name=".view.activity.SubjectActivity"
-            android:theme="@style/AppTheme">
-        </activity>
         <activity android:name=".view.activity.TestActivity"
             android:launchMode="singleTop"
             android:theme="@style/AppTheme">
@@ -58,13 +54,16 @@
         <activity android:name=".view.activity.LectureActivity"
             android:theme="@style/AppTheme">
         </activity>
-        <activity android:name=".view.activity.HomeActivity"
+        <activity android:name=".view.activity.SubjectActivity"
             android:theme="@style/AppTheme">
         </activity>
         <activity android:name=".view.activity.FullTestActivity"
             android:theme="@style/AppTheme">
         </activity>
         <activity android:name=".view.activity.MainHomeActivity"
+            android:theme="@style/AppTheme">
+        </activity>
+        <activity android:name=".view.activity.HomeActivity"
             android:theme="@style/AppTheme">
         </activity>
     </application>

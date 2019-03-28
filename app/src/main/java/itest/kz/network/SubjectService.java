@@ -54,6 +54,7 @@ public interface SubjectService
 
     @POST("api/test/generate")
     Observable<TestGenerateResponse> getTestGenerate(@Header("Accept") String accept,
+                                                     @Header("X-Localization") String lang,
                                                      @Header("Authorization") String accessToken,
                                                      @Body TestGenerateCredentials credentials);
 

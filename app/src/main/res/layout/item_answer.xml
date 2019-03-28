@@ -44,12 +44,17 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
+                <RelativeLayout
+                    android:id="@+id/letter_relative"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:gravity="center">
+
+
                 <TextView
                     android:id="@+id/textview1"
                     android:layout_width="33dp"
-                    android:layout_height="match_parent"
-                    android:layout_centerVertical="true"
-                    android:layout_gravity="left"
+                    android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="@{answer.letter}"
                     android:textAlignment="center"
@@ -58,16 +63,18 @@
                     android:textSize="20dp"
                     android:textStyle="bold" />
 
+                </RelativeLayout>
+
 
                 <itest.kz.util.AnswerWebView
                     android:id="@+id/answerText"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
 
                     android:hardwareAccelerated="true"
                     android:clickable="false"
                     android:focusable="false"
-                    android:layout_toRightOf="@id/textview1"
+                    android:layout_toRightOf="@id/letter_relative"
                     app:loadData="@{answer.answerText}">
 
                     <!--android:layout_centerHorizontal="true"-->

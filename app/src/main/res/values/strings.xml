@@ -2,17 +2,113 @@
     <string name="app_name">itest</string>
     <string name="rus">Руский</string>
     <string name="kaz">Қазақша</string>
-    <string name="sign_up">ЖАЛҒАСТЫРУ</string>
-    <string name="selectLanguage">ТІЛДІ ТАҢДАҢЫЗ</string>
+
+    <string name="selectLanguageKz">ТІЛДІ ТАҢДАҢЫЗ</string>
+    <string name="selectLanguageRu">ВЫБЕРИТЕ ЯЗЫК</string>
+
+    <string name="continueKz">ЖАЛҒАСТЫРУ</string>
+    <string name="continueRu">ПРОДОЛЖИТЬ</string>
+
+    <string name="subjectsKz">Пәндер</string>
+    <string name="subjectsRu">Предметы</string>
+
+    <string name="fullEntKz">Толық ҰБТ</string>
+    <string name="fullEntRu">Полное ЕНТ</string>
+
+    <string name="forSubjectKz">Пән бойынша</string>
+    <string name="forSubjectRu">По предмету</string>
+
+    <string name="requiredSubjectsKz">Негізгі пәндер</string>
+    <string name="requiredSubjectsRu">Обязательные предметы</string>
+
+    <string name="chosedSubjectsKz">Таңдау пәндері</string>
+    <string name="chosedSubjectsRu">Предметы по профилю</string>
+
+    <string name="fullTestStartKz">Толық ҰБТ тапсыру</string>
+    <string name="fullTestStartRu">Сдать полный ЕНТ</string>
+
+    <string name="cancelKz">Жою</string>
+    <string name="cancelRu">Отмена</string>
+
+    <string name="profileInfoKz">Өңдеу</string>
+    <string name="profileInfoRu">Редактировать</string>
+
+    <string name="saveTitleKz">Сақтау</string>
+    <string name="saveTitleRu">Сохранить</string>
+
+    <string name="nameKz">Аты: </string>
+    <string name="nameRu">Имя: </string>
+
+    <string name="hintNameKz">Сіздің атыңыз</string>
+    <string name="hintNameRu">Ваше имя</string>
+
+    <string name="surnameKz">Tегі: </string>
+    <string name="surnameRu">Фамилия: </string>
+
+    <string name="hintSurnameKz">Ваша фамилия</string>
+    <string name="hintSurnameRu">Сіздің тегіңіз</string>
+
+    <string name="dateOfBirthKz">Туған күн, ай, жыл:</string>
+    <string name="dateOfBirthRu">Дата рождения: </string>
+
+    <string name="hintDateOfBirthKz">КК.АА.ЖЖЖЖ</string>
+    <string name="hintDateOfBirthRu">ДД.ММ.ГГГГ</string>
+
+    <string name="loginKz">Логин: </string>
+    <string name="loginRu">Логин: </string>
+
+    <string name="hintLoginKz">Сіздің логиніңіз</string>
+    <string name="hintLoginRu">Ваш логин</string>
+
+    <string name="emailKz">Email: </string>
+    <string name="emailRu">Email: </string>
+
+    <string name="hintEmailKz">Сіздің email-іңіз</string>
+    <string name="hintEmailRu">Ваш email</string>
+
+    <string name="loginEmailHeaderKz">Логин және Email: </string>
+    <string name="loginEmailHeaderRu">Логин и Email: </string>
+
+    <string name="passwordChangedKz">Құпиясөз</string>
+    <string name="passwordChangedRu">Пароль</string>
+
+    <string name="oldPassTextKz">Қазіргі құпиясөз: </string>
+    <string name="oldPassTextRu">Текущий пароль: </string>
+
+    <string name="hintOldPassTextKz">Қазіргі құпиясөзді еңгізіңіз</string>
+    <string name="hintOldPassTextRu">Введите текущий пароль</string>
+
+    <string name="newPassTextKz">Жаңа құпиясөз: </string>
+    <string name="newPassTextRu">Новый пароль: </string>
+
+    <string name="hintNewPassTextKz">Жаңа құпиясөзді еңгізіңіз</string>
+    <string name="hintNewPassTextRu">Введите текущий пароль</string>
+
+    <string name="confirmNewPassKz">Растау: </string>
+    <string name="confirmNewPassRu">Подтверждение: </string>
+
+    <string name="hintConfirmNewPassKz">Жаңа құпиясөзді растаңыз</string>
+    <string name="hintConfirmNewPassRu">Подтвердите новый пароль</string>
+
+    <string name="helpCenterKz">Анықтама бөлімі</string>
+    <string name="helpCenterRu">Справочный центр</string>
+
+    <string name="policyKz">Құпиялық саясаты</string>
+    <string name="policyRu">Политика конфиденциальности</string>
+
+    <string name="agreementKz">Қолданушылық келісімі</string>
+    <string name="agreementRu">Пользовательское соглашение</string>
+
+    <string name="langKz">Тіл</string>
+    <string name="langRu">Язык</string>
+
     <string name="login">Login</string>
     <string name="signUpKaz">ТІРКЕЛУ</string>
     <string name="logInKaz">КІРУ</string>
-    <string name="profileInfoKaz">Өңдеу</string>
-    <string name="passwordKaz">Құпиясөз</string>
-    <string name="langKaz">Тіл</string>
-    <string name="agreementKaz">Анықтама бөлімі</string>
-    <string name="nameKaz">Аты: </string>
 
+    <string name="test">test</string>
+    <string name="statistic">statistic</string>
+    <string name="user">user</string>
     <string name="permission_granted">Permission granted</string>
     <string name="permission_denied">Permission denied</string>
 

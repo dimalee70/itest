@@ -11,12 +11,14 @@ import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,10 +26,18 @@ import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
 
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.CompositeDisposable;
+import io.reactivex.disposables.Disposable;
+import io.reactivex.functions.Consumer;
 import itest.kz.R;
+import itest.kz.app.AppController;
 import itest.kz.databinding.FragmentProfileBinding;
 import itest.kz.model.Profile;
+import itest.kz.model.ProfileResponse;
+import itest.kz.network.UserService;
 import itest.kz.util.Constant;
+import itest.kz.view.activity.HomeActivity;
 import itest.kz.view.activity.MainActivity;
 import itest.kz.viewmodel.ProfileFragmentViewModel;
 import jp.wasabeef.picasso.transformations.CropCircleTransformation;
@@ -41,6 +51,10 @@ public class ProfileFragment extends Fragment
     private Toolbar myToolbar;
     private SharedPreferences sharedPreferences;
     private Profile profile;
+    private String language;
+    private boolean isStartedFirs = true;
+    private String accessToken;
+
 
     public static ProfileFragment newInstance(Profile profile)
     {
@@ -53,12 +67,12 @@ public class ProfileFragment extends Fragment
     }
 
 
-//    @Override
-//    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater)
-//    {
-//        inflater.inflate(R.menu.main, menu);
-//        super.onCreateOptionsMenu(menu, inflater);
-//    }
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater)
+    {
+        inflater.inflate(R.menu.main, menu);
+        super.onCreateOptionsMenu(menu, inflater);
+    }
 
 
     @Override
@@ -97,6 +111,15 @@ public class ProfileFragment extends Fragment
         profile = (Profile) args.getSerializable(Constant.PROFILE);
     }
 
+
+    private void updateProfile(Profile profile)
+    {
+        this.profile = profile;
+//        profileFragmentViewModel = new ProfileFragmentViewModel(getContext(), profile);
+//        fragmentProfileBinding.setProfile(profileFragmentViewModel);
+//        setMyToolbar();
+    }
+
     @Override
     public void onPrepareOptionsMenu(Menu menu)
     {
@@ -115,13 +138,44 @@ public class ProfileFragment extends Fragment
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState)
     {
+
+
+        SharedPreferences settings = getContext().getSharedPreferences(Constant.MY_LANG, MODE_PRIVATE);
+//        settings.edit().clear().commit();
+        language = settings.getString(Constant.LANG, "kz");
         setHasOptionsMenu(true);
-        getFromBundle();
+
         fragmentProfileBinding = DataBindingUtil.inflate
                 (inflater, R.layout.fragment_profile, container, false);
-        profileFragmentViewModel = new ProfileFragmentViewModel(getContext(), profile);
-        fragmentProfileBinding.setProfile(profileFragmentViewModel);
+
+        ((HomeActivity)getActivity()).setNavigationVisibility(true);
+////        getFromBundle();
+//
+//        getFromBundle();
+//        profileFragmentViewModel = new ProfileFragmentViewModel(getContext(), profile);
+//        fragmentProfileBinding.setProfile(profileFragmentViewModel);
+
+
+//
+
+        if (isStartedFirs)
+        {
+            getFromBundle();
+            profileFragmentViewModel = new ProfileFragmentViewModel(getContext(), profile);
+
+            isStartedFirs = false;
+        }
+        else
+            fetchProfileInfo();
+
         setMyToolbar();
+        fragmentProfileBinding.setProfile(profileFragmentViewModel);
+
+
+//        System.out.println(isStartedFirs);
+
+
+//        System.out.println(isStartedFirs);
 //        setContentProfile();
 
 
@@ -130,6 +184,32 @@ public class ProfileFragment extends Fragment
 //        mTitle.setTextColor(Color.WHITE);
 
         return fragmentProfileBinding.getRoot();
+    }
+
+    public void fetchProfileInfo()
+    {
+        getAccessToken();
+        AppController appController = new AppController();
+        CompositeDisposable compositeDisposable = new CompositeDisposable();
+//        AppController appController = AppController.create(context);
+        UserService userService = appController.getUserService();
+
+        Disposable disposable = userService.getProfile(language, Constant.ACCEPT,
+                "Bearer " + accessToken)
+                .subscribeOn(appController.subscribeScheduler())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Consumer<ProfileResponse>()
+                {
+
+                    @Override
+                    public void accept(ProfileResponse profileResponse) throws Exception
+                    {
+                        profileFragmentViewModel.setProfile(profileResponse.getProfile());
+                        profileFragmentViewModel.setLanguage(language);
+                    }
+                });
+
+        compositeDisposable.add(disposable);
     }
 
 //    public void setContentProfile()
@@ -162,5 +242,10 @@ public class ProfileFragment extends Fragment
 //        upArrow.setColorFilter(getResources().getColor(R.color.grey), PorterDuff.Mode.SRC_ATOP);
 
         ((AppCompatActivity)getActivity()).setSupportActionBar(myToolbar);
+    }
+
+    public void getAccessToken()
+    {
+        accessToken = getActivity().getIntent().getStringExtra(Constant.ACCESS_TOKEN);
     }
 }

@@ -56,6 +56,11 @@ public class TestFragmentViewModel extends Observable
 //        subjectRecycler.notifyChange();
     }
 
+//    public String getText()
+//    {
+//        return test.getText();
+//    }
+
 
 //    public TestAdapter getTestAdapter() {
 //        return testAdapter;

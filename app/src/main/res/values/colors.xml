@@ -7,13 +7,17 @@
     <color name="colorPrimaryLight">#C6E6FC</color>
     <color name="colorFrame">#0D5685</color>
     <color name="colorText">#D8D8D8</color>
-    <color name="colorBlack">#000000</color>
+    <color name="colorBlack">#FF000000</color>
     <color name="colorUnselectedTab">#D8D8D8</color>
+    <color name="colorUnselectedTabSubject">#FF287FB9</color>
     <color name="colorDivider">#D8D8D8</color>
     <color name="colorPhotoIcon">#E2ECF2</color>
     <color name="colorRed">#FF0000</color>
     <color name="colorGray">#D9DCE4FF</color>
     <color name="colorBackgroundEntBtn">#C95CB7</color>
     <color name="colorBackgroundCardView">#F1F2F6FF</color>
-    #d8d8d8ff
+    <color name="colorBorderCheckBoxUnSelected">#8A000000</color>
+    <color name="colorBorderCheckBoxSelected">#FF37ACF9</color>
+    <color name="colorSelectLanguage">#E8C6E6FC</color>
+    <color name="colorUnselectLanguage">#52C6E6FC</color>
 </resources>
