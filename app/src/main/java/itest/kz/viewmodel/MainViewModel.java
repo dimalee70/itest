@@ -37,11 +37,20 @@ public class MainViewModel extends BaseObservable
 
     public MainViewModel (Context context)
     {
+
         this.context = context;
         this.loginFragment = new LoginFragment();
+//        SharedPreferences.Editor editor2 = sharedPreferences.edit();
+//        editor2.clear();
+////            editor.putString(Constant.ACCESS_TOKEN, accessToken);
+//        editor2.apply();
+//        editor2.commit();
         fragmentManager = FragmentHelper.getFragmentManager(context);
 
         SharedPreferences settings = context.getSharedPreferences(Constant.MY_LANG, MODE_PRIVATE);
+
+//        SharedPreferences s = context.getSharedPreferences(Constant.MY_PREF, MODE_PRIVATE);
+//        s.edit().clear().commit();
 //        settings.edit().clear().commit();
         language = settings.getString(Constant.LANG, "kz");
 

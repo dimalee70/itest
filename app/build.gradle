@@ -23,6 +23,9 @@ project.ext {
     circleImageViewVersion = "3.0.0"
     easyPermissionVersion = "1.0.1"
     expandableTextViewVerion = "1.0.5"
+    hourglassVersion = "2.0.0"
+    slidinguppanelVersion = "3.4.0"
+//    plainPieVersion = "v0.2.9"
 
     daggerVersion = "2.15"
     butterKnifeVersion = "8.8.1"
@@ -88,6 +91,7 @@ dependencies {
     implementation "com.squareup.retrofit2:adapter-rxjava2:$retrofit2Version"
     implementation "com.jakewharton.retrofit:retrofit2-rxjava2-adapter:$retrofitRxJava2Version"
 
+
     implementation "android.arch.lifecycle:extensions:$lifecycleVersion"
     implementation "android.arch.lifecycle:viewmodel:$lifecycleVersion"
 
@@ -108,5 +112,14 @@ dependencies {
     implementation "pub.devrel:easypermissions:$easyPermissionVersion"
 
     implementation "at.blogc:expandabletextview:$expandableTextViewVerion"
+
+    implementation "com.ankushgrover:Hourglass:$hourglassVersion"
+
+    implementation "com.github.flipboxstudio:sosoito:v1.0.3"
+
+    implementation "com.squareup.okhttp3:okhttp:3.14.1"
+//    implementation "com.sothree.slidinguppanel:library:$slidinguppanelVersion"
+
+//    implementation "com.github.zurche:plain-pie:$plainPieVersion"
 
 }

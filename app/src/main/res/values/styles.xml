@@ -1,5 +1,37 @@
 <resources>
 
+    <!--<style name="Theme_Dialog" parent="android:Theme.Holo.Dialog">-->
+        <!--<item name="android:windowMinWidthMajor">96%</item>-->
+        <!--<item name="android:windowMinWidthMinor">96%</item>-->
+        <!--<item name="android:windowMinH"-->
+    <!--</style>-->
+
+
+    <!--<style name="AppBottomSheetDialogTheme"-->
+        <!--parent="Theme.Design.Light.BottomSheetDialog">-->
+        <!--<item name="bottomSheetStyle">@style/AppModalStyle</item>-->
+    <!--</style>-->
+
+    <!--<style name="AppModalStyle"-->
+        <!--parent="Widget.Design.BottomSheet.Modal">-->
+        <!--<item name="android:background">@drawable/dialog_rounded_bg</item>-->
+    <!--</style>-->
+
+    <style name="DialogAnimation">
+        <item name="android:windowEnterAnimation">@anim/slide_up</item>
+        <item name="android:windowExitAnimation">@anim/slide_down</item>
+    </style>
+
+
+
+    <style name="BottomSheetDialog" parent="Theme.Design.Light.BottomSheetDialog">
+        <item name="bottomSheetStyle">@style/bottomSheetStyleWrapper</item>
+    </style>
+
+    <style name="bottomSheetStyleWrapper" parent="Widget.Design.BottomSheet.Modal">
+        <item name="behavior_peekHeight">1000dp</item>
+    </style>
+
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Customize your theme here. -->
@@ -21,7 +53,7 @@
     </style>
 
     <style name="TextViewParagraph">
-        <item name="fontPath">font/Roboto-Regular.ttf</item>
+        <item name="android:fontFamily">font/opensans_semibold.ttf</item>
         <item name="android:textSize">14sp</item>
         <item name="android:textColor">#444444</item>
     </style>
@@ -75,6 +107,21 @@
         <item name="tabBackground">?attr/selectableItemBackground</item>
         <item name="tabSelectedTextColor">@color/colorWhite</item>
         <item name="android:textColor">@color/colorUnselectedTabSubject</item>
+    </style>
+
+    <style name="styleTabLayoutAuth" parent="Widget.Design.TabLayout">
+        <item name="tabIndicatorColor">#FFFF</item>
+        <item name="tabIndicatorHeight">2dp</item>
+        <item name="tabPaddingStart">8dp</item>
+        <item name="android:textSize">18sp</item>
+        <item name="tabPaddingEnd">8dp</item>
+        <item name="tabBackground">?attr/selectableItemBackground</item>
+        <item name="tabSelectedTextColor">@color/colorPrimary</item>
+        <item name="android:textColor">@color/colorUnselectedTabAuth</item>
+    </style>
+
+    <style name="tab_text" parent="@android:style/TextAppearance.Widget.TabWidget">
+        <item name="android:fontFamily">@font/my_open_sans_semibold</item>
     </style>
 
 </resources>

@@ -63,14 +63,14 @@ public class ItemAnswerViewModel extends BaseObservable
         notifyChange();
     }
 
-    public  ItemAnswerViewModel (Context context, Answer answer, List<Answer> answerList)
+    public  ItemAnswerViewModel (Context context, Answer answer)
     {
 //        super(application);
         this.context = context;
         this.answer = answer;
-        this.answerList = answerList;
-        color = new ObservableInt(( answer.getAnswerResponce()!= null)?
-                Color.GREEN : Color.WHITE);
+//        this.answerList = answerList;
+//        color = new ObservableInt((answer.getAnswerResponce())?
+//                Color.GREEN : Color.WHITE);
 //        notifyChange();
 //        System.out.println(answer.getAnswer());
         answerText.set(Constant.MATHJAX + answer.getAnswer());
@@ -86,43 +86,43 @@ public class ItemAnswerViewModel extends BaseObservable
     {
         return color;
     }
+//
+//    public void setColor(ObservableInt color)
+//    {
+//        this.color = color;
+//    }
 
-    public void setColor(ObservableInt color)
-    {
-        this.color = color;
-    }
-
-    public void onClick()
-    {
-//        System.out.println(answer.getAnswerResponce());
-        if (color.get() != Color.WHITE)
-        {
-            color.set( Color.WHITE);
-            answer.setAnswerResponce(null);
-        }
-        else
-        {
-//            answer.setAnswerResponce(new ArrayList<>());
-//            answer.getAnswerResponce().add(answer.getId());
-            for (Answer a: answerList
-                 ) {
-                a.setAnswerResponce(null);
-            }
-            answer.setAnswerResponce(null);
-            answer.setAnswerResponce(answer.getAnswerId());
-            color.set(Color.GREEN);
-
-
-//            notifyChange();
-//            notifyChange();
-
-
-
-        }
-//        System.out.println("On Click ");
+//    public void onClick()
+//    {
+////        System.out.println(answer.getAnswerResponce());
+//        if (color.get() != Color.WHITE)
+//        {
+//            color.set( Color.WHITE);
+//            answer.setAnswerResponce(false);
+//        }
+//        else
+//        {
+////            answer.setAnswerResponce(new ArrayList<>());
+////            answer.getAnswerResponce().add(answer.getId());
+//            for (Answer a: answerList
+//                 ) {
+//                a.setAnswerResponce(false);
+//            }
+//            answer.setAnswerResponce(false);
+//            answer.setAnswerResponce(true );
+//            color.set(Color.GREEN);
+//
+//
+////            notifyChange();
+////            notifyChange();
+//
+//
+//
+//        }
+////        System.out.println("On Click ");
 //        TestActivity testActivity =
 //                (TestActivity)getA
-    }
+//    }
 //    public String getAnswerText()
 //    {
 //        return  answer.getAnswer();

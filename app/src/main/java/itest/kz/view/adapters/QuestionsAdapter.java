@@ -41,12 +41,22 @@ public class QuestionsAdapter extends RecyclerView.Adapter<QuestionsAdapter.Ques
     private List<Answer> answers;
     private Context context;
     private ItemQuestionsBinding itemQuestionsBinding;
+    private String resultTag;
 
     public QuestionsAdapter(List<Answer> answers, Context context)
     {
         this.answers = answers;
         this.context = context;
+        this.resultTag = null;
     }
+
+    public QuestionsAdapter(List<Answer> answers, Context context, String resultTag)
+    {
+        this.answers = answers;
+        this.context = context;
+        this.resultTag = resultTag;
+    }
+
 
     @NonNull
     @Override
@@ -82,27 +92,81 @@ public class QuestionsAdapter extends RecyclerView.Adapter<QuestionsAdapter.Ques
         questionAdapterViewHolder.bindAnswer(answers.get(i));
         itemQuestionsBinding.btn.setText(letters[i].toString());
 //        System.out.println("changed");
+//        answers.get(i).getUserAnswer() != null
 
-        if (answers.get(i).getAnswerResponce() != null)
+        StateListDrawable gradientDrawable = (StateListDrawable) itemQuestionsBinding.btn.getBackground();
+        DrawableContainer.DrawableContainerState drawableContainerState = (DrawableContainer.DrawableContainerState) gradientDrawable.getConstantState();
+        Drawable[] children = drawableContainerState.getChildren();
+        GradientDrawable selectedItem = (GradientDrawable) children[0];
+        if (resultTag != null)
         {
+
+            if ( answers.get(i).getUserAnswer() == 1)
+            {
 //            if (answers.get(i).getAnswerResponce() == answers.get(i).getId()
 //            && answers.get(i).getCorrect() == 1)
 //            {
 
-            StateListDrawable gradientDrawable = (StateListDrawable) itemQuestionsBinding.btn.getBackground();
-            DrawableContainer.DrawableContainerState drawableContainerState = (DrawableContainer.DrawableContainerState) gradientDrawable.getConstantState();
-            Drawable[] children = drawableContainerState.getChildren();
-            GradientDrawable selectedItem = (GradientDrawable) children[0];
+//                StateListDrawable gradientDrawable = (StateListDrawable) itemQuestionsBinding.btn.getBackground();
+//                DrawableContainer.DrawableContainerState drawableContainerState = (DrawableContainer.DrawableContainerState) gradientDrawable.getConstantState();
+//                Drawable[] children = drawableContainerState.getChildren();
+//                GradientDrawable selectedItem = (GradientDrawable) children[0];
 //            LayerDrawable unselectedItem = (LayerDrawable) children[1];
 //            GradientDrawable selectedDrawable = (GradientDrawable) selectedItem.getDrawable(0);
 //            GradientDrawable unselectedDrawable = (GradientDrawable) unselectedItem.getDrawable(0);
 //            selectedItem.setStroke(1, Color.RED);
 
-            selectedItem.setColor(Color.parseColor("#D2D0D3"));
+                selectedItem.setColor(Color.parseColor("#ffff6969"));
 
 
 
             }
+            if (answers.get(i).getCorrect() == 1 && isAnswered())
+            {
+//                StateListDrawable gradientDrawable = (StateListDrawable) itemQuestionsBinding.btn.getBackground();
+//                DrawableContainer.DrawableContainerState drawableContainerState = (DrawableContainer.DrawableContainerState) gradientDrawable.getConstantState();
+//                Drawable[] children = drawableContainerState.getChildren();
+//                GradientDrawable selectedItem = (GradientDrawable) children[0];
+//            LayerDrawable unselectedItem = (LayerDrawable) children[1];
+//            GradientDrawable selectedDrawable = (GradientDrawable) selectedItem.getDrawable(0);
+//            GradientDrawable unselectedDrawable = (GradientDrawable) unselectedItem.getDrawable(0);
+//            selectedItem.setStroke(1, Color.RED);
+
+                selectedItem.setColor(Color.parseColor("#ff68da78"));
+            }
+            else if (!isAnswered() && answers.get(i).getCorrect() == 1)
+            {
+
+//            LayerDrawable unselectedItem = (LayerDrawable) children[1];
+//            GradientDrawable selectedDrawable = (GradientDrawable) selectedItem.getDrawable(0);
+//            GradientDrawable unselectedDrawable = (GradientDrawable) unselectedItem.getDrawable(0);
+//            selectedItem.setStroke(1, Color.RED);
+
+                selectedItem.setColor(Color.parseColor("#a0b5c2"));
+            }
+        }
+        else
+            {
+            if (answers.get(i).getUserAnswer() == 1) {
+//            if (answers.get(i).getAnswerResponce() == answers.get(i).getId()
+//            && answers.get(i).getCorrect() == 1)
+//            {
+
+//                StateListDrawable gradientDrawable = (StateListDrawable) itemQuestionsBinding.btn.getBackground();
+//                DrawableContainer.DrawableContainerState drawableContainerState = (DrawableContainer.DrawableContainerState) gradientDrawable.getConstantState();
+//                Drawable[] children = drawableContainerState.getChildren();
+//                GradientDrawable selectedItem = (GradientDrawable) children[0];
+//            LayerDrawable unselectedItem = (LayerDrawable) children[1];
+//            GradientDrawable selectedDrawable = (GradientDrawable) selectedItem.getDrawable(0);
+//            GradientDrawable unselectedDrawable = (GradientDrawable) unselectedItem.getDrawable(0);
+//            selectedItem.setStroke(1, Color.RED);
+
+                selectedItem.setColor(Color.parseColor("#D2D0D3"));
+
+
+            }
+
+        }
 //        else
 //            {
 //            ColorFilter filter = new LightingColorFilter(Color.GREEN, Color.BLACK);
@@ -113,6 +177,15 @@ public class QuestionsAdapter extends RecyclerView.Adapter<QuestionsAdapter.Ques
 
     }
 
+    public boolean isAnswered()
+    {
+        for (Answer a : answers)
+        {
+            if (a.getUserAnswer() == 1)
+                return true;
+        }
+        return false;
+    }
     @Override
     public int getItemCount() {
         if (answers != null)

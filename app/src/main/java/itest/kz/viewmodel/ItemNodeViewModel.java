@@ -9,6 +9,7 @@ import java.util.Observable;
 
 import io.reactivex.disposables.CompositeDisposable;
 import itest.kz.model.Node;
+import itest.kz.model.NodeChildren;
 import itest.kz.model.Subject;
 import itest.kz.util.Constant;
 import itest.kz.view.activity.MaterialsActivity;
@@ -17,10 +18,10 @@ import itest.kz.view.activity.NodeByNodeActivity;
 public class ItemNodeViewModel extends BaseObservable
 {
     private Context context;
-    private Node node;
+    private NodeChildren node;
     private Subject subject;
 
-    public ItemNodeViewModel(Context context, Node node)
+    public ItemNodeViewModel(Context context, NodeChildren node)
     {
         this.context = context;
         this.node = node;
@@ -39,28 +40,25 @@ public class ItemNodeViewModel extends BaseObservable
         this.context = context;
     }
 
-    public Node getNode() {
+    public NodeChildren getNode() {
         return node;
     }
 
-    public void setNode(Node node) {
+    public void setNode(NodeChildren node) {
         this.node = node;
         notifyChange();
     }
 
     public void onClick(View view)
     {
-//
-//        System.out.println("Hello");
-//        System.out.println(node);
+
+
         Intent intent = new Intent(view.getContext(), NodeByNodeActivity.class);
-//////        System.out.println("Subject");
-//////        System.out.println(node.toString());
         intent.putExtra(Constant.SELECTED_NODE, node);
 
+
         context.startActivity(intent);
-//        context.
-//        view.getContext().s
+
     }
 
 

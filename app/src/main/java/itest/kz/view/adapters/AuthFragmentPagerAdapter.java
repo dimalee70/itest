@@ -32,19 +32,19 @@ public class AuthFragmentPagerAdapter extends FragmentPagerAdapter
         return null;
     }
 
-    @Nullable
-    @Override
-    public CharSequence getPageTitle(int position)
-    {
-        switch (position)
-        {
-            case 0:
-                return context.getString(R.string.logInKaz);
-            case 1:
-                return context.getString(R.string.signUpKaz);
-        }
-        return null;
-    }
+//    @Nullable
+//    @Override
+//    public CharSequence getPageTitle(int position)
+//    {
+//        switch (position)
+//        {
+//            case 0:
+//                return context.getString(R.string.logInKaz);
+//            case 1:
+//                return context.getString(R.string.signUpKaz);
+//        }
+//        return null;
+//    }
 
     @Override
     public int getCount()

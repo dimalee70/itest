@@ -8,103 +8,175 @@
             type="itest.kz.viewmodel.SignUpViewModel"/>
     </data>
 
-    <ScrollView
-        android:layout_width="wrap_content"
+    <!--<ScrollView-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content">-->
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
 
-
-    <RelativeLayout
-        android:layout_marginTop="50dp"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-
-        <android.support.design.widget.TextInputLayout
-            android:id="@+id/emailLayout"
+        <RelativeLayout
+            android:layout_marginTop="50dp"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="8dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            app:error="@{sighUp.confirmPasswordErr}">
-            <!--app:layout_constraintBottom_toTopOf="@+id/signInButton"-->
-            <!--app:layout_constraintEnd_toEndOf="parent"-->
-            <!--app:layout_constraintHorizontal_bias="0.5"-->
-            <!--app:layout_constraintStart_toStartOf="parent"-->
-            <!--app:layout_constraintTop_toBottomOf="@+id/passwordLayout"-->
+            android:layout_height="wrap_content">
 
-            <android.support.design.widget.TextInputEditText
+            <RelativeLayout
+                android:id="@+id/login_relative"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp">
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="39dp"
+                        android:layout_marginRight="37dp">
+
+                        <EditText
+                            android:id="@+id/login_input"
+                            android:layout_height="wrap_content"
+                            android:layout_width="match_parent"
+                            android:hint="@{sighUp.loginHint}"
+                            android:text="@={sighUp.login}"
+                            android:inputType="text"
+                            android:textSize="14sp"
+                            android:fontFamily="@font/my_open_sans_regular"/>
+
+                    </RelativeLayout>
+
+                </RelativeLayout>
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/password_relative"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Email"
-                android:text="@={sighUp.confirmPassword}"/>
+                android:layout_below="@+id/login_relative">
 
-        </android.support.design.widget.TextInputLayout>
-        <android.support.design.widget.TextInputLayout
-            android:id="@+id/passwordLayout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="8dp"
-            android:layout_marginStart="8dp"
-            android:hint="Password"
-            android:inputType="textPassword"
-            android:layout_marginTop="8dp"
-            app:error="@{sighUp.loginErr}"
-            android:layout_below="@id/emailLayout">
-            <!--app:layout_constraintBottom_toTopOf="@+id/passwordLayout"-->
-            <!--app:layout_constraintEnd_toEndOf="parent"-->
-            <!--app:layout_constraintHorizontal_bias="0.5"-->
-            <!--app:layout_constraintStart_toStartOf="parent"-->
-            <!--app:layout_constraintTop_toTopOf="parent"-->
-            <!--app:layout_constraintVertical_chainStyle="packed"-->
-            <android.support.design.widget.TextInputEditText
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp">
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="39dp"
+                        android:layout_marginRight="37dp">
+
+                        <EditText
+                            android:id="@+id/password_input"
+                            android:layout_height="wrap_content"
+                            android:layout_width="match_parent"
+                            android:hint="@{sighUp.passwordHint}"
+                            android:inputType="textPassword"
+                            android:text="@={sighUp.password}"
+                            android:textSize="14sp"
+                            android:fontFamily="@font/my_open_sans_regular"/>
+
+                    </RelativeLayout>
+
+                </RelativeLayout>
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/password_confirm_relative"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@={sighUp.login}"/>
-        </android.support.design.widget.TextInputLayout>
+                android:layout_below="@+id/password_relative">
 
-        <android.support.design.widget.TextInputLayout
-            android:id="@+id/confirmPasswordLayout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="8dp"
-            android:layout_below="@id/passwordLayout"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            app:error="@{sighUp.passwordErr}">
-            <!--app:layout_constraintBottom_toTopOf="@+id/emailLayout"-->
-            <!--app:layout_constraintEnd_toEndOf="parent"-->
-            <!--app:layout_constraintHorizontal_bias="0.5"-->
-            <!--app:layout_constraintStart_toStartOf="parent"-->
-            <!--app:layout_constraintTop_toBottomOf="@+id/userNameLayout"-->
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp">
 
-            <android.support.design.widget.TextInputEditText
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="39dp"
+                        android:layout_marginRight="37dp">
+
+                        <EditText
+                            android:id="@+id/password_confirm_input"
+                            android:layout_height="wrap_content"
+                            android:layout_width="match_parent"
+                            android:hint="@{sighUp.passwordConfirmHint}"
+                            android:inputType="textPassword"
+                            android:text="@={sighUp.confirmPassword}"
+                            android:textSize="14sp"
+                            android:fontFamily="@font/my_open_sans_regular"/>
+
+                    </RelativeLayout>
+
+                </RelativeLayout>
+
+            </RelativeLayout>
+
+            <android.support.v7.widget.CardView
+                android:id="@+id/login_cardview"
+                android:layout_marginTop="25dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Password"
-                android:inputType="textPassword"
-                android:text="@={sighUp.password}"/>
-        </android.support.design.widget.TextInputLayout>
+                app:cardBackgroundColor="@color/colorPrimary"
+                app:cardCornerRadius="5dp"
+                android:layout_marginLeft="39dp"
+                android:layout_marginRight="37dp"
+                android:foreground="?android:attr/selectableItemBackground"
+                android:clickable="true"
+                android:onClick="@{sighUp.signIn}"
+                android:enabled="@{sighUp.enableLogin}"
+                android:layout_below="@+id/password_confirm_relative">
 
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
 
+                    <TextView
+                        android:id="@+id/signInButton"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:layout_marginTop="11dp"
+                        android:layout_marginBottom="11dp"
+                        android:text="@{sighUp.signInButtonText}"
+                        android:textAlignment="center"
+                        android:textColor="@color/colorWhite"
+                        android:textSize="16sp"
+                        android:fontFamily="@font/my_open_sans_regular" />
 
-        <Button
-            android:id="@+id/signInButton"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="8dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            android:text="Sign In"
-            android:layout_below="@id/confirmPasswordLayout"
-            android:onClick="@{sighUp.signIn}"
-            android:enabled="@{sighUp.enableLogin}" />
-        <!--app:layout_constraintBottom_toBottomOf="parent"-->
-        <!--app:layout_constraintEnd_toEndOf="parent"-->
-        <!--app:layout_constraintHorizontal_bias="0.5"-->
-        <!--app:layout_constraintStart_toStartOf="parent"-->
-        <!--app:layout_constraintTop_toBottomOf="@+id/emailLayout"-->
-    </RelativeLayout>
-    </ScrollView>
+                </RelativeLayout>
+
+            </android.support.v7.widget.CardView>
+
+            <RelativeLayout
+                android:layout_marginTop="29dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:layout_marginLeft="39dp"
+                android:layout_marginRight="37dp"
+                android:layout_below="@+id/login_cardview">
+
+                <TextView
+                    android:id="@+id/firstPartText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="10sp"
+                    android:textAlignment="center"
+                    android:specText="@{sighUp.text}"
+                    android:fontFamily="@font/my_open_sans_regular"/>
+
+            </RelativeLayout>
+
+        </RelativeLayout>
+
+    </LinearLayout>
+
 </layout>

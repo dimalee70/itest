@@ -7,6 +7,7 @@ import android.view.View;
 
 import io.reactivex.functions.Action;
 import itest.kz.model.Answer;
+import itest.kz.model.Question;
 import itest.kz.model.Test;
 import itest.kz.util.Constant;
 import itest.kz.view.activity.TestActivity;
@@ -16,16 +17,16 @@ public class ItemResultViewModel extends BaseObservable
 {
     private Answer answer;
     private Context context;
-    private Test test;
+    private Question test;
     private int num;
     public Action clickAnswer;
 
-    public Test getTest()
+    public Question getTest()
     {
         return test;
     }
 
-    public void setTest(Test test)
+    public void setTest(Question test)
     {
         this.test = test;
         notifyChange();
@@ -46,7 +47,7 @@ public class ItemResultViewModel extends BaseObservable
 //        this.context = context;
 //    }
 
-    public ItemResultViewModel(Test test, Context context, int num)
+    public ItemResultViewModel(Question test, Context context, int num)
     {
         this.test = test;
         this.context = context;

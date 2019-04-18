@@ -25,6 +25,7 @@ import itest.kz.network.UserService;
 import itest.kz.util.BindableFieldTarget;
 import itest.kz.util.Constant;
 import itest.kz.util.FragmentHelper;
+import itest.kz.view.fragments.AgreementFragment;
 import itest.kz.view.fragments.LanguageChangeFragment;
 import itest.kz.view.fragments.PasswordChangeFragment;
 import itest.kz.view.fragments.ProfileFragment;
@@ -44,6 +45,7 @@ public class ProfileFragmentViewModel extends BaseObservable
     public Action clickInfo;
     public Action clickPassword;
     public Action clickLang;
+    public Action clickAgreement;
     private String language;
 
 //    infoText
@@ -119,8 +121,19 @@ public class ProfileFragmentViewModel extends BaseObservable
         {
             openLangFragment();
         };
+        this.clickAgreement = () ->
+        {
+            openAgreementFragment();
+        };
 
 
+    }
+
+    private void openAgreementFragment()
+    {
+        FragmentHelper.openFragment(context,
+                R.id.frame_layout,
+                new AgreementFragment());
     }
 
     private void openLangFragment()

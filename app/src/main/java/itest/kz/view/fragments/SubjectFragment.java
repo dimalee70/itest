@@ -12,6 +12,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,6 +23,7 @@ import itest.kz.R;
 import itest.kz.databinding.FragmentEntBinding;
 import itest.kz.model.Subject;
 import itest.kz.model.Test;
+import itest.kz.util.Constant;
 import itest.kz.view.activity.FullTestActivity;
 import itest.kz.view.adapters.EntMainAdapter;
 import itest.kz.viewmodel.SubjectFragmentViewModel;
@@ -47,6 +49,11 @@ public class SubjectFragment extends Fragment implements Observer
             }
         }
     };
+
+    public void setFragments()
+    {
+
+    }
 
     @Nullable
     @Override
@@ -80,12 +87,22 @@ public class SubjectFragment extends Fragment implements Observer
 //                {
 //                    System.out.println("listOf2");
 //                    System.out.println(selectedSubects.toString());
+                if (selectedSubects.size() == 5)
+                {
+                    Intent intent = new Intent(getContext(), FullTestActivity.class);
 
-                Intent intent = new Intent(getContext(), FullTestActivity.class);
-
-                intent.putExtra("subjects", (ArrayList<Subject>) selectedSubects);
+                    intent.putExtra(Constant.SUBJECT_LIST, (ArrayList<Subject>) selectedSubects);
 //                intent.setFlags(Intent.FLAG_ACTIVITY_BROUGHT_TO_FRONT | Intent.FLAG_ACTIVITY_SINGLE_TOP | Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
-                startActivity(intent);
+                    startActivity(intent);
+                }
+
+                else
+                {
+                    Toast.makeText(getContext(),
+                            "Предметов должно быть 5",
+                            Toast.LENGTH_SHORT).show();
+                }
+
 
 //                    selectedSubects.addAll(subjectFragmentViewModel.getSubjectListMain());
 //                    System.out.println(selectedSubects.toString());
@@ -134,6 +151,11 @@ public class SubjectFragment extends Fragment implements Observer
     public void addToSelectedList(Subject subject)
     {
         selectedSubects.add(subject);
+        if (selectedSubects.size() == 5)
+        {
+//            System.out.println("5");
+            fragmentEntBinding.entStartCardview.setVisibility(View.VISIBLE);
+        }
     }
 
     private void setUpObserver(Observable observable)
@@ -191,9 +213,15 @@ public class SubjectFragment extends Fragment implements Observer
                     List<Subject> sublings = new ArrayList<>();
                     sublings.add(item);
 
-                    if (getSelectedSubects().size() < 5) {
-                        item.setIsSelected(1);
-                        addToSelectedList(item);
+                    if (getSelectedSubects().size() < 5)
+                    {
+
+                        if (item.getIsSelected() != 1)
+                        {
+                            item.setIsSelected(1);
+                            addToSelectedList(item);
+                        }
+
 
 
                         for (Subject s : subjects) {
@@ -209,6 +237,7 @@ public class SubjectFragment extends Fragment implements Observer
                                 .getAdapter();
                         entMainAdapter2.setSubjectListMain(sublings);
                     }
+
 
                 }
             }

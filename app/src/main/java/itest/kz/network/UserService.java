@@ -2,6 +2,8 @@ package itest.kz.network;
 
 import android.databinding.ObservableField;
 
+import com.google.gson.JsonObject;
+
 import io.reactivex.Observable;
 import itest.kz.model.LoginResponse;
 import itest.kz.model.PasswordChangeResponce;
@@ -24,7 +26,8 @@ public interface UserService
 {
     @FormUrlEncoded
     @POST("api/register")
-    Observable<RegisterResponse>  register(@Field("email") String email,
+    Observable<RegisterResponse>  register(@Header("X-Localization") String lang,
+                                           @Field("email") String email,
                                            @Field("password") String password,
                                            @Field("password_confirm") String password_confirm);
 
@@ -72,4 +75,10 @@ public interface UserService
                                                       @Field("new_password") String newPassword,
                                                       @Field("new_password_confirmation") String newPasswordConfirm
                                                       );
+
+    @FormUrlEncoded
+    @POST("api/reset-password")
+    Observable<JsonObject> resetPassword(@Header("Accept") String accept,
+                                              @Header("X-Localization") String lang,
+                                              @Field("email") String email);
 }

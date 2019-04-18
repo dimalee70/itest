@@ -3,7 +3,9 @@ package itest.kz.view.adapters;
 import android.content.Context;
 import android.databinding.DataBindingUtil;
 import android.graphics.Color;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.v7.util.DiffUtil;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -15,8 +17,13 @@ import java.util.List;
 import itest.kz.R;
 import itest.kz.databinding.ItemAnswerBinding;
 import itest.kz.model.Answer;
+import itest.kz.model.Subject;
+import itest.kz.util.AnswersTestDiffUtilCallback;
+import itest.kz.util.Constant;
+import itest.kz.util.FullTestSubjectDiffUtilCallback;
 import itest.kz.util.LETTERS;
 import itest.kz.viewmodel.ItemAnswerViewModel;
+import itest.kz.viewmodel.ItemFullEntViewModel;
 
 
 public class AnswerAdapter extends RecyclerView.Adapter<AnswerAdapter.AnswerAdpterViewHolder>
@@ -27,16 +34,29 @@ public class AnswerAdapter extends RecyclerView.Adapter<AnswerAdapter.AnswerAdpt
     private LETTERS [] letters;
     private ViewGroup viewGroup;
     private int position;
+    public String resultTag;
+    private boolean isFirst = true;
 
     public interface OnItemClickListener
     {
-        void onItemClick(Answer item, List<Answer> answerList);
+        void onItemClick(Answer item, int position) throws CloneNotSupportedException;
     }
 
 //    public interface OnItemTouchListener
 //    {
 //        void OnItemTouch(Answer item, List<Answer> answerList);
 //    }
+
+    public AnswerAdapter(List<Answer> answerList, String resultTag)
+    {
+        this.answerList = answerList;
+        this.resultTag = resultTag;
+    }
+
+    public AnswerAdapter(List<Answer> answerList)
+    {
+        this.answerList = answerList;
+    }
 
     private OnItemClickListener listener;
 //    private OnItemTouchListener touchListener;
@@ -84,17 +104,59 @@ public class AnswerAdapter extends RecyclerView.Adapter<AnswerAdapter.AnswerAdpt
     @Override
     public void onBindViewHolder(@NonNull AnswerAdpterViewHolder answerAdpterViewHolder, int i)
     {
-//        itemAnswerBinding =
-//                DataBindingUtil.inflate(LayoutInflater.from(viewGroup.getContext()),
-//                        R.layout.item_answer, viewGroup, false);
-//        onCreateViewHolder(viewGroup, position);
-        setLetter();
-        answerAdpterViewHolder.bindAnswer(answerList.get(i), answerList, listener);
+//        if (isFirst)
+//        {
+            setLetter();
+            if (resultTag == null)
+                answerAdpterViewHolder.bindAnswer(answerList.get(i),i,  listener);
+            else
+            {
+                answerAdpterViewHolder.bindAnswer(answerList.get(i), i, resultTag, listener);
+            }
+//            isFirst = false;
+//        }
 
-//        if ()
-//        ((CardView) answerAdpterViewHolder.itemAnswerBinding.cardview1)
     }
 
+    @Override
+    public void onBindViewHolder(@NonNull AnswerAdpterViewHolder answerAdpterViewHolder,
+                                 int position,
+                                 @NonNull List<Object> payloads)
+    {
+        if (payloads.isEmpty())
+            super.onBindViewHolder(answerAdpterViewHolder, position, payloads);
+        else
+        {
+
+            Bundle o = (Bundle) payloads.get(0);
+            for (String key : o.keySet()) {
+                if (key.equals("answer"))
+                {
+                    itemAnswerBinding.cardview1
+                            .setCardBackgroundColor(
+                                    Color.GREEN);
+                    itemAnswerBinding.textview1.setTextColor(Color.WHITE);
+                }
+                else
+                {
+                    itemAnswerBinding.cardview1
+                            .setCardBackgroundColor(
+                                    Color.WHITE);
+                    itemAnswerBinding.textview1.setTextColor(Color.BLACK);
+                }
+            }
+
+//            fullTestSubjectAdapterViewHolder.itemFullSubjectBinding.entStartCardvi
+//            if (subjectList.get(position).getIsSelected() == 1)
+//            {
+//                itemFullSubjectBinding.entStartCardview
+//                        .setCardBackgroundColor(
+//                                Color.parseColor(Constant.colorSelectedSubjectOnEnt));
+//                itemFullSubjectBinding.titleSubjectText.setTextColor(Color.WHITE);
+//
+//            }
+        }
+    }
 
     @Override
     public int getItemCount()
@@ -102,6 +164,11 @@ public class AnswerAdapter extends RecyclerView.Adapter<AnswerAdapter.AnswerAdpt
         if (answerList != null)
             return answerList.size();
         return 0;
+    }
+
+    @Override
+    public long getItemId(int position) {
+        return position;
     }
 
 
@@ -136,8 +203,145 @@ public class AnswerAdapter extends RecyclerView.Adapter<AnswerAdapter.AnswerAdpt
         }
 
 
-        void bindAnswer(Answer answer, List<Answer> answerList, final OnItemClickListener listener)
+            public void bindAnswer(Answer answer, int position, String resultTag, final OnItemClickListener listener)
+            {
+                if(itemAnswerBinding.getAnswer() == null)
+                {
+                    itemAnswerBinding.setAnswer(
+                            new ItemAnswerViewModel(itemView.getContext(),answer));
+                }
+                else
+                {
+                    itemAnswerBinding.getAnswer().setAnswer(answer);
+
+                }
+
+
+                if (answer.getUserAnswer() == 1)
+                {
+                    if (answer.getCorrect() == 1)
+                    {
+                        itemAnswerBinding.cardview1
+                                .setCardBackgroundColor(
+                                        Color.parseColor("#ff68da78")
+//                                Color.GREEN
+                                );
+                    }
+                    else
+                    {
+                        itemAnswerBinding.cardview1
+                                .setCardBackgroundColor(
+                                        Color.parseColor("#ffff6969")
+//                                Color.GREEN
+                                );
+                    }
+
+                    itemAnswerBinding.textview1.setTextColor
+                            (Color.WHITE);
+                }
+                else
+                {
+                    itemAnswerBinding.cardview1
+                            .setCardBackgroundColor(
+                                    Color.WHITE);
+                    itemAnswerBinding.textview1.setTextColor(Color.BLACK);
+                }
+
+                if (answer.getCorrect() == 1)
+                {
+                    itemAnswerBinding.cardview1
+                            .setCardBackgroundColor(
+//                                    Color.parseColor("#ff68da78")
+                                    Color.GREEN
+                            );
+//                    System.out.println("inside if ");
+                    itemAnswerBinding.textview1.setTextColor
+                            (Color.WHITE);
+                }
+
+                if (resultTag == null)
+                {
+                    itemAnswerBinding.cardview1.setOnClickListener
+                            (new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    try {
+                                        listener.onItemClick(answer, getAdapterPosition());
+                                    } catch (CloneNotSupportedException e) {
+                                        e.printStackTrace();
+                                    }
+//                            if (answer.getAnswerResponce() == null)
+//                            {
+//                                itemAnswerBinding
+//                                        .cardview1
+//                                        .setCardBackgroundColor(Color.WHITE);
+//                            }
+//                            else
+//                            {
+//                                itemAnswerBinding
+//                                        .cardview1
+//                                        .setCardBackgroundColor(Color.GREEN);
+//                            }
+
+                                }
+                            });
+                }
+
+//            if (itemAnswerBinding.getAnswer() == null) {
+//                itemAnswerBinding.setAnswer
+//                        (new ItemAnswerViewModel(itemView.getContext(), answer, answerList));
+//            } else {
+//                itemAnswerBinding.getAnswer().setAnswer(answer);
+//            }
+//
+//
+//            if (answer.getAnswerResponce() != null)
+//            {
+//                itemAnswerBinding.cardview1
+//                        .setCardBackgroundColor(Color.GREEN);
+////                notify();
+//
+//            }
+//            else
+//                {
+//                itemAnswerBinding.cardview1
+//                        .setCardBackgroundColor(Color.WHITE);
+////                answer.setAnswerResponce(null);
+////                notify();
+//            }
+            }
+
+
+
+        public void bindAnswer(Answer answer, int position, final OnItemClickListener listener)
         {
+            if(itemAnswerBinding.getAnswer() == null)
+            {
+                itemAnswerBinding.setAnswer(
+                        new ItemAnswerViewModel(itemView.getContext(),answer));
+            }
+            else
+            {
+                itemAnswerBinding.getAnswer().setAnswer(answer);
+
+            }
+            if (answer.getUserAnswer() == 1)
+            {
+                itemAnswerBinding.cardview1
+                        .setCardBackgroundColor(
+                                Color.parseColor("#ff2daafc")
+//                                Color.GREEN
+                        );
+                itemAnswerBinding.textview1.setTextColor
+                        (Color.WHITE);
+            }
+            else
+            {
+                itemAnswerBinding.cardview1
+                        .setCardBackgroundColor(
+                                Color.WHITE);
+                itemAnswerBinding.textview1.setTextColor(Color.BLACK);
+            }
 //            itemAnswerBinding.getRoot().findViewById(R.id.answerText).setOnTouchListener
 //                    (new View.OnTouchListener() {
 //                        @Override
@@ -155,47 +359,54 @@ public class AnswerAdapter extends RecyclerView.Adapter<AnswerAdapter.AnswerAdpt
 //                        }
 //                    });
 //             listener
-            itemAnswerBinding.getRoot().findViewById(R.id.cardview1).setOnClickListener
+            itemAnswerBinding.cardview1.setOnClickListener
                     (new View.OnClickListener() {
                         @Override
-                        public void onClick(View v) {
-                            listener.onItemClick(answer, answerList);
-                            if (answer.getAnswerResponce() == null)
-                            {
-                                itemAnswerBinding
-                                        .cardview1
-                                        .setCardBackgroundColor(Color.WHITE);
+                        public void onClick(View v)
+                        {
+                            try {
+                                listener.onItemClick(answer, getAdapterPosition());
+                            } catch (CloneNotSupportedException e) {
+                                e.printStackTrace();
                             }
-                            else
-                            {
-                                itemAnswerBinding
-                                        .cardview1
-                                        .setCardBackgroundColor(Color.GREEN);
-                            }
+//                            if (answer.getAnswerResponce() == null)
+//                            {
+//                                itemAnswerBinding
+//                                        .cardview1
+//                                        .setCardBackgroundColor(Color.WHITE);
+//                            }
+//                            else
+//                            {
+//                                itemAnswerBinding
+//                                        .cardview1
+//                                        .setCardBackgroundColor(Color.GREEN);
+//                            }
 
                         }
                     });
 
-            if (itemAnswerBinding.getAnswer() == null) {
-                itemAnswerBinding.setAnswer
-                        (new ItemAnswerViewModel(itemView.getContext(), answer, answerList));
-            } else {
-                itemAnswerBinding.getAnswer().setAnswer(answer);
-            }
-            if (answer.getAnswerResponce() != null)
-            {
-                itemAnswerBinding.cardview1
-                        .setCardBackgroundColor(Color.GREEN);
-//                notify();
-
-            }
-            else
-                {
-                itemAnswerBinding.cardview1
-                        .setCardBackgroundColor(Color.WHITE);
-//                answer.setAnswerResponce(null);
-//                notify();
-            }
+//            if (itemAnswerBinding.getAnswer() == null) {
+//                itemAnswerBinding.setAnswer
+//                        (new ItemAnswerViewModel(itemView.getContext(), answer, answerList));
+//            } else {
+//                itemAnswerBinding.getAnswer().setAnswer(answer);
+//            }
+//
+//
+//            if (answer.getAnswerResponce() != null)
+//            {
+//                itemAnswerBinding.cardview1
+//                        .setCardBackgroundColor(Color.GREEN);
+////                notify();
+//
+//            }
+//            else
+//                {
+//                itemAnswerBinding.cardview1
+//                        .setCardBackgroundColor(Color.WHITE);
+////                answer.setAnswerResponce(null);
+////                notify();
+//            }
         }
 
 
@@ -205,6 +416,58 @@ public class AnswerAdapter extends RecyclerView.Adapter<AnswerAdapter.AnswerAdpt
 //
 //            }
         }
+
+    public void setData(List<Answer> newData)
+    {
+
+//        DiffUtil.DiffResult diffResult = DiffUtil.calculateDiff(new AnswersTestDiffUtilCallback(newData, answerList));
+
+
+//        findViewHolderForAdapterPosition(pos);
+        answerList.clear();
+        answerList.addAll(newData);
+
+//        for (int i = 0; i < answerList.size(); i++)
+//        {
+//            if (answerList.get(i).getUserAnswer() == 1)
+//            {
+//                itemAnswerBinding.cardview1
+//                        .setCardBackgroundColor(
+//                                Color.parseColor("#ff2daafc")
+////                                Color.GREEN
+//                        );
+//                itemAnswerBinding.textview1.setTextColor
+//                        (Color.WHITE);
+//            }
+//            else
+//            {
+//                itemAnswerBinding.cardview1
+//                        .setCardBackgroundColor(
+//                                Color.WHITE);
+//                itemAnswerBinding.textview1.setTextColor(Color.BLACK);
+//            }
+//        }
+
+
+//        int t = 0;
+//        for (int i = 0; i < answerList.size(); i++)
+//        {
+//            if (answerList.get(i).getUserAnswer() == 1)
+//            {
+//                t = i;
+//                notifyItemChanged(i);
+//            }
+//
+//        }
+//        diffResult.dispatchUpdatesTo(this);
+//        notifyDataSetChanged();
+
+    }
+
+    public List<Answer> getData()
+    {
+        return answerList;
+    }
 
 
 }

@@ -2,13 +2,26 @@ package itest.kz.view.activity;
 
 import android.content.SharedPreferences;
 import android.databinding.DataBindingUtil;
+import android.graphics.Color;
+import android.graphics.Rect;
+import android.media.Image;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
+import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.view.Menu;
+import android.view.View;
+import android.widget.ImageButton;
+import android.widget.TextView;
+import android.widget.Toast;
 
+import com.ankushgrover.hourglass.Hourglass;
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
@@ -40,10 +53,14 @@ import itest.kz.network.SubjectService;
 import itest.kz.network.UserService;
 import itest.kz.util.Constant;
 import itest.kz.util.CustomViewPager;
+import itest.kz.util.DataHolder;
+import itest.kz.util.PageListener;
+import itest.kz.util.TestsUtils;
 import itest.kz.view.adapters.FullTestAdapter;
 import itest.kz.view.adapters.FullTestSubjectAdapter;
 import itest.kz.view.adapters.MyAdapter;
 import itest.kz.view.adapters.ResultAdapter;
+import itest.kz.view.fragments.TestFragment;
 import itest.kz.viewmodel.FullTestViewModel;
 import itest.kz.viewmodel.HomeViewModel;
 import itest.kz.viewmodel.ResultViewModel;
@@ -56,27 +73,149 @@ public class FullTestActivity extends AppCompatActivity
     private List<Subject> subjectList;
     private String accessToken;
     public CustomViewPager mPager;
-    private Toolbar myToolbar;
-    private ArrayList<Tests> arrayListArrayListQuestions;
+    private String language;
+    public Long testIdMain;
+    private List<Tests> arrayListArrayListQuestions;
+    private FullTestSubjectAdapter fullTestSubjectAdapter;
+    private boolean isStartedFirst;
+    private TestGenerate testGenerate;
+    private Integer currentPosition;
+    private Integer selectedSubjectPosition = 0;
+    private  Integer selectedTestPosition = 0;
+    private int numbersOFpages;
+    public int currentPage = 0;
+    private TextView timer;
+    private long maxTimeInMilliseconds;// in your case
+    private Hourglass hourglass;
+    private  ImageButton buttonForward;
+    private ImageButton buttonBack;
+    private  CountDownTimer t;
+    private String resultTag;
+    private RecyclerView subjectResycleView;
+    private boolean hasActiveTest = false;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
 
+        subjectList = getIntent().getParcelableArrayListExtra(Constant.SUBJECT_LIST);
+
+
+        SharedPreferences settings = getSharedPreferences(Constant.MY_LANG, MODE_PRIVATE);
+
+        this.selectedTestPosition = getIntent().getExtras().getInt(Constant.SELECTED_TEST_POSITION_ID, 0);
+        this.selectedSubjectPosition = getIntent().getExtras().getInt(Constant.CURRENT_POSITION_SUBJECT, 0);
+        this.isStartedFirst = getIntent().getExtras().getBoolean(Constant.IS_STARTED_FIRST, true);
+        this.resultTag = getIntent().getExtras().getString(Constant.RESULT_TAG, null);
+        this.hasActiveTest = getIntent().getBooleanExtra(Constant.hasActiveTest, false);
+
+        language = settings.getString(Constant.LANG, "kz");
         getAccessToken();
-        subjectList = getIntent().getParcelableArrayListExtra("subjects");
-        fetchFullTestGenerate();
-//        System.out.println(subjectList.toString());
+
+
+        this.currentPosition = getIntent().getExtras().getInt(Constant.CURRENT_POSITION_SUBJECT, 0);
+        this.testIdMain = getIntent().getExtras().getLong(Constant.TEST_MAIN_ID);
+        subjectList.get(currentPosition).setOnClickedRecycle(1);
+
+        if (isStartedFirst)
+        {
+//            maxTimeInMilliseconds = 10800000;
+            fetchFullTestGenerate();
+        }
+        else
+        {
+            maxTimeInMilliseconds = (Long) getSharedPreferences(Constant.CURRENT_TIME, MODE_PRIVATE)
+                    .getLong(Constant.CURRENT_TIME, 10800000);
+            fetchFullTestQuestionsGenerate(testIdMain);
+        }
+//        System.out.println(maxTimeInMilliseconds);
         activityFullTestBinding = DataBindingUtil.setContentView(this, R.layout.activity_full_test);
-        myToolbar = activityFullTestBinding.myToolbar;
-        myToolbar.setTitle("");
-        setSupportActionBar(myToolbar);
         setR(activityFullTestBinding.listSubjects);
+//        startTimer(maxTimeInMilliseconds, 1000);
 
 
 
     }
+
+//    @Override
+//    public boolean onCreateOptionsMenu(Menu menu)
+//    {
+//        getMenuInflater().inflate(R.menu.main, menu);
+//        return true;
+//    }
+
+    public void startTimer(Long maxTime, int interval)
+    {
+
+        t = new CountDownTimer(maxTimeInMilliseconds, 1000) {
+
+
+            public void onTick(long millisUntilFinished) {
+                long remainedSecs = millisUntilFinished / 1000;
+                maxTimeInMilliseconds = millisUntilFinished;
+                timer.setText((remainedSecs/60 )/60+ ":" + (remainedSecs / 60)%60 + ":" + (remainedSecs % 60));// manage it accordign to you
+            }
+
+            public void onFinish() {
+                timer.setText("00:00:00");
+                Toast.makeText(FullTestActivity.this, "Finish", Toast.LENGTH_SHORT).show();
+
+                cancel();
+            }
+        }.start();
+
+
+//        hourglass = new Hourglass(maxTime, interval) {
+//            @Override
+//            public void onTimerTick(long timeRemaining)
+//            {
+////                long remainedSecs = timeRemaining / 1000;
+//                maxTimeInMilliseconds = timeRemaining;
+//                timer.setText(((timeRemaining/1000)/60 )/60+ ":" + ((timeRemaining/1000) / 60)%60 + ":" + ((timeRemaining/1000) % 60));
+////                System.out.println(remainedSecs);// manage it accordign to you
+//            }
+//
+//            @Override
+//            public void onTimerFinish()
+//            {
+//                timer.setText("00:00:00");
+//                Toast.makeText(FullTestActivity.this, "Finish", Toast.LENGTH_SHORT).show();
+//            }
+//        };
+
+
+
+
+//        t = new CountDownTimer(maxTimeInMilliseconds, 1000) {
+//
+//
+//            public void onTick(long millisUntilFinished) {
+//                long remainedSecs = millisUntilFinished / 1000;
+//                maxTimeInMilliseconds = millisUntilFinished;
+//                timer.setText((remainedSecs/60 )/60+ ":" + (remainedSecs / 60)%60 + ":" + (remainedSecs % 60));// manage it accordign to you
+//            }
+//
+//            public void onFinish() {
+//                timer.setText("00:00:00");
+//                Toast.makeText(FullTestActivity.this, "Finish", Toast.LENGTH_SHORT).show();
+//
+//                cancel();
+//            }
+//        }.start();
+    }
+
+
+    @Override
+    protected void onDestroy()
+    {
+        super.onDestroy();
+        SharedPreferences d = getSharedPreferences(Constant.CURRENT_TIME, MODE_PRIVATE);
+        d.edit().clear().apply();
+        d.edit().commit();
+
+    }
+
 
     public void getAccessToken()
     {
@@ -86,25 +225,75 @@ public class FullTestActivity extends AppCompatActivity
 
     public void setR(RecyclerView recyclerView)
     {
-        fullTestViewModel = new FullTestViewModel(this,subjectList);
+        this.subjectResycleView = recyclerView;
+        fullTestViewModel = new FullTestViewModel(this,subjectList, resultTag );
         activityFullTestBinding.setFull(fullTestViewModel);
 
-        FullTestSubjectAdapter fullTestSubjectAdapter =
+        timer = activityFullTestBinding.timer;
+
+        fullTestSubjectAdapter =
                 new FullTestSubjectAdapter( this, subjectList);
+//        fullTestSubjectAdapter.setHasStableIds(true);
         recyclerView.setAdapter(fullTestSubjectAdapter);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
+//        recyclerView.setItemAnimator(null);
+
+        recyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
+//        {
+//            @Override
+//            public boolean requestChildRectangleOnScreen(RecyclerView parent, View child, Rect rect, boolean immediate)
+//            {
+//                return false;
+//            }
+//            @Override
+//            public boolean requestChildRectangleOnScreen(RecyclerView parent, View child, Rect rect, boolean immediate, boolean focusedChildVisible) {
+//                return false;
+//            }
+//        }
+        );
 
         fullTestSubjectAdapter.setOnItemListener(new FullTestSubjectAdapter.OnItemClickListener() {
             @Override
-            public void onItemClick(Subject item, int position)
+            public void onItemClick(Subject item, int position) throws CloneNotSupportedException
             {
-//                System.out.println("Position");
-//                System.out.println(position);
-                setFragment(arrayListArrayListQuestions.get(position));
+//                selectedSubjectPosition = position;
+                currentPosition = position;
+                changePricesInTheList(position);
+                setFragment(arrayListArrayListQuestions.get(position), 0);
             }
         });
 
+
     }
+
+    private void changePricesInTheList(int position) throws CloneNotSupportedException {
+
+        ArrayList<Subject> models = new ArrayList<>();
+        int previousPosition = 0;
+//        int nextPosition;
+
+        for (Subject model : subjectList) {
+            models.add(model.clone());
+        }
+
+        for (int i = 0; i < models.size(); i++)
+        {
+            if (models.get(i).getOnClickedRecycle() == 1)
+            {
+                previousPosition = i;
+                models.get(i).setOnClickedRecycle(0);
+
+
+            }
+        }
+        models.get(position).setOnClickedRecycle(1);
+
+
+
+
+        fullTestSubjectAdapter.setSubjectList(models);
+//        setData(models);
+    }
+
 
     public String getOwnersId()
     {
@@ -135,7 +324,7 @@ public class FullTestActivity extends AppCompatActivity
 //        AppController appController = AppController.create(context);
         SubjectService subjectService = appController.getSubjectService();
 
-        Disposable disposable = subjectService.getTestGenerate(Constant.ACCEPT, "ru",
+        Disposable disposable = subjectService.getTestGenerate(Constant.ACCEPT, language,
                 "Bearer " + accessToken, credentials)
                 .subscribeOn(appController.subscribeScheduler())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -144,150 +333,38 @@ public class FullTestActivity extends AppCompatActivity
                     @Override
                     public void accept(TestGenerateResponse testGenerateResponse) throws Exception
                     {
-                        fetchFullTestQuestionsGenerate(testGenerateResponse.getTestGenerate().getTestId(),
-                                testGenerateResponse.getTestGenerate());
+                        setTestIdMain(testGenerateResponse.getTestGenerate().getTestId());
+                        setTestGenerateResponse(testGenerateResponse);
+                        fetchFullTestQuestionsGenerate(testGenerateResponse.getTestGenerate().getTestId());
+
                     }
                 });
 
         compositeDisposable.add(disposable);
     }
 
-    public  ArrayList<Tests> deserializeFromJson(TestGenerate testGenerate, JsonObject jsonObject) throws JSONException
+    private void setTestGenerateResponse(TestGenerateResponse testGenerateResponse)
     {
-//        ArrayList<ArrayList<Question>> arrayListsQuestions =
-//                new ArrayList<>();
-
-//        System.out.println(accessToken);
-        ArrayList<Tests> testsArrayList = new ArrayList<>();
-        JSONObject jsonObject1 = new JSONObject(jsonObject.toString());
-        JSONObject data = jsonObject1.getJSONObject("data");
-        JSONArray tests = data.getJSONArray("tests");
-
-        Gson gson = new Gson();
-        for (int i=0; i < tests.length(); i++)
-        {
-            JSONObject testItem = tests.getJSONObject(i);
-
-            JSONArray questions = testItem.getJSONArray("questions");
-            JSONObject test = testItem.getJSONObject("test");
-//            JSONObject subject = testItem.getJSONObject("subject");
-            Subject subject = gson.fromJson(testItem.getJSONObject("subject").toString(), Subject.class);
-            Long testId = test.getLong("id");
-
-            ArrayList<Question> questionsList = new ArrayList<>();
-            for (int j = 0; j < questions.length(); j++) {
-                Question obj = gson.fromJson(questions.getJSONObject(j).toString(),Question.class);
-                if (testItem.has("texts")) {
-                    JSONObject texts = testItem.getJSONObject("texts");
-
-                    if (obj.getTextId() != null) {
-
-                        if (texts.has(obj.getTextId().toString())) {
-
-                            JSONObject textsId = texts.getJSONObject
-                                    (obj.getTextId().toString());
-                            String t = textsId.getString("text");
-                            obj.setText(t);
-                        }
-                    }
-
-                }
-                questionsList.add(obj);
-            }
-
-            testsArrayList.add(new Tests(questionsList, testId, subject));
-
-//            if (testItem.has("texts"))
-//            {
-//                JSONObject texts = testItem.getJSONObject("texts");
-//
-//            }
-
-
-
-
-//            System.out.println(test.toString());
-//            JSONArray questions = tests.getJSONArray(i);
-
-//            JSONObject test = tests.getJSONObject(i);
-//            System.out.println(test.toString());
-//
-//            System.out.println();
-//            System.out.println(i);
-//            System.out.println();
-//            Question obj = gson.fromJson(questions.getJSONObject(i).toString(),Question.class);
-//            if (testId.has("texts"))
-//            {
-//                JSONObject texts = testId.getJSONObject("texts");
-//                if (texts.has(obj.getQuestionId().toString()))
-//                {
-//                    JSONObject textsId = texts.getJSONObject
-//                            (obj.getQuestionId().toString());
-//                    String t = textsId.getString("text");
-//                    obj.setText(t);
-//                }
-//
-//            }
-//            questionsList.add(obj);
-        }
-
-        return testsArrayList;
-//        arrayListsQuestions.add(questionsList);
-//
-//        System.out.println(tests.toJSONObject());
-
-
-
-
-
-//        JSONObject tests = jsonObject1.getJSONObject("tests");
-//        for (Long id : testGenerate.getOwners())
-//        {
-////            System.out.println("id ");
-////            System.out.println(id);
-//            JSONObject testId = tests.getJSONObject(id.toString());
-//            JSONObject data = testId.getJSONObject("data");
-//            JSONArray questions = data.getJSONArray("questions");
-//
-//            Gson gson = new Gson();
-//            ArrayList<Question> questionsList = new ArrayList<>();
-//            for (int i=0; i < questions.length(); i++) {
-//                Question obj = gson.fromJson(questions.getJSONObject(i).toString(),Question.class);
-//                if (testId.has("texts"))
-//                {
-//                    JSONObject texts = testId.getJSONObject("texts");
-//                    if (texts.has(obj.getQuestionId().toString()))
-//                    {
-//                        JSONObject textsId = texts.getJSONObject
-//                                (obj.getQuestionId().toString());
-//                        String t = textsId.getString("text");
-//                        obj.setText(t);
-//                    }
-//
-//                }
-//                questionsList.add(obj);
-//            }
-//            arrayListsQuestions.add(questionsList);
-//
-//        }
-//
-//        System.out.println("q");
-//        System.out.println(arrayListsQuestions);
-
-//        return arrayListsQuestions;
-
-
+        this.testGenerate = testGenerateResponse.getTestGenerate();
     }
 
-    public void fetchFullTestQuestionsGenerate(Long id, TestGenerate testGenerate)
+    private void setTestIdMain(Long testId)
     {
+        this.testIdMain = testId;
+    }
+
+
+
+    public void fetchFullTestQuestionsGenerate(Long id)
+    {
+
         AppController appController = new AppController();
         CompositeDisposable compositeDisposable = new CompositeDisposable();
 //        AppController appController = AppController.create(context);
         SubjectService subjectService = appController.getSubjectService();
 
         Disposable disposable = subjectService.getQuestions(Constant.ACCEPT,
-                "ru",
+                language,
                 "Bearer " + accessToken, id)
                 .subscribeOn(appController.subscribeScheduler())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -298,55 +375,159 @@ public class FullTestActivity extends AppCompatActivity
                                {
 
 //                                   System.out.println(jsonObject.toString());
+                                   JSONObject jsonObject1 = new JSONObject(jsonObject.toString());
+                                   JSONObject config = jsonObject1.getJSONObject("config");
+                                   int limit = config.getInt("time_limit");
+                                   int remaining = config.getInt("time_remaining");
+                                   if (isStartedFirst || hasActiveTest)
+                                   {
+                                       maxTimeInMilliseconds = TestsUtils.getTimeRemaining(limit, remaining);
+                                   }
                                    ArrayList<Tests> questions =
-                                   deserializeFromJson(testGenerate, jsonObject);
+                                           TestsUtils.deserializeFromJson(jsonObject);
+
+                                   System.out.println("questions");
+                                   System.out.println(questions);
 //
                                    setArraListArrayListQuestions(questions);
 //
-                                   Tests arrayList = questions.get(0);
-
-//                                   for (Tests t : questions)
-//                                   {
-//                                       for (Question q : t.getQuestions())
-//                                       {
-//                                           System.out.println(q.getText());
-//                                       }
-//                                   }
-////
+                                   Tests arrayList = questions.get(currentPosition);
+                                   if (resultTag == null)
+                                       startTimer(maxTimeInMilliseconds, 1000);
                                    setFragment(arrayList);
-
                                }
                            }
-//                        new Consumer<JSONObject>() {
-//                    @Override
-//                    public void accept(JSONObject jsonObject) throws Exception
-//                    {
-//                        System.out.println("json");
-//                        System.out.println(jsonObject.toString());
-//                    }
-//                }
                 );
 
         compositeDisposable.add(disposable);
+
+
     }
 
     private void setArraListArrayListQuestions(ArrayList<Tests> questions)
     {
         this.arrayListArrayListQuestions = questions;
+//        List<Tests> ppl = DataHolder.getInstance().arrayListArrayListQuestions;
+//        System.out.println("List");
+//        System.out.println(ppl);
     }
 
     public void setFragment(Tests arrayList)
     {
+        this.numbersOFpages = arrayList.getQuestions().size();
         mPager = activityFullTestBinding.pager;
-        mPager.setOffscreenPageLimit(2);
+//        mPager.setOffscreenPageLimit(1);
 
 //                    if (isStartedFirst)
 //                    {
 
 //                                   mPager.setAdapter( new MyAdapter(getSupportFragmentManager(), questions.get(0)));u
-        mPager.setAdapter(new FullTestAdapter(getSupportFragmentManager(),arrayList));
+        mPager.setAdapter(new FullTestAdapter(getSupportFragmentManager(),arrayList, testIdMain,
+                                            subjectList, currentPosition, resultTag));
+
+        PageListener listener = new PageListener();
+        mPager.addOnPageChangeListener(listener);
+        setPageNumberToFragment();
+//        mPager.setOnPageChangeListener(listener);
+    }
+
+    public void setFragment(Tests arrayList, int pos)
+    {
+
+        this.numbersOFpages = arrayList.getQuestions().size();
+        mPager = activityFullTestBinding.pager;
+//        mPager.setOffscreenPageLimit(1);
+
+//                    if (isStartedFirst)
+//                    {
+
+//                                   mPager.setAdapter( new MyAdapter(getSupportFragmentManager(), questions.get(0)));u
+        mPager.setAdapter(new FullTestAdapter(getSupportFragmentManager(),arrayList, testIdMain,
+                subjectList, currentPosition, resultTag));
+
+        PageListener listener = new PageListener();
+        mPager.addOnPageChangeListener(listener);
+        selectedTestPosition = pos;
+        setPageNumberToFragment();
+
+    }
+
+    public  void setPageNumberToFragment()
+    {
+        TextView tv = findViewById(R.id.text_number_pager);
+        tv.setText(1 + " / " + numbersOFpages);
 
 
+//        System.out.println("Timer start");
+//        tv_Number.setText("Page :" + currentPage);
+        mPager.setCurrentItem(selectedTestPosition);
+
+        buttonForward = (ImageButton) activityFullTestBinding
+                .buttonForward;
+        buttonBack = (ImageButton) activityFullTestBinding
+                .buttonBack;
+        buttonForward.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                if (selectedTestPosition != numbersOFpages - 1)
+                    mPager.setCurrentItem(++selectedTestPosition, true);
+            }
+        });
+
+        buttonBack.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                if (selectedTestPosition != 0)
+                    mPager.setCurrentItem(--selectedTestPosition, true);
+            }
+        });
+    }
+
+    public class PageListener extends ViewPager.SimpleOnPageChangeListener {
+
+        public int getCurrentPage() {
+            return currentPage;
+        }
+
+        public void setCurrentPage(int currentPageArg) {
+            currentPage = currentPageArg;
+        }
+
+        public void onPageSelected(int position)
+        {
+            currentPage = position;
+
+//            FullTestAdapter fullTestAdapter = (FullTestAdapter) mPager.getAdapter();
+//            TestFragment testFragment = (TestFragment) fullTestAdapter.getItem(position);
+            TextView tv = findViewById(R.id.text_number_pager);
+            tv.setText((currentPage + 1) + " / " + numbersOFpages);
+        }
+    }
+
+    @Override
+    public void onRestoreInstanceState(Bundle savedInstanceState)
+    {
+        super.onRestoreInstanceState(savedInstanceState);
+        Long time =  savedInstanceState.getLong(Constant.CURRENT_TIME, 10800000);
+//        System.out.println("Time 2 ");
+//        System.out.println(time);
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState)
+    {
+
+        SharedPreferences sharedPreferences = getSharedPreferences(Constant.CURRENT_TIME, MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putLong(Constant.CURRENT_TIME, maxTimeInMilliseconds);
+        editor.apply();
+        editor.commit();
+        super.onSaveInstanceState(outState);
+        // call superclass to save any view hierarchy
 
     }
 

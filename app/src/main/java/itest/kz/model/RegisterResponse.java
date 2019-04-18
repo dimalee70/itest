@@ -13,7 +13,19 @@ public class RegisterResponse
     @Expose
     private String message = "";
 
+    @SerializedName("error")
+    @Expose
+    private String error;
 
+    public String getError()
+    {
+        return error;
+    }
+
+    public void setError(String error)
+    {
+        this.error = error;
+    }
 
     public Boolean getSuccess()
     {

@@ -139,6 +139,11 @@ public class HomeActivity extends AppCompatActivity
                                 intent.putExtra(Constant.ACCESS_TOKEN, accessToken);
                                 startActivity(intent);
                                 break;
+                            case R.id.item_statistic:
+                                finish();
+                                intent = new Intent(HomeActivity.this,StatisticActivity.class);
+                                intent.putExtra(Constant.ACCESS_TOKEN, accessToken);
+                                startActivity(intent);
                             case R.id.item_user:
 //                                fetchProfileInfo();
 //                                finish();

@@ -3,78 +3,159 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
+        <import type="android.view.View"/>
         <variable
             name="auth"
             type="itest.kz.viewmodel.LoginViewModel"/>
     </data>
 
-    <ScrollView
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
+        android:layout_height="wrap_content">
 
     <RelativeLayout
         android:layout_marginTop="50dp"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content">
 
+        <RelativeLayout
+            android:id="@+id/login_relative"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
-        <android.support.design.widget.TextInputLayout
-            android:id="@+id/userNameLayout"
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp">
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="39dp"
+                        android:layout_marginRight="37dp">
+
+                        <EditText
+                            android:id="@+id/login_input"
+                            android:layout_height="wrap_content"
+                            android:layout_width="match_parent"
+                            android:hint="@{auth.loginHint}"
+                            android:textSize="14sp"
+                            android:fontFamily="@font/my_open_sans_regular"
+                            android:text="@={auth.login}"
+                            android:inputType="text"/>
+
+                    </RelativeLayout>
+
+                </RelativeLayout>
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/password_relative"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="8dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            app:error="@{auth.loginErr}">
+            android:layout_below="@+id/login_relative">
 
-            <!--app:layout_constraintBottom_toTopOf="@+id/passwordLayout"-->
-            <!--app:layout_constraintEnd_toEndOf="parent"-->
-            <!--app:layout_constraintHorizontal_bias="0.5"-->
-            <!--app:layout_constraintStart_toStartOf="parent"-->
-            <!--app:layout_constraintTop_toTopOf="parent"-->
-            <!--app:layout_constraintVertical_chainStyle="packed"-->
-
-            <android.support.design.widget.TextInputEditText
+            <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="User Name"
-                android:text="@={auth.login}"/>
-        </android.support.design.widget.TextInputLayout>
+                android:layout_marginTop="10dp">
 
-        <android.support.design.widget.TextInputLayout
-            android:layout_below="@+id/userNameLayout"
-            android:id="@+id/passwordLayout"
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="39dp"
+                    android:layout_marginRight="37dp">
+
+                    <EditText
+                        android:id="@+id/password_input"
+                        android:layout_height="wrap_content"
+                        android:layout_width="match_parent"
+                        android:hint="@{auth.passwordHint}"
+                        android:inputType="textPassword"
+                        android:textSize="14sp"
+                        android:fontFamily="@font/my_open_sans_regular"
+                        android:text="@={auth.password}"/>
+
+                </RelativeLayout>
+
+            </RelativeLayout>
+
+        </RelativeLayout>
+
+        <TextView
+            android:id="@+id/forgotPasswordText"
+            android:layout_below="@+id/password_relative"
+            android:layout_width="match_parent"
+            android:textAlignment="center"
+            android:layout_marginTop="25dp"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/my_open_sans_regular"
+            android:text="@{auth.forgotPassword}"
+            android:onClick="@{auth.clickForgot}"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:clickable="true"
+            android:textSize="12sp"
+            android:textColor="@color/colorTextForgotPassword"/>
+
+        <android.support.v7.widget.CardView
+            android:id="@+id/login_cardview"
+            android:layout_marginTop="25dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="8dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            app:error="@{auth.passwordErr}">
-
-
-            <android.support.design.widget.TextInputEditText
-                android:id="@+id/password"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="Password"
-                android:inputType="textPassword"
-                android:text="@={auth.password}"/>
-        </android.support.design.widget.TextInputLayout>
-
-
-        <Button
-            android:id="@+id/signInButton"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="8dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            android:text="Sign In"
-            android:onClick="@{auth.logIn}"
+            app:cardBackgroundColor="@color/colorPrimary"
+            app:cardCornerRadius="5dp"
+            android:layout_marginRight="39dp"
+            android:layout_marginLeft="37dp"
             android:enabled="@{auth.enableLogin}"
-            android:layout_below="@+id/passwordLayout"/>
+            android:onClick="@{auth.logIn}"
+            android:foreground="?android:attr/selectableItemBackground"
+            android:clickable="true"
+            android:layout_below="@+id/forgotPasswordText">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/signInButton"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:layout_marginTop="11dp"
+                    android:layout_marginBottom="11dp"
+                    android:fontFamily="@font/my_open_sans_regular"
+                    android:text="@{auth.logInButtonText}"
+                    android:textAlignment="center"
+                    android:textColor="@color/colorWhite"
+                    android:textSize="16sp"/>
+
+            </RelativeLayout>
+
+        </android.support.v7.widget.CardView>
+
+        <RelativeLayout
+            android:layout_marginTop="29dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_marginLeft="39dp"
+            android:layout_marginRight="37dp"
+            android:layout_below="@+id/login_cardview">
+
+                <TextView
+                    android:id="@+id/firstPartText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="10sp"
+                    android:textAlignment="center"
+                    android:specText="@{auth.text}"
+                    android:fontFamily="@font/my_open_sans_regular" />
+
+        </RelativeLayout>
 
     </RelativeLayout>
-    </ScrollView>
+
+    </LinearLayout>
+
 </layout>

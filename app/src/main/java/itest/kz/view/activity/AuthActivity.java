@@ -1,5 +1,6 @@
 package itest.kz.view.activity;
 
+import android.content.SharedPreferences;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -11,6 +12,7 @@ import android.view.View;
 import io.reactivex.functions.Action;
 import itest.kz.R;
 import itest.kz.databinding.ActivityAuthBinding;
+import itest.kz.util.Constant;
 import itest.kz.util.FragmentHelper;
 import itest.kz.view.adapters.AuthFragmentPagerAdapter;
 import itest.kz.view.fragments.LoginFragment;
@@ -20,12 +22,14 @@ import itest.kz.viewmodel.AuthViewModel;
 public class AuthActivity extends AppCompatActivity
 {
     private AuthViewModel authViewModel;
+
 //    private SignUpFragment signUpFragment = new SignUpFragment();
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
+
         ActivityAuthBinding activityAuthBinding =
                 DataBindingUtil.setContentView(this, R.layout.activity_auth);
         authViewModel = new AuthViewModel(this);
@@ -41,6 +45,15 @@ public class AuthActivity extends AppCompatActivity
 
         TabLayout tabLayout = activityAuthBinding.slidingTabs;
         tabLayout.setupWithViewPager(viewPager);
+
+        tabLayout.getTabAt(0).setText((authViewModel
+                .getLanguage().equals(Constant.KZ)) ? R.string.logInKaz
+                : R.string.logInRu);
+        tabLayout.getTabAt(1).setText((authViewModel
+                .getLanguage().equals(Constant.KZ)) ? R.string.signUpKaz
+                : R.string.signUpRu);
+
+
 
 
 //        ActivityMainBinding activityMainBinding = DataBindingUtil.setContentView(this, R.layout.activity_main);

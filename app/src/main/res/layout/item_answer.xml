@@ -37,7 +37,8 @@
         tools:layout_marginBottom="16dp"
         android:clickable="false"
         android:focusable="false"
-        app:backgroundColor="@{answer.color}">
+       >
+        <!--app:backgroundColor="@{answer.color}"-->
         <!--android:onClick="@{() -> answer.onClick()}">-->
 
             <RelativeLayout

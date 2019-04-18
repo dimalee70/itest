@@ -7,13 +7,16 @@ import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
 
-public class Subject implements Serializable, Parcelable
+public class Subject implements Serializable, Parcelable, Comparable, Cloneable
 {
 
     private int isSelected = 0;
+    private  int onClickedRecycle = 0;
 
+    private boolean isExpand = false;
 
     @SerializedName("id")
     @Expose
@@ -59,6 +62,10 @@ public class Subject implements Serializable, Parcelable
     @Expose
     private List<String> sublings;
 
+    @SerializedName("date")
+    @Expose
+    private Date date;
+
 
     public Subject(Long id, String title, String idForGenerateTest, String colorBg, String icon, String image, boolean isMain, String alias, List<String> sublings) {
         this.id = id;
@@ -70,6 +77,22 @@ public class Subject implements Serializable, Parcelable
         this.isMain = isMain;
         this.alias = alias;
         this.sublings = sublings;
+    }
+
+    public Subject(Long id)
+    {
+        this.id = id;
+//        this.title = title;
+    }
+
+    public int getOnClickedRecycle()
+    {
+        return onClickedRecycle;
+    }
+
+    public void setOnClickedRecycle(int onClickedRecycle)
+    {
+        this.onClickedRecycle = onClickedRecycle;
     }
 
     public int getIsSelected()
@@ -122,6 +145,16 @@ public class Subject implements Serializable, Parcelable
         this.idForGenerateTest = idForGenerateTest;
     }
 
+    public boolean isExpand()
+    {
+        return isExpand;
+    }
+
+    public void setExpand(boolean expand)
+    {
+        isExpand = expand;
+    }
+
     public String getColorBg() {
         return colorBg;
     }
@@ -154,6 +187,16 @@ public class Subject implements Serializable, Parcelable
         isMain = main;
     }
 
+    public Date getDate()
+    {
+        return date;
+    }
+
+    public void setDate(Date date)
+    {
+        this.date = date;
+    }
+
     @Override
     public String toString() {
         return "Subject{" +
@@ -165,6 +208,7 @@ public class Subject implements Serializable, Parcelable
 //                ", subkings = " + sublings.toString() + '\''+
                 ", image='" + image + '\'' +
                 ", isMain=" + isMain +
+                ", isExpand " + isExpand + '\''+
                 '}';
     }
 
@@ -208,5 +252,31 @@ public class Subject implements Serializable, Parcelable
                     return new Subject[size];
                 }
             };
+
+    @Override
+    public int compareTo(Object o)
+    {
+        Subject compare = (Subject) o;
+
+        if (compare.id == this.id)
+        {
+            return 0;
+        }
+        return 1;
+    }
+
+    @Override
+    public Subject clone() throws CloneNotSupportedException
+    {
+        Subject clone;
+        try {
+            clone = (Subject) super.clone();
+
+        } catch (CloneNotSupportedException e) {
+            throw new RuntimeException(e); //should not happen
+        }
+
+        return clone;
+    }
 }
 

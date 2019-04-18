@@ -18,17 +18,22 @@
 
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:layout_marginRight="25dp">
 
                 <TextView
-                    android:id="@+id/text_view"
-                    android:layout_margin="10dp"
+                    android:id="@+id/subject_title_text"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="10dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@{ent.name}"
                     android:textColor="@color/colorBlack"
-                    android:textSize="18sp"
-                    android:textStyle="bold"
+                    android:textSize="15sp"
+                    android:ellipsize="end"
+                    android:maxLines="1"
+                    android:fontFamily="@font/my_open_sans_semibold"
                     android:drawableEnd="@{ent.icon}"
                     />
 
@@ -46,7 +51,7 @@
                     <!--/>-->
 
             <View
-                android:layout_below="@+id/text_view"
+                android:layout_below="@+id/subject_title_text"
                 android:layout_width="match_parent"
                 android:layout_height="0.5dp"
                 android:background="@color/colorGray" />

@@ -17,48 +17,115 @@ public class Node implements Serializable
     @Expose
     private String title;
 
-    @SerializedName("id_for_generate_test")
+    @SerializedName("children")
     @Expose
-    private String idForGenerateTest;
+    private List<NodeChildren> children;
+
+    @SerializedName("lectures")
+    @Expose
+    private List<Lecture> lectures;
 
 
-    public Node(int id, String title, String idForGenerateTest)
+    public Node(int id, String title, List<NodeChildren> children, List<Lecture> lectures)
     {
         this.id = id;
         this.title = title;
-        this.idForGenerateTest = idForGenerateTest;
+        this.children = children;
+        this.lectures = lectures;
     }
 
-    public int getId() {
+    public int getId()
+    {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(int id)
+    {
         this.id = id;
     }
 
-    public String getTitle() {
+    public String getTitle()
+    {
         return title;
     }
 
-    public void setTitle(String title) {
+    public void setTitle(String title)
+    {
         this.title = title;
     }
 
-    public String getIdForGenerateTest() {
-        return idForGenerateTest;
+    public List<NodeChildren> getChildren()
+    {
+        return children;
     }
 
-    public void setIdForGenerateTest(String idForGenerateTest) {
-        this.idForGenerateTest = idForGenerateTest;
+    public void setChildren(List<NodeChildren> children)
+    {
+        this.children = children;
+    }
+
+    public List<Lecture> getLectures()
+    {
+        return lectures;
+    }
+
+    public void setLectures(List<Lecture> lectures)
+    {
+        this.lectures = lectures;
     }
 
     @Override
-    public String toString() {
+    public String toString()
+    {
         return "Node{" +
                 "id=" + id +
                 ", title='" + title + '\'' +
-                ", idForGenerateTest='" + idForGenerateTest + '\'' +
+                ", children=" + children +
                 '}';
     }
+
+    //    @SerializedName("id_for_generate_test")
+//    @Expose
+//    private String idForGenerateTest;
+//
+//
+//    public Node(int id, String title, String idForGenerateTest)
+//    {
+//        this.id = id;
+//        this.title = title;
+//        this.idForGenerateTest = idForGenerateTest;
+//    }
+//
+//    public int getId() {
+//        return id;
+//    }
+//
+//    public void setId(int id) {
+//        this.id = id;
+//    }
+//
+//    public String getTitle() {
+//        return title;
+//    }
+//
+//    public void setTitle(String title) {
+//        this.title = title;
+//    }
+//
+//    public String getIdForGenerateTest() {
+//        return idForGenerateTest;
+//    }
+//
+//    public void setIdForGenerateTest(String idForGenerateTest) {
+//        this.idForGenerateTest = idForGenerateTest;
+//    }
+//
+//    @Override
+//    public String toString() {
+//        return "Node{" +
+//                "id=" + id +
+//                ", title='" + title + '\'' +
+//                ", idForGenerateTest='" + idForGenerateTest + '\'' +
+//                '}';
+//    }
 }

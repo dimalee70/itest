@@ -2,7 +2,11 @@ package itest.kz.viewmodel;
 
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.databinding.ObservableField;
+import android.support.v4.text.HtmlCompat;
+import android.text.Html;
+import android.text.Spanned;
 import android.widget.Toast;
 
 import io.reactivex.Observable;
@@ -12,12 +16,16 @@ import io.reactivex.disposables.Disposable;
 import io.reactivex.functions.Action;
 import io.reactivex.functions.Consumer;
 import io.reactivex.functions.Function3;
+import itest.kz.R;
 import itest.kz.app.AppController;
 import itest.kz.model.RegisterResponse;
 import itest.kz.network.UserService;
+import itest.kz.util.Constant;
 import itest.kz.viewmodel.actions.ValidateAction;
 import itest.kz.util.InputValidator;
 import itest.kz.util.RxUtils;
+
+import static android.content.Context.MODE_PRIVATE;
 
 
 public class SignUpViewModel
@@ -35,18 +43,19 @@ public class SignUpViewModel
     public ObservableField<String> login = new ObservableField<>();
     public ObservableField<String> password  = new ObservableField<>();
     public ObservableField<String> confirmPassword  = new ObservableField<>();
-    public ObservableField<String> loginErr  = new ObservableField<>();
-    public ObservableField<String> passwordErr  = new ObservableField<>();
-    public ObservableField<String> confirmPasswordErr  = new ObservableField<>();
     public ObservableField<Boolean> enableLogin;
     public Action signIn;
     private Context context;
+    private String language;
     private CompositeDisposable compositeDisposable = new CompositeDisposable();
 
     public SignUpViewModel(Context context)
     {
 
         this.context = context;
+        SharedPreferences settings = context.getSharedPreferences(Constant.MY_LANG, MODE_PRIVATE);
+//        settings.edit().clear().commit();
+        language = settings.getString(Constant.LANG, "kz");
         Observable result = Observable.combineLatest(RxUtils.toObservable(login),
                 RxUtils.toObservable(password),
                 RxUtils.toObservable(confirmPassword), new Function3<String, String, String, Boolean>() {
@@ -55,34 +64,90 @@ public class SignUpViewModel
                         int failCount = 0;
                         if (!InputValidator.validateUserName(userName)) {
                             ++failCount;
-                            loginErr.set("Username format not correct");
-                        } else {
-                            loginErr.set("");
+//                            loginErr.set("Username format not correct");
                         }
+//                        else {
+//                            loginErr.set("");
+//                        }
 
                         if (!InputValidator.validatePassword(password)) {
                             ++failCount;
-                            passwordErr.set("Password format not correct");
-                        } else {
-                            passwordErr.set("");
+//                            passwordErr.set("Password format not correct");
                         }
+//                        else {
+//                            passwordErr.set("");
+//                        }
 
-                        if (!InputValidator.validateEmail(email)) {
+                        if (!InputValidator.validatePassword(email)) {
                             ++failCount;
-                            confirmPasswordErr.set("Email format not correct");
-                        } else {
-                            confirmPasswordErr.set("");
+
+//                            confirmPasswordErr.set("Email format not correct");
                         }
+//                        else
+//                            {
+//                            confirmPasswordErr.set("");
+//                        }
                         return failCount == 0;
                     }});
 
         enableLogin = RxUtils.toField(result);
 
-        ValidateAction validateAction = new ValidateAction(login, password, confirmPassword, context);
+        ValidateAction validateAction = new ValidateAction(language, login, password, confirmPassword, context);
 
         signIn = validateAction;
     }
 
+    public int getLoginHint()
+    {
+        if (language.equals(Constant.KZ))
+            return R.string.emailPlaceholderKz;
+        return R.string.emailPlaceholderRu;
+    }
+
+    public int getPasswordHint()
+    {
+        if (language.equals(Constant.KZ))
+            return R.string.passwordPlaceholderKz;
+        return R.string.passwordPlaceholderRu;
+    }
+
+    public int getPasswordConfirmHint()
+    {
+        if (language.equals(Constant.KZ))
+            return R.string.passwordConfirmHintKz;
+        return R.string.passwordConfirmHintRu;
+    }
+
+    public int getSignInButtonText()
+    {
+        if (language.equals(Constant.KZ))
+            return R.string.signUpKaz;
+        return R.string.signUpRu;
+    }
+
+    public Spanned getText()
+    {
+        String text;
+
+        if (language.equals(Constant.KZ))
+        {
+            text = "<p>Тіркелу арқылы сіз  " +
+                    "<a href=\"https://itest.kz/"+language+"/terms-of-use\">Қолданушылық</a> " +
+                    "келісімі мен <a href=\"https://itest.kz/"+language+"/privacy-policy\"> Құпиялылық саясатының " +
+                    "</a> шарттарын автоматты түрде қабылдайсыз</p>";
+        }
+        else
+        {
+            text = "<p>Проходя регистрацию вы автоматически принимаете условия " +
+                "<a href=\"https://itest.kz/"+language+"/terms-of-use\">Пользовательского соглашения </a> " +
+                "и <a href=\"https://itest.kz/"+language+"/privacy-policy\"> Политики конфиденциальности ";
+        }
+
+//        String text = "<a href=\"https://vk.com\">Google</a>";
+        return Html.fromHtml(text, HtmlCompat.FROM_HTML_MODE_LEGACY);
+    }
+
+//     мен  шарттарын автоматты түрде қабылдайсыз
     public void destroy()
     {
 

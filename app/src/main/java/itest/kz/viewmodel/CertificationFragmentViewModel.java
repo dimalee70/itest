@@ -34,6 +34,7 @@ public class CertificationFragmentViewModel extends Observable
     private List<Subject> subjectList;
     public Action showHideButtons;
     private String language;
+    private String accessToken;
 
 
     private CompositeDisposable compositeDisposable = new CompositeDisposable();
@@ -47,6 +48,11 @@ public class CertificationFragmentViewModel extends Observable
         SharedPreferences settings = context.getSharedPreferences(Constant.MY_LANG, MODE_PRIVATE);
 //        settings.edit().clear().commit();
         language = settings.getString(Constant.LANG, "kz");
+
+        SharedPreferences accessTok = context.getSharedPreferences(Constant.MY_PREF, MODE_PRIVATE);
+//        settings.edit().clear().commit();
+        accessToken = accessTok.getString(Constant.ACCESS_TOKEN, "kz");
+
 //        showHideButtons = () ->
 //                {
 //                    System.out.println("Hello World");
@@ -61,8 +67,8 @@ public class CertificationFragmentViewModel extends Observable
         SubjectService subjectService = appController.getSubjectService();
 
 
-        Disposable disposable = subjectService.getSubjects(Constant.ATTESTATION,
-                "Bearer " + Constant.ACCESSTOKEN, Constant.ACCEPT, language)
+        Disposable disposable = subjectService.getSubjects(Constant.ENT,
+                "Bearer " + accessToken, Constant.ACCEPT, language)
                 .subscribeOn(appController.subscribeScheduler())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Consumer<SubjectResponce>() {

@@ -29,7 +29,8 @@
                 android:text="@{profile.titleText}"
                 android:layout_marginLeft="20dp"
                 android:textSize="20sp"
-                android:layout_gravity="left"/>
+                android:layout_gravity="left"
+                android:fontFamily="@font/my_open_sans_regular" />
 
             <itest.kz.view.customviews.CustomTextView
                 android:id="@+id/toolbar_text_right"
@@ -49,6 +50,7 @@
             android:layout_below="@+id/toolbar_profile"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
+
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
@@ -57,7 +59,8 @@
                     android:id="@+id/profile_info_relative"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="0dp">
+                    android:layout_marginTop="30dp"
+                    android:layout_marginBottom="28dp">
 
                     <de.hdodenhof.circleimageview.CircleImageView
                         android:id="@+id/profilePhoto"
@@ -72,30 +75,23 @@
                         android:layout_height="40dp"
                         android:layout_below="@+id/profilePhoto"
                         android:layout_centerHorizontal="true"
-
                         android:src="@drawable/ic_add_profile_photo_main" />
-                    <!--android:onClick="@{profile.clickOnPhoto}"-->
                 </RelativeLayout>
 
                 <android.support.v7.widget.CardView
                     android:id="@+id/info_cardview"
-                    android:layout_marginTop="28dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/profile_info_relative">
 
                     <RelativeLayout
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginRight="10dp">
+                        android:layout_height="wrap_content">
 
                         <RelativeLayout
-
                             android:id="@+id/name_relative"
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="20dp"
-                            android:layout_marginRight="10dp">
+                            android:layout_height="wrap_content">
 
                             <android.support.v7.widget.CardView
                                 android:layout_width="match_parent"
@@ -103,18 +99,21 @@
 
                                 <RelativeLayout
                                     android:layout_width="match_parent"
-                                    android:layout_height="match_parent"
-                                    android:layout_marginTop="10dp">
+                                    android:layout_height="match_parent">
 
                                     <RelativeLayout
                                         android:layout_width="match_parent"
                                         android:layout_height="wrap_content">
+
                                         <TextView
                                             android:id="@+id/name_text"
                                             android:layout_width="wrap_content"
                                             android:layout_height="wrap_content"
+                                            android:layout_marginLeft="22dp"
+                                            android:layout_marginBottom="10dp"
                                             android:text="@{profile.nameText}"
-                                            android:textColor="@color/colorPrimary"/>
+                                            android:textColor="@color/colorPrimary"
+                                            android:fontFamily="@font/my_open_sans_regular"/>
 
                                         <TextView
                                             android:id="@+id/name_asterisk"
@@ -131,7 +130,11 @@
                                             android:hint="@{profile.hintNameText}"
                                             android:text="@{profile.name}"
                                             android:layout_width="match_parent"
-                                            android:inputType="text"/>
+                                            android:inputType="text"
+                                            android:textSize="14sp"
+                                            android:fontFamily="@font/my_open_sans_regular"
+                                            android:layout_marginLeft="20dp"
+                                            android:layout_marginRight="17dp"/>
 
                                     </RelativeLayout>
 
@@ -147,9 +150,7 @@
                             android:id="@+id/surname_relative"
                             android:layout_below="@+id/name_relative"
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="20dp"
-                            android:layout_marginRight="10dp">
+                            android:layout_height="wrap_content">
 
                             <android.support.v7.widget.CardView
                                 android:layout_width="match_parent"
@@ -162,12 +163,16 @@
                                     <RelativeLayout
                                         android:layout_width="match_parent"
                                         android:layout_height="wrap_content">
+
                                         <TextView
                                             android:id="@+id/surname_text"
                                             android:layout_width="wrap_content"
                                             android:layout_height="wrap_content"
                                             android:text="@{profile.surnameText}"
-                                            android:textColor="@color/colorPrimary"/>
+                                            android:textColor="@color/colorPrimary"
+                                            android:layout_marginLeft="22dp"
+                                            android:layout_marginBottom="10dp"
+                                            android:fontFamily="@font/my_open_sans_regular"/>
 
                                         <TextView
                                             android:id="@+id/surname_asterisk"
@@ -184,7 +189,11 @@
                                             android:hint="@{profile.hintSurnameText}"
                                             android:text="@{profile.surname}"
                                             android:layout_width="match_parent"
-                                            android:inputType="text"/>
+                                            android:inputType="text"
+                                            android:textSize="14sp"
+                                            android:fontFamily="@font/my_open_sans_regular"
+                                            android:layout_marginLeft="20dp"
+                                            android:layout_marginRight="17dp"/>
 
                                     </RelativeLayout>
 
@@ -200,10 +209,7 @@
                             android:id="@+id/date_relative"
                             android:layout_below="@+id/surname_relative"
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="20dp"
-                            android:layout_marginRight="10dp"
-                            android:layout_marginBottom="10dp">
+                            android:layout_height="wrap_content">
 
                             <android.support.v7.widget.CardView
                                 android:layout_width="match_parent"
@@ -216,12 +222,16 @@
                                     <RelativeLayout
                                         android:layout_width="match_parent"
                                         android:layout_height="wrap_content">
+
                                         <TextView
                                             android:id="@+id/date_text"
                                             android:layout_width="wrap_content"
                                             android:layout_height="wrap_content"
                                             android:text="@{profile.dateOfBirthText}"
-                                            android:textColor="@color/colorPrimary"/>
+                                            android:textColor="@color/colorPrimary"
+                                            android:layout_marginLeft="22dp"
+                                            android:layout_marginBottom="10dp"
+                                            android:fontFamily="@font/my_open_sans_regular"/>
 
                                         <TextView
                                             android:id="@+id/date_asterisk"
@@ -238,7 +248,10 @@
                                             android:hint="@{profile.hintDateOfBirthText}"
                                             android:text="@{profile.date}"
                                             android:layout_width="match_parent"
-                                            android:inputType="text"/>
+                                            android:inputType="text"
+                                            android:fontFamily="@font/my_open_sans_regular"
+                                            android:layout_marginLeft="20dp"
+                                            android:layout_marginRight="17dp"/>
 
                                     </RelativeLayout>
 
@@ -261,26 +274,23 @@
                     android:layout_below="@+id/info_cardview"
                     android:textColor="@color/colorBlack"
                     android:layout_marginLeft="9dp"
-                    android:layout_marginTop="19dp"/>
+                    android:layout_marginTop="14dp"/>
 
                 <android.support.v7.widget.CardView
                     android:id="@+id/login_cardview"
-                    android:layout_marginTop="19dp"
+                    android:layout_marginTop="21dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/login_email_text">
 
                     <RelativeLayout
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginRight="10dp">
+                        android:layout_height="wrap_content">
 
                         <RelativeLayout
                             android:id="@+id/login_relative"
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="20dp"
-                            android:layout_marginRight="10dp">
+                            android:layout_height="wrap_content">
 
                             <android.support.v7.widget.CardView
                                 android:layout_width="match_parent"
@@ -292,14 +302,17 @@
 
                                     <RelativeLayout
                                         android:layout_width="match_parent"
-                                        android:layout_height="wrap_content"
-                                        android:layout_marginTop="10dp">
+                                        android:layout_height="wrap_content">
+
                                         <TextView
                                             android:id="@+id/login_text"
                                             android:layout_width="wrap_content"
                                             android:layout_height="wrap_content"
                                             android:text="Логин: "
-                                            android:textColor="@color/colorPrimary"/>
+                                            android:textColor="@color/colorPrimary"
+                                            android:layout_marginLeft="22dp"
+                                            android:layout_marginBottom="10dp"
+                                            android:fontFamily="@font/my_open_sans_regular"/>
 
                                         <TextView
                                             android:id="@+id/login_asterisk"
@@ -316,7 +329,10 @@
                                             android:hint="@{profile.hintLoginText}"
                                             android:layout_width="match_parent"
                                             android:text="@{profile.login}"
-                                            android:inputType="text"/>
+                                            android:inputType="text"
+                                            android:fontFamily="@font/my_open_sans_regular"
+                                            android:layout_marginLeft="20dp"
+                                            android:layout_marginRight="17dp"/>
 
                                     </RelativeLayout>
 
@@ -332,9 +348,7 @@
                             android:id="@+id/email_relative"
                             android:layout_below="@+id/login_relative"
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="20dp"
-                            android:layout_marginRight="10dp">
+                            android:layout_height="wrap_content">
 
                             <android.support.v7.widget.CardView
                                 android:layout_width="match_parent"
@@ -347,12 +361,16 @@
                                     <RelativeLayout
                                         android:layout_width="match_parent"
                                         android:layout_height="wrap_content">
+
                                         <TextView
                                             android:id="@+id/email_text"
                                             android:layout_width="wrap_content"
                                             android:layout_height="wrap_content"
                                             android:text="Email: "
-                                            android:textColor="@color/colorPrimary"/>
+                                            android:textColor="@color/colorPrimary"
+                                            android:layout_marginLeft="22dp"
+                                            android:layout_marginBottom="10dp"
+                                            android:fontFamily="@font/my_open_sans_regular"/>
 
                                         <TextView
                                             android:id="@+id/email_asterisk"
@@ -369,15 +387,16 @@
                                             android:hint="@{profile.hintEmailText}"
                                             android:text="@{profile.email}"
                                             android:layout_width="match_parent"
-                                            android:inputType="text"/>
+                                            android:inputType="text"
+                                            android:fontFamily="@font/my_open_sans_regular"
+                                            android:layout_marginLeft="20dp"
+                                            android:layout_marginRight="17dp"/>
 
                                     </RelativeLayout>
-
 
                                 </RelativeLayout>
 
                             </android.support.v7.widget.CardView>
-
 
                         </RelativeLayout>
 

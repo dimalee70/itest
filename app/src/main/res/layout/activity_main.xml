@@ -52,7 +52,6 @@
                         android:layout_alignRight="@+id/ivMap"
                         android:layout_alignParentBottom="true"
                         android:layout_marginTop="50dp"
-                        android:fontFamily="@font/opensans_regular"
                         android:gravity="center"
                         android:text="@{mainViewModel.selectLanguage}"
                         android:textColor="@color/colorWhite"

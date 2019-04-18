@@ -100,29 +100,31 @@ public class ItemSubjectFragmentViewModel extends BaseObservable
         this.context = context;
     }
 
-    public void onItemClick(View view)
-    {
-        if (!isClicked)
-        {
-            buttonsVisible.set(View.VISIBLE);
-            textColor.set(Color.parseColor("#D8D8D8"));
-            isClicked = true;
-//            colorIcon.set(Color.parseColor("#36ABF9"));
-//            Drawable mDrawable = context.getDrawable(R.drawable.ic_keyboard_arrow_down_black_24dp);
-//            mDrawable.setColorFilter(new
-//                    PorterDuffColorFilter(0x36ABF9,PorterDuff.Mode.MULTIPLY));
-        }
-        else
-        {
-            buttonsVisible.set(View.GONE);
-            textColor.set(Color.BLACK);
-//            colorIcon.set(Color.BLACK);
-            isClicked = false;
-        }
-
-
-        Log.d("dcsd","On Item Click");
-    }
+//    public void onItemClick(View view)
+//    {
+//        if (!isClicked)
+//        {
+//            subject.setExpand(true);
+//            buttonsVisible.set(View.VISIBLE);
+//            textColor.set(Color.parseColor("#D8D8D8"));
+//            isClicked = true;
+////            colorIcon.set(Color.parseColor("#36ABF9"));
+////            Drawable mDrawable = context.getDrawable(R.drawable.ic_keyboard_arrow_down_black_24dp);
+////            mDrawable.setColorFilter(new
+////                    PorterDuffColorFilter(0x36ABF9,PorterDuff.Mode.MULTIPLY));
+//        }
+//        else
+//        {
+//            subject.setExpand(false);
+//            buttonsVisible.set(View.GONE);
+//            textColor.set(Color.BLACK);
+////            colorIcon.set(Color.BLACK);
+//            isClicked = false;
+//        }
+//
+//
+//        Log.d("dcsd","On Item Click");
+//    }
 
     public void clickTest(View view)
     {
@@ -130,6 +132,7 @@ public class ItemSubjectFragmentViewModel extends BaseObservable
         Intent intent = new Intent(getContext().getApplicationContext(), TestActivity.class);
         intent.putExtra(Constant.SELECTED_SUBJECT,(Serializable) subject);
         intent.putExtra(Constant.IS_STARTED_FIRST, true);
+        intent.putExtra(Constant.TYPE, Constant.TYPESUBJECTTEST);
 //        context.startActivity(TestActivity.fillSelectedSubject(view.getContext(), subject));
         context.startActivity(intent);
     }
@@ -140,12 +143,42 @@ public class ItemSubjectFragmentViewModel extends BaseObservable
             @Override
             public void run()
             {
+
+
+//                    Dialog dialog = new Dialog(getContext());
+//
+//                    dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+//                    dialog.setContentView(R.layout.dialog);
+//                    dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+//                    dialogText = dialog.findViewById(R.id.dialog_text);
+//                    if (language.equals(Constant.KZ))
+//                        dialogText.setText(R.string.textDialogCertificationKz);
+//                    else
+//                        dialogText.setText(R.string.textDialogCertificationRu);
+//                    buttonYes = dialog.findViewById(R.id.buttonOk);
+//                    buttonNo = dialog.findViewById(R.id.buttonCancel);
+//                    buttonYes.setOnClickListener(new View.OnClickListener() {
+//                        @Override
+//                        public void onClick(View v) {
+////                            finishTest(testIdMain);
+//
+//
+//                            //System.out.println(testIdMain);//103080954
+//
+//                        }
+//                    });
+//
+//                    buttonNo.setOnClickListener(new View.OnClickListener() {
+//                        @Override
+//                        public void onClick(View v) {
+//                            dialog.dismiss();
+//                        }
+//                    });
+//                    dialog.show();
                 Intent intent = new Intent(getContext().getApplicationContext(), MaterialsActivity.class);
 //        System.out.println("Subject");
 //        System.out.println(subject.toString());
                 context.startActivity(MaterialsActivity.fillSelectedSubject(view.getContext(), subject));
-//        view.getContext().getApplicationContext().fini
-//        context.startActivity(intent);
             }
         }).start();
 

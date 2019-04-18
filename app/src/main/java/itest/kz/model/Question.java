@@ -7,6 +7,7 @@ import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 public class Question implements Serializable, Parcelable
@@ -26,6 +27,10 @@ public class Question implements Serializable, Parcelable
     @Expose
     private Long textId;
 
+    @SerializedName("description")
+    @Expose
+    private String description;
+
     private String text;
 
     public String getText()
@@ -43,6 +48,16 @@ public class Question implements Serializable, Parcelable
         this.question = question;
         this.answers = answers;
         this.textId = textId;
+    }
+
+    public String getDescription()
+    {
+        return description;
+    }
+
+    public void setDescription(String description)
+    {
+        this.description = description;
     }
 
     public Long getQuestionId()
@@ -107,6 +122,7 @@ public class Question implements Serializable, Parcelable
         this.question = source.readString();
         this.textId = source.readLong();
         this.text = source.readString();
+        this.description = source.readString();
 //        this.nodeId = source.readInt();
 //        this.subjectId = source.readInt();
 //        this.langId = source.readInt();
@@ -114,6 +130,7 @@ public class Question implements Serializable, Parcelable
 //        this.difficultyLevel = source.readInt();
 //        this.checked = source.readInt();
 //        this.answerType = source.readInt();
+//        source.readList(answers, Answer.class.getClassLoader());
         this.answers = source.readArrayList(Answer.class.getClassLoader());
 
     }
@@ -125,10 +142,14 @@ public class Question implements Serializable, Parcelable
     {
         dest.writeLong(questionId);
         dest.writeString(question);
-        if (textId != null) {
+        if (textId != null)
             dest.writeLong(textId);
-            dest.writeString(text);
-        }
+        dest.writeString(text);
+        dest.writeString(description);
+//        if (textId != null) {
+//            dest.writeLong(textId);
+//            dest.writeString(text);
+//        }
 //        dest.writeInt(nodeId);
 //        dest.writeInt(langId);
 //        dest.writeInt(examSubjectId);
@@ -137,6 +158,7 @@ public class Question implements Serializable, Parcelable
 //        dest.writeInt(checked);
 //        dest.writeInt(answerType);
         dest.writeList(answers);
+
     }
 
     public static final Parcelable.Creator<Question> CREATOR = new

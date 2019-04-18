@@ -97,7 +97,7 @@ public class TestAdapter extends RecyclerView.Adapter<TestAdapter.TestAdapterVie
         {
             if (itemAnswerBinding.getAnswer() == null)
                 itemAnswerBinding.setAnswer
-                        (new ItemAnswerViewModel(itemView.getContext(), answer, answerList));
+                        (new ItemAnswerViewModel(itemView.getContext(), answer));
             else
                 itemAnswerBinding.getAnswer().setAnswer(answer);
 

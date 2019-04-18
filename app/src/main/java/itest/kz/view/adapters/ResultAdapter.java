@@ -10,6 +10,7 @@ import android.graphics.PorterDuff;
 import android.graphics.PorterDuffColorFilter;
 import android.graphics.drawable.Drawable;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -19,6 +20,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -27,9 +29,13 @@ import itest.kz.databinding.ItemQuestionsBinding;
 import itest.kz.databinding.ItemResultBinding;
 import itest.kz.databinding.ItemSubjectBinding;
 import itest.kz.model.Answer;
+import itest.kz.model.Question;
 import itest.kz.model.Subject;
 import itest.kz.model.Test;
+import itest.kz.model.Tests;
 import itest.kz.util.Constant;
+import itest.kz.view.activity.FullTestActivity;
+import itest.kz.view.activity.FulltestResultActivity;
 import itest.kz.view.activity.TestActivity;
 import itest.kz.viewmodel.ItemQuestionsViewModel;
 import itest.kz.viewmodel.ItemResultViewModel;
@@ -42,7 +48,7 @@ public class ResultAdapter extends RecyclerView.Adapter<ResultAdapter.ResultAdap
 
     public interface OnItemClickListener
     {
-        void onItemClick(Test test, List<Test> testList);
+        void onItemClick(Question test, List<Question> testList);
     }
 //    public interface OnItemClickListener
 //    {
@@ -52,11 +58,31 @@ public class ResultAdapter extends RecyclerView.Adapter<ResultAdapter.ResultAdap
     private OnItemClickListener listener;
     List<Answer> answerList;
     boolean isStart = false;
-    List<Test> testList;
+    Tests testList;
     private Context context;
-    private Test test;
+    private Question test;
+    private Subject selectedSubject;
     private ItemQuestionsViewModel itemQuestionsViewModel;
-//    private ItemQuestionsBinding itemQuestionsBinding;
+    private Integer currentPosition;
+    private Long testIdMain;
+    private ArrayList<Subject> subjectList;
+    private Integer selectedSubjectPosition;
+    private int i = 0;
+    private String resultTag;
+    private String typeTest;
+
+    public Integer getCurrentPosition()
+    {
+        return currentPosition;
+    }
+
+    public void setCurrentPosition(Integer currentPosition)
+    {
+        this.currentPosition = currentPosition;
+        notifyDataSetChanged();
+    }
+
+    //    private ItemQuestionsBinding itemQuestionsBinding;
 
 
 //    public ResultAdapter (List<Answer> answers)
@@ -64,10 +90,55 @@ public class ResultAdapter extends RecyclerView.Adapter<ResultAdapter.ResultAdap
 //        this.answerList = answers;
 ////        this.answersAdapterListener = answersAdapterListener;
 //    }
-    public ResultAdapter(List<Test> testList, Context context)
+    public ResultAdapter(Tests testList, Context context,
+                         Subject selectedSubject, Long testIdMain,
+                         @Nullable Integer currentPosition,
+                         ArrayList<Subject> subjectList,
+                         Integer selectedSubjectPosition,
+                         int i, String resultTag
+
+    )
     {
+
+        this.resultTag = resultTag;
         this.context = context;
         this.testList = testList;
+        this.selectedSubjectPosition = selectedSubjectPosition;
+        this.subjectList = subjectList;
+        this.selectedSubject = selectedSubject;
+        this.currentPosition = currentPosition;
+        this.testIdMain = testIdMain;
+        this.i = i;
+
+
+//        System.out.println("current Position");
+//        System.out.println(this.currentPosition);
+
+    }
+
+    public ResultAdapter(Tests testList, Context context,
+                         Subject selectedSubject, Long testIdMain,
+                         @Nullable Integer currentPosition,
+                         ArrayList<Subject> subjectList,
+                         Integer selectedSubjectPosition,
+                         int i, String resultTag, String typeTest
+
+    )
+    {
+
+        this.context = context;
+        this.testList = testList;
+        this.selectedSubjectPosition = selectedSubjectPosition;
+        this.subjectList = subjectList;
+        this.selectedSubject = selectedSubject;
+        this.currentPosition = currentPosition;
+        this.testIdMain = testIdMain;
+        this.i = i;
+        this.resultTag = resultTag;
+        this.typeTest = typeTest;
+
+//        System.out.println("current Position");
+//        System.out.println(this.currentPosition);
 
     }
 
@@ -89,25 +160,29 @@ public class ResultAdapter extends RecyclerView.Adapter<ResultAdapter.ResultAdap
     @Override
     public ResultAdapterViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i)
     {
-//        if (!isStart)
-//        {
-//            Test.num = 1;
-//            isStart = true;
-//        }
-//        }
         ItemResultBinding itemResultBinding = DataBindingUtil
                 .inflate(LayoutInflater.from(viewGroup.getContext())
                         , R.layout.item_result, viewGroup, false );
         return new ResultAdapterViewHolder(itemResultBinding);
     }
 
+    public int getI()
+    {
+        return i;
+    }
+
+    public void setI(int i)
+    {
+        this.i = i;
+    }
+
     @Override
     public void onBindViewHolder(@NonNull ResultAdapterViewHolder resultAdapterViewHolder, int i)
     {
 //        resultAdapterViewHolder.bindAnswer(answerList.get(i));
-        this.test = testList.get(i);
+        this.test = testList.getQuestions().get(i);
         resultAdapterViewHolder.bindTest(test, i);
-        this.answerList = testList.get(i).getAnswers();
+        this.answerList = testList.getQuestions().get(i).getAnswers();
 
         RecyclerView recyclerView = resultAdapterViewHolder.recyclerView;
 //        RecyclerView.OnItemTouchListener onItemTouchListener
@@ -130,27 +205,50 @@ public class ResultAdapter extends RecyclerView.Adapter<ResultAdapter.ResultAdap
 //        };
 //        recyclerView.addOnItemTouchListener(onItemTouchListener);
 //        recyclerView.setOnTouchListener(onItemTouchListener);
-        QuestionsAdapter questionsAdapter = new QuestionsAdapter(answerList, context);
+        QuestionsAdapter questionsAdapter = new QuestionsAdapter(answerList, context, resultTag);
         recyclerView.setAdapter(questionsAdapter);
+
+
 
         resultAdapterViewHolder.itemResultBinding.getRoot().findViewById(R.id.cardview_questions)
         .setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v)
             {
-//                tests = testList;
-//                System.out.println("Click on carrd");
-                Intent intent = new Intent(context, TestActivity.class);
-//////        intent.putExtra()
-                intent.putExtra(Constant.SELECTED_TEST_POSITION_ID, resultAdapterViewHolder
-                .getAdapterPosition());
-                intent.putExtra(Constant.IS_STARTED_FIRST, false);
-                intent.putExtra("list", (ArrayList<Test>) testList);
+                Intent intent = null;
 
-//////        context.startActivity(TestActivity.fillSelectedSubject(view.etContext(), subject));
-//////                StartActivityForResult(intent, 0);
+//                System.out.println("idx");
+//                System.out.println(idx);
+                if (currentPosition != null && typeTest.equals(Constant.TYPEFULLTEST))
+                {
+                    intent = new Intent(context, FullTestActivity.class);
+                    intent.putExtra(Constant.SELECTED_TEST_POSITION_ID, resultAdapterViewHolder
+                            .getAdapterPosition());
+                    intent.putExtra(Constant.SUBJECT_LIST, subjectList);
+                    intent.putExtra(Constant.CURRENT_POSITION_SUBJECT, currentPosition);
+                    intent.putExtra(Constant.IS_STARTED_FIRST, false);
+                    intent.putExtra(Constant.TEST_MAIN_ID, testIdMain);
+                    intent.putExtra(Constant.RESULT_TAG, resultTag);
+                    intent.putExtra(Constant.TYPE, typeTest);
+//                    intent.putExtra("list", testList);
+                }
+                else
+                {
+                    intent = new Intent(context, TestActivity.class);
+                    //////        intent.putExtra()
+                    intent.putExtra(Constant.SELECTED_TEST_POSITION_ID, resultAdapterViewHolder
+                            .getAdapterPosition());
+                    intent.putExtra(Constant.SELECTED_SUBJECT, (Serializable) selectedSubject);
+                    intent.putExtra(Constant.IS_STARTED_FIRST, false);
+                    intent.putExtra("list", testList);
+//                    System.out.println("testList");
+//                    System.out.println(testList);
+                    intent.putExtra(Constant.RESULT_TAG, resultTag);
+                    intent.putExtra(Constant.TYPE, typeTest);
+                    intent.putExtra(Constant.TEST_MAIN_ID, testIdMain);
+                }
+
                 context.startActivity(intent);
-//                listener.onItemClick(test, testList);
             }
         });
 
@@ -189,7 +287,7 @@ public class ResultAdapter extends RecyclerView.Adapter<ResultAdapter.ResultAdap
     public int getItemCount()
     {
         if (testList != null)
-            return testList.size();
+            return testList.getQuestions().size();
         return 0;
 //        if (answerList != null)
 //            return answerList.size();
@@ -244,7 +342,7 @@ public class ResultAdapter extends RecyclerView.Adapter<ResultAdapter.ResultAdap
 //            }
 //        }
 
-        void bindTest(Test test, int i)
+        void bindTest(Question test, int i)
         {
 
 

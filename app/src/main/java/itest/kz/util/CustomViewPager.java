@@ -1,9 +1,12 @@
 package itest.kz.util;
 
 import android.content.Context;
+import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
+
+import java.util.Iterator;
 
 public class CustomViewPager extends ViewPager {
 
@@ -62,6 +65,7 @@ public class CustomViewPager extends ViewPager {
 
         return true;
     }
+
 
     public void setAllowedSwipeDirection(SwipeDirection direction) {
         this.direction = direction;

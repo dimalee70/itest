@@ -16,7 +16,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="16dp"
-
             android:background="@color/colorWhite"
             >
             <!--android:layout_margin="10dp"-->
@@ -29,9 +28,9 @@
                 android:background="@color/colorWhite"
                 app:layout_behavior="@string/appbar_scrolling_view_behavior"
                 app:visibility="@{certification.subjectRecycler}"
-                tools:listitem="@layout/item_subject"
                 android:clickable="true"
-                android:onClick="@{certification.showHideButtons}"/>
+                android:onClick="@{certification.showHideButtons}"
+                tools:listitem="@layout/item_subject"/>
 
         </android.support.v7.widget.CardView>
 

@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+    <data>
+        <variable
+            name="results"
+            type="itest.kz.viewmodel.ResultsViewModel"/>
+    </data>
+    <!--<android.support.design.widget.CoordinatorLayout-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:background="@color/colorBackgroundCardView"-->
+        <!--android:layout_height="match_parent">-->
+
+
+
+
+        <RelativeLayout
+            android:id="@+id/activity_result_relative"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <android.support.design.widget.AppBarLayout
+                android:id="@+id/app_bar_layout"
+                android:layout_width="match_parent"
+                android:theme="@style/AppTheme.AppBarOverlay"
+                android:layout_height="wrap_content">
+
+                <!--android:theme="@style/AppTheme.AppBarOverlay"-->
+
+                <android.support.v7.widget.Toolbar
+                    android:id="@+id/result_toolbar"
+                    android:layout_width="match_parent"
+                    android:layout_height="?attr/actionBarSize"
+                    android:background="?attr/colorPrimary"
+                    app:layout_scrollFlags="scroll|enterAlways"
+                    app:popupTheme="@style/AppTheme.PopupOverlay">
+
+                    <RelativeLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            android:id="@+id/text_view_title"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="ENT"
+                            android:textSize="20sp"
+                            android:layout_marginStart="43dp"
+                            android:textColor="@color/colorWhite" />
+
+                    </RelativeLayout>
+
+                    <ImageButton
+                        android:id="@+id/buttonFinishTest"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="right"
+                        android:background="@drawable/ic_icon_x"
+                        android:layout_marginEnd="15dp"
+                        android:clickable="true"/>
+
+                </android.support.v7.widget.Toolbar>
+
+                <android.support.design.widget.TabLayout
+                    android:id="@+id/tl_tabs_container"
+                    android:layout_width="match_parent"
+                    app:tabGravity="fill"
+                    app:tabMode="fixed"
+                    app:tabTextAppearance="@android:style/TextAppearance.Widget.TabWidget"
+                    style="@style/MyStyle"
+                    android:layout_height="wrap_content"/>
+            </android.support.design.widget.AppBarLayout>
+
+            <android.support.v4.view.ViewPager
+                android:id="@+id/vp_fragments_container"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_below="@id/app_bar_layout" />
+
+        </RelativeLayout>
+
+    <!--</android.support.design.widget.CoordinatorLayout>-->
+</layout>

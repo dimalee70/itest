@@ -235,11 +235,6 @@ public class ProfileFragment extends Fragment
         TextView titleTextView = fragmentProfileBinding.toolbarTitle;
         titleTextView.setText("Профиль");
         myToolbar.setTitle("");
-//        myToolbar.setTitleTextColor(Color.WHITE);
-//        myToolbar.setContentInsetsAbsolute(200, 0);
-
-//        final Drawable upArrow = getResources().getDrawable(R.drawable.abc_ic_ab_back_mtrl_am_alpha);
-//        upArrow.setColorFilter(getResources().getColor(R.color.grey), PorterDuff.Mode.SRC_ATOP);
 
         ((AppCompatActivity)getActivity()).setSupportActionBar(myToolbar);
     }

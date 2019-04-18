@@ -18,6 +18,7 @@ import itest.kz.R;
 import itest.kz.databinding.ActivityNodeByNodeBinding;
 import itest.kz.model.Lecture;
 import itest.kz.model.Node;
+import itest.kz.model.NodeChildren;
 import itest.kz.model.Subject;
 import itest.kz.util.Constant;
 import itest.kz.view.adapters.MaterialsAdapter;
@@ -29,9 +30,7 @@ public class NodeByNodeActivity extends AppCompatActivity implements Observer
 {
     private ActivityNodeByNodeBinding activityNodeByNodeBinding;
     private NodeByNodeViewModel nodeByNodeViewModel;
-    private Node node;
-    private List<Lecture> lectures;
-    private NodeByNodeAdapter nodeByNodeAdapter;
+    private NodeChildren node;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState)
@@ -64,7 +63,7 @@ public class NodeByNodeActivity extends AppCompatActivity implements Observer
 
     private void getExtrasFromIntent()
     {
-        this.node = (Node) getIntent().getSerializableExtra(Constant.SELECTED_NODE);
+        this.node = (NodeChildren) getIntent().getSerializableExtra(Constant.SELECTED_NODE);
     }
 
     public static Intent fillSelectedSubject(Context context, Node node)

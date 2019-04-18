@@ -15,6 +15,7 @@ import itest.kz.databinding.ItemNodeBinding;
 import itest.kz.databinding.ItemQuestionsBinding;
 import itest.kz.model.Answer;
 import itest.kz.model.Node;
+import itest.kz.model.NodeChildren;
 import itest.kz.viewmodel.ItemNodeViewModel;
 import itest.kz.viewmodel.ItemQuestionsViewModel;
 import itest.kz.viewmodel.MaterialsViewModel;
@@ -22,7 +23,7 @@ import itest.kz.viewmodel.MaterialsViewModel;
 public class MaterialsAdapter extends RecyclerView.Adapter<MaterialsAdapter.MaterialsAdpterViewHolder>
 {
 
-    private List<Node> listNode;
+    private List<NodeChildren> listNode;
     private Context context;
     private ItemNodeBinding itemNodeBinding;
 
@@ -59,11 +60,11 @@ public class MaterialsAdapter extends RecyclerView.Adapter<MaterialsAdapter.Mate
         return 0;
     }
 
-    public List<Node> getListNode() {
+    public List<NodeChildren> getListNode() {
         return listNode;
     }
 
-    public void setListNode(List<Node> listNode) {
+    public void setListNode(List<NodeChildren> listNode) {
         this.listNode = listNode;
         notifyDataSetChanged();
     }
@@ -80,7 +81,7 @@ public class MaterialsAdapter extends RecyclerView.Adapter<MaterialsAdapter.Mate
         }
 
 
-        void bindNode(Node node) {
+        void bindNode(NodeChildren node) {
             if (itemNodeBinding.getNode() == null) {
                 itemNodeBinding.setNode
                         (new ItemNodeViewModel(itemView.getContext(), node));

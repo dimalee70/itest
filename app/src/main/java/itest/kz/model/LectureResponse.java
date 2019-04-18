@@ -11,14 +11,9 @@ public class LectureResponse implements Serializable
     @Expose
     private Lecture lecture;
 
-    @SerializedName("description")
-    @Expose
-    private String description;
-
-    public LectureResponse(Lecture lecture, String description)
+    public LectureResponse(Lecture lecture)
     {
         this.lecture = lecture;
-        this.description = description;
     }
 
     public Lecture getLecture()
@@ -31,21 +26,49 @@ public class LectureResponse implements Serializable
         this.lecture = lecture;
     }
 
-    public String getDescription()
-    {
-        return description;
-    }
-
-    public void setDescription(String description)
-    {
-        this.description = description;
-    }
-
     @Override
-    public String toString() {
+    public String toString()
+    {
         return "LectureResponse{" +
                 "lecture=" + lecture +
-                ", description='" + description + '\'' +
                 '}';
     }
+
+    //    @SerializedName("description")
+//    @Expose
+//    private String description;
+//
+//    public LectureResponse(Lecture lecture, String description)
+//    {
+//        this.lecture = lecture;
+//        this.description = description;
+//    }
+//
+//    public Lecture getLecture()
+//    {
+//        return lecture;
+//    }
+//
+//    public void setLecture(Lecture lecture)
+//    {
+//        this.lecture = lecture;
+//    }
+//
+//    public String getDescription()
+//    {
+//        return description;
+//    }
+//
+//    public void setDescription(String description)
+//    {
+//        this.description = description;
+//    }
+//
+//    @Override
+//    public String toString() {
+//        return "LectureResponse{" +
+//                "lecture=" + lecture +
+//                ", description='" + description + '\'' +
+//                '}';
+//    }
 }

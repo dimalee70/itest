@@ -4,6 +4,7 @@ import android.databinding.DataBindingUtil;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
 
 import java.util.List;
@@ -16,6 +17,29 @@ import itest.kz.viewmodel.ItemSubjectFragmentViewModel;
 public class SubjectAdapter extends RecyclerView.Adapter<SubjectAdapter.SubjectAdapterViewHolder>
 {
 
+    public interface OnItemClickListener
+    {
+        void onItemClick(Subject item, int i) throws CloneNotSupportedException;
+    }
+
+    @Override
+    public long getItemId(int position) {
+        return position;
+    }
+
+    @Override
+    public int getItemViewType(int position) {
+        return position;
+    }
+
+    public OnItemClickListener listener;
+    private SubjectAdapterViewHolder subjectAdapterViewHolder;
+
+    public void setOnItemListener(OnItemClickListener listener)
+    {
+        this.listener = listener;
+    }
+
     private List<Subject> subjectList;
     @NonNull
     @Override
@@ -25,15 +49,15 @@ public class SubjectAdapter extends RecyclerView.Adapter<SubjectAdapter.SubjectA
                 .inflate(LayoutInflater.from(viewGroup.getContext()),
                         R.layout.item_subject, viewGroup, false);
 
-
-        return new SubjectAdapterViewHolder(itemSubjectBinding);
+        subjectAdapterViewHolder = new SubjectAdapterViewHolder(itemSubjectBinding);
+        return subjectAdapterViewHolder;
 
     }
 
     @Override
     public void onBindViewHolder(@NonNull SubjectAdapterViewHolder subjectAdapterViewHolder, int i)
     {
-        subjectAdapterViewHolder.bindSubject(subjectList.get(i));
+        subjectAdapterViewHolder.bindSubject(subjectList.get(i),listener);
     }
 
     @Override
@@ -49,6 +73,15 @@ public class SubjectAdapter extends RecyclerView.Adapter<SubjectAdapter.SubjectA
         notifyDataSetChanged();
     }
 
+    public List<Subject> getSubjectList() {
+        return subjectList;
+    }
+
+    public SubjectAdapterViewHolder getSubjectAdapterViewHolder()
+    {
+        return subjectAdapterViewHolder;
+    }
+
     public static class SubjectAdapterViewHolder extends RecyclerView.ViewHolder
     {
 //        ItemSubjectBinding itemSubjectBinding;
@@ -61,7 +94,7 @@ public class SubjectAdapter extends RecyclerView.Adapter<SubjectAdapter.SubjectA
             this.itemSubjectBinding = itemSubjectBinding;
         }
 
-        void bindSubject(Subject subject)
+        void bindSubject(Subject subject,final OnItemClickListener listener)
         {
             if(itemSubjectBinding.getSubjectFragmentViewModel() == null)
             {
@@ -72,6 +105,24 @@ public class SubjectAdapter extends RecyclerView.Adapter<SubjectAdapter.SubjectA
             {
                 itemSubjectBinding.getSubjectFragmentViewModel().setSubject(subject);
             }
+
+            if (subject.isExpand())
+            {
+                itemSubjectBinding.expandCardview.setVisibility(View.VISIBLE);
+            }
+            else
+                itemSubjectBinding.expandCardview.setVisibility(View.GONE);
+            itemSubjectBinding.subjectLinear.setOnClickListener(new View.OnClickListener()
+            {
+                @Override
+                public void onClick(View v) {
+                    try {
+                        listener.onItemClick(subject, getAdapterPosition());
+                    } catch (CloneNotSupportedException e) {
+                        e.printStackTrace();
+                    }
+                }
+            });
         }
 
 

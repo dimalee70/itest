@@ -1,6 +1,7 @@
 package itest.kz.view.adapters;
 
 import android.databinding.DataBindingUtil;
+import android.graphics.Color;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -14,6 +15,7 @@ import itest.kz.databinding.ItemEntBinding;
 import itest.kz.databinding.ItemSubjectBinding;
 import itest.kz.model.Answer;
 import itest.kz.model.Subject;
+import itest.kz.util.Constant;
 import itest.kz.viewmodel.ItemEntViewModel;
 import itest.kz.viewmodel.ItemSubjectFragmentViewModel;
 
@@ -101,7 +103,9 @@ public class EntMainAdapter extends RecyclerView.Adapter<EntMainAdapter.EntMainA
                         @Override
                         public void onClick(View v)
                         {
+
                             listener.onItemClick(subject, subjectList);
+
                         }
                     });
 

@@ -10,281 +10,258 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
-public class Test implements Serializable, Parcelable
+public class Test implements Serializable
 {
-
-    public static int num = 1;
-
     @SerializedName("id")
     @Expose
-    private int id;
+    private Long id;
 
-    @SerializedName("question")
+    @SerializedName("owner_id")
     @Expose
-    private String question;
+    private int ownerId;
 
-    @SerializedName("description")
+    @SerializedName("title")
     @Expose
-    private String description;
+    private String title;
 
-    @SerializedName("node_id")
+    @SerializedName("result")
     @Expose
-    private int nodeId;
+    private TestResult result;
 
-    @SerializedName("subject_id")
+    @SerializedName("created_at")
     @Expose
-    private int subjectId;
+    private Date createdAt;
 
-    @SerializedName("lang_id")
+    @SerializedName("finished_at")
     @Expose
-    private int langId;
+    private Date finishedAt;
 
-    @SerializedName("exam_subject_id")
-    @Expose
-    private int  examSubjectId;
-
-    @SerializedName("difficulty_level")
-    @Expose
-    private int  difficultyLevel;
-
-    @SerializedName("checked")
-    @Expose
-    private int checked;
-
-    @SerializedName("answer_type")
-    @Expose
-    private int answerType;
-//
-//    @SerializedName("created_at")
-//    @Expose
-//    private Date createdAt;
-//
-//    @SerializedName("updated_at")
-//    @Expose
-//    private Date updatedAt;
-//
-//    @SerializedName("deleted_at")
-//    @Expose
-//    private Date deletedAt;
-
-    @SerializedName("answers")
-    @Expose
-    private List<Answer> answers;
-
-
-
-    public Test(int id, String question, String description, int nodeId, int subjectId, int langId, int examSubjectId, int difficultyLevel, int checked, int answerType, List<Answer> answers) {
+    public Test(Long id, int ownerId, String title, TestResult result, Date createdAt, Date finishedAt) {
         this.id = id;
-        this.question = question;
-        this.description = description;
-        this.nodeId = nodeId;
-        this.subjectId = subjectId;
-        this.langId = langId;
-        this.examSubjectId = examSubjectId;
-        this.difficultyLevel = difficultyLevel;
-        this.checked = checked;
-        this.answerType = answerType;
-        this.answers = answers;
+        this.ownerId = ownerId;
+        this.title = title;
+        this.result = result;
+        this.createdAt = createdAt;
+        this.finishedAt = finishedAt;
     }
 
-//    private Test(Parcelable in)
-//    {
-//        this.id = in.rea
-//    }
-//        public Test(int id, String question, String description, int nodeId, int subjectId, int langId, int examSubjectId, int difficultyLevel, int checked, int answerType, Date createdAt, Date updatedAt, Date deletedAt, List<Answer> answers) {
-//        this.id = id;
-//        this.question = question;
-//        this.description = description;
-//        this.nodeId = nodeId;
-//        this.subjectId = subjectId;
-//        this.langId = langId;
-//        this.examSubjectId = examSubjectId;
-//        this.difficultyLevel = difficultyLevel;
-//        this.checked = checked;
-//        this.answerType = answerType;
-//        this.createdAt = createdAt;
-//        this.updatedAt = updatedAt;
-//        this.deletedAt = deletedAt;
-//        this.answers = answers;
-//    }
-
-//    public Date getCreatedAt() {
-//        return createdAt;
-//    }
-//
-//    public void setCreatedAt(Date createdAt) {
-//        this.createdAt = createdAt;
-//    }
-//
-//    public Date getUpdatedAt() {
-//        return updatedAt;
-//    }
-//
-//    public void setUpdatedAt(Date updatedAt) {
-//        this.updatedAt = updatedAt;
-//    }
-//
-//    public Date getDeletedAt() {
-//        return deletedAt;
-//    }
-//
-//    public void setDeletedAt(Date deletedAt) {
-//        this.deletedAt = deletedAt;
-//    }
-
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
-    public String getQuestion() {
-        return question;
+    public int getOwnerId() {
+        return ownerId;
     }
 
-    public void setQuestion(String question) {
-        this.question = question;
+    public void setOwnerId(int ownerId) {
+        this.ownerId = ownerId;
     }
 
-    public String getDescription() {
-        return description;
+    public String getTitle() {
+        return title;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
+    public void setTitle(String title) {
+        this.title = title;
     }
 
-    public int getNodeId() {
-        return nodeId;
+    public TestResult getResult() {
+        return result;
     }
 
-    public void setNodeId(int nodeId) {
-        this.nodeId = nodeId;
+    public void setResult(TestResult result) {
+        this.result = result;
     }
 
-    public int getSubjectId() {
-        return subjectId;
+    public Date getCreatedAt() {
+        return createdAt;
     }
 
-    public void setSubjectId(int subjectId) {
-        this.subjectId = subjectId;
+    public void setCreatedAt(Date createdAt) {
+        this.createdAt = createdAt;
     }
 
-    public int getLangId() {
-        return langId;
+    public Date getFinishedAt() {
+        return finishedAt;
     }
 
-    public void setLangId(int langId) {
-        this.langId = langId;
+    public void setFinishedAt(Date finishedAt) {
+        this.finishedAt = finishedAt;
     }
 
-    public int getExamSubjectId() {
-        return examSubjectId;
-    }
-
-    public void setExamSubjectId(int examSubjectId) {
-        this.examSubjectId = examSubjectId;
-    }
-
-    public int getDifficultyLevel() {
-        return difficultyLevel;
-    }
-
-    public void setDifficultyLevel(int difficultyLevel) {
-        this.difficultyLevel = difficultyLevel;
-    }
-
-    public int getChecked() {
-        return checked;
-    }
-
-    public void setChecked(int checked) {
-        this.checked = checked;
-    }
-
-    public int getAnswerType() {
-        return answerType;
-    }
-
-    public void setAnswerType(int answerType) {
-        this.answerType = answerType;
-    }
-
-    public List<Answer> getAnswers()
-    {
-        return answers;
-    }
-
-    public void setAnswers(List<Answer> answers) {
-        this.answers = answers;
-    }
-
-
-    public Test (Parcel source)
-    {
-        this.id = source.readInt();
-        this.question = source.readString();
-        this.description = source.readString();
-//        this.nodeId = source.readInt();
-//        this.subjectId = source.readInt();
-//        this.langId = source.readInt();
-//        this.examSubjectId = source.readInt();
-//        this.difficultyLevel = source.readInt();
-//        this.checked = source.readInt();
-//        this.answerType = source.readInt();
-        this.answers = source.readArrayList(Answer.class.getClassLoader());
-
-    }
     @Override
     public String toString() {
         return "Test{" +
                 "id=" + id +
-                ", question='" + question + '\'' +
-                ", description='" + description + '\'' +
-                ", nodeId=" + nodeId +
-                ", subjectId=" + subjectId +
-                ", langId=" + langId +
-                ", examSubjectId=" + examSubjectId +
-                ", difficultyLevel=" + difficultyLevel +
-                ", checked=" + checked +
-                ", answerType=" + answerType +
-                ", answers=" + answers +
+                ", ownerId=" + ownerId +
+                ", title='" + title + '\'' +
+                ", result=" + result +
+                ", createdAt=" + createdAt +
+                ", finishedAt=" + finishedAt +
                 '}';
     }
-
-    @Override
-    public int describeContents() {
-        return 0;
-    }
-
-    @Override
-    public void writeToParcel(Parcel dest, int flags)
-    {
-        dest.writeInt(id);
-        dest.writeString(question);
-        dest.writeString(description);
-//        dest.writeInt(nodeId);
-//        dest.writeInt(langId);
-//        dest.writeInt(examSubjectId);
-//        dest.writeInt(examSubjectId);
-//        dest.writeInt(difficultyLevel);
-//        dest.writeInt(checked);
-//        dest.writeInt(answerType);
-        dest.writeList(answers);
-
-    }
-    public static final Parcelable.Creator<Test> CREATOR = new
-            Parcelable.Creator<Test>(){
-                @Override
-                public Test createFromParcel(Parcel source) {
-                    return new Test(source);
-                }
-
-                @Override
-                public Test[] newArray(int size) {
-                    return new Test[size];
-                }
-            };
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//    @SerializedName("id")
+//    @Expose
+//    private Long id;
+//
+//    @SerializedName("user_id")
+//    @Expose
+//    private Long userId;
+//
+//    @SerializedName("locale")
+//    @Expose
+//    private String locale;
+//
+//    @SerializedName("owner_id")
+//    @Expose
+//    private int ownerId;
+//
+//    @SerializedName("type")
+//    @Expose
+//    private String type;
+//
+//    @SerializedName("parent_id")
+//    @Expose
+//    private Long parentId;
+//
+//    @SerializedName("content_type")
+//    @Expose
+//    private ContentType contentType;
+//
+//    @SerializedName("result")
+//    @Expose
+//    private TestResult result;
+//
+//    @SerializedName("is_finished")
+//    @Expose
+//    private boolean isFinished;
+//
+//    public Test(Long id, Long userId, String locale,
+//                int ownerId, String type, Long parentId,
+//                ContentType contentType, TestResult result, boolean isFinished)
+//    {
+//        this.id = id;
+//        this.userId = userId;
+//        this.locale = locale;
+//        this.ownerId = ownerId;
+//        this.type = type;
+//        this.parentId = parentId;
+//        this.contentType = contentType;
+//        this.result = result;
+//        this.isFinished = isFinished;
+//    }
+//
+//    public Long getId()
+//    {
+//        return id;
+//    }
+//
+//    public void setId(Long id)
+//    {
+//        this.id = id;
+//    }
+//
+//    public Long getUserId()
+//    {
+//        return userId;
+//    }
+//
+//    public void setUserId(Long userId)
+//    {
+//        this.userId = userId;
+//    }
+//
+//    public String getLocale()
+//    {
+//        return locale;
+//    }
+//
+//    public void setLocale(String locale)
+//    {
+//        this.locale = locale;
+//    }
+//
+//    public int getOwnerId()
+//    {
+//        return ownerId;
+//    }
+//
+//    public void setOwnerId(int ownerId)
+//    {
+//        this.ownerId = ownerId;
+//    }
+//
+//    public String getType()
+//    {
+//        return type;
+//    }
+//
+//    public void setType(String type)
+//    {
+//        this.type = type;
+//    }
+//
+//    public Long getParentId()
+//    {
+//        return parentId;
+//    }
+//
+//    public void setParentId(Long parentId)
+//    {
+//        this.parentId = parentId;
+//    }
+//
+//    public ContentType getContentType()
+//    {
+//        return contentType;
+//    }
+//
+//    public void setContentType(ContentType contentType)
+//    {
+//        this.contentType = contentType;
+//    }
+//
+//    public TestResult getResult()
+//    {
+//        return result;
+//    }
+//
+//    public void setResult(TestResult result)
+//    {
+//        this.result = result;
+//    }
+//
+//    public boolean isFinished()
+//    {
+//        return isFinished;
+//    }
+//
+//    public void setFinished(boolean finished)
+//    {
+//        isFinished = finished;
+//    }
+//}
+

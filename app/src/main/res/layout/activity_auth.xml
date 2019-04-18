@@ -8,14 +8,29 @@
             type="itest.kz.viewmodel.AuthViewModel"/>
     </data>
 
+    <android.support.v4.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <!--android:fillViewport="true">-->
+
+
+
     <!--<ScrollView-->
         <!--android:layout_width="match_parent"-->
         <!--android:layout_height="wrap_content">-->
 
+    <!--<id.co.flipbox.sosoito.LoadingLayout-->
+        <!--android:id="@+id/loginLoading"-->
+    <id.co.flipbox.sosoito.LoadingLayout
+        android:id="@+id/loginLoading"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+
 
     <LinearLayout
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:orientation="vertical">
 
         <ImageView
@@ -27,97 +42,11 @@
             android:layout_marginTop="63dp"
             android:src="@drawable/ic_itest_logo"
             />
-        <!--android:src="@mipmap/itest_white"-->
-
-    <!--<LinearLayout-->
-        <!--android:id="@+id/buttonsLayout"-->
-        <!--android:orientation="horizontal"-->
-        <!--android:gravity="center_horizontal"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:paddingTop="10dp" >-->
-
-
-
-        <!--&lt;!&ndash;<LinearLayout&ndash;&gt;-->
-            <!--&lt;!&ndash;android:layout_width="wrap_content"&ndash;&gt;-->
-            <!--&lt;!&ndash;android:layout_height="match_parent"&ndash;&gt;-->
-            <!--&lt;!&ndash;android:orientation="horizontal">&ndash;&gt;-->
-
-
-            <!--&lt;!&ndash;<itest.kz.view.customviews.CustomTextView&ndash;&gt;-->
-                <!--&lt;!&ndash;android:id="@+id/logInButton"&ndash;&gt;-->
-                <!--&lt;!&ndash;android:layout_width="fill_parent"&ndash;&gt;-->
-                <!--&lt;!&ndash;android:layout_height="wrap_content"&ndash;&gt;-->
-                <!--&lt;!&ndash;android:layout_alignParentBottom="true"&ndash;&gt;-->
-                <!--&lt;!&ndash;android:clickable="true"&ndash;&gt;-->
-                <!--&lt;!&ndash;android:gravity="center"&ndash;&gt;-->
-                <!--&lt;!&ndash;android:text="@string/logInKaz"&ndash;&gt;-->
-                <!--&lt;!&ndash;android:textColor="@color/colorPrimary"&ndash;&gt;-->
-                <!--&lt;!&ndash;android:textSize="18dp"&ndash;&gt;-->
-                <!--&lt;!&ndash;android:onClick="@{auth.logIn}"&ndash;&gt;-->
-                <!--&lt;!&ndash;android:padding="50dp"/>&ndash;&gt;-->
-
-        <!--&lt;!&ndash;</LinearLayout>&ndash;&gt;-->
-
-        <!--&lt;!&ndash;<LinearLayout&ndash;&gt;-->
-            <!--&lt;!&ndash;android:layout_width="wrap_content"&ndash;&gt;-->
-            <!--&lt;!&ndash;android:layout_height="match_parent"&ndash;&gt;-->
-            <!--&lt;!&ndash;android:orientation="horizontal">&ndash;&gt;-->
-
-        <!--&lt;!&ndash;<itest.kz.view.customviews.CustomTextView&ndash;&gt;-->
-            <!--&lt;!&ndash;android:id="@+id/signUpButton"&ndash;&gt;-->
-            <!--&lt;!&ndash;android:layout_width="fill_parent"&ndash;&gt;-->
-            <!--&lt;!&ndash;android:layout_height="wrap_content"&ndash;&gt;-->
-            <!--&lt;!&ndash;android:layout_alignParentBottom="true"&ndash;&gt;-->
-            <!--&lt;!&ndash;android:clickable="true"&ndash;&gt;-->
-            <!--&lt;!&ndash;android:gravity="center"&ndash;&gt;-->
-            <!--&lt;!&ndash;android:text="@string/signUpKaz"&ndash;&gt;-->
-            <!--&lt;!&ndash;android:textColor="@color/colorPrimary"&ndash;&gt;-->
-            <!--&lt;!&ndash;android:textSize="18dp"&ndash;&gt;-->
-            <!--&lt;!&ndash;android:onClick="@{auth.signUp}"&ndash;&gt;-->
-            <!--&lt;!&ndash;android:padding="50dp" />&ndash;&gt;-->
-
-        <!--&lt;!&ndash;</LinearLayout>&ndash;&gt;-->
-        <!--<LinearLayout-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content">-->
-            <!--<android.support.design.widget.TabLayout-->
-                <!--android:id="@+id/sliding_tabs"-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--app:tabMode="fixed" />-->
-
-        <!--</LinearLayout>-->
-
-
-        <!--&lt;!&ndash;<ScrollView&ndash;&gt;-->
-            <!--&lt;!&ndash;android:layout_width="wrap_content"&ndash;&gt;-->
-            <!--&lt;!&ndash;android:layout_height="match_parent">&ndash;&gt;-->
-
-        <!--<android.support.v4.view.ViewPager-->
-            <!--android:id="@+id/viewpager"-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="match_parent"-->
-            <!--android:background="@android:color/white" />-->
-        <!--&lt;!&ndash;</ScrollView>&ndash;&gt;-->
-
-
-
-
-        <!--</LinearLayout>-->
-
-    <!--&lt;!&ndash;<FrameLayout&ndash;&gt;-->
-        <!--&lt;!&ndash;android:id="@+id/fl_fragment_container"&ndash;&gt;-->
-        <!--&lt;!&ndash;android:layout_width="match_parent"&ndash;&gt;-->
-        <!--&lt;!&ndash;android:layout_height="match_parent"/>&ndash;&gt;-->
-    <!--</LinearLayout>-->
-
 
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:paddingTop="20dp"
-                android:layout_height="match_parent"
+                android:paddingTop="60dp"
+                android:layout_height="wrap_content"
                 android:fitsSystemWindows="false"
                 android:orientation="vertical"
                 tools:showIn="@layout/activity_auth">
@@ -127,9 +56,10 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     app:tabIndicatorHeight="0dp"
-                    app:tabTextAppearance="@style/AppTabTextAppearance"
+                    style="@style/styleTabLayoutAuth"
                     app:tabSelectedTextColor="@color/colorPrimaryDark"
                     android:minHeight="?attr/actionBarSize"
+                    app:tabTextAppearance="@style/tab_text"
                     android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"/>
 
 
@@ -138,14 +68,19 @@
                 <android.support.v4.view.ViewPager
                     android:id="@+id/viewpager"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="370dp"
                     android:layout_below="@id/sliding_tabs"/>
 
             </RelativeLayout>
 
             </LinearLayout>
-<!--</ScrollView>-->
 
+
+    </id.co.flipbox.sosoito.LoadingLayout>
+
+    <!--</ScrollView>-->
+<!---->
+    </android.support.v4.widget.NestedScrollView>
 
 
 

@@ -1,6 +1,7 @@
 package itest.kz.viewmodel;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.databinding.ObservableInt;
 import android.view.View;
 
@@ -9,22 +10,29 @@ import java.util.Observable;
 
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.disposables.Disposable;
+import itest.kz.R;
 import itest.kz.model.Answer;
+import itest.kz.model.Question;
 import itest.kz.model.Subject;
 import itest.kz.model.Test;
+import itest.kz.model.Tests;
+import itest.kz.util.Constant;
+
+import static android.content.Context.MODE_PRIVATE;
 
 public class ResultViewModel extends Observable
 {
     public Context context;
     public ObservableInt answersRecycler;
-    private List<Test> answersList;
-    private List<Test> testList;
+    private Tests answersList;
+    private List<Question> testList;
+    private String language;
 
-    public List<Test> getTestList() {
+    public List<Question> getTestList() {
         return testList;
     }
 
-    public void setTestList(List<Test> testList) {
+    public void setTestList(List<Question> testList) {
         this.testList = testList;
     }
 
@@ -37,11 +45,14 @@ public class ResultViewModel extends Observable
 //        this.answersList = answersList;
 //    }
 
-    public ResultViewModel(Context context, List<Test> answersList)
+    public ResultViewModel(Context context, Tests answersList)
     {
         this.context = context;
         this.answersRecycler = new ObservableInt(View.VISIBLE);
         this.answersList = answersList;
+        SharedPreferences settings = context.getSharedPreferences(Constant.MY_LANG, MODE_PRIVATE);
+//        settings.edit().clear().commit();
+        language = settings.getString(Constant.LANG, "kz");
 //        this.answersList = answersList;
     }
 
@@ -65,12 +76,27 @@ public class ResultViewModel extends Observable
         this.answersRecycler = answersRecycler;
     }
 
-    public List<Test> getAnswersList()
+    public String getTitle()
+    {
+        if (language.equals(Constant.KZ))
+            return context.getResources().getString(R.string.toolbarAnswersTextKz);
+        return context.getResources().getString(R.string.toolbarAnswersTextRu);
+//        return String.valueOf(R.string.agreementRu);
+    }
+//
+//    public int getToolbarTitle()
+//    {
+////        if (language.equals(Constant.KZ))
+////            return R.string.toolbarAnswersTextKz;
+//        return R.string.toolbarAnswersTextRu;
+//    }
+
+    public Tests getAnswersList()
     {
         return answersList;
     }
 
-    public void setAnswersList(List<Test> answersList)
+    public void setAnswersList(Tests answersList)
     {
         this.answersList = answersList;
     }

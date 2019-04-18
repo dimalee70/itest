@@ -1,0 +1,238 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+    <data>
+        <variable
+            name="results"
+            type="itest.kz.viewmodel.ResultsFragmentViewModel"/>
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/colorBackgroundCardView">
+
+
+        <android.support.v4.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <!--<android.support.v7.widget.CardView-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content">-->
+
+
+
+            <android.support.v7.widget.CardView
+                android:id="@+id/result_suject_cardview"
+                android:layout_width="match_parent"
+                android:background="@color/colorBackgroundCardView"
+                app:cardUseCompatPadding="false"
+                android:layout_height="wrap_content"
+                app:cardPreventCornerOverlap="false"
+                app:cardElevation="0dp"
+                android:orientation="vertical"
+                app:cardBackgroundColor="@color/colorWhite">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/colorBackgroundCardView">
+
+                    <TextView
+                        android:id="@+id/title_text"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Сіздің көрсеткішіңіз:"
+                        android:textAlignment="center"
+                        android:textColor="@color/colorBlack"
+                        android:textSize="18sp"
+                        />
+
+                    <RelativeLayout
+                        android:id="@+id/pie_chart_relative"
+                        android:layout_below="@+id/title_text"
+                        android:layout_width="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:layout_height="wrap_content">
+
+
+
+                    <android.support.constraint.ConstraintLayout
+                        android:id="@+id/constraintLayout"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.5"
+                        app:layout_constraintStart_toStartOf="parent">
+
+                        <!-- ProgressBar that represents a total of 100% -->
+                        <ProgressBar
+                            android:id="@+id/background_progressbar"
+                            style="?android:attr/progressBarStyleHorizontal"
+                            android:layout_width="192dp"
+                            android:layout_height="192dp"
+                            android:indeterminate="false"
+                            android:max="100"
+                            android:progress="100"
+                            android:progressDrawable="@drawable/stats_full"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintHorizontal_bias="0.5"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <!-- ProgressBar that represents a chart slice, where "android:progress" is the % value of the slice -->
+                        <ProgressBar
+                            android:id="@+id/stats_progressbar"
+                            style="?android:attr/progressBarStyleHorizontal"
+                            android:layout_width="192dp"
+                            android:layout_height="192dp"
+                            android:indeterminate="false"
+                            android:max="100"
+                            android:progress="@{results.percent}"
+                            android:progressDrawable="@drawable/stats_progress"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintHorizontal_bias="0.5"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <!-- The text that goes in a center of the chart -->
+                        <TextView
+                            android:id="@+id/number_of_correct"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@{results.htmlText}"
+                            android:textSize="20sp"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintHorizontal_bias="0.5"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+
+                    </android.support.constraint.ConstraintLayout>
+
+
+
+                    </RelativeLayout>
+
+                    <!--<az.plainpie.PieView-->
+                        <!--android:layout_below="@+id/title_text"-->
+                        <!--android:layout_centerInParent="true"-->
+                        <!--android:id="@+id/pieView"-->
+                        <!--android:layout_width="200dp"-->
+                        <!--android:layout_height="200dp"-->
+                        <!--app:inner_pie_padding="60"-->
+                        <!--app:percentage_size="45"-->
+                        <!--app:inner_text_visibility="true"/>-->
+
+                </RelativeLayout>
+
+
+            </android.support.v7.widget.CardView>
+
+            <LinearLayout
+                android:id="@+id/result_suject_cardview_linear"
+                android:layout_below="@+id/result_suject_cardview"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent">
+
+            <RelativeLayout
+                android:id="@+id/subject_recycle_relative"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/subject_list"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginTop="0dp"
+                    android:nestedScrollingEnabled="false"
+                    android:overScrollMode="never"
+                    tools:listitem="@layout/item_result_subject">
+
+                    <!--<Button-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="wrap_content" -->
+                    <!--/>-->
+                </android.support.v7.widget.RecyclerView>
+            </RelativeLayout>
+
+            </LinearLayout>
+
+            <android.support.v7.widget.CardView
+                android:id="@+id/ent_start_cardview"
+                android:layout_margin="16dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/result_suject_cardview_linear"
+                app:cardBackgroundColor="@color/colorPrimary"
+                app:cardCornerRadius="5dp"
+                android:layout_marginBottom="28dp"
+                android:onClick="@{results.clickAgainTest}"
+                android:foreground="?android:attr/selectableItemBackground"
+                android:clickable="true"
+                >
+
+
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:id="@+id/ent_start_text_view"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textAlignment="center"
+                        android:text="Ewe raz test"
+                        android:textSize="18sp"
+                        android:textColor="@color/colorWhite"
+                        android:layout_centerInParent="true"
+                        android:layout_margin="10dp"
+                        />
+                    <!--android:onClick="@{() ->ent.onClickCancel()}"-->
+                    <!--android:onClick="@{ent.onClick}"-->
+                </RelativeLayout>
+
+            </android.support.v7.widget.CardView>
+
+
+            <!--<RelativeLayout-->
+                <!--android:layout_below="@+id/result_suject_cardview_linear"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content">-->
+
+                <!--<Button-->
+                    <!--android:id="@+id/ent_start_text_view"-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="match_parent"-->
+                    <!--android:textAlignment="center"-->
+                    <!--android:text="asdsadsadasdsdsad"-->
+                    <!--android:layout_marginTop="20dp"-->
+                    <!--android:layout_marginBottom="10dp"-->
+                    <!--android:textColor="@color/colorWhite"-->
+                    <!--android:layout_centerInParent="true"-->
+                    <!--android:layout_margin="10dp"-->
+                    <!--android:textSize="18sp"-->
+                    <!--/>-->
+                <!--&lt;!&ndash;android:onClick="@{() ->ent.onClickCancel()}"&ndash;&gt;-->
+                <!--&lt;!&ndash;android:onClick="@{ent.onClick}"&ndash;&gt;-->
+            <!--</RelativeLayout>-->
+
+            <!--</android.support.v7.widget.CardView>-->
+
+        </RelativeLayout>
+
+        </android.support.v4.widget.NestedScrollView>
+    </LinearLayout>
+</layout>

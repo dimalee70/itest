@@ -7,9 +7,9 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public  class Answer implements Serializable
+public  class Answer implements Serializable, Comparable, Cloneable
 {
-    public Long answerResponce;
+    public int answerResponce = 0;
 
     private String letter;
 
@@ -25,7 +25,11 @@ public  class Answer implements Serializable
     @Expose
     private int correct;
 
-    public Answer(Long answerResponce, String letter, Long answerId, String answer, int correct)
+    @SerializedName("user_answer")
+    @Expose
+    private int userAnswer;
+
+    public Answer(int answerResponce, String letter, Long answerId, String answer, int correct)
     {
         this.answerResponce = answerResponce;
         this.letter = letter;
@@ -34,12 +38,12 @@ public  class Answer implements Serializable
         this.correct = correct;
     }
 
-    public Long getAnswerResponce()
+    public int getAnswerResponce()
     {
         return answerResponce;
     }
 
-    public void setAnswerResponce(Long answerResponce)
+    public void setAnswerResponce(int answerResponce)
     {
         this.answerResponce = answerResponce;
     }
@@ -84,6 +88,16 @@ public  class Answer implements Serializable
         this.correct = correct;
     }
 
+    public int getUserAnswer()
+    {
+        return userAnswer;
+    }
+
+    public void setUserAnswer(int userAnswer)
+    {
+        this.userAnswer = userAnswer;
+    }
+
     @Override
     public String toString()
     {
@@ -94,6 +108,32 @@ public  class Answer implements Serializable
                 ", answer='" + answer + '\'' +
                 ", correct=" + correct +
                 '}';
+    }
+
+    @Override
+    public int compareTo(Object o)
+    {
+        Answer compare = (Answer) o;
+
+        if (compare.getAnswerId() == this.getAnswerId())
+        {
+            return 0;
+        }
+        return 1;
+    }
+
+    @Override
+    public Answer clone() throws CloneNotSupportedException
+    {
+        Answer clone;
+        try {
+            clone = (Answer) super.clone();
+
+        } catch (CloneNotSupportedException e) {
+            throw new RuntimeException(e); //should not happen
+        }
+
+        return clone;
     }
 
     //    @SerializedName("id")

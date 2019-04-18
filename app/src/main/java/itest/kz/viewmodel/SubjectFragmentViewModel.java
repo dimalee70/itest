@@ -37,6 +37,7 @@ public class SubjectFragmentViewModel extends Observable
     private Context context;
     private ObservableInt entVisibleBtn;
     private String language;
+    private String accessToken;
 
     public void onClickCancel()
     {
@@ -79,6 +80,9 @@ public class SubjectFragmentViewModel extends Observable
         SharedPreferences settings = context.getSharedPreferences(Constant.MY_LANG, MODE_PRIVATE);
 //        settings.edit().clear().commit();
         language = settings.getString(Constant.LANG, "kz");
+        SharedPreferences accessTok = context.getSharedPreferences(Constant.MY_PREF, MODE_PRIVATE);
+//        settings.edit().clear().commit();
+        accessToken = accessTok.getString(Constant.ACCESS_TOKEN, "kz");
     }
 
     public ObservableInt getEntVisibleBtn()
@@ -104,7 +108,7 @@ public class SubjectFragmentViewModel extends Observable
 
 
         Disposable disposable = subjectService.getSubjects(Constant.ENT,
-                "Bearer " + Constant.ACCESSTOKEN, Constant.ACCEPT, language)
+                "Bearer " + accessToken, Constant.ACCEPT, language)
                 .subscribeOn(appController.subscribeScheduler())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Consumer<SubjectResponce>() {

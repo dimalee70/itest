@@ -1,7 +1,70 @@
 <resources>
     <string name="app_name">itest</string>
+
     <string name="rus">Руский</string>
     <string name="kaz">Қазақша</string>
+
+    <string name="yesKz">Иә</string>
+    <string name="yesRu">Да</string>
+
+    <string name="noKz">Жоқ</string>
+    <string name="noRu">Нет</string>
+
+    <string name="textDialogCertificationKz">Бул тақырып бойынша конспект жоқ, тестті өтуді қалайсыз ба?</string>
+    <string name="textDialogCertificationRu">По этой теме конспект отсутствует, желаете пройти тест?</string>
+
+    <string name="toolbarAnswersTextKz">Сіздің жауаптарыңыз</string>
+    <string name="toolbarAnswersTextRu">Ваши ответы</string>
+
+    <string name="questionTextKz">СҰРАҚ</string>
+    <string name="questionTextRu">ВОПРОС</string>
+
+    <string name="answersTextKz">ЖАУАПТАР</string>
+    <string name="answersTextRu">ОТВЕТЫ</string>
+
+    <string name="textTestKz">МӘТІН</string>
+    <string name="textTestRu">ТЕКСТ</string>
+
+    <string name="solutionTextKz">ШЕШІМ</string>
+    <string name="solutionTextRu">РЕШЕНИЕ</string>
+
+    <string name="forgotPasswordButtonKz">Жіберу</string>
+    <string name="forgotPasswordButoonRu">Отправить</string>
+
+    <string name="forgotPasswordKz">Құпиясөзді ұмыттыңыз ба?</string>
+    <string name="forgotPasswordRu">Забыли пароль?</string>
+
+    <string name="emailPlaceholderKz">Сіздің email немесе логин</string>
+    <string name="emailPlaceholderRu">Ваш email или логин</string>
+
+    <string name="passwordPlaceholderKz">Құпиясөз</string>
+    <string name="passwordPlaceholderRu">Пароль</string>
+
+    <string name="passwordConfirmHintKz">Құпиясөзді растаңыз</string>
+    <string name="passwordConfirmHintRu">Подтвердите пароль</string>
+
+    <string name="subjectKz">ПӘН</string>
+    <string name="subjetcRu">ПРЕДМЕТ</string>
+
+    <string name="lectureKz">ТАҚЫРЫП</string>
+    <string name="lectureRu">ТЕМА</string>
+
+    <string name="fullKz">ҰБТ</string>
+    <string name="fullRu">ЕНТ</string>
+
+    <string name="statisticKzRu">Статистика</string>
+
+    <string name="checkInFullKz">Толық нәтиже</string>
+    <string name="checkInFullRu">Полный результат</string>
+
+    <string name="checkInKz">Қатемен жұмыс</string>
+    <string name="checkInRu">Работа над ошибками</string>
+
+    <string name="questionAnswerKz">Сұрақ және жауап</string>
+    <string name="questionAnswerRu">Вопрос и ответ</string>
+
+    <string name="whyKz">Неге</string>
+    <string name="whyRu">Почему</string>
 
     <string name="selectLanguageKz">ТІЛДІ ТАҢДАҢЫЗ</string>
     <string name="selectLanguageRu">ВЫБЕРИТЕ ЯЗЫК</string>
@@ -72,17 +135,17 @@
     <string name="passwordChangedKz">Құпиясөз</string>
     <string name="passwordChangedRu">Пароль</string>
 
-    <string name="oldPassTextKz">Қазіргі құпиясөз: </string>
+    <string name="oldPassTextKz">Ағымдағы құпиясөз: </string>
     <string name="oldPassTextRu">Текущий пароль: </string>
 
-    <string name="hintOldPassTextKz">Қазіргі құпиясөзді еңгізіңіз</string>
+    <string name="hintOldPassTextKz">Ағымдағы құпиясөзді еңгізіңіз</string>
     <string name="hintOldPassTextRu">Введите текущий пароль</string>
 
     <string name="newPassTextKz">Жаңа құпиясөз: </string>
     <string name="newPassTextRu">Новый пароль: </string>
 
     <string name="hintNewPassTextKz">Жаңа құпиясөзді еңгізіңіз</string>
-    <string name="hintNewPassTextRu">Введите текущий пароль</string>
+    <string name="hintNewPassTextRu">Введите новый пароль</string>
 
     <string name="confirmNewPassKz">Растау: </string>
     <string name="confirmNewPassRu">Подтверждение: </string>
@@ -103,8 +166,12 @@
     <string name="langRu">Язык</string>
 
     <string name="login">Login</string>
+
     <string name="signUpKaz">ТІРКЕЛУ</string>
+    <string name="signUpRu">РЕГИСТРАЦИЯ</string>
+
     <string name="logInKaz">КІРУ</string>
+    <string name="logInRu">ВОЙТИ</string>
 
     <string name="test">test</string>
     <string name="statistic">statistic</string>
@@ -113,3 +180,4 @@
     <string name="permission_denied">Permission denied</string>
 
 </resources>
+

@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.databinding.DataBindingUtil;
 import android.graphics.Color;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -115,6 +116,8 @@ public class SubjectActivity extends AppCompatActivity
                 .getLanguage().equals(Constant.KZ)) ? R.string.forSubjectKz
                 : R.string.forSubjectRu);
 
+//        setCustomFont();
+
         sharedPreferences = getSharedPreferences(Constant.MY_PREF, MODE_PRIVATE);
         setAccessToken();
 
@@ -142,8 +145,14 @@ public class SubjectActivity extends AppCompatActivity
 //                                else
 //                                fragmentManager.beginTransaction().replace(R.id.viewpager, testFragment)
 //                                        .commit();
+//                                finish();
+//                                intent = new Intent(SubjectActivity.this,SubjectActivity.class);
+//                                intent.putExtra(Constant.ACCESS_TOKEN, accessToken);
+//                                startActivity(intent);
+                                break;
+                            case R.id.item_statistic:
                                 finish();
-                                intent = new Intent(SubjectActivity.this,SubjectActivity.class);
+                                intent = new Intent(SubjectActivity.this,StatisticActivity.class);
                                 intent.putExtra(Constant.ACCESS_TOKEN, accessToken);
                                 startActivity(intent);
                                 break;
@@ -163,8 +172,30 @@ public class SubjectActivity extends AppCompatActivity
                     }
                 }
         );
-//        bottomNavigationView.setSelectedItemId(R.id.item_test);
+        bottomNavigationView.setSelectedItemId(R.id.item_test);
     }
+//
+//    public void setCustomFont() {
+//
+//        ViewGroup vg = (ViewGroup) mTabLayout.getChildAt(0);
+//        int tabsCount = vg.getChildCount();
+//
+//        for (int j = 0; j < tabsCount; j++) {
+//            ViewGroup vgTab = (ViewGroup) vg.getChildAt(j);
+//
+//            int tabChildsCount = vgTab.getChildCount();
+//
+//            for (int i = 0; i < tabChildsCount; i++) {
+//                View tabViewChild = vgTab.getChildAt(i);
+//                if (tabViewChild instanceof TextView) {
+//                    //Put your font in assests folder
+//                    //assign name of the font here (Must be case sensitive)
+//                    ((TextView) tabViewChild).setTypeface(Typeface.createFromAsset(getAssets(), "res/font/opensans_semibold.ttf"));
+//                }
+//            }
+//        }
+//    }
+//    res/font/opensans_semibold.ttf
 
     public void setAccessToken()
     {
@@ -185,6 +216,7 @@ public class SubjectActivity extends AppCompatActivity
             editor.apply();
             editor.commit();
 
+            System.out.println(accessToken);
 //            System.out.println(sharedPreferences.getString(Constant.ACCESS_TOKEN, null));
 
         }

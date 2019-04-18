@@ -500,7 +500,7 @@ public class ProfileInfoFragment extends Fragment implements EasyPermissions.Per
                     System.out.println(accessToken);
 
                     Disposable disposable = userService.updateAvatar(Constant.ACCEPT,
-                            "ru",
+                            language,
 
                             "Bearer " + accessToken,
 //                            Constant.MULTIPART,
@@ -509,11 +509,9 @@ public class ProfileInfoFragment extends Fragment implements EasyPermissions.Per
                     )
                             .subscribeOn(appController.subscribeScheduler())
                             .observeOn(AndroidSchedulers.mainThread())
-                            .subscribe(new Consumer<ProfileResponse>()
-                                       {
+                            .subscribe(new Consumer<ProfileResponse>() {
                                            @Override
-                                           public void accept(ProfileResponse profileResponse) throws Exception
-                                           {
+                                           public void accept(ProfileResponse profileResponse) throws Exception {
                                                profile.setAvatarUrl(profileResponse.getProfile().getAvatarUrl());
                                                profileInfoViewModel.getProfile().setAvatarUrl
                                                        (profileResponse.getProfile().getAvatarUrl());
@@ -527,7 +525,17 @@ public class ProfileInfoFragment extends Fragment implements EasyPermissions.Per
 //                                               System.out.println("Response");
 //                                               System.out.println(responseBody.string());
 //                                           }
-                                       }
+                                       },
+                                    new Consumer<Throwable>()
+                                    {
+                                        @Override
+                                        public void accept(Throwable throwable) throws Exception
+                                        {
+                                            Toast.makeText(getContext(),
+                                                    "size is big",
+                                                    Toast.LENGTH_SHORT).show();
+                                        }
+                                    }
 
 //                                    new Consumer<ProfileResponse>()
 //                            {

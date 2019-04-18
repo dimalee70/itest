@@ -15,11 +15,66 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal">
 
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/my_toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="?attr/colorPrimary"
+            android:elevation="4dp"
+            android:contentInsetStart="0dp"
+            android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
+            app:popupTheme="@style/ThemeOverlay.AppCompat.Light">
+
+
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+
+                <!--<ImageButton-->
+                    <!--android:id="@+id/button_close_result"-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_gravity="left"-->
+                    <!--android:background="@drawable/ic_answers"-->
+                    <!--android:clickable="true"/>-->
+
+                <TextView
+                    android:id="@+id/text_view_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@{result.title}"
+                    android:textSize="20sp"
+                    android:layout_marginStart="43dp"
+                    android:textColor="@color/colorWhite"
+                    android:layout_toRightOf="@+id/imageButtonTitle" />
+
+            </RelativeLayout>
+            <ImageButton
+                android:id="@+id/button_close_result"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right"
+                android:src="@drawable/ic_icon_x"
+                android:background="?attr/selectableItemBackground"
+                android:layout_marginEnd="15dp"
+                android:clickable="true"/>
+        </android.support.v7.widget.Toolbar>
+
+
+
         <android.support.v7.widget.RecyclerView
             android:id="@+id/list_answers"
             android:orientation="horizontal"
             app:layoutManager="android.support.v7.widget.LinearLayoutManager"
-
+            android:layout_below="@+id/my_toolbar"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:clipToPadding="false"
@@ -29,6 +84,9 @@
             tools:listitem="@layout/item_result"
             android:clickable="true"
             android:focusable="true" />
+
+        </RelativeLayout>
+
     </LinearLayout>
 
 </layout>
