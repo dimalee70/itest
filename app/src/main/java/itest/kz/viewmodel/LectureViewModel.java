@@ -15,6 +15,7 @@ import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.functions.Action;
 import io.reactivex.functions.Consumer;
+import itest.kz.R;
 import itest.kz.app.AppController;
 import itest.kz.model.Answer;
 import itest.kz.model.Lecture;
@@ -36,8 +37,8 @@ public class LectureViewModel extends Observable
     private LectureResponse lectureResponse;
     private CompositeDisposable compositeDisposable = new CompositeDisposable();
     private Context context;
-    public ObservableInt visibleHeader;
-    public ObservableInt visibleFooter;
+    public ObservableInt visibleHeader = new ObservableInt(View.GONE);
+    public ObservableInt visibleFooter = new ObservableInt(View.GONE);
     public Action onClickTest;
     private String accessToken;
     private String language;
@@ -58,7 +59,8 @@ public class LectureViewModel extends Observable
             Intent intent = new Intent(context, TestActivity.class);
 //            intent.putExtra(Constant.TEST_MAIN_ID, testGenerateResponse.getTestGenerate().getTestId());
             intent.putExtra(Constant.TYPE, Constant.TYPELECTURETEST);
-            Subject subject = new Subject(Long.parseLong(String.valueOf(lectureResponse.getLecture().getId())));
+            Subject subject = new Subject(Long.parseLong(String.valueOf(lectureResponse.getLecture().getId())),
+                    lectureResponse.getLecture().getTitle());
             intent.putExtra(Constant.SELECTED_SUBJECT, (Serializable) subject);
             intent.putExtra(Constant.IS_STARTED_FIRST, true);
 //            intent.putExtra(Constant.RESULT_TAG, Constant.RESULT_TAG);
@@ -70,8 +72,6 @@ public class LectureViewModel extends Observable
 ////            intent.putExtra(Constant.RESULT_TAG, Constant.RESULT_TAG);
 //            context.startActivity(intent);
         };
-        visibleHeader = new ObservableInt(View.GONE);
-        visibleFooter = new ObservableInt(View.GONE);
         setVisibilityHeader();
 
     }
@@ -114,7 +114,8 @@ public class LectureViewModel extends Observable
                                    Intent intent = new Intent(context, TestActivity.class);
                                    intent.putExtra(Constant.TEST_MAIN_ID, testGenerateResponse.getTestGenerate().getTestId());
                                    intent.putExtra(Constant.TYPE, Constant.TYPELECTURETEST);
-                                   Subject subject = new Subject(Long.parseLong(String.valueOf(lectureResponse.getLecture().getId())));
+                                   Subject subject = new Subject(Long.parseLong(String.valueOf(lectureResponse.getLecture().getId())),
+                                           lectureResponse.getLecture().getTitle());
                                    intent.putExtra(Constant.SELECTED_SUBJECT, (Serializable) subject);
 //            intent.putExtra(Constant.RESULT_TAG, Constant.RESULT_TAG);
                                    context.startActivity(intent);
@@ -188,6 +189,20 @@ public class LectureViewModel extends Observable
         unSubscribeFromObservable();
         compositeDisposable = null;
         context = null;
+    }
+
+    public int getPassTestText()
+    {
+        if (language.equals(Constant.KZ))
+            return R.string.chapterTestKz;
+        return R.string.chapterTestRu;
+    }
+
+    public int getHaventTestText()
+    {
+        if (language.equals(Constant.KZ))
+            return R.string.haventTestKz;
+        return R.string.haventTestRu;
     }
 
 }

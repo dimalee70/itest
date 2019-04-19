@@ -1,5 +1,6 @@
 package itest.kz.view.activity;
 
+import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -8,6 +9,8 @@ import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.View;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -37,6 +40,7 @@ public class ResultsActivity extends AppCompatActivity
     private List<Subject> subjectList;
     private String typeTest;
     private Subject selectedSubject;
+    private ImageButton closeFragment;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState)
@@ -50,6 +54,7 @@ public class ResultsActivity extends AppCompatActivity
         typeTest = getIntent().getExtras().getString(Constant.TYPE);
         resultsViewModel = new ResultsViewModel(this);
         activityResultsBinding.setResults(resultsViewModel);
+        setMyToolbar();
         setFragments();
 
     }
@@ -82,11 +87,37 @@ public class ResultsActivity extends AppCompatActivity
                 .resultToolbar;
         mainToolbarText = (TextView) activityResultsBinding
                 .textViewTitle;
+        resultToolbar.setTitle("");
+        closeFragment = activityResultsBinding.buttonCloseFragment;
+
+        setSupportActionBar(resultToolbar);
+
+        closeFragment.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+//                finish();
+
+//                System.out.println("Click on Close");
+                finish();
+                Intent intent = new Intent(ResultsActivity.this, SubjectActivity.class);
+//                intent.putExtra("tag","tag")
+                startActivity(intent);
+//                closeActivity();
+
+            }
+        });
 //        mainToolbarText.setText("Пәндер");
 //        mainToolbarText.setTextColor(Color.WHITE);
-        setSupportActionBar(resultToolbar);
+
     }
 
+//    public void closeActivity()
+//    {
+////        finish();
+//
+//    }
 
 
 }

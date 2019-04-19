@@ -124,4 +124,8 @@
         <item name="android:fontFamily">@font/my_open_sans_semibold</item>
     </style>
 
+    <!--<style name="DrawerArrowStyle" parent="Widget.AppCompat.DrawerArrowToggle">-->
+        <!--<item name="color">@android:color/black</item>-->
+    <!--</style>-->
+
 </resources>

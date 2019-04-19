@@ -36,11 +36,10 @@
                     android:layout_height="wrap_content">
 
 
-                    <itest.kz.view.customviews.CustomTextView
+                    <TextView
                         android:id="@+id/titleSubject"
                         android:layout_width="fill_parent"
                         android:layout_height="match_parent"
-                        android:textSize="15sp"
                         android:paddingLeft="10dp"
                         android:text="@{lecture.title}"
                         android:ellipsize="end"
@@ -51,9 +50,9 @@
                         android:layout_alignParentTop="true"
                         android:paddingBottom="10dp"
                         android:layout_alignParentBottom="true"
-                        style="@android:style/TextAppearance.Medium"
                         android:drawableEnd="@drawable/rotate_ic_icon_strelka_black"
-                        />
+                        android:textSize="15sp"
+                        android:fontFamily="@font/my_open_sans_regular" />
 
                     <View
                         android:layout_below="@+id/titleSubject"

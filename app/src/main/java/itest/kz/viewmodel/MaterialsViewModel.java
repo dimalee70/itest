@@ -123,4 +123,8 @@ public class MaterialsViewModel extends Observable
         this.context = context;
     }
 
+    public String getTitleText()
+    {
+        return subject.getTitle();
+    }
 }

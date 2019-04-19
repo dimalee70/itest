@@ -52,7 +52,15 @@ public class ItemSubjectFragmentViewModel extends BaseObservable
         this.subject = subject;
         this.context = context;
         this.cardColor = new ObservableInt(Color.parseColor("#D8DCE5"));
-        this.textColor = new ObservableInt(Color.BLACK);
+        if (subject.isExpand())
+        {
+            this.textColor = new ObservableInt(Color.parseColor("#36ABF9"));
+        }
+        else
+        {
+            this.textColor = new ObservableInt(Color.BLACK);
+        }
+
 //        buttonVisible = new ObservableInt(View.GONE);
         this.buttonsVisible = new ObservableInt(View.GONE);
 //        int iconColor = Color.YELLOW; // TODO: Get from settings
@@ -60,6 +68,12 @@ public class ItemSubjectFragmentViewModel extends BaseObservable
 
 
 //        clickTest =
+    }
+
+    public boolean checkSubLectureRecylle()
+    {
+        return subject.isExpand();
+
     }
 
     public int getColorIcon()

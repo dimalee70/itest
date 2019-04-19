@@ -103,6 +103,7 @@ public class TestFragment extends Fragment
     private Toolbar navigationToolbar;
     private String resultTag;
     private RecyclerView answerListRecycle;
+    private TextView dialogText;
 
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater)
@@ -241,8 +242,22 @@ public class TestFragment extends Fragment
                     dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
                     dialog.setContentView(R.layout.dialog);
                     dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                    dialogText = dialog.findViewById(R.id.dialog_text);
                     buttonYes = dialog.findViewById(R.id.buttonOk);
                     buttonNo = dialog.findViewById(R.id.buttonCancel);
+                    if(language.equals(Constant.KZ))
+                    {
+                        buttonNo.setText(R.string.noKz);
+                        buttonYes.setText(R.string.yesKz);
+                        dialogText.setText(R.string.finishTestDialogKz);
+
+                    }
+                    else
+                    {
+                        buttonNo.setText(R.string.noRu);
+                        buttonYes.setText(R.string.yesRu);
+                        dialogText.setText(R.string.finishTestDialogRu);
+                    }
                     buttonYes.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
@@ -282,6 +297,7 @@ public class TestFragment extends Fragment
                             intent.putExtra("tests", (Tests) testList);
                             intent.putExtra(Constant.SELECTED_SUBJECT, (Serializable) selectedSubject);
                             intent.putExtra(Constant.RESULT_TAG, resultTag);
+                            intent.putExtra(Constant.TYPE, typeTest);
 //                        startActivity(intent);
                         }
 
@@ -294,6 +310,7 @@ public class TestFragment extends Fragment
                             intent.putExtra(Constant.CURRENT_POSITION_SUBJECT, currentPosition);
                             intent.putExtra(Constant.RESULT_TAG, resultTag);
                             intent.putExtra(Constant.SUBJECT_LIST, (Serializable) subjectList);
+                            intent.putExtra(Constant.TYPE, typeTest);
 //                        args.putSerializable(Constant.SUBJECT_LIST, (ArrayList<Subject>) selectedSubects);
                         }
 
@@ -307,6 +324,7 @@ public class TestFragment extends Fragment
                             intent.putExtra(Constant.SELECTED_SUBJECT, (Serializable) selectedSubject);
                             intent.putExtra(Constant.TEST_MAIN_ID, testIdMain);
                             intent.putExtra(Constant.RESULT_TAG, resultTag);
+                            intent.putExtra(Constant.TYPE, typeTest);
 //                        startActivity(intent);
                         }
 

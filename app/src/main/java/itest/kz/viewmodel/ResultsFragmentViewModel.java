@@ -2,6 +2,7 @@ package itest.kz.viewmodel;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.v4.text.HtmlCompat;
 import android.text.Html;
 import android.text.Spanned;
@@ -11,11 +12,14 @@ import java.util.List;
 import java.util.Observable;
 
 import io.reactivex.functions.Action;
+import itest.kz.R;
 import itest.kz.model.Subject;
 import itest.kz.model.TestFinishResponse;
 import itest.kz.util.Constant;
 import itest.kz.view.activity.FullTestActivity;
 import itest.kz.view.activity.TestActivity;
+
+import static android.content.Context.MODE_PRIVATE;
 
 public class ResultsFragmentViewModel extends Observable
 {
@@ -25,6 +29,9 @@ public class ResultsFragmentViewModel extends Observable
     private Subject selectedSubject;
     private List<Subject> subjectList;
     private String typeTest;
+    private String language;
+    private SharedPreferences settings;
+
 //    private String text = "This is <font color='red'>red</font>. This is <font color='blue'>blue</font>.";
 
     public ResultsFragmentViewModel(Context context, TestFinishResponse testFinishResponse,
@@ -35,6 +42,9 @@ public class ResultsFragmentViewModel extends Observable
         this.subjectList = subjectList;
         this.selectedSubject = selectedSubject;
         this.typeTest = typeTest;
+        settings = context.getSharedPreferences(Constant.MY_LANG, MODE_PRIVATE);
+//        settings.edit().clear().commit();
+        language = settings.getString(Constant.LANG, "kz");
 
         this.clickAgainTest = ()->
         {
@@ -42,18 +52,33 @@ public class ResultsFragmentViewModel extends Observable
             {
                 Intent intent = new Intent(context, FullTestActivity.class);
                 intent.putExtra(Constant.SUBJECT_LIST, (Serializable) subjectList);
+                intent.putExtra(Constant.TYPE, typeTest);
                 context.startActivity(intent);
             }
             else if (typeTest.equals(Constant.TYPESUBJECTTEST))
             {
                 Intent intent = new Intent(context, TestActivity.class);
                 intent.putExtra(Constant.SELECTED_SUBJECT, (Serializable) selectedSubject);
+                intent.putExtra(Constant.TYPE, typeTest);
                 context.startActivity(intent);
             }
 
+            else if (typeTest.equals(Constant.TYPELECTURETEST))
+            {
+                Intent intent = new Intent(context, TestActivity.class);
+                intent.putExtra(Constant.SELECTED_SUBJECT, (Serializable) selectedSubject);
+                intent.putExtra(Constant.TYPE, typeTest);
+                context.startActivity(intent);
+            }
         };
     }
 
+    public int getShowResultText()
+    {
+        if (language.equals(Constant.KZ))
+            return R.string.resultShowKz;
+        return R.string.resultShowRu;
+    }
     public Spanned getHtmlText()
     {
         int all = testFinishResponse.getResult().getAll();
@@ -66,5 +91,12 @@ public class ResultsFragmentViewModel extends Observable
     public  int getPercent()
     {
         return  (int )testFinishResponse.getResult().getPercent();
+    }
+
+    public int getAgainTestText()
+    {
+        if (language.equals(Constant.KZ))
+            return R.string.againTestKz;
+        return R.string.againTestRu;
     }
 }

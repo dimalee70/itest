@@ -4,19 +4,19 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
         android:id="@+id/menu_github"
-        android:icon="@drawable/ic_answers"
+        android:icon="@drawable/ic_iconfinder_connect_direction_path_way_2203530"
         android:orderInCategory="1"
         android:title=""
         app:showAsAction="always" />
     <item
         android:id="@+id/menu_github1"
-        android:icon="@drawable/ic_answers"
+        android:icon="@drawable/ic_iconfinder_connect_direction_path_way_2203530"
         android:orderInCategory="1"
         android:title=""
         app:showAsAction="always" />
     <item
         android:id="@+id/menu_github2"
-        android:icon="@drawable/ic_answers"
+        android:icon="@drawable/ic_iconfinder_connect_direction_path_way_2203530"
         android:orderInCategory="1"
         android:title=""
         app:showAsAction="always" />
@@ -27,7 +27,7 @@
         app:showAsAction="always" />
     <item
         android:id="@+id/menu_logout"
-        android:icon="@drawable/ic_log_out"
+        android:icon="@drawable/ic_exit"
         android:visible="false"
         android:orderInCategory="1"
         android:title=""

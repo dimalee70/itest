@@ -44,9 +44,9 @@
             android:layout_height="wrap_content"
             android:textColor="@color/colorBlack"
             android:layout_margin="30dp"
-            android:text="Сіз расымен тестілеуді аяқтауды қалайсыз ба?"
             android:textAlignment="center"
-            android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            android:fontFamily="@font/my_open_sans_regular"/>
 
     </RelativeLayout>
 
@@ -64,8 +64,8 @@
             android:layout_gravity="center"
             android:background="@drawable/button_yes"
             android:layout_marginRight="15dp"
-            android:text="Иә"
-            android:textColor="@color/colorWhite" />
+            android:textColor="@color/colorWhite"
+            android:fontFamily="@font/my_open_sans_regular"/>
         <Button
             android:id="@+id/buttonCancel"
             android:layout_width="wrap_content"
@@ -74,7 +74,7 @@
             android:textColor="@color/colorWhite"
             android:layout_toRightOf="@+id/buttonOk"
             android:layout_marginLeft="15dp"
-            android:text="Жоқ"/>
+            android:fontFamily="@font/my_open_sans_regular" />
 
     </RelativeLayout>
 

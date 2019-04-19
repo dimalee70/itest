@@ -77,6 +77,10 @@ public class TestActivity extends AppCompatActivity
 
         activityTestBinding.setTest(testViewModel);
 
+        if (typeTest.equals(Constant.TYPESUBJECTTEST) || typeTest.equals(Constant.TYPELECTURETEST))
+            activityTestBinding
+                    .textViewTitle.setText(selectedSubject.getTitle());
+
 //
 //        if (SELECTED_TEST_POSITION_ID == null || !(isStartedFirst))
 //        {
@@ -102,7 +106,7 @@ public class TestActivity extends AppCompatActivity
                     mPager = activityTestBinding.pager;
                     mPager.setOffscreenPageLimit(2);
 
-                    mPager.setAdapter( new MyAdapter(getSupportFragmentManager(), tests, selectedSubject, resultTag));
+                    mPager.setAdapter( new MyAdapter(getSupportFragmentManager(), tests, selectedSubject, resultTag, typeTest));
 
                     PageListener listener = new PageListener();
                     mPager.addOnPageChangeListener(listener);

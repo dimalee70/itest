@@ -386,12 +386,13 @@ public class FullTestActivity extends AppCompatActivity
                                    ArrayList<Tests> questions =
                                            TestsUtils.deserializeFromJson(jsonObject);
 
-                                   System.out.println("questions");
-                                   System.out.println(questions);
+//                                   System.out.println("questions");
+//                                   System.out.println(questions);
 //
                                    setArraListArrayListQuestions(questions);
 //
                                    Tests arrayList = questions.get(currentPosition);
+                                   activityFullTestBinding.textViewTitle.setText(arrayList.getTitle());
                                    if (resultTag == null)
                                        startTimer(maxTimeInMilliseconds, 1000);
                                    setFragment(arrayList);

@@ -85,7 +85,7 @@ public class ResultsFragment extends Fragment
         testIdMain = getArguments().getLong(Constant.TEST_MAIN_ID, 0);
         subjectList = getArguments().getParcelableArrayList(Constant.SUBJECT_LIST);
         selectedSubject = (Subject) getArguments().getSerializable(Constant.SELECTED_SUBJECT);
-        this.typeTest = getArguments().getString(Constant.TYPE);
+        typeTest = getArguments().getString(Constant.TYPE);
         fragmentResultsBinding = DataBindingUtil
                 .inflate(inflater, R.layout.fragment_results, container, false);
         resultsFragmentViewModel = new ResultsFragmentViewModel(getContext(), testFinishResponse,
@@ -127,6 +127,13 @@ public class ResultsFragment extends Fragment
                                        testsList.add(TestsUtils.deserializeFromJsonToTests(jsonObject));
                                    }
 
+                                   else  if (typeTest.equals(Constant.TYPELECTURETEST))
+                                   {
+                                       testsList = new ArrayList<>();
+
+                                       testsList.add(TestsUtils.deserializeFromJsonToTests(jsonObject));
+                                   }
+
                                    setUpListOfSubjectsView(fragmentResultsBinding.subjectList);
 //
 //                                   setArraListArrayListQuestions(questions);
@@ -162,7 +169,7 @@ public class ResultsFragment extends Fragment
 
     private void setUpListOfSubjectsView(RecyclerView listSubjects)
     {
-        if (testsList.size() == 5)
+        if (testsList != null && testsList.size() == 5)
         {
             resultsSubjectAdapter =
                     new ResultsSubjectAdapter(testsList);
@@ -181,6 +188,7 @@ public class ResultsFragment extends Fragment
                         intent.putExtra(Constant.RESULT_TAG, Constant.RESULT_TAG);
                         intent.putExtra(Constant.SUBJECT_LIST, (Serializable) subjectList);
                         intent.putExtra(Constant.SELECTED_SUBJECT, (Serializable) selectedSubject);
+                        intent.putExtra(Constant.TYPE, typeTest);
                         getContext().startActivity(intent);
                     }
 //                else if (typeTest.equals(Constant.TYPESUBJECTTEST))

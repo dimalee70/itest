@@ -8,12 +8,7 @@
             type="itest.kz.viewmodel.ItemAnswerViewModel"/>
     </data>
 
-    <!--<ScrollView-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:clickable="false"-->
-        <!--android:focusable="false"-->
-        <!--&gt;-->
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
@@ -36,6 +31,8 @@
         app:cardUseCompatPadding="true"
         tools:layout_marginBottom="16dp"
         android:clickable="false"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
         android:focusable="false"
        >
         <!--app:backgroundColor="@{answer.color}"-->

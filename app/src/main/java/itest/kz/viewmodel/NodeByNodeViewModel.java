@@ -117,5 +117,10 @@ public class NodeByNodeViewModel extends Observable
         this.context = context;
     }
 
+    public String getTitleText()
+    {
+        return node.getTitle();
+    }
+
 
 }

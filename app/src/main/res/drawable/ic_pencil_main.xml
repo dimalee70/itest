@@ -4,13 +4,36 @@
         <shape android:shape="rectangle">
             <solid android:color="@color/colorPrimary" />
             <corners android:radius="4dp" />
-            <size android:height="30dp" android:width="30dp"></size>
-            <padding android:left="5dp" android:top="5dp" android:right="5dp" android:bottom="5dp" />
+            <size android:height="5dp" android:width="5dp"></size>
+
         </shape>
     </item>
-    <item>
-        <bitmap
-            android:src="@drawable/ic_pencil"
-            android:tileMode="disabled" />
-    </item>
+    <item
+        android:gravity="center"
+        android:drawable="@drawable/ic_pen"
+        android:top="5dp"
+        android:bottom="5dp"
+        android:left="5dp"
+        android:right="5dp"
+        />
+
 </layer-list>
+
+<!--<padding android:left="5dp" android:top="5dp" android:right="5dp" android:bottom="5dp" />-->
+
+<!--<layer-list xmlns:android="http://schemas.android.com/apk/res/android">-->
+<!--<item-->
+    <!--android:gravity="fill"-->
+    <!--android:drawable="@drawable/ic_brightness_1_black_24dp"-->
+
+    <!--/>-->
+<!--<item-->
+    <!--android:gravity="center"-->
+    <!--android:drawable="@drawable/ic_call_black_24dp"-->
+    <!--android:top="20dp"-->
+    <!--android:bottom="20dp"-->
+    <!--android:left="20dp"-->
+    <!--android:right="20dp"-->
+    <!--/>-->
+
+<!--</layer-list>-->

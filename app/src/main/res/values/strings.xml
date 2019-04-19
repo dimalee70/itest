@@ -4,6 +4,21 @@
     <string name="rus">Руский</string>
     <string name="kaz">Қазақша</string>
 
+    <string name="finishTestDialogKz">Сіз расымен тестілеуді аяқтауды қалайсыз ба?</string>
+    <string name="finishTestDialogRu">Вы действительно хотите завершить тест?</string>
+
+    <string name="chapterTestKz">Тақырып бойынша тест тапсыру</string>
+    <string name="chapterTestRu">Сдать тест по теме</string>
+
+    <string name="haventTestKz">Әзірге тақырып бойынша тест жоқ</string>
+    <string name="haventTestRu">По данной темы теста нет</string>
+
+    <string name="againTestKz">Жаңа тест тапсыру</string>
+    <string name="againTestRu">Сдать новый тест</string>
+
+    <string name="resultShowKz">Сіздің көрсеткішіңіз:</string>
+    <string name="resultShowRu">Ваш показатель:</string>
+
     <string name="yesKz">Иә</string>
     <string name="yesRu">Да</string>
 

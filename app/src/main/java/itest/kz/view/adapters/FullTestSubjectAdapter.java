@@ -161,6 +161,8 @@ public class FullTestSubjectAdapter extends RecyclerView.Adapter<FullTestSubject
                 itemFullSubjectBinding.entStartCardview
                         .setCardBackgroundColor(
                                 Color.parseColor(Constant.colorSelectedSubjectOnEnt));
+                itemFullSubjectBinding.subjectListRelative
+                        .setBackgroundColor(Color.parseColor(Constant.colorSelectedSubjectOnEnt));
                 itemFullSubjectBinding.titleSubjectText.setTextColor(Color.WHITE);
 
             }
@@ -168,6 +170,9 @@ public class FullTestSubjectAdapter extends RecyclerView.Adapter<FullTestSubject
             {
                 itemFullSubjectBinding.entStartCardview
                         .setCardBackgroundColor(
+                                Color.parseColor("#F1F2F6FF"));
+                itemFullSubjectBinding.subjectListRelative
+                        .setBackgroundColor(
                                 Color.parseColor("#F1F2F6FF"));
                 itemFullSubjectBinding.titleSubjectText.setTextColor(Color.parseColor("#ff2daafc"));
             }

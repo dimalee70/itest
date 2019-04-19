@@ -90,31 +90,37 @@ public class ResultAdapter extends RecyclerView.Adapter<ResultAdapter.ResultAdap
 //        this.answerList = answers;
 ////        this.answersAdapterListener = answersAdapterListener;
 //    }
-    public ResultAdapter(Tests testList, Context context,
-                         Subject selectedSubject, Long testIdMain,
-                         @Nullable Integer currentPosition,
-                         ArrayList<Subject> subjectList,
-                         Integer selectedSubjectPosition,
-                         int i, String resultTag
-
-    )
-    {
-
-        this.resultTag = resultTag;
-        this.context = context;
-        this.testList = testList;
-        this.selectedSubjectPosition = selectedSubjectPosition;
-        this.subjectList = subjectList;
-        this.selectedSubject = selectedSubject;
-        this.currentPosition = currentPosition;
-        this.testIdMain = testIdMain;
-        this.i = i;
 
 
-//        System.out.println("current Position");
-//        System.out.println(this.currentPosition);
 
-    }
+
+
+
+//    public ResultAdapter(Tests testList, Context context,
+//                         Subject selectedSubject, Long testIdMain,
+//                         @Nullable Integer currentPosition,
+//                         ArrayList<Subject> subjectList,
+//                         Integer selectedSubjectPosition,
+//                         int i, String resultTag
+//
+//    )
+//    {
+//
+//        this.resultTag = resultTag;
+//        this.context = context;
+//        this.testList = testList;
+//        this.selectedSubjectPosition = selectedSubjectPosition;
+//        this.subjectList = subjectList;
+//        this.selectedSubject = selectedSubject;
+//        this.currentPosition = currentPosition;
+//        this.testIdMain = testIdMain;
+//        this.i = i;
+//
+//
+////        System.out.println("current Position");
+////        System.out.println(this.currentPosition);
+//
+//    }
 
     public ResultAdapter(Tests testList, Context context,
                          Subject selectedSubject, Long testIdMain,
@@ -259,29 +265,7 @@ public class ResultAdapter extends RecyclerView.Adapter<ResultAdapter.ResultAdap
 
         recyclerView.setLayoutManager
                 (new LinearLayoutManager(this.context, LinearLayoutManager.HORIZONTAL, false));
-
-
-
-
-
-//        this.answerList = testList.get(i).getAnswers();
-
     }
-    //    public void setR(RecyclerView recyclerView)
-//    {
-////        itemQuestionsViewModel = new ItemQuestionsViewModel(this,tests);
-////        activityResultBinding.setResult(resultViewModel);
-//        QuestionsAdapter questionsAdapter = new QuestionsAdapter(answerList);
-//        recyclerView.setAdapter(questionsAdapter);
-//        recyclerView.setLayoutManager(new LinearLayoutManager(, LinearLayoutManager.HORIZONTAL
-//                , false));
-//        resultViewModel = new ResultViewModel(this,test.getAnswers());
-////        activityResultBinding.setResult(resultViewModel);
-////        ResultAdapter resultAdapter = new ResultAdapter(test.getAnswers());
-////        recyclerView.setAdapter(resultAdapter);
-////        recyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
-//    }
-
 
     @Override
     public int getItemCount()

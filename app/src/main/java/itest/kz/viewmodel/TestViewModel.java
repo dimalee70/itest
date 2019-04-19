@@ -127,6 +127,13 @@ public class TestViewModel extends AndroidViewModel
         return String.valueOf(subject.getId());
     }
 
+//    public String getTitle()
+//    {
+//        if (typeTest.equals(Constant.TYPEFULLTEST))
+//            return testsList.getTitle();
+//        return testsList.getSubject().getTitle();
+//    }
+
 
 
     public void fetchTestList()

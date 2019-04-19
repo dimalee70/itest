@@ -10,32 +10,48 @@
             type="itest.kz.viewmodel.MaterialsViewModel"/>
     </data>
 
-    <!--<LinearLayout-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="match_parent"-->
-        <!--android:orientation="vertical">-->
-    <!--<RelativeLayout-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="match_parent"-->
-        <!--android:id="@+id/relativelayout"-->
-        <!--android:paddingBottom="10dp"-->
-        <!--android:paddingLeft="10dp"-->
-        <!--android:paddingRight="10dp"-->
-        <!--android:paddingTop="10dp"/>-->
-
-
-        <LinearLayout
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@color/colorBackgroundCardView">
+
+            <android.support.v7.widget.Toolbar
+                android:id="@+id/toolbar_materials"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                android:background="?attr/colorPrimary"
+                android:elevation="4dp"
+                app:theme="@style/ToolbarColoredBackArrow"
+                android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
+                app:popupTheme="@style/ThemeOverlay.AppCompat.Light">
+
+                <TextView
+                    android:id="@+id/toolbar_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@{materials.titleText}"
+                    android:layout_marginLeft="20dp"
+                    android:textSize="20sp"
+                    android:layout_gravity="left"
+                    android:textColor="@color/colorWhite"
+                    android:ellipsize="end"
+                    android:maxLines="1"
+                    android:fontFamily="@font/my_open_sans_regular" />
+
+            </android.support.v7.widget.Toolbar>
+
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/material_list"
+                android:layout_marginTop="16dp"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                tools:listitem="@layout/item_node">
+                tools:listitem="@layout/item_node"
+                android:layout_marginRight="16dp"
+                android:layout_marginLeft="16dp"
+                android:layout_below="@+id/toolbar_materials">
             </android.support.v7.widget.RecyclerView>
 
-        </LinearLayout>
+        </RelativeLayout>
 
 
 

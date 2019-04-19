@@ -56,7 +56,7 @@ public class AgreementViewModel extends BaseObservable
     {
         if (language.equals(Constant.KZ))
             return R.string.agreementKz;
-        return R.string.agreementKz;
+        return R.string.agreementRu;
     }
 
     public int getPolicy()

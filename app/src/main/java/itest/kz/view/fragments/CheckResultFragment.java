@@ -144,6 +144,11 @@ public class CheckResultFragment extends Fragment
                                        questions.add(TestsUtils.deserializeFromJsonToTests(jsonObject));
                                    }
 //
+                                   else if (typeTest.equals(Constant.TYPELECTURETEST))
+                                   {
+//                                       questions = new ArrayList<>();
+                                       questions.add(TestsUtils.deserializeFromJsonToTests(jsonObject));
+                                   }
                                    setArraListArrayListQuestions(questions);
 
                                    mPager = fragmentCheckResultsBinding.pager;
@@ -158,6 +163,20 @@ public class CheckResultFragment extends Fragment
                                    }
 
                                    else if (typeTest.equals(Constant.TYPESUBJECTTEST))
+                                   {
+                                       subjectsList = new ArrayList<>();
+                                       subjectsList.add(selectedSubject);
+                                       fullTestResultAdapter = new FullTestResultAdapter(getActivity().getSupportFragmentManager()
+                                               , questions, testIdMain,
+                                               subjectsList,
+                                               currentPosition, resultTag, typeTest,selectedSubject);
+                                       mPager.setAdapter(fullTestResultAdapter);
+//                                       resultAdapter = new ResultAdapter(questions.get(0), getContext(),
+//                                               selectedSubject, null,null,
+//                                               null,null,0);
+                                   }
+
+                                   else if (typeTest.equals(Constant.TYPELECTURETEST))
                                    {
                                        subjectsList = new ArrayList<>();
                                        subjectsList.add(selectedSubject);

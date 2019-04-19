@@ -1,6 +1,7 @@
 package itest.kz.view.adapters;
 
 import android.databinding.DataBindingUtil;
+import android.graphics.Color;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -109,9 +110,18 @@ public class SubjectAdapter extends RecyclerView.Adapter<SubjectAdapter.SubjectA
             if (subject.isExpand())
             {
                 itemSubjectBinding.expandCardview.setVisibility(View.VISIBLE);
+//                itemSubjectBinding
+//                        .titleSubject
+//                        .setTextColor(Color.parseColor("#ff2daafc"));
             }
             else
+            {
                 itemSubjectBinding.expandCardview.setVisibility(View.GONE);
+//                itemSubjectBinding
+//                        .titleSubject
+//                        .setTextColor(Color.BLACK);
+            }
+
             itemSubjectBinding.subjectLinear.setOnClickListener(new View.OnClickListener()
             {
                 @Override

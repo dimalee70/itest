@@ -32,7 +32,7 @@
                 android:layout_gravity="left"
                 android:fontFamily="@font/my_open_sans_regular" />
 
-            <itest.kz.view.customviews.CustomTextView
+            <TextView
                 android:id="@+id/toolbar_text_right"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -40,6 +40,7 @@
                 android:textSize="20sp"
                 android:textColor="@color/colorWhite"
                 android:layout_gravity="right"
+                android:fontFamily="@font/my_open_sans_regular"
                 android:layout_marginRight="30dp"
                 android:enabled="@{profile.enableSave}" />
 
@@ -53,7 +54,8 @@
 
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:paddingBottom="50dp">
 
                 <RelativeLayout
                     android:id="@+id/profile_info_relative"
@@ -82,7 +84,9 @@
                     android:id="@+id/info_cardview"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_below="@+id/profile_info_relative">
+                    android:layout_below="@+id/profile_info_relative"
+                    app:cardPreventCornerOverlap="false"
+                    app:cardElevation="0dp">
 
                     <RelativeLayout
                         android:layout_width="match_parent"
@@ -95,7 +99,9 @@
 
                             <android.support.v7.widget.CardView
                                 android:layout_width="match_parent"
-                                android:layout_height="wrap_content">
+                                android:layout_height="wrap_content"
+                                app:cardPreventCornerOverlap="false"
+                                app:cardElevation="0dp">
 
                                 <RelativeLayout
                                     android:layout_width="match_parent"
@@ -113,7 +119,8 @@
                                             android:layout_marginBottom="10dp"
                                             android:text="@{profile.nameText}"
                                             android:textColor="@color/colorPrimary"
-                                            android:fontFamily="@font/my_open_sans_regular"/>
+                                            android:fontFamily="@font/my_open_sans_regular"
+                                            android:layout_marginTop="10dp"/>
 
                                         <TextView
                                             android:id="@+id/name_asterisk"
@@ -121,6 +128,7 @@
                                             android:layout_height="wrap_content"
                                             android:layout_toRightOf="@+id/name_text"
                                             android:text="\u002A"
+                                            android:layout_marginTop="10dp"
                                             android:textColor="@color/colorRed"/>
 
                                         <EditText
@@ -154,7 +162,9 @@
 
                             <android.support.v7.widget.CardView
                                 android:layout_width="match_parent"
-                                android:layout_height="wrap_content">
+                                android:layout_height="wrap_content"
+                                app:cardPreventCornerOverlap="false"
+                                app:cardElevation="0dp">
 
                                 <RelativeLayout
                                     android:layout_width="match_parent"
@@ -213,7 +223,9 @@
 
                             <android.support.v7.widget.CardView
                                 android:layout_width="match_parent"
-                                android:layout_height="wrap_content">
+                                android:layout_height="wrap_content"
+                                app:cardPreventCornerOverlap="false"
+                                app:cardElevation="0dp">
 
                                 <RelativeLayout
                                     android:layout_width="match_parent"
@@ -249,9 +261,11 @@
                                             android:text="@{profile.date}"
                                             android:layout_width="match_parent"
                                             android:inputType="text"
+                                            android:textSize="14sp"
                                             android:fontFamily="@font/my_open_sans_regular"
                                             android:layout_marginLeft="20dp"
-                                            android:layout_marginRight="17dp"/>
+                                            android:layout_marginRight="17dp"
+                                            android:layout_marginBottom="17dp"/>
 
                                     </RelativeLayout>
 
@@ -281,7 +295,9 @@
                     android:layout_marginTop="21dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_below="@+id/login_email_text">
+                    android:layout_below="@+id/login_email_text"
+                    app:cardPreventCornerOverlap="false"
+                    app:cardElevation="0dp">
 
                     <RelativeLayout
                         android:layout_width="match_parent"
@@ -294,7 +310,9 @@
 
                             <android.support.v7.widget.CardView
                                 android:layout_width="match_parent"
-                                android:layout_height="wrap_content">
+                                android:layout_height="wrap_content"
+                                app:cardPreventCornerOverlap="false"
+                                app:cardElevation="0dp">
 
                                 <RelativeLayout
                                     android:layout_width="match_parent"
@@ -312,15 +330,18 @@
                                             android:textColor="@color/colorPrimary"
                                             android:layout_marginLeft="22dp"
                                             android:layout_marginBottom="10dp"
+                                            android:layout_marginTop="10dp"
                                             android:fontFamily="@font/my_open_sans_regular"/>
 
                                         <TextView
                                             android:id="@+id/login_asterisk"
+                                            android:layout_marginBottom="10dp"
                                             android:layout_width="wrap_content"
                                             android:layout_height="wrap_content"
                                             android:layout_toRightOf="@+id/login_text"
                                             android:text="\u002A"
-                                            android:textColor="@color/colorRed"/>
+                                            android:textColor="@color/colorRed"
+                                            android:layout_marginTop="10dp"/>
 
                                         <EditText
                                             android:id="@+id/login_input"
@@ -330,6 +351,7 @@
                                             android:layout_width="match_parent"
                                             android:text="@{profile.login}"
                                             android:inputType="text"
+                                            android:textSize="14sp"
                                             android:fontFamily="@font/my_open_sans_regular"
                                             android:layout_marginLeft="20dp"
                                             android:layout_marginRight="17dp"/>
@@ -352,7 +374,9 @@
 
                             <android.support.v7.widget.CardView
                                 android:layout_width="match_parent"
-                                android:layout_height="wrap_content">
+                                android:layout_height="wrap_content"
+                                app:cardPreventCornerOverlap="false"
+                                app:cardElevation="0dp">
 
                                 <RelativeLayout
                                     android:layout_width="match_parent"
@@ -390,7 +414,9 @@
                                             android:inputType="text"
                                             android:fontFamily="@font/my_open_sans_regular"
                                             android:layout_marginLeft="20dp"
-                                            android:layout_marginRight="17dp"/>
+                                            android:textSize="14sp"
+                                            android:layout_marginRight="17dp"
+                                            android:layout_marginBottom="17dp"/>
 
                                     </RelativeLayout>
 

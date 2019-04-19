@@ -141,7 +141,8 @@ public class ItemNodeByNodeViewModel extends BaseObservable
                                                Intent intent = new Intent(context, TestActivity.class);
 //            intent.putExtra(Constant.TEST_MAIN_ID, testGenerateResponse.getTestGenerate().getTestId());
                                                intent.putExtra(Constant.TYPE, Constant.TYPELECTURETEST);
-                                               Subject subject = new Subject(Long.parseLong(String.valueOf(lectureResponse.getLecture().getId())));
+                                               Subject subject = new Subject(Long.parseLong(String.valueOf(lectureResponse.getLecture().getId())),
+                                                       lectureResponse.getLecture().getTitle());
                                                intent.putExtra(Constant.SELECTED_SUBJECT, (Serializable) subject);
                                                intent.putExtra(Constant.IS_STARTED_FIRST, true);
 //            intent.putExtra(Constant.RESULT_TAG, Constant.RESULT_TAG);

@@ -79,4 +79,15 @@ public class PasswordChangeFragmentViewModel extends BaseObservable
         return R.string.oldPassTextRu;
     }
 
+    public String getPassWordText()
+    {
+        if (language.equals(Constant.KZ))
+            return context
+                    .getResources()
+                    .getString( R.string.passwordChangedKz) + ": ";
+        return context
+                .getResources()
+                .getString( R.string.passwordChangedRu) + ": ";
+    }
+
 }

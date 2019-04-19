@@ -5,12 +5,15 @@
             <solid android:color="@color/colorPhotoIcon" />
             <corners android:radius="4dp" />
             <size android:height="40dp" android:width="40dp"></size>
-            <padding android:left="10dp" android:top="10dp" android:right="10dp" android:bottom="10dp" />
+            <!--<padding android:left="10dp" android:top="10dp" android:right="10dp" android:bottom="10dp" />-->
         </shape>
     </item>
-    <item>
-        <bitmap
-            android:src="@drawable/ic_add_profile_photo"
-            android:tileMode="disabled" />
-    </item>
+    <item
+        android:gravity="center"
+        android:drawable="@drawable/ic_photo"
+        android:top="5dp"
+        android:bottom="5dp"
+        android:left="5dp"
+        android:right="5dp"
+        />
 </layer-list>

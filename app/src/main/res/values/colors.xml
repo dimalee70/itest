@@ -41,6 +41,8 @@
 
     <color name="colorBackgroundCardView">#F1F2F6FF</color>
 
+    <color name="unselectedNavigationColor">#D2D5D6</color>
+
     <color name="colorBorderCheckBoxUnSelected">#8A000000</color>
 
     <color name="colorBorderCheckBoxSelected">#FF37ACF9</color>

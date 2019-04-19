@@ -14,38 +14,79 @@
         android:id="@+id/rl3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:padding="3dp"
+        android:padding="1dp"
         android:clickable="false"
         android:focusable="false"
         android:orientation="horizontal">
 
+        <!--<android.support.v7.widget.CardView-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="match_parent"-->
+            <!--android:layout_gravity="center"-->
+            <!--app:cardBackgroundColor="@color/colorPrimary"-->
+            <!--app:cardCornerRadius="20dp"-->
+            <!--app:contentPadding="5dp"> &lt;!&ndash; Change it to customize the border width &ndash;&gt;-->
 
+            <!--<android.support.v7.widget.CardView-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="match_parent"-->
+                <!--android:layout_gravity="center"-->
+                <!--app:cardCornerRadius="20dp"-->
+                <!--app:contentPadding="5dp">-->
+
+                <!--<RelativeLayout-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="match_parent">-->
+
+                    <!--&lt;!&ndash; Add your UI elements &ndash;&gt;-->
+
+                <!--</RelativeLayout>-->
+            <!--</android.support.v7.widget.CardView>-->
+        <!--</android.support.v7.widget.CardView>-->
 
         <android.support.v7.widget.CardView
-            android:id="@+id/ent_start_cardview"
-            android:layout_margin="10dp"
+            android:id="@+id/ent_start_cardview_border"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="10dp"
             android:layout_width="124dp"
             android:layout_height="45dp"
-            app:cardBackgroundColor="@color/colorBackgroundCardView"
-            app:cardElevation="2dp"
+            app:cardBackgroundColor="@color/colorPrimary"
             app:cardCornerRadius="5dp"
+            app:cardPreventCornerOverlap="false"
+            app:cardElevation="0dp"
             >
+        <android.support.v7.widget.CardView
+            android:id="@+id/ent_start_cardview"
+            android:layout_margin="1dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:cardBackgroundColor="@color/colorBackgroundCardView"
+            app:cardCornerRadius="5dp"
+            app:cardPreventCornerOverlap="false"
+            app:cardElevation="0dp"
+            >
+
             <RelativeLayout
+                android:id="@+id/subject_list_relative"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="match_parent"
+                android:background="@color/colorBackgroundCardView">
 
 
-            <TextView
-                android:id="@+id/title_subject_text"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@{fullSubject.title}"
-                android:layout_centerInParent="true"
-                android:textAlignment="center"
-                android:textColor="@color/colorPrimary"
-                />
+                <TextView
+                    android:id="@+id/title_subject_text"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
+                    android:text="@{fullSubject.title}"
+                    android:textAlignment="center"
+                    android:textColor="@color/colorPrimary" />
 
             </RelativeLayout>
+        </android.support.v7.widget.CardView>
+
         </android.support.v7.widget.CardView>
 
 

@@ -29,7 +29,8 @@
                 android:text="@{lang.titleText}"
                 android:layout_marginLeft="20dp"
                 android:textSize="20sp"
-                android:layout_gravity="left"/>
+                android:layout_gravity="left"
+                android:fontFamily="@font/my_open_sans_regular"/>
 
         </android.support.v7.widget.Toolbar>
 
@@ -60,7 +61,9 @@
 
                         <android.support.v7.widget.CardView
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content">
+                            android:layout_height="wrap_content"
+                            app:cardPreventCornerOverlap="false"
+                            app:cardElevation="0dp">
 
 
 
@@ -84,10 +87,11 @@
                                         android:textAlignment="center"
                                         android:text="Қазақша"
                                         android:textSize="14sp"
-                                        android:layout_margin="20dp"
-                                        android:textStyle="bold"
                                         android:textColor="@color/colorBlack"
-                                        android:layout_centerInParent="true"/>
+                                        android:layout_centerInParent="true"
+                                        android:layout_marginLeft="14dp"
+                                        android:layout_marginTop="27dp"
+                                        android:fontFamily="@font/my_open_sans_regular"/>
 
                                 </RelativeLayout>
 
@@ -115,7 +119,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="1dp"
                         android:layout_below="@+id/lang_relative"
-                        android:layout_marginLeft="20dp"
+                        android:layout_marginLeft="14dp"
                         android:background="@color/colorDivider" />
 
                     <RelativeLayout
@@ -127,7 +131,9 @@
 
                         <android.support.v7.widget.CardView
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content">
+                            android:layout_height="wrap_content"
+                            app:cardPreventCornerOverlap="false"
+                            app:cardElevation="0dp">
 
                             <RelativeLayout
 
@@ -143,15 +149,16 @@
 
                                     <TextView
                                         android:id="@+id/rus_text"
-                                        android:layout_margin="20dp"
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
                                         android:textAlignment="center"
                                         android:text="Русский"
                                         android:textColor="@color/colorBlack"
                                         android:textSize="14sp"
-                                        android:textStyle="bold"
-                                        android:layout_centerInParent="true"/>
+                                        android:layout_centerInParent="true"
+                                        android:layout_marginLeft="14dp"
+                                        android:layout_marginTop="27dp"
+                                        android:fontFamily="@font/my_open_sans_regular"/>
 
                                 </RelativeLayout>
 

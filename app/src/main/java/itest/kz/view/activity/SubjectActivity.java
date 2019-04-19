@@ -56,6 +56,7 @@ public class SubjectActivity extends AppCompatActivity
     private TextView mainToolbarText;
     private String accessToken;
     private SharedPreferences sharedPreferences;
+//    public int currentPage = 0;
 
 
 //    @Nullable
@@ -107,6 +108,8 @@ public class SubjectActivity extends AppCompatActivity
         mViewPager = (ViewPager) findViewById(R.id.vp_fragments_container);
         mViewPager.setAdapter(new ViewPagerAdapter(getSupportFragmentManager(), mFragments));
 
+        PageListener listener = new PageListener();
+        mViewPager.addOnPageChangeListener(listener);
         mTabLayout = (TabLayout) findViewById(R.id.tl_tabs_container);
         mTabLayout.setupWithViewPager(mViewPager);
         mTabLayout.getTabAt(0).setText((subjectViewModel
@@ -174,28 +177,7 @@ public class SubjectActivity extends AppCompatActivity
         );
         bottomNavigationView.setSelectedItemId(R.id.item_test);
     }
-//
-//    public void setCustomFont() {
-//
-//        ViewGroup vg = (ViewGroup) mTabLayout.getChildAt(0);
-//        int tabsCount = vg.getChildCount();
-//
-//        for (int j = 0; j < tabsCount; j++) {
-//            ViewGroup vgTab = (ViewGroup) vg.getChildAt(j);
-//
-//            int tabChildsCount = vgTab.getChildCount();
-//
-//            for (int i = 0; i < tabChildsCount; i++) {
-//                View tabViewChild = vgTab.getChildAt(i);
-//                if (tabViewChild instanceof TextView) {
-//                    //Put your font in assests folder
-//                    //assign name of the font here (Must be case sensitive)
-//                    ((TextView) tabViewChild).setTypeface(Typeface.createFromAsset(getAssets(), "res/font/opensans_semibold.ttf"));
-//                }
-//            }
-//        }
-//    }
-//    res/font/opensans_semibold.ttf
+
 
     public void setAccessToken()
     {
@@ -216,7 +198,7 @@ public class SubjectActivity extends AppCompatActivity
             editor.apply();
             editor.commit();
 
-            System.out.println(accessToken);
+//            System.out.println(accessToken);
 //            System.out.println(sharedPreferences.getString(Constant.ACCESS_TOKEN, null));
 
         }
@@ -231,6 +213,7 @@ public class SubjectActivity extends AppCompatActivity
 //        mainToolbarText.setText("Пәндер");
 //        mainToolbarText.setTextColor(Color.WHITE);
         myToolbar.setTitle("");
+        mainToolbarText.setText(mTabLayout.getTabAt(0).getText());
 
 
         setSupportActionBar(myToolbar);
@@ -288,4 +271,14 @@ public class SubjectActivity extends AppCompatActivity
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
     }
+
+    public class PageListener extends ViewPager.SimpleOnPageChangeListener {
+
+        public void onPageSelected(int position)
+        {
+//            currentPage = position;
+            mainToolbarText.setText(mTabLayout.getTabAt(position).getText());
+        }
+    }
+
 }

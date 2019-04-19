@@ -31,9 +31,11 @@
             android:id="@+id/bottom_navigation_view"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            app:itemIconSize="20dp"
             android:layout_gravity="bottom"
             android:background="@color/colorWhite"
             app:labelVisibilityMode="unlabeled"
+            app:itemIconTint="@drawable/selector"
             android:fitsSystemWindows="true"
             app:menu="@menu/bottom_navigation_view_menu"/>
 

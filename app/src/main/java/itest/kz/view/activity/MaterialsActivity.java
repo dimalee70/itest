@@ -3,23 +3,36 @@ package itest.kz.view.activity;
 import android.content.Context;
 import android.content.Intent;
 import android.databinding.DataBindingUtil;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
+import android.view.View;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import java.io.Serializable;
 import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
 
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.CompositeDisposable;
+import io.reactivex.disposables.Disposable;
+import io.reactivex.functions.Consumer;
 import itest.kz.R;
+import itest.kz.app.AppController;
 import itest.kz.databinding.ActivityMaterialsBinding;
 import itest.kz.model.Node;
+import itest.kz.model.ProfileInfo;
+import itest.kz.model.ProfileResponse;
 import itest.kz.model.Subject;
 import itest.kz.model.Test;
+import itest.kz.network.UserService;
 import itest.kz.util.Constant;
 import itest.kz.view.adapters.MaterialsAdapter;
 import itest.kz.view.adapters.MyAdapter;
@@ -33,7 +46,8 @@ public class MaterialsActivity extends AppCompatActivity implements Observer
     private MaterialsViewModel materialsViewModel;
     private MaterialsAdapter materialsAdapter;
     private List<Node> nodeList;
-
+    private Toolbar toolbarMaterials;
+    private TextView mainToolbarText;
     public Subject getSubject() {
         return subject;
     }
@@ -55,6 +69,7 @@ public class MaterialsActivity extends AppCompatActivity implements Observer
         materialsViewModel = new MaterialsViewModel(this, subject);
         activityMaterialsBinding.setMaterials(materialsViewModel);
 
+        setMyToolbar();
         setUpListOfNodesView(activityMaterialsBinding.materialList);
         setUpObserver(materialsViewModel);
 
@@ -132,4 +147,21 @@ public class MaterialsActivity extends AppCompatActivity implements Observer
 //
 //
 //    }
+
+    public void setMyToolbar()
+    {
+        toolbarMaterials = (Toolbar) activityMaterialsBinding
+                .toolbarMaterials;
+        mainToolbarText = (TextView) activityMaterialsBinding
+                .toolbarTitle;
+//        mainToolbarText.setTextColor(Color.WHITE);
+        toolbarMaterials.setTitle("");
+        toolbarMaterials.setNavigationIcon(R.drawable.ic_navigation_strelka);
+        toolbarMaterials.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+    }
 }

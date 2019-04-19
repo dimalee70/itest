@@ -33,7 +33,7 @@
                     android:textSize="15sp"
                     android:ellipsize="end"
                     android:maxLines="1"
-                    android:fontFamily="@font/my_open_sans_semibold"
+                    android:fontFamily="@font/my_open_sans_regular"
                     android:drawableEnd="@{ent.icon}"
                     />
 

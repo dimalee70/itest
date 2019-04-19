@@ -79,10 +79,10 @@ public class Subject implements Serializable, Parcelable, Comparable, Cloneable
         this.sublings = sublings;
     }
 
-    public Subject(Long id)
+    public Subject(Long id, String title)
     {
         this.id = id;
-//        this.title = title;
+        this.title = title;
     }
 
     public int getOnClickedRecycle()

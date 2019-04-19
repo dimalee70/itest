@@ -9,6 +9,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
+import android.view.View;
+import android.widget.TextView;
 
 import java.util.List;
 import java.util.Observable;
@@ -31,6 +34,8 @@ public class NodeByNodeActivity extends AppCompatActivity implements Observer
     private ActivityNodeByNodeBinding activityNodeByNodeBinding;
     private NodeByNodeViewModel nodeByNodeViewModel;
     private NodeChildren node;
+    private Toolbar toolbarNode;
+    private TextView mainToolbarText;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState)
@@ -42,6 +47,7 @@ public class NodeByNodeActivity extends AppCompatActivity implements Observer
         nodeByNodeViewModel = new NodeByNodeViewModel(this, node);
         activityNodeByNodeBinding.setNode(nodeByNodeViewModel);
 
+        setMyToolbar();
         setUpListOfNodesView(activityNodeByNodeBinding.lecturesList);
         setUpObserver(nodeByNodeViewModel);
 
@@ -94,5 +100,21 @@ public class NodeByNodeActivity extends AppCompatActivity implements Observer
         nodeByNodeViewModel.reset();
     }
 
+    public void setMyToolbar()
+    {
+        toolbarNode = (Toolbar) activityNodeByNodeBinding
+                .toolbarNodeByNode;
+        mainToolbarText = (TextView) activityNodeByNodeBinding
+                .toolbarTitle;
+//        mainToolbarText.setTextColor(Color.WHITE);
+        toolbarNode.setTitle("");
+        toolbarNode.setNavigationIcon(R.drawable.ic_navigation_strelka);
+        toolbarNode.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+    }
 
 }

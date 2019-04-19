@@ -4,6 +4,9 @@ import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
+import android.view.View;
+import android.widget.TextView;
 
 import java.util.Observable;
 import java.util.Observer;
@@ -21,6 +24,8 @@ public class LectureActivity extends AppCompatActivity implements Observer
     private LectureResponse lectureResponse;
     private ActivityLectureBinding activityLectureBinding;
     private LectureViewModel lectureViewModel;
+    private Toolbar toolbarLecture;
+    private TextView mainToolbarText;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState)
@@ -33,6 +38,7 @@ public class LectureActivity extends AppCompatActivity implements Observer
 
         lectureViewModel = new LectureViewModel(this, lectureResponse);
         activityLectureBinding.setLecture(lectureViewModel);
+        setMyToolbar();
 
     }
 
@@ -51,5 +57,21 @@ public class LectureActivity extends AppCompatActivity implements Observer
             LectureViewModel lectureViewModel =
                     (LectureViewModel) o;
         }
+    }
+    public void setMyToolbar()
+    {
+        toolbarLecture = (Toolbar) activityLectureBinding
+                .toolbarLecture;
+        mainToolbarText = (TextView) activityLectureBinding
+                .toolbarTitle;
+//        mainToolbarText.setTextColor(Color.WHITE);
+        toolbarLecture.setTitle("");
+        toolbarLecture.setNavigationIcon(R.drawable.ic_navigation_strelka);
+        toolbarLecture.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
     }
 }

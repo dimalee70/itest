@@ -4,13 +4,16 @@
         <shape android:shape="rectangle">
             <solid android:color="@color/colorPrimary" />
             <corners android:radius="4dp" />
-            <size android:height="30dp" android:width="30dp"></size>
-            <padding android:left="5dp" android:top="5dp" android:right="5dp" android:bottom="5dp" />
+            <size android:height="5dp" android:width="5dp"></size>
+            <!--<padding android:left="5dp" android:top="5dp" android:right="5dp" android:bottom="5dp" />-->
         </shape>
     </item>
-    <item>
-        <bitmap
-            android:src="@drawable/ic_lang"
-            android:tileMode="disabled" />
-    </item>
+    <item
+        android:gravity="center"
+        android:drawable="@drawable/ic_language"
+        android:top="5dp"
+        android:bottom="5dp"
+        android:left="5dp"
+        android:right="5dp"
+        />
 </layer-list>

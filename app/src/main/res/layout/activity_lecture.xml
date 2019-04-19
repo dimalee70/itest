@@ -12,23 +12,54 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar_lecture"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="?attr/colorPrimary"
+            android:elevation="4dp"
+            app:theme="@style/ToolbarColoredBackArrow"
+            android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
+            app:popupTheme="@style/ThemeOverlay.AppCompat.Light">
+
+            <TextView
+                android:id="@+id/toolbar_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@{lecture.title}"
+                android:layout_marginLeft="20dp"
+                android:textSize="20sp"
+                android:layout_gravity="left"
+                android:textColor="@color/colorWhite"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:fontFamily="@font/my_open_sans_regular" />
+
+        </android.support.v7.widget.Toolbar>
+
         <RelativeLayout
             android:id="@+id/header"
-            android:visibility="@{lecture.visibleHeader}"
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:layout_alignParentTop="true"
             android:background="#b3b1b1"
+            android:layout_below="@+id/toolbar_lecture"
             android:gravity="center"
+            android:visibility="@{lecture.visibleHeader}"
             android:layout_gravity="center">
+            <!--android:visibility="@{lecture.visibleHeader}"-->
+            <!--android:layout_alignParentTop="true"-->
             <TextView
                 android:id="@+id/header_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Әзірге тақырып бойынша тест жоқ"
+                android:text="@{lecture.haventTestText}"
                 android:textSize="16sp"
-                android:textColor="#4c4c4c" />
+                android:textColor="#4c4c4c"
+                android:fontFamily="@font/my_open_sans_regular"/>
+
         </RelativeLayout>
+
         <RelativeLayout
             android:id="@+id/footer"
             android:layout_width="wrap_content"
@@ -65,12 +96,13 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:textAlignment="center"
-                        android:text="Ewe raz test"
+                        android:text="@{lecture.passTestText}"
                         android:textSize="18sp"
                         android:onClick="@{lecture.onClickTest}"
                         android:textColor="@color/colorWhite"
                         android:layout_centerInParent="true"
                         android:layout_margin="10dp"
+                        android:fontFamily="@font/my_open_sans_regular"
                         />
                     <!--android:onClick="@{() ->ent.onClickCancel()}"-->
                     <!--android:onClick="@{ent.onClick}"-->

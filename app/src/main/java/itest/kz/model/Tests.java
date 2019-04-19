@@ -9,6 +9,7 @@ public class Tests implements Serializable
     private List<Question> questions;
     private Long testId;
     private Subject subject;
+    private String title;
 //    private TestResult testResult;
 
     private Test test;
@@ -24,6 +25,15 @@ public class Tests implements Serializable
         this.testId = testId;
         this.subject = subject;
         this.test = test;
+    }
+
+    public Tests(List<Question> questions, Long testId, Subject subject, Test test, String title)
+    {
+        this.questions = questions;
+        this.testId = testId;
+        this.subject = subject;
+        this.test = test;
+        this.title = title;
     }
 
     public Test getTest() {
@@ -62,6 +72,14 @@ public class Tests implements Serializable
     public void setSubject(Subject subject)
     {
         this.subject = subject;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
     }
 
     @Override

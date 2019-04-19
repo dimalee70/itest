@@ -32,6 +32,8 @@ public class TestsUtils
         ArrayList<Tests> testsArrayList = new ArrayList<>();
         JSONObject jsonObject1 = new JSONObject(jsonObject.toString());
         JSONObject testMain = jsonObject1.getJSONObject("test");
+        JSONObject contentType = testMain.getJSONObject("content_type");
+        String title = contentType.getString("title");
         JSONObject data = jsonObject1.getJSONObject("data");
         JSONArray tests = data.getJSONArray("tests");
 
@@ -69,7 +71,7 @@ public class TestsUtils
                 questionsList.add(obj);
             }
 
-            testsArrayList.add(new Tests(questionsList, testId, subject, testObject));
+            testsArrayList.add(new Tests(questionsList, testId, subject, testObject, title));
         }
 
         return testsArrayList;

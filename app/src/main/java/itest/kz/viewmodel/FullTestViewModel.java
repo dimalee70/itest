@@ -27,4 +27,9 @@ public class FullTestViewModel extends Observable
         else
             timeVisibility = new ObservableInt(View.GONE);
     }
+
+//    public String getTitle()
+//    {
+//        return
+//    }
 }

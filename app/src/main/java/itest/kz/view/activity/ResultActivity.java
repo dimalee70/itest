@@ -210,7 +210,7 @@ public class ResultActivity extends AppCompatActivity implements Observer
         }
         ResultAdapter resultAdapter = new ResultAdapter(tests, this,
                 selectedSubject, testIdMain,null,
-                null,null,0, resultTag);
+                null,null,0, resultTag, typeTest);
 
 //        recyclerView.setOnClickListener();
 //
