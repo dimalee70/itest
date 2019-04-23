@@ -29,7 +29,7 @@
                 <!--android:theme="@style/AppTheme.AppBarOverlay"-->
 
                 <android.support.v7.widget.Toolbar
-                    android:id="@+id/result_toolbar"
+                    android:id="@+id/results_toolbar"
                     android:layout_width="match_parent"
                     android:layout_height="?attr/actionBarSize"
                     android:background="?attr/colorPrimary"
@@ -38,28 +38,42 @@
 
 
                     <RelativeLayout
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content">
 
                         <TextView
                             android:id="@+id/text_view_title"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="ENT"
+                            android:text="@{results.title}"
+                            android:textAlignment="center"
                             android:textSize="20sp"
-                            android:layout_marginStart="43dp"
-                            android:textColor="@color/colorWhite" />
+                            android:layout_marginStart="120dp"
+                            android:textColor="@color/colorWhite"
+                            android:fontFamily="@font/my_open_sans_regular"/>
+
+                        <ImageButton
+                            android:id="@+id/buttonCloseFragment"
+                            android:layout_width="wrap_content"
+                            android:layout_alignParentRight="true"
+                            android:layout_centerVertical="true"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/ic_icon_x"
+                            android:layout_marginEnd="30dp"
+                            android:clickable="true"/>
+                        <!--android:layout_toRightOf="@+id/text_view_title"-->
 
                     </RelativeLayout>
 
-                    <ImageButton
-                        android:id="@+id/buttonCloseFragment"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="right"
-                        android:background="@drawable/ic_icon_x"
-                        android:layout_marginEnd="15dp"
-                        android:clickable="true"/>
+                    <!--<ImageButton-->
+                        <!--android:id="@+id/buttonCloseFragment"-->
+                        <!--android:layout_width="wrap_content"-->
+                        <!--android:layout_height="wrap_content"-->
+                        <!--android:layout_gravity="right"-->
+                        <!--android:background="@drawable/ic_icon_x"-->
+                        <!--android:clickable="true"/>-->
+
+                    <!--android:onClick="@{results.onClickClose}"-->
 
                 </android.support.v7.widget.Toolbar>
 

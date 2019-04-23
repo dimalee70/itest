@@ -18,6 +18,7 @@ import itest.kz.app.AppController;
 import itest.kz.model.StatisticSubject;
 import itest.kz.model.StatisticSubjectResponce;
 import itest.kz.network.SubjectService;
+import itest.kz.util.CheckUtility;
 import itest.kz.util.Constant;
 
 import static android.content.Context.MODE_PRIVATE;
@@ -28,6 +29,7 @@ public class FullTestStatisticViewModel extends Observable
     private String accessToken;
     private String language;
     public ObservableInt subjectRecycler;
+    public ObservableInt  imageButtonVisibility;
     private List<StatisticSubject> statisticSubjectList;
     private CompositeDisposable compositeDisposable = new CompositeDisposable();
 
@@ -48,30 +50,32 @@ public class FullTestStatisticViewModel extends Observable
     }
     private void fetchSubjectStatisticList()
     {
-        AppController appController = new AppController();
-        SubjectService subjectService = appController.getSubjectService();
+        if (CheckUtility.isNetworkConnected(context)) {
 
 
-        Disposable disposable = subjectService.getStatisticFull(Constant.ACCEPT,
-                language,
-                "Bearer " + accessToken)
-                .subscribeOn(appController.subscribeScheduler())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Consumer<StatisticSubjectResponce>() {
-                               @Override
-                               public void accept(StatisticSubjectResponce statisticSubjectResponce) throws Exception
-                               {
-                                   System.out.println(statisticSubjectResponce);
-                                   updateSubjectDataList(statisticSubjectResponce.getData());
-                                   subjectRecycler.set(View.VISIBLE);
-                               }
-                           },
-                        new Consumer<Throwable>() {
-                            @Override
-                            public void accept(Throwable throwable) throws Exception
-                            {
+            AppController appController = new AppController();
+            SubjectService subjectService = appController.getSubjectService();
+
+
+            Disposable disposable = subjectService.getStatisticFull(Constant.ACCEPT,
+                    language,
+                    "Bearer " + accessToken)
+                    .subscribeOn(appController.subscribeScheduler())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribe(new Consumer<StatisticSubjectResponce>() {
+                                   @Override
+                                   public void accept(StatisticSubjectResponce statisticSubjectResponce) throws Exception {
+//                                   System.out.println(statisticSubjectResponce);
+                                       updateSubjectDataList(statisticSubjectResponce.getData());
+                                       subjectRecycler.set(View.VISIBLE);
+                                       imageButtonVisibility.set(View.GONE);
+                                   }
+                               },
+                            new Consumer<Throwable>() {
+                                @Override
+                                public void accept(Throwable throwable) throws Exception {
+                                }
                             }
-                        }
 //                        new Consumer<SubjectResponce>() {
 //                    @Override
 //                    public void accept(SubjectResponce subjectResponce) throws Exception
@@ -80,9 +84,15 @@ public class FullTestStatisticViewModel extends Observable
 //                        subjectRecycler.set(View.VISIBLE);
 //                    }
 //                }
-                );
+                    );
 
-        compositeDisposable.add(disposable);
+            compositeDisposable.add(disposable);
+        }
+        else
+        {
+            subjectRecycler.set(View.GONE);
+            imageButtonVisibility.set(View.VISIBLE);
+        }
     }
 
     private void updateSubjectDataList(List<StatisticSubject> data)

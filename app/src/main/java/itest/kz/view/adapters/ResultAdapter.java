@@ -236,6 +236,8 @@ public class ResultAdapter extends RecyclerView.Adapter<ResultAdapter.ResultAdap
                     intent.putExtra(Constant.TEST_MAIN_ID, testIdMain);
                     intent.putExtra(Constant.RESULT_TAG, resultTag);
                     intent.putExtra(Constant.TYPE, typeTest);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
 //                    intent.putExtra("list", testList);
                 }
                 else
@@ -247,11 +249,13 @@ public class ResultAdapter extends RecyclerView.Adapter<ResultAdapter.ResultAdap
                     intent.putExtra(Constant.SELECTED_SUBJECT, (Serializable) selectedSubject);
                     intent.putExtra(Constant.IS_STARTED_FIRST, false);
                     intent.putExtra("list", testList);
-//                    System.out.println("testList");
-//                    System.out.println(testList);
                     intent.putExtra(Constant.RESULT_TAG, resultTag);
                     intent.putExtra(Constant.TYPE, typeTest);
                     intent.putExtra(Constant.TEST_MAIN_ID, testIdMain);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+//                    intent.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
+//                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 }
 
                 context.startActivity(intent);

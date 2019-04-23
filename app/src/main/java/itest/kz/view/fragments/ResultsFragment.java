@@ -37,8 +37,10 @@ import itest.kz.util.Constant;
 import itest.kz.util.TestsUtils;
 import itest.kz.view.activity.FulltestResultActivity;
 import itest.kz.view.activity.ResultActivity;
+import itest.kz.view.activity.ResultsActivity;
 import itest.kz.view.adapters.AnswerAdapter;
 import itest.kz.view.adapters.ResultsSubjectAdapter;
+import itest.kz.view.adapters.ViewPagerAdapter;
 import itest.kz.viewmodel.ResultsFragmentViewModel;
 
 import static android.content.Context.MODE_PRIVATE;
@@ -77,6 +79,7 @@ public class ResultsFragment extends Fragment
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState)
     {
+        setHasOptionsMenu(true);
         SharedPreferences settings = getContext().getSharedPreferences(Constant.MY_LANG, MODE_PRIVATE);
         language = settings.getString(Constant.LANG, "kz");
         SharedPreferences accessTok = getContext().getSharedPreferences(Constant.MY_PREF, MODE_PRIVATE);
@@ -167,6 +170,11 @@ public class ResultsFragment extends Fragment
         compositeDisposable.add(disposable);
     }
 
+    public ResultsSubjectAdapter getResultsSubjectAdapter()
+    {
+        return resultsSubjectAdapter;
+    }
+
     private void setUpListOfSubjectsView(RecyclerView listSubjects)
     {
         if (testsList != null && testsList.size() == 5)
@@ -182,14 +190,24 @@ public class ResultsFragment extends Fragment
                 {
                     if (typeTest.equals(Constant.TYPEFULLTEST))
                     {
-                        Intent intent = new Intent(getActivity(), FulltestResultActivity.class);
-                        intent.putExtra(Constant.TEST_MAIN_ID, testIdMain);
-                        intent.putExtra(Constant.CURRENT_POSITION_SUBJECT, position);
-                        intent.putExtra(Constant.RESULT_TAG, Constant.RESULT_TAG);
-                        intent.putExtra(Constant.SUBJECT_LIST, (Serializable) subjectList);
-                        intent.putExtra(Constant.SELECTED_SUBJECT, (Serializable) selectedSubject);
-                        intent.putExtra(Constant.TYPE, typeTest);
-                        getContext().startActivity(intent);
+
+
+
+                        ResultsActivity r = ((ResultsActivity)getActivity());
+
+                        ViewPagerAdapter v = (ViewPagerAdapter)r.getmViewPager().getAdapter();
+                        CheckResultFragment c = (CheckResultFragment) v.getItem(1);
+                        c.setCurrentPosition(position);
+
+                        ((ResultsActivity)getActivity()).getmViewPager().setCurrentItem(1);
+//                        Intent intent = new Intent(getActivity(), FulltestResultActivity.class);
+//                        intent.putExtra(Constant.TEST_MAIN_ID, testIdMain);
+//                        intent.putExtra(Constant.CURRENT_POSITION_SUBJECT, position);
+//                        intent.putExtra(Constant.RESULT_TAG, Constant.RESULT_TAG);
+//                        intent.putExtra(Constant.SUBJECT_LIST, (Serializable) subjectList);
+//                        intent.putExtra(Constant.SELECTED_SUBJECT, (Serializable) selectedSubject);
+//                        intent.putExtra(Constant.TYPE, typeTest);
+//                        getContext().startActivity(intent);
                     }
 //                else if (typeTest.equals(Constant.TYPESUBJECTTEST))
 //                {

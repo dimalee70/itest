@@ -12,6 +12,20 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+
+        <ImageButton
+            android:id="@+id/button_reflesh"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_centerVertical="true"
+            android:layout_centerHorizontal="true"
+            android:text="dsdcsdcsdcdscdcds"
+            android:visibility="@{subject.imageButtonVisibility}"/>
+
         <android.support.v7.widget.RecyclerView
             android:layout_marginTop="10dp"
             android:id="@+id/list_subject_statistic"
@@ -23,5 +37,7 @@
             app:layout_behavior="@string/appbar_scrolling_view_behavior"
             tools:listitem="@layout/item_subject_statistic"
             android:clickable="true"/>
+
+        </RelativeLayout>
     </LinearLayout>
 </layout>

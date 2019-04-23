@@ -270,7 +270,7 @@ public class ProfileInfoFragment extends Fragment implements EasyPermissions.Per
                         surname.getText().toString(),
                         date.getText().toString(),
                         login.getText().toString(), email.getText().toString());
-                System.out.println(accessToken);
+//                System.out.println(accessToken);
 
                 AppController appController = new AppController();
                 CompositeDisposable compositeDisposable = new CompositeDisposable();
@@ -497,7 +497,7 @@ public class ProfileInfoFragment extends Fragment implements EasyPermissions.Per
 //        AppController appController = AppController.create(context);
                     UserService userService = appController.getUserService();
 
-                    System.out.println(accessToken);
+//                    System.out.println(accessToken);
 
                     Disposable disposable = userService.updateAvatar(Constant.ACCEPT,
                             language,

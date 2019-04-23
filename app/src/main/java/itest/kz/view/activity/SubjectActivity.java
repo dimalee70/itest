@@ -92,6 +92,7 @@ public class SubjectActivity extends AppCompatActivity
     protected void onCreate(@Nullable Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
+//        System.out.println("Start");
         activitySubjectBinding = DataBindingUtil
                 .setContentView(this, R.layout.activity_subject);
 

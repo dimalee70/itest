@@ -154,7 +154,7 @@
                                         android:layout_height="wrap_content"
                                         android:layout_toRightOf="@+id/pencil"
                                         android:textSize="16sp"
-                                        android:fontFamily="@font/my_open_sans_semibold"
+                                        android:fontFamily="@font/my_open_sans_regular"
                                         android:text="@{profile.infoText}"/>
 
                                 </RelativeLayout>
@@ -207,7 +207,7 @@
                                     android:layout_toRightOf="@+id/password"
                                     android:textSize="16sp"
                                     android:text="@{profile.passwordText}"
-                                    android:fontFamily="@font/my_open_sans_semibold"/>
+                                    android:fontFamily="@font/my_open_sans_regular"/>
 
                             </RelativeLayout>
 
@@ -257,7 +257,7 @@
                                     android:layout_height="wrap_content"
                                     android:layout_toRightOf="@+id/lang"
                                     android:textSize="16sp"
-                                    android:fontFamily="@font/my_open_sans_semibold"
+                                    android:fontFamily="@font/my_open_sans_regular"
                                     android:text="@{profile.langText}" />
 
                             </RelativeLayout>
@@ -311,7 +311,7 @@
                                     android:layout_toRightOf="@+id/agreement"
                                     android:textSize="16sp"
                                     android:text="@{profile.agreementText}"
-                                    android:fontFamily="@font/my_open_sans_semibold"/>
+                                    android:fontFamily="@font/my_open_sans_regular"/>
 
                             </RelativeLayout>
 

@@ -16,6 +16,7 @@ public class TestViewModelFactory implements ViewModelProvider.Factory
     private String typeTest;
     private boolean isStartedFirst;
     private Tests  tests;
+    private Long testIdMain = -1L;
 
     public TestViewModelFactory(Application application, Subject subject)
     {
@@ -33,10 +34,21 @@ public class TestViewModelFactory implements ViewModelProvider.Factory
         this.tests = tests;
     }
 
+    public TestViewModelFactory(Application application, Subject subject, String typeTest, boolean isStartedFirst, Long testIdMain)
+    {
+        this.application = application;
+        this.subject = subject;
+        this.typeTest = typeTest;
+        this.isStartedFirst = isStartedFirst;
+        this.testIdMain = testIdMain;
+    }
+
     @NonNull
     @Override
     public <T extends ViewModel> T create(@NonNull Class<T> modelClass)
     {
+        if (testIdMain == null)
+            return (T) new TestViewModel(application, subject, typeTest, isStartedFirst, testIdMain);
         return (T) new TestViewModel(application, subject, typeTest, isStartedFirst, tests);
     }
 }

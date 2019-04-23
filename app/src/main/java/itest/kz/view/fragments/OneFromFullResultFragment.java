@@ -13,6 +13,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -44,6 +45,7 @@ public class OneFromFullResultFragment extends Fragment implements Observer
     private String resultTag;
     private  int i;
     private String typeTest;
+    private TextView subjectTitleText;
 
     @Nullable
     @Override
@@ -69,6 +71,8 @@ public class OneFromFullResultFragment extends Fragment implements Observer
         oneFromFullResultViewModel = new OneFromFullResultViewModel(getContext(), tests);
         fragmentOneFromFullResultBinding.setOne(oneFromFullResultViewModel);
 
+//        subjectTitleText = getActivity().findViewById(R.id.subject_title_text);
+//        subjectTitleText.setText(subjectList.get(currentPosition).getTitle());
         selectedSubject = (Subject) getArguments().getSerializable(Constant.SELECTED_SUBJECT);
         setR(fragmentOneFromFullResultBinding.listAnswers);
 //        System.out.println("resultTag");

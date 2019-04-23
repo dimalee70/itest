@@ -22,7 +22,8 @@
         android:supportsRtl="true">
         <activity
             android:name=".view.activity.SplashActivity"
-            android:theme="@style/SplashTheme">
+            android:theme="@style/SplashTheme"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -30,51 +31,79 @@
             </intent-filter>
         </activity>
         <activity
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme"
             android:name=".view.activity.MainActivity">
         </activity>
         <activity
+            android:screenOrientation="portrait"
             android:name=".view.activity.AuthActivity"
             android:windowSoftInputMode="adjustResize"
             android:theme="@style/AppTheme">
             <!--android:windowSoftInputMode="stateHidden"-->
             <!--android:windowSoftInputMode="adjustResize"-->
         </activity>
-        <activity android:name=".view.activity.TestActivity"
-            android:launchMode="singleTop"
+        <activity
+            android:screenOrientation="portrait"
+            android:name=".view.activity.TestActivity"
             android:theme="@style/AppTheme">
         </activity>
-        <activity android:name=".view.activity.ResultActivity"
+        <!--android:noHistory="true"-->
+        <!--android:launchMode="singleTop"-->
+        <!--android:excludeFromRecents="true"-->
+        <!--android:launchMode="singleTask"-->
+        <!--android:launchMode="singleTop"-->
+        <activity
+            android:screenOrientation="portrait"
+            android:name=".view.activity.ResultActivity"
             android:theme="@style/AppTheme">
         </activity>
-        <activity android:name=".view.activity.MaterialsActivity"
+        <activity
+            android:screenOrientation="portrait"
+            android:name=".view.activity.MaterialsActivity"
             android:theme="@style/AppTheme">
         </activity>
-        <activity android:name=".view.activity.NodeByNodeActivity"
+        <activity
+            android:screenOrientation="portrait"
+            android:name=".view.activity.NodeByNodeActivity"
             android:theme="@style/AppTheme">
         </activity>
         <activity android:name=".view.activity.LectureActivity"
             android:theme="@style/AppTheme">
         </activity>
-        <activity android:name=".view.activity.SubjectActivity"
+        <activity
+            android:screenOrientation="portrait"
+            android:name=".view.activity.SubjectActivity"
             android:theme="@style/AppTheme">
         </activity>
-        <activity android:name=".view.activity.FullTestActivity"
+        <activity
+            android:screenOrientation="portrait"
+            android:name=".view.activity.FullTestActivity"
             android:theme="@style/AppTheme">
         </activity>
-        <activity android:name=".view.activity.MainHomeActivity"
+        <activity
+            android:screenOrientation="portrait"
+            android:name=".view.activity.MainHomeActivity"
             android:theme="@style/AppTheme">
         </activity>
-        <activity android:name=".view.activity.HomeActivity"
+        <activity
+            android:screenOrientation="portrait"
+            android:name=".view.activity.HomeActivity"
             android:theme="@style/AppTheme">
         </activity>
-        <activity android:name=".view.activity.FulltestResultActivity"
+        <activity
+            android:screenOrientation="portrait"
+            android:name=".view.activity.FulltestResultActivity"
             android:theme="@style/AppTheme">
         </activity>
-        <activity android:name=".view.activity.ResultsActivity"
+        <activity
+            android:screenOrientation="portrait"
+            android:name=".view.activity.ResultsActivity"
             android:theme="@style/AppTheme">
         </activity>
-        <activity android:name=".view.activity.StatisticActivity"
+        <activity
+            android:screenOrientation="portrait"
+            android:name=".view.activity.StatisticActivity"
             android:theme="@style/AppTheme">
         </activity>
     </application>

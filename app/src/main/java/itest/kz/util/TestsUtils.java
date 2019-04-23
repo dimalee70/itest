@@ -127,8 +127,8 @@ public class TestsUtils
         {
             JSONObject itemByKey = data.getJSONObject(panelKeys.next());
             Subject subject = gson.fromJson(itemByKey.getJSONObject("subject").toString(), Subject.class);
-            System.out.println("subject");
-            System.out.println(subject);
+//            System.out.println("subject");
+//            System.out.println(subject);
             JSONArray tests = itemByKey.getJSONArray("tests");
             Test test;
             List<Test> testList = new ArrayList<>();

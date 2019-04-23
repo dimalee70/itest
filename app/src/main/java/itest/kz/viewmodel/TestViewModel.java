@@ -56,23 +56,58 @@ public class TestViewModel extends AndroidViewModel
     private Subject subject;
     private String language;
     private String accessToken;
-    public Tests testsList;
+    public Tests testsList = null;
 //    private  List<Question> testList = new ArrayList<>();
     private CompositeDisposable compositeDisposable = new CompositeDisposable();
     private Context context;
     private String typeTest;
     private boolean isStartedFirst;
     public Action onClickForward;
+    private Long testIdMain;
 
     public LiveData<Tests> getTests() {
         if (listMutableLiveData == null) {
             listMutableLiveData = new MutableLiveData<Tests>();
+//
+//            System.out.println("testIdMain");
+//            System.out.println(testIdMain);
+//            if (testIdMain <= 0)
+//            {
             if (testsList == null)
                 fetchTestList();
             else
                 fetchFullTestQuestionsGenerate(testsList.getTestId());
+//            }
+//            else
+//            {
+//                fetchFullTestQuestionsGenerate(testIdMain);
+//            }
+
         }
         return listMutableLiveData;
+    }
+
+    public TestViewModel(Application application, Subject subject, String typeTest, boolean isStartedFirst, Long testIdMain)
+    {
+        super(application);
+        this.testIdMain = testIdMain;
+        this.subject = subject;
+        this.context = application;
+        this.isStartedFirst = isStartedFirst;
+        SharedPreferences settings = application.getSharedPreferences(Constant.MY_PREF, MODE_PRIVATE);
+        accessToken = settings.getString(Constant.ACCESS_TOKEN, null);
+        SharedPreferences lang = application.getSharedPreferences(Constant.MY_LANG, MODE_PRIVATE);
+//        settings.edit().clear().commit();
+        language = lang.getString(Constant.LANG, "kz");
+        this.typeTest = typeTest;
+//        this.onClickForward = () ->
+//        {
+//            System.out.println("Dfvdf");
+//        };
+//        System.out.println("MV");
+//        System.out.println(subject);
+//        fetchTestList();
+
     }
 
     public TestViewModel(Application application, Subject subject, String typeTest, boolean isStartedFirst, Tests testsList)
@@ -141,6 +176,7 @@ public class TestViewModel extends AndroidViewModel
 //        System.out.println("subject");
 //        System.out.println(subject);
         TestGenerateCredentials credentials = new TestGenerateCredentials("ent", typeTest, subject.getId().toString());
+//        System.out.println(subject);
         AppController appController = new AppController();
         CompositeDisposable compositeDisposable = new CompositeDisposable();
 //        AppController appController = AppController.create(context);
@@ -150,16 +186,20 @@ public class TestViewModel extends AndroidViewModel
                 language, "Bearer " + accessToken, credentials)
                 .subscribeOn(appController.subscribeScheduler())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Consumer<TestGenerateResponse>()
-                           {
+                .subscribe(new Consumer<TestGenerateResponse>() {
                                @Override
-                               public void accept(TestGenerateResponse testGenerateResponse) throws Exception
-                               {
+                               public void accept(TestGenerateResponse testGenerateResponse) throws Exception {
 //                                   System.out.println("testGenerate");
 //                                   System.out.println(testGenerateResponse.getTestGenerate());
                                    fetchFullTestQuestionsGenerate(testGenerateResponse.getTestGenerate().getTestId());
                                }
-                           }
+                           },
+                        new Consumer<Throwable>() {
+                            @Override
+                            public void accept(Throwable throwable) throws Exception {
+                                System.out.println("error");
+                            }
+                        }
 //                        new Consumer<List<Question>>() {
 //                               @Override
 //                               public void accept(List<Question> tests) throws Exception {
@@ -194,6 +234,7 @@ public class TestViewModel extends AndroidViewModel
                                public void accept(JsonObject jsonObject) throws Exception
                                {
 
+//                                   System.out.println("json");
 //                                   System.out.println(jsonObject.toString());
                                    Tests questions =
                                            TestsUtils.deserializeFromJsonToTests(jsonObject);

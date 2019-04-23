@@ -297,6 +297,19 @@ public class TestFragment extends Fragment
                             intent.putExtra("tests", (Tests) testList);
                             intent.putExtra(Constant.SELECTED_SUBJECT, (Serializable) selectedSubject);
                             intent.putExtra(Constant.RESULT_TAG, resultTag);
+//                            intent.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
+
+                            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                            intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+//                            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+//                            intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+//                            intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+//                            intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+////                            intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+//                            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+//                            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
+//                            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP |
+//                                    Intent.FLAG_ACTIVITY_NEW_TASK);
                             intent.putExtra(Constant.TYPE, typeTest);
 //                        startActivity(intent);
                         }
@@ -311,6 +324,8 @@ public class TestFragment extends Fragment
                             intent.putExtra(Constant.RESULT_TAG, resultTag);
                             intent.putExtra(Constant.SUBJECT_LIST, (Serializable) subjectList);
                             intent.putExtra(Constant.TYPE, typeTest);
+                            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                            intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
 //                        args.putSerializable(Constant.SUBJECT_LIST, (ArrayList<Subject>) selectedSubects);
                         }
 
@@ -325,6 +340,8 @@ public class TestFragment extends Fragment
                             intent.putExtra(Constant.TEST_MAIN_ID, testIdMain);
                             intent.putExtra(Constant.RESULT_TAG, resultTag);
                             intent.putExtra(Constant.TYPE, typeTest);
+                            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                            intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
 //                        startActivity(intent);
                         }
 

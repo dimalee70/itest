@@ -31,6 +31,7 @@ public class LectureStatisticViewModel  extends Observable
     private String accessToken;
     private String language;
     public ObservableInt subjectRecycler;
+    public ObservableInt imageButtonVisibility;
     private List<LectureStatisticResponse> lectureStatisticResponseList;
     private CompositeDisposable compositeDisposable = new CompositeDisposable();
 
@@ -45,6 +46,7 @@ public class LectureStatisticViewModel  extends Observable
         accessToken = accessTok.getString(Constant.ACCESS_TOKEN, "kz");
         this.context = context;
         this.subjectRecycler = new ObservableInt(View.GONE);
+        this.imageButtonVisibility = new ObservableInt(View.GONE);
         this.lectureStatisticResponseList = new ArrayList<>();
         fetchLectureStatisticList();
     }
@@ -75,12 +77,15 @@ public class LectureStatisticViewModel  extends Observable
                                             .deserializeFromJsonToLectureStatistic
                                                     (jsonObject));
                                     subjectRecycler.set(View.VISIBLE);
+                                    imageButtonVisibility.set(View.GONE);
                                 }
                             },
                             new Consumer<Throwable>() {
                                 @Override
                                 public void accept(Throwable throwable) throws Exception {
-                                    System.out.println("error");
+//                                    System.out.println("error");
+                                    throwable.getMessage();
+                                    imageButtonVisibility.set(View.GONE);
                                 }
                             }
                     );
@@ -89,7 +94,9 @@ public class LectureStatisticViewModel  extends Observable
         }
         else
         {
-            System.out.println("error");
+            subjectRecycler.set(View.GONE);
+            imageButtonVisibility.set(View.VISIBLE);
+
         }
     }
 

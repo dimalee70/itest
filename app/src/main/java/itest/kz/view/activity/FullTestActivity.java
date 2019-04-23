@@ -500,12 +500,12 @@ public class FullTestActivity extends AppCompatActivity
 
         public void onPageSelected(int position)
         {
-            currentPage = position;
+            selectedTestPosition = position;
 
 //            FullTestAdapter fullTestAdapter = (FullTestAdapter) mPager.getAdapter();
 //            TestFragment testFragment = (TestFragment) fullTestAdapter.getItem(position);
             TextView tv = findViewById(R.id.text_number_pager);
-            tv.setText((currentPage + 1) + " / " + numbersOFpages);
+            tv.setText((selectedTestPosition + 1) + " / " + numbersOFpages);
         }
     }
 

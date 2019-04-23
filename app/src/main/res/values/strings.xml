@@ -4,6 +4,9 @@
     <string name="rus">Руский</string>
     <string name="kaz">Қазақша</string>
 
+    <string name="resultKz">Нәтиже</string>
+    <string name="resultRu">Результат</string>
+
     <string name="finishTestDialogKz">Сіз расымен тестілеуді аяқтауды қалайсыз ба?</string>
     <string name="finishTestDialogRu">Вы действительно хотите завершить тест?</string>
 

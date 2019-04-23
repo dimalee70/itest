@@ -200,7 +200,8 @@ public class ResultActivity extends AppCompatActivity implements Observer
             public void onClick(View v)
             {
 //                System.out.println("Close");
-                finish();
+//                finish();
+                ResultActivity.super.onBackPressed();
             }
         });
 

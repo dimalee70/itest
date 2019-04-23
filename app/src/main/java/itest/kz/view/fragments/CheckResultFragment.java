@@ -10,6 +10,8 @@ import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
+import android.widget.TextView;
 
 import com.google.gson.JsonObject;
 
@@ -53,6 +55,9 @@ public class CheckResultFragment extends Fragment
     private String resultTag;
     private String typeTest;
     private Subject selectedSubject;
+    private TextView subjectTitleText;
+    private ImageButton buttonNext;
+    private ImageButton buttonPrevious;
 
     public static CheckResultFragment newInstance(Long testIdMain, List<Subject> subjectList, Subject selectedSubject,
                                                   String tag, String typeTest)
@@ -86,6 +91,7 @@ public class CheckResultFragment extends Fragment
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState)
     {
+        setHasOptionsMenu(true);
         Bundle extras = getActivity().getIntent().getExtras();
         SharedPreferences settings = getActivity().getSharedPreferences(Constant.MY_PREF, MODE_PRIVATE);
 //        settings.edit().clear().commit();
@@ -112,7 +118,14 @@ public class CheckResultFragment extends Fragment
                 R.layout.fragment_check_results, container, false);
         checkResultViewMoel = new CheckResultViewMoel(getContext());
         fragmentCheckResultsBinding.setCheck(checkResultViewMoel);
+        subjectTitleText = fragmentCheckResultsBinding
+                .subjectTitleText;
+        buttonNext = fragmentCheckResultsBinding
+                .buttonNextResult;
+        buttonPrevious = fragmentCheckResultsBinding
+                .buttonPrefiousResult;
         setTestsResults();
+
         return fragmentCheckResultsBinding.getRoot();
     }
 
@@ -193,15 +206,58 @@ public class CheckResultFragment extends Fragment
                                    PageListener listener = new PageListener();
                                    mPager.addOnPageChangeListener(listener);
 
-
+                                   setmPager(mPager);
 
                                    mPager.setCurrentItem(currentPosition);
+                                   subjectTitleText.setText(subjectsList.get(currentPosition).getTitle());
 
+                                   buttonNext.setOnClickListener(new View.OnClickListener()
+                                   {
+                                       @Override
+                                       public void onClick(View v)
+                                       {
+                                           if (currentPosition != mPager.getChildCount() - 1)
+                                               mPager.setCurrentItem(++currentPosition, true);
+                                       }
+                                   });
+
+                                   buttonPrevious.setOnClickListener(new View.OnClickListener() {
+                                       @Override
+                                       public void onClick(View v)
+                                       {
+                                           if (currentPosition != 0)
+                                               mPager.setCurrentItem(--currentPosition, true);
+                                       }
+                                   });
                                }
                            }
                 );
 
         compositeDisposable.add(disposable);
+    }
+
+    public void setmPager(CustomViewPager mPager)
+    {
+        this.mPager = mPager;
+    }
+
+    public CustomViewPager getmPager()
+    {
+        return mPager;
+    }
+
+    public Integer getCurrentPosition()
+    {
+        return currentPosition;
+    }
+
+    public void setCurrentPosition(Integer currentPosition)
+    {
+        this.currentPosition = currentPosition;
+        if (getmPager() != null)
+            getmPager().setCurrentItem(currentPosition);
+        System.out.println(currentPosition);
+//        mPager.setCurrentItem(currentPosition);
     }
 
     public  void setTestsResults()
@@ -248,6 +304,8 @@ public class CheckResultFragment extends Fragment
 //            System.out.println(position);
 //                f.setCurrentPosition(-1);
                 lastPage = position;
+                subjectTitleText
+                        .setText(subjectsList.get(currentPosition).getTitle());
             }
             else
             {
@@ -259,6 +317,8 @@ public class CheckResultFragment extends Fragment
 //            System.out.println(position);
 //                f.setCurrentPosition(1);
                 lastPage = position;
+                subjectTitleText
+                        .setText(subjectsList.get(currentPosition).getTitle());
             }
 
 

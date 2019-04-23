@@ -11,6 +11,7 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.ImageButton;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.ankushgrover.hourglass.Hourglass;
@@ -61,6 +62,9 @@ public class FulltestResultActivity extends AppCompatActivity
     private  CountDownTimer t;
     private ImageButton buttonCloseResult;
     private Subject selectedSubject;
+    private TextView subjectTitleText;
+    private ImageButton buttonNext;
+    private ImageButton buttonPrevious;
 
 //    SharedPreferences sharedPreferences = getSharedPreferences(Constant.CURRENT_TIME, MODE_PRIVATE);
 //    SharedPreferences.Editor editor = sharedPreferences.edit();
@@ -86,6 +90,7 @@ public class FulltestResultActivity extends AppCompatActivity
         this.testIdMain = getIntent().getExtras().getLong(Constant.TEST_MAIN_ID);
         this.subjectsList = getIntent().getExtras().getParcelableArrayList(Constant.SUBJECT_LIST);
         this.currentPosition = getIntent().getExtras().getInt(Constant.CURRENT_POSITION_SUBJECT, 0);
+
         this.resultTag = getIntent().getExtras().getString(Constant.RESULT_TAG, null);
         this.selectedSubject = (Subject) getIntent().getSerializableExtra(Constant.SELECTED_SUBJECT);
         maxTimeInMilliseconds = getSharedPreferences(Constant.CURRENT_TIME, MODE_PRIVATE)
@@ -100,6 +105,13 @@ public class FulltestResultActivity extends AppCompatActivity
         fulltestResultViewModel = new FulltestResultViewModel(this);
         activityFulltestResultBinding.setFull(fulltestResultViewModel);
         setTestsResults();
+
+        subjectTitleText = activityFulltestResultBinding
+                .subjectTitleText;
+        buttonPrevious = activityFulltestResultBinding
+                .buttonPrefiousResult;
+        buttonNext = activityFulltestResultBinding
+                .buttonNextResult;
 
         buttonCloseResult = activityFulltestResultBinding
                 .buttonCloseResult;
@@ -160,6 +172,27 @@ public class FulltestResultActivity extends AppCompatActivity
 
 
                                    mPager.setCurrentItem(currentPosition);
+                                   subjectTitleText.setText
+                                           (subjectsList.get(currentPosition).getTitle());
+
+                                   buttonPrevious.setOnClickListener(new View.OnClickListener()
+                                   {
+                                       @Override
+                                       public void onClick(View v)
+                                       {
+                                           if (currentPosition != 0)
+                                               mPager.setCurrentItem(--currentPosition, true);
+                                       }
+                                   });
+
+                                   buttonNext.setOnClickListener(new View.OnClickListener() {
+                                       @Override
+                                       public void onClick(View v)
+                                       {
+                                           if (currentPosition != mPager.getChildCount() - 1)
+                                               mPager.setCurrentItem(++currentPosition, true);
+                                       }
+                                   });
 
                                }
                            }
@@ -215,11 +248,15 @@ public class FulltestResultActivity extends AppCompatActivity
             {
                 currentPosition = position;
                 lastPage = position;
+                subjectTitleText.setText
+                        (subjectsList.get(currentPosition).getTitle());
             }
             else
             {
                 currentPosition = position;
                 lastPage = position;
+                subjectTitleText.setText
+                        (subjectsList.get(currentPosition).getTitle());
             }
 
 

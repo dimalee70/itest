@@ -15,56 +15,75 @@
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
 
-                <android.support.v7.widget.Toolbar
-                    android:id="@+id/my_toolbar"
+            <android.support.v7.widget.Toolbar
+                android:id="@+id/my_toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                android:background="?attr/colorPrimary"
+                android:elevation="4dp"
+                android:contentInsetStart="0dp"
+                android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
+                app:popupTheme="@style/ThemeOverlay.AppCompat.Light">
+
+                <RelativeLayout
                     android:layout_width="match_parent"
-                    android:layout_height="?attr/actionBarSize"
-                    android:background="?attr/colorPrimary"
-                    android:elevation="4dp"
-                    android:contentInsetStart="0dp"
-                    android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
-                    app:popupTheme="@style/ThemeOverlay.AppCompat.Light">
-
+                    android:layout_height="match_parent">
 
 
                     <RelativeLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content">
+                        android:id="@+id/text_view_relative"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+                        <!--android:layout_marginRight="200dp"-->
 
 
-                    <ImageButton
-                        android:id="@+id/imageButtonTitle"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="left"
-                        android:background="@drawable/ic_iconfinder_connect_direction_path_way_2203530"
-                        android:clickable="true"/>
+                        <ImageButton
+                            android:id="@+id/imageButtonTitle"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_centerVertical="true"
+                            android:background="@drawable/ic_iconfinder_connect_direction_path_way_2203530"
+                            android:clickable="true"/>
 
-                    <TextView
-                        android:id="@+id/text_view_title"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textSize="20sp"
-                        android:layout_marginStart="43dp"
-                        android:textColor="@color/colorWhite"
-                        android:layout_toRightOf="@+id/imageButtonTitle"
-                        android:ellipsize="end"
-                        android:maxLines="1"
-                        android:fontFamily="@font/my_open_sans_regular"/>
+                        <TextView
+                            android:id="@+id/text_view_title"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textSize="20sp"
+                            android:layout_centerVertical="true"
+
+                            android:layout_centerHorizontal="true"
+                            android:textColor="@color/colorWhite"
+                            android:ellipsize="end"
+                            android:maxLines="1"
+                            android:fontFamily="@font/my_open_sans_regular"/>
+                        <!--android:layout_centerInParent="true"-->
+                        <!--android:layout_marginStart="50dp"-->
+                        <!---->
+
+
+                        <ImageButton
+                            android:id="@+id/buttonFinishTest"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:src="@drawable/ic_icon_x"
+                            android:layout_centerVertical="true"
+                            android:layout_gravity="right"
+                            android:layout_marginStart="250dp"
+                            android:background="?attr/selectableItemBackground"
+                            android:clickable="true"/>
 
                     </RelativeLayout>
-                    <ImageButton
-                        android:id="@+id/buttonFinishTest"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="right"
-                        android:src="@drawable/ic_icon_x"
-                        android:background="?attr/selectableItemBackground"
-                        android:layout_marginEnd="15dp"
-                        android:clickable="true"/>
-                </android.support.v7.widget.Toolbar>
+
+                </RelativeLayout>
+
+
+            </android.support.v7.widget.Toolbar>
+
 
             <android.support.v7.widget.Toolbar
                 android:id="@+id/toolbar"
@@ -151,9 +170,8 @@
                     android:scrollbars="vertical"
                     app:layoutManager="android.support.v7.widget.LinearLayoutManager"
                     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-                    tools:listitem="@layout/item_full_subject"
+                    tools:listitem="@layout/item_full_subject" />
 
-                    />
             </RelativeLayout>
 
             <TextView

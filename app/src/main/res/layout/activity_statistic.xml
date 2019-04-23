@@ -45,13 +45,14 @@
 
                     <TextView
                         android:id="@+id/toolbar_title"
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="@{statistic.toolbarTitle}"
-                        android:layout_marginStart="73dp"
                         android:textSize="20sp"
                         android:textColor="@color/colorWhite"
-                        android:layout_gravity="left"/>
+                        android:textAlignment="center"
+                        android:layout_gravity="left"
+                        android:fontFamily="@font/my_open_sans_regular"/>
 
                 </android.support.v7.widget.Toolbar>
 

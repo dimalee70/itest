@@ -1,5 +1,6 @@
 package itest.kz.viewmodel;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -17,6 +18,7 @@ import itest.kz.model.Subject;
 import itest.kz.model.TestFinishResponse;
 import itest.kz.util.Constant;
 import itest.kz.view.activity.FullTestActivity;
+import itest.kz.view.activity.ResultsActivity;
 import itest.kz.view.activity.TestActivity;
 
 import static android.content.Context.MODE_PRIVATE;
@@ -57,15 +59,18 @@ public class ResultsFragmentViewModel extends Observable
             }
             else if (typeTest.equals(Constant.TYPESUBJECTTEST))
             {
-                Intent intent = new Intent(context, TestActivity.class);
+                Intent intent = new Intent((Activity) context, TestActivity.class);
                 intent.putExtra(Constant.SELECTED_SUBJECT, (Serializable) selectedSubject);
                 intent.putExtra(Constant.TYPE, typeTest);
+                intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+//                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 context.startActivity(intent);
             }
 
             else if (typeTest.equals(Constant.TYPELECTURETEST))
             {
                 Intent intent = new Intent(context, TestActivity.class);
+//                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 intent.putExtra(Constant.SELECTED_SUBJECT, (Serializable) selectedSubject);
                 intent.putExtra(Constant.TYPE, typeTest);
                 context.startActivity(intent);
