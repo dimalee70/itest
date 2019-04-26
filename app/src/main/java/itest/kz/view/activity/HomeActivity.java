@@ -38,6 +38,7 @@ import itest.kz.databinding.ActivityHomeBinding;
 import itest.kz.model.ProfileResponse;
 import itest.kz.model.RegisterResponse;
 import itest.kz.network.UserService;
+import itest.kz.util.CheckUtility;
 import itest.kz.util.Constant;
 import itest.kz.util.FragmentHelper;
 import itest.kz.view.fragments.LoginFragment;
@@ -55,6 +56,9 @@ public class HomeActivity extends AppCompatActivity
     private TextView dialogText;
     private Button buttonYes;
     private Button buttonNo;
+    private TextView dialogTextError;
+    private Button buttonYesError;
+    private Button buttonNoError;
 
 
 //    @Override
@@ -202,43 +206,116 @@ public class HomeActivity extends AppCompatActivity
     public void fetchProfileInfo()
     {
         homeViewModel.setProgress(true);
+
+        if (CheckUtility.isNetworkConnected(this))
+        {
+            activityHomeBinding.buttonReflesh.setVisibility(View.GONE);
 //        System.out.println(accessToken);
-        AppController appController = new AppController();
-        CompositeDisposable compositeDisposable = new CompositeDisposable();
+            AppController appController = new AppController();
+            CompositeDisposable compositeDisposable = new CompositeDisposable();
 //        AppController appController = AppController.create(context);
-        UserService userService = appController.getUserService();
+            UserService userService = appController.getUserService();
 
-        Disposable disposable = userService.getProfile(language, Constant.ACCEPT,
-                "Bearer " + accessToken)
-                .subscribeOn(appController.subscribeScheduler())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Consumer<ProfileResponse>() {
-                               @Override
-                               public void accept(ProfileResponse profileResponse) throws Exception {
-                                   openFragment(profileResponse);
-                                   homeViewModel.setBottomVisible(true);
+            Disposable disposable = userService.getProfile(language, Constant.ACCEPT,
+                    "Bearer " + accessToken)
+                    .subscribeOn(appController.subscribeScheduler())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribe(new Consumer<ProfileResponse>() {
+                                   @Override
+                                   public void accept(ProfileResponse profileResponse) throws Exception {
+                                       openFragment(profileResponse);
+                                       homeViewModel.setBottomVisible(true);
 
-                               }
-                           },
-                        new Consumer<Throwable>()
-                        {
-                            @Override
-                            public void accept(Throwable throwable) throws Exception
-                            {
-                                homeViewModel.setBottomVisible(false);
-                                if (throwable.getMessage().contains("401"))
-                                {
-                                    showToastUnauthorized();
-                                    homeViewModel.setProgress(false);
+                                   }
+                               },
+                            new Consumer<Throwable>() {
+                                @Override
+                                public void accept(Throwable throwable) throws Exception {
+                                    homeViewModel.setBottomVisible(false);
+                                    if (throwable.getMessage().contains("401")) {
+                                        showToastUnauthorized();
+                                        homeViewModel.setProgress(false);
 
-                                }
+                                    }
 //                                System.out.println(throwable.getLocalizedMessage());
 //                                System.out.println(throwable.getMessage());
 
-                            }
-                        });
+                                }
+                            });
 
-        compositeDisposable.add(disposable);
+            compositeDisposable.add(disposable);
+        }
+        else
+        {
+            homeViewModel.setProgress(false);
+            activityHomeBinding
+                    .buttonReflesh.setOnClickListener
+                    (new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v)
+                        {
+                            fetchProfileInfo();
+                        }
+                    });
+            homeViewModel.setBottomVisible(true);
+            activityHomeBinding.buttonReflesh.setVisibility(View.VISIBLE);
+            String text = "";
+            if (language.equals(Constant.KZ))
+                text = Constant.SERVER_ERROR_ALERT_KZ;
+            else
+                text = Constant.SERVER_ERROR_ALERT_RU;
+
+            Dialog dialog = new Dialog(this);
+            dialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
+                @Override
+                public void onDismiss(DialogInterface dialog) {
+//                    openAuthActivity();
+//                    finishTest(testIdMain);
+                    //System.out.println(testIdMain);//103080954
+//                dialog.dismiss();
+                }
+            });
+            dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+            dialog.setContentView(R.layout.dialog);
+            dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+            dialogTextError = dialog.findViewById(R.id.dialog_text);
+            buttonYesError = dialog.findViewById(R.id.buttonOk);
+            buttonNoError = dialog.findViewById(R.id.buttonCancel);
+            buttonNoError.setVisibility(View.GONE);
+            buttonYesError.setText(R.string.ok);
+//            if(language.equals(Constant.KZ))
+//            {
+//            buttonNo.setText(R.string.noKz);
+
+            dialogTextError.setText(text);
+
+//            }
+//            else
+//            {
+////            buttonNo.setText(R.string.noRu);
+////            buttonYes.setText(R.string.yesRu);
+//                dialogTextAuth.setText(R.string.sessionErrorRu);
+//            }
+            buttonYesError.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    buttonYesError.setEnabled(false);
+                    dialog.dismiss();
+//                    openAuthActivity();
+//                    finishTest(testIdMain);
+                    //System.out.println(testIdMain);//103080954
+
+                }
+            });
+
+//        buttonNo.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                dialog.dismiss();
+//            }
+//        });
+            dialog.show();
+        }
     }
 
     public void showToastUnauthorized()

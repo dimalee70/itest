@@ -56,7 +56,7 @@ public class StatisticActivity extends AppCompatActivity
         mFragments.add(new LectureStatisticFragment());
         mFragments.add(FullTestStatisticFragment.newInstance(typeTest));
         mViewPager = (ViewPager) activityStatisticBinding.vpFragmentsContainer;
-        mViewPager.setOffscreenPageLimit(1);
+        mViewPager.setOffscreenPageLimit(3);
         mViewPager.setAdapter(new ViewPagerAdapter(getSupportFragmentManager(), mFragments));
 
         mTabLayout = (TabLayout) findViewById(R.id.tl_tabs_container);

@@ -73,14 +73,14 @@ public class SubjectFragment extends Fragment implements Observer
         subjectFragmentViewModel.getTests().observe(this, listObserver);
         fragmentEntBinding.setEnt(subjectFragmentViewModel);
 
-        fragmentEntBinding
-                .buttonReflesh.setOnClickListener
-                (new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        System.out.println("hello");
-                    }
-                });
+//        fragmentEntBinding
+//                .buttonReflesh.setOnClickListener
+//                (new View.OnClickListener() {
+//                    @Override
+//                    public void onClick(View v) {
+//                        System.out.println("hello");
+//                    }
+//                });
         initContent();
 
         setUpObserver(subjectFragmentViewModel);

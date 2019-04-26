@@ -22,6 +22,7 @@ import java.util.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.disposables.Disposable;
+import io.reactivex.functions.Action;
 import io.reactivex.functions.Consumer;
 import itest.kz.R;
 import itest.kz.app.AppController;
@@ -48,6 +49,11 @@ public class SubjectStatisticViewModel extends Observable
     private TextView dialogTextAuth;
     private Button buttonYesAuth;
     private Button buttonNoAuth;
+    private TextView dialogTextError;
+    private Button buttonYesError;
+    private Button buttonNoError;
+    public Action clickTryAgain;
+    private boolean firstTimeDialog = true;
 
     public ObservableInt getProgress()
     {
@@ -66,6 +72,14 @@ public class SubjectStatisticViewModel extends Observable
         notifyObservers();
     }
 
+
+    public int getServerErrorText()
+    {
+        if (language.equals(Constant.KZ))
+            return R.string.tryAgainTextKz;
+        return R.string.tryAgainTextRu;
+    }
+
     public SubjectStatisticViewModel(Context context)
     {
         SharedPreferences settings = context.getSharedPreferences(Constant.MY_LANG, MODE_PRIVATE);
@@ -81,6 +95,10 @@ public class SubjectStatisticViewModel extends Observable
         this.subjectRecycler = new ObservableInt(View.GONE);
         this.imageButtonVisibility = new ObservableInt(View.GONE);
         this.statisticSubjectList = new ArrayList<>();
+        clickTryAgain = () ->
+        {
+            fetchSubjectStatisticList();
+        };
         fetchSubjectStatisticList();
     }
 
@@ -127,6 +145,79 @@ public class SubjectStatisticViewModel extends Observable
         {
             imageButtonVisibility.set(View.VISIBLE);
             setProgress(false);
+
+            subjectRecycler.set(View.GONE);
+            imageButtonVisibility.set(View.VISIBLE);
+            String text = "";
+            if (language.equals(Constant.KZ))
+                text = Constant.SERVER_ERROR_ALERT_KZ;
+            else
+                text = Constant.SERVER_ERROR_ALERT_RU;
+//            Toast toast = Toast.makeText(context,
+//                    text, Toast.LENGTH_SHORT);
+//            toast.show();
+
+            //        public void showFinishTimeDialog()
+
+
+//        {
+            if (!firstTimeDialog) {
+                Dialog dialog = new Dialog(context);
+                dialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
+                    @Override
+                    public void onDismiss(DialogInterface dialog) {
+//                    openAuthActivity();
+//                    finishTest(testIdMain);
+                        //System.out.println(testIdMain);//103080954
+//                dialog.dismiss();
+                    }
+                });
+                dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+                dialog.setContentView(R.layout.dialog);
+                dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                dialogTextError = dialog.findViewById(R.id.dialog_text);
+                buttonYesError = dialog.findViewById(R.id.buttonOk);
+                buttonNoError = dialog.findViewById(R.id.buttonCancel);
+                buttonNoError.setVisibility(View.GONE);
+                buttonYesError.setText(R.string.ok);
+//            if(language.equals(Constant.KZ))
+//            {
+//            buttonNo.setText(R.string.noKz);
+
+                dialogTextError.setText(text);
+
+//            }
+//            else
+//            {
+////            buttonNo.setText(R.string.noRu);
+////            buttonYes.setText(R.string.yesRu);
+//                dialogTextAuth.setText(R.string.sessionErrorRu);
+//            }
+                buttonYesError.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        buttonYesError.setEnabled(false);
+                        dialog.dismiss();
+//                    openAuthActivity();
+//                    finishTest(testIdMain);
+                        //System.out.println(testIdMain);//103080954
+
+                    }
+                });
+
+//        buttonNo.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                dialog.dismiss();
+//            }
+//        });
+                dialog.show();
+            }
+
+            firstTimeDialog = false;
+
+
+            progress.set(View.GONE);
         }
     }
 

@@ -62,7 +62,7 @@ public class SubjectFragmentViewModel extends Observable
     private TextView dialogTextError;
     private Button buttonYesError;
     private Button buttonNoError;
-//    public Action clickTryAgain;
+    public Action clickTryAgain;
     private boolean firstTimeDialog = true;
 
     public void onClickCancel()
@@ -141,11 +141,11 @@ public class SubjectFragmentViewModel extends Observable
         this.subjectRecycler = new ObservableInt(View.GONE);
         this.entVisibleBtn = new ObservableInt(View.VISIBLE);
 
-//        clickTryAgain = () ->
-//        {
-//            System.out.println("click");
-//            fetchSubjectList();
-//        };
+        clickTryAgain = () ->
+        {
+            System.out.println("click");
+            fetchSubjectList();
+        };
 
 
 
@@ -237,8 +237,8 @@ public class SubjectFragmentViewModel extends Observable
 
             //        public void showFinishTimeDialog()
 //        {
-//            if (!firstTimeDialog)
-//            {
+            if (!firstTimeDialog)
+            {
                 Dialog dialog = new Dialog(context);
                 dialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
                     @Override
@@ -289,10 +289,10 @@ public class SubjectFragmentViewModel extends Observable
 //            }
 //        });
                 dialog.show();
-//            }
+            }
 
 
-//            firstTimeDialog = false;
+            firstTimeDialog = false;
 
 
             progress.set(View.GONE);
@@ -459,8 +459,8 @@ public class SubjectFragmentViewModel extends Observable
         return R.string.tryAgainTextRu;
     }
 
-    public void clickTryAgain(View view)
-    {
-        System.out.println("hello");
-    }
+//    public void clickTryAgain(View view)
+//    {
+//        System.out.println("hello");
+//    }
 }

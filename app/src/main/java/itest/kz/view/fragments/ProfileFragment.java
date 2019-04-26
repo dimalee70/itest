@@ -43,6 +43,7 @@ import itest.kz.databinding.FragmentProfileBinding;
 import itest.kz.model.Profile;
 import itest.kz.model.ProfileResponse;
 import itest.kz.network.UserService;
+import itest.kz.util.CheckUtility;
 import itest.kz.util.Constant;
 import itest.kz.view.activity.AuthActivity;
 import itest.kz.view.activity.HomeActivity;
@@ -208,40 +209,47 @@ public class ProfileFragment extends Fragment
     {
         profileFragmentViewModel.setProgress(true);
         getAccessToken();
-        AppController appController = new AppController();
-        CompositeDisposable compositeDisposable = new CompositeDisposable();
+
+        if (CheckUtility.isNetworkConnected(getContext())) {
+            AppController appController = new AppController();
+            CompositeDisposable compositeDisposable = new CompositeDisposable();
 //        AppController appController = AppController.create(context);
-        UserService userService = appController.getUserService();
+            UserService userService = appController.getUserService();
 
-        Disposable disposable = userService.getProfile(language, Constant.ACCEPT,
-                "Bearer " + accessToken)
-                .subscribeOn(appController.subscribeScheduler())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Consumer<ProfileResponse>() {
+            Disposable disposable = userService.getProfile(language, Constant.ACCEPT,
+                    "Bearer " + accessToken)
+                    .subscribeOn(appController.subscribeScheduler())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribe(new Consumer<ProfileResponse>() {
 
-                               @Override
-                               public void accept(ProfileResponse profileResponse) throws Exception {
-                                   profileFragmentViewModel.setProfile(profileResponse.getProfile());
-                                   profileFragmentViewModel.getInfoFromProfile();
-                                   profileFragmentViewModel.setLanguage(language);
-                                   profileFragmentViewModel.setProgress(false);
-                               }
-                           },
-                        new Consumer<Throwable>() {
-                            @Override
-                            public void accept(Throwable throwable) throws Exception {
-                                if (throwable.getMessage().contains("401")) {
-                                    showToastUnauthorized();
-                                    profileFragmentViewModel.setProgress(false);
-                                }
+                                   @Override
+                                   public void accept(ProfileResponse profileResponse) throws Exception {
+                                       profileFragmentViewModel.setProfile(profileResponse.getProfile());
+                                       profileFragmentViewModel.getInfoFromProfile();
+                                       profileFragmentViewModel.setLanguage(language);
+                                       profileFragmentViewModel.setProgress(false);
+                                   }
+                               },
+                            new Consumer<Throwable>() {
+                                @Override
+                                public void accept(Throwable throwable) throws Exception {
+                                    if (throwable.getMessage().contains("401")) {
+                                        showToastUnauthorized();
+                                        profileFragmentViewModel.setProgress(false);
+                                    }
 //                                System.out.println(throwable.getLocalizedMessage());
 //                                System.out.println(throwable.getMessage());
 
+                                }
                             }
-                        }
-                        );
+                    );
 
-        compositeDisposable.add(disposable);
+            compositeDisposable.add(disposable);
+        }
+        else
+        {
+            profileFragmentViewModel.setProgress(false);
+        }
     }
 
 

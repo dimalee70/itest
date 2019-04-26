@@ -281,7 +281,7 @@
                                             android:hint="@{profile.hintDateOfBirthText}"
                                             android:text="@{profile.date}"
                                             android:layout_width="match_parent"
-                                            android:inputType="text"
+                                            android:inputType="number"
                                             android:textSize="14sp"
                                             android:fontFamily="@font/my_open_sans_regular"
                                             android:layout_marginLeft="20dp"

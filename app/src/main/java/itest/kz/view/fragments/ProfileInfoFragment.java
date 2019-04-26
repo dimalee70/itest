@@ -50,6 +50,7 @@ import itest.kz.model.ProfileResponse;
 import itest.kz.model.RegisterResponse;
 import itest.kz.network.UserService;
 import itest.kz.util.CameraUtils;
+import itest.kz.util.CheckUtility;
 import itest.kz.util.Constant;
 import itest.kz.view.activity.AuthActivity;
 import itest.kz.view.activity.HomeActivity;
@@ -285,56 +286,61 @@ public class ProfileInfoFragment extends Fragment implements EasyPermissions.Per
 
 //                profileInfoViewModel.setProgress(true);
 
-                AppController appController = new AppController();
-                CompositeDisposable compositeDisposable = new CompositeDisposable();
-//        AppController appController = AppController.create(context);
-                UserService userService = appController.getUserService();
+                if (CheckUtility.isNetworkConnected(getContext())) {
 
-                Disposable disposable = userService.setProfile(Constant.ACCEPT,
-                        language, "Bearer " + accessToken,
+                    AppController appController = new AppController();
+                    CompositeDisposable compositeDisposable = new CompositeDisposable();
+//        AppController appController = AppController.create(context);
+                    UserService userService = appController.getUserService();
+
+                    Disposable disposable = userService.setProfile(Constant.ACCEPT,
+                            language, "Bearer " + accessToken,
 //                        "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImp0aSI6IjI1NTU0MTEzYjcwM2EzNzgzMGFlYjFjYjZkMWI3YzI3NzQwY2MyMTNmZTk2YmYyMTc5ZTY4ZGQ1MTdhNWY3NzYxMDIyYzI2ZmM3NzQ3MzExIn0.eyJhdWQiOiIxIiwianRpIjoiMjU1NTQxMTNiNzAzYTM3ODMwYWViMWNiNmQxYjdjMjc3NDBjYzIxM2ZlOTZiZjIxNzllNjhkZDUxN2E1Zjc3NjEwMjJjMjZmYzc3NDczMTEiLCJpYXQiOjE1NTM1MDI4MTEsIm5iZiI6MTU1MzUwMjgxMSwiZXhwIjoxNTg1MTI1MjExLCJzdWIiOiIxMjEyNTIwIiwic2NvcGVzIjpbXX0.o_AqAxMWQf2h7BHDRH1QFzUvJ5jrVYA8PuLtlGXxIjHSygf1pKmuiifzxHwYshPHTqdZEUmRvgCFokAM349RoFDgkekI2RPA_mGsQ_UaCCuyMCN5xBIRObE_YBl8CDMX6rGhJwHQsmuVQXwnC9BnwFl_7OdjFo7AZM_05ZdjEweLX-gcFYAlOpdi0qfsueN2LUNTEseHPwgTFFxPCNpL8JPh98hSGSmo0OsKaJUHRy1ggYXarAsYoO5rS-vK_zVo_MLDm0ADyV-yVuVfjisNn0EVaXd3pC1q3GC76YAuJlmv20Cme0XIpgBF33lWICswnehpPRkqqo_OUTmwvUgJwT2d2cQlTFO59IHeFoHi2JwrH4kE07E-HHLXhiOnnL0McsqX-l_ofF5Nal8KK5xKmFg9ha2W8-tSmsyYMTtNYgXQw2OX2OgmeC1fVNIHHmdw9-hjwyJrm_ojjc9owbb53FQNaE6YTBSSHv5cDJlebCr0Zz2u1cKScujLH9Zq3V_eDkvLq_G-wQxhuRbSjo_Sc9T2no5KaHAP96Kiv9GOhkxOpdvem3LyolKcKeL3QIMvAU9cj3kidnlLY_WyMEg8um4Msam8k9fJ6JryIbKkTQsTc0Wh3BExgf3pNDayDvkTV-3NHRCv9XDHIIsSMQg_JgSiR8A3SQJuxmXWtnkhFJA",
 //                        "1234","123", "10.10.1010",
 //                            "test123@gmail.com", "test123@gmail.com"
-                        name.getText().toString(), surname.getText().toString(),
-                        date.getText().toString(), login.getText().toString(),
-                        email.getText().toString()
-                )
-                        .subscribeOn(appController.subscribeScheduler())
-                        .observeOn(AndroidSchedulers.mainThread())
-                        .subscribe(new Consumer<ProfileResponse>()
-                                   {
-                                       @Override
-                                       public void accept(ProfileResponse profileResponse) throws Exception
-                                       {
+                            name.getText().toString(), surname.getText().toString(),
+                            date.getText().toString(), login.getText().toString(),
+                            email.getText().toString()
+                    )
+                            .subscribeOn(appController.subscribeScheduler())
+                            .observeOn(AndroidSchedulers.mainThread())
+                            .subscribe(new Consumer<ProfileResponse>() {
+                                           @Override
+                                           public void accept(ProfileResponse profileResponse) throws Exception {
 //                                           System.out.println("Cool");
 //                                           fragmentProfileInfoBinding.getProfile();
 //                                           fragmentProfileInfoBinding.setProfile(profileResponse.getProfile());
 //                                           fragmentProfileInfoBinding.getProfile().setProfile(profileResponse.getProfile());
 
 //                                           profileInfoViewModel.setProfile(profileResponse.getProfile());
-                                           hideKeyboard(getActivity()); //won't work
+                                               hideKeyboard(getActivity()); //won't work
 
 //                                           profileInfoViewModel.setProgress(false);
-                                           profileInfoViewModel.setProgress(false);
+                                               profileInfoViewModel.setProgress(false);
 //                                           fragmentProfileInfoBinding.getProfile().setProfile(profileResponse.getProfile());
 
-                                       }
-                                   },
+                                           }
+                                       },
 
-                                new Consumer<Throwable>() {
-                                    @Override
-                                    public void accept(Throwable throwable) throws Exception {
-                                        if (throwable.getMessage().contains("401"))
-                                        {
-                                            showToastUnauthorized();
+                                    new Consumer<Throwable>() {
+                                        @Override
+                                        public void accept(Throwable throwable) throws Exception {
+                                            if (throwable.getMessage().contains("401")) {
+                                                showToastUnauthorized();
+
+                                            }
                                             profileInfoViewModel.setProgress(false);
                                         }
                                     }
-                                }
 
-                        );
+                            );
 
-                compositeDisposable.add(disposable);
+                    compositeDisposable.add(disposable);
+                }
+                else
+                {
+                    profileInfoViewModel.setProgress(false);
+                }
 
 //                System.out.println(name.getText());
             }

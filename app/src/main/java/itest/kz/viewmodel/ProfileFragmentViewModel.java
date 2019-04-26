@@ -50,10 +50,17 @@ public class ProfileFragmentViewModel extends BaseObservable
     private String language;
     public ObservableInt progress = new ObservableInt(View.GONE);
     public ObservableInt scroll = new ObservableInt(View.GONE);
-
+    public ObservableInt imageButtonVisibility;
     public ObservableInt getProgress()
     {
         return progress;
+    }
+
+    public int getServerErrorText()
+    {
+        if (language.equals(Constant.KZ))
+            return R.string.tryAgainTextKz;
+        return R.string.tryAgainTextRu;
     }
 
     public void setProgress(boolean isProgress)
@@ -126,6 +133,7 @@ public class ProfileFragmentViewModel extends BaseObservable
 //        settings.edit().clear().commit();
         language = settings.getString(Constant.LANG, "kz");
         profileImage = new ObservableField<>();
+        this.imageButtonVisibility = new ObservableInt(View.GONE);
         getInfoFromProfile();
         this.clickInfo = () ->
         {
