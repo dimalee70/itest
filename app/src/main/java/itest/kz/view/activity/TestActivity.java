@@ -71,6 +71,7 @@ public class TestActivity extends AppCompatActivity
 
     private void fetchFullTestQuestionsGenerate(Long testId)
     {
+//        testViewModel.setProgress(true);
         AppController appController = new AppController();
         CompositeDisposable compositeDisposable = new CompositeDisposable();
 //        AppController appController = AppController.create(context);
@@ -92,6 +93,7 @@ public class TestActivity extends AppCompatActivity
                                    Tests questions =
                                            TestsUtils.deserializeFromJsonToTests(jsonObject);
                                    updateTestDataList(questions);
+//                                   testViewModel.setProgress(false);
 
 //
 //                                   setArraListArrayListQuestions(questions);
@@ -198,11 +200,14 @@ public class TestActivity extends AppCompatActivity
             final Observer<Tests> listObserver = new Observer<Tests>() {
 
                 @Override
-                public void onChanged(@Nullable Tests tests) {
+                public void onChanged(@Nullable Tests tests)
+                {
+                    testViewModel.setProgress(true);
                     if (!isStartedFirst) {
                         tests = getTests();
                     }
                     if (tests != null && tests.getQuestions().size() > 0) {
+
                         numbersOFpages = tests.getQuestions().size();
                         mPager = activityTestBinding.pager;
                         mPager.setOffscreenPageLimit(2);
@@ -213,8 +218,8 @@ public class TestActivity extends AppCompatActivity
                         mPager.addOnPageChangeListener(listener);
 
                         navigationToolbar = activityTestBinding.toolbar;
-                        buttonForward = activityTestBinding.buttonForwardTest;
-                        buttonBack = activityTestBinding.buttonBackTest;
+                        buttonForward = activityTestBinding.buttonForward;
+                        buttonBack = activityTestBinding.buttonBack;
 
 //                    activityTestBinding.buttonForwardTestTest.setOnClickListener(new View.OnClickListener()
 //                    {
@@ -251,6 +256,7 @@ public class TestActivity extends AppCompatActivity
                     }
                     mPager.setCurrentItem(SELECTED_TEST_POSITION_ID);
 
+                    testViewModel.setProgress(false);
                 }
 
 
@@ -375,6 +381,7 @@ public class TestActivity extends AppCompatActivity
 
             @Override
             public void onChanged(@Nullable Tests tests) {
+                testViewModel.setProgress(true);
                 if (!isStartedFirst) {
                     tests = getTests();
                 }
@@ -389,8 +396,8 @@ public class TestActivity extends AppCompatActivity
                     mPager.addOnPageChangeListener(listener);
 
                     navigationToolbar = activityTestBinding.toolbar;
-                    buttonForward = activityTestBinding.buttonForwardTest;
-                    buttonBack = activityTestBinding.buttonBackTest;
+                    buttonForward = activityTestBinding.buttonForward;
+                    buttonBack = activityTestBinding.buttonBack;
 
 //                    activityTestBinding.buttonForwardTestTest.setOnClickListener(new View.OnClickListener()
 //                    {
@@ -426,6 +433,7 @@ public class TestActivity extends AppCompatActivity
 
                 }
                 mPager.setCurrentItem(SELECTED_TEST_POSITION_ID);
+                testViewModel.setProgress(false);
 
             }
 
@@ -464,9 +472,9 @@ public class TestActivity extends AppCompatActivity
 
         public void onPageSelected(int position)
         {
-            currentPage = position;
+            SELECTED_TEST_POSITION_ID = position;
             TextView tv = activityTestBinding.textNumberPager;
-            tv.setText((currentPage + 1) + " / " + numbersOFpages);
+            tv.setText((SELECTED_TEST_POSITION_ID + 1) + " / " + numbersOFpages);
         }
     }
 
@@ -474,8 +482,8 @@ public class TestActivity extends AppCompatActivity
     @Override
     public void onBackPressed()
     {
-        super.onBackPressed();
-        finish();
+//        super.onBackPressed();
+//        finish();
     }
 }
 

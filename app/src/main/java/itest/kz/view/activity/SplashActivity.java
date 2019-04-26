@@ -16,27 +16,24 @@ public class SplashActivity extends AppCompatActivity
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState)
     {
-
-        SharedPreferences settings = this.getSharedPreferences(Constant.MY_PREF, MODE_PRIVATE);
-        accessToken = settings.getString(Constant.ACCESS_TOKEN, null);
-
         super.onCreate(savedInstanceState);
-
-//
+        SharedPreferences settings = getSharedPreferences(Constant.MY_PREF, MODE_PRIVATE);
+        accessToken = settings.getString(Constant.ACCESS_TOKEN, null);
         if (accessToken != null && !accessToken.equals(""))
         {
+
             Intent intent = new Intent(this, MainHomeActivity.class);
+            intent.putExtra(Constant.ACCESS_TOKEN, accessToken);
             startActivity(intent);
             finish();
 
-//            Intent intent = new Intent(this, SubjectActivity.class);
+
+//            Intent intent = new Intent(this, SplashScreensActivity.class);
 //            startActivity(intent);
 //            finish();
         }
         else
         {
-//        System.out.println("AcessToken");
-//        System.out.println(accessToken);
             Intent intent = new Intent(this, MainActivity.class);
             startActivity(intent);
             finish();

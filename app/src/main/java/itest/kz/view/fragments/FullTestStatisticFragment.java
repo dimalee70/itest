@@ -63,6 +63,7 @@ public class FullTestStatisticFragment extends Fragment implements Observer
 //        subjectStatisticAdapter.setHasStableIds(true);
         listSubjectStatistic.setAdapter(subjectStatisticAdapter);
         listSubjectStatistic.setLayoutManager(new LinearLayoutManager(getContext()));
+//        fullTestStatisticViewModel.setProgress(false);
 
     }
 

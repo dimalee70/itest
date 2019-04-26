@@ -2,6 +2,8 @@ package itest.kz.viewmodel;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.databinding.ObservableInt;
+import android.view.View;
 
 import java.util.Observable;
 
@@ -14,6 +16,25 @@ public class FulltestResultViewModel extends Observable
 {
     private Context context;
     private String language;
+    public ObservableInt progress = new ObservableInt(View.GONE);
+    public ObservableInt scroll = new ObservableInt(View.GONE);
+
+    public ObservableInt getProgress()
+    {
+        return progress;
+    }
+
+    public void setProgress(boolean isProgress)
+    {
+        if (isProgress)
+            progress.set(View.VISIBLE);
+        else
+        {
+            progress.set(View.GONE);
+            scroll.set(View.VISIBLE);
+        }
+        notifyObservers();
+    }
 
     public  FulltestResultViewModel(Context context)
     {

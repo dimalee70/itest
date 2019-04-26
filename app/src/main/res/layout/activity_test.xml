@@ -14,6 +14,14 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
+        <!--<RelativeLayout-->
+            <!--android:layout_centerInParent="true"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content">-->
+
+     <!---->
+        <!--</RelativeLayout>-->
+
     <android.support.v7.widget.Toolbar
         android:id="@+id/my_toolbar"
         android:layout_width="match_parent"
@@ -21,35 +29,37 @@
         android:background="?attr/colorPrimary">
 
         <RelativeLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
 
         <RelativeLayout
             android:id="@+id/title_relative"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginRight="100dp">
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
             <ImageButton
                 android:id="@+id/imageButtonTitle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
                 android:layout_gravity="left"
-                android:background="@drawable/ic_iconfinder_connect_direction_path_way_2203530"
-                android:clickable="true"/>
+                android:src="@drawable/ic_iconfinder_connect_direction_path_way_2203530"
+                android:clickable="true"
+                android:layout_centerVertical="true"
+                android:background="?attr/selectableItemBackground"/>
 
             <TextView
                 android:id="@+id/text_view_title"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
                 android:textSize="20sp"
-                android:layout_marginStart="40dp"
+                android:paddingRight="60dp"
+                android:paddingLeft="60dp"
                 android:textColor="@color/colorWhite"
-                android:layout_toRightOf="@+id/imageButtonTitle"
-                android:textAlignment="center"
                 android:ellipsize="end"
-                android:layout_marginRight="100dp"
+                android:layout_marginTop="14dp"
+                android:textAlignment="center"
+                android:layout_marginEnd="20dp"
                 android:maxLines="1"
                 android:fontFamily="@font/my_open_sans_regular"/>
 
@@ -60,11 +70,12 @@
 
             <ImageButton
                 android:id="@+id/buttonFinishTest"
-                android:layout_width="wrap_content"
+                android:layout_width="40dp"
                 android:layout_alignParentRight="true"
-                android:layout_height="wrap_content"
+                android:layout_height="40dp"
                 android:src="@drawable/ic_icon_x"
-                android:layout_marginRight="30dp"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="16dp"
                 android:background="?attr/selectableItemBackground"
                 android:clickable="true"/>
 
@@ -76,63 +87,69 @@
             android:id="@+id/toolbar"
             android:layout_alignParentBottom="true"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="40dp"
+            android:contentInsetStart="0dp"
+            android:padding="0dp"
+            android:contentInsetLeft="10dp"
+            android:contentInsetRight="10dp"
+            app:contentInsetLeft="0dp"
+            app:contentInsetRight="0dp"
+            app:contentInsetStart="0dp"
             android:background="@color/colorWhite"
             android:minHeight="?attr/actionBarSize">
 
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="wrap_content">
 
                 <RelativeLayout
                     android:id="@+id/button_back_relative"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content">
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
 
                     <ImageButton
-                        android:id="@+id/buttonBackTest"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="left"
-                        android:layout_marginLeft="15dp"
-                        android:background="@drawable/ic_icon_strelka"
-                        android:clickable="true"/>
-
+                        android:id="@+id/buttonBack"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:layout_alignParentStart="true"
+                        android:src="@drawable/ic_icon_strelka"
+                        android:background="?attr/selectableItemBackground"
+                        android:clickable="true" />
                 </RelativeLayout>
 
                 <RelativeLayout
-                    android:layout_toRightOf="@+id/button_back_relative"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="40dp">
+                    android:layout_height="match_parent">
 
                     <TextView
                         android:id="@+id/text_number_pager"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textAlignment="center"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginTop="8dp"
                         android:textColor="@color/colorPrimary"
-                        android:text=""
-                        android:layout_centerInParent="true"
+                        android:textAlignment="center"
                         android:textSize="18sp"/>
+                    <!--android:text="fvfdfdfnjscbhsdbchsdbchdscdcsdcsdcvgsdvcgsvdgcdsdvcg"-->
+                    <!--android:textAlignment="center"-->
 
                 </RelativeLayout>
 
                 <RelativeLayout
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:layout_alignParentRight="true">
 
                     <ImageButton
-                        android:id="@+id/buttonForwardTest"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="right"
-                        android:background="@drawable/rotate_ic_icon_strelka"
-                        android:layout_marginRight="15dp"
-                        android:clickable="true"/>
-                </RelativeLayout>
+                        android:id="@+id/buttonForward"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:layout_centerVertical="true"
+                        android:src="@drawable/rotate_ic_icon_strelka"
+                        android:background="?attr/selectableItemBackground"
+                        android:clickable="true"
 
+                        />
+                </RelativeLayout>
             </RelativeLayout>
 
 
@@ -174,6 +191,15 @@
 
         </LinearLayout>
 
+        <ProgressBar
+            android:id="@+id/progressBar1"
+            style="?android:attr/progressBarStyleLarge"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:indeterminate="true"
+            android:visibility="@{test.progress}"/>
     <!--</ScrollView>-->
     </RelativeLayout>
 </layout>

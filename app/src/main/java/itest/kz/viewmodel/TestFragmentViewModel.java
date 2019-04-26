@@ -58,11 +58,46 @@ public class TestFragmentViewModel extends Observable
     private String language;
     public ObservableInt subjectRecycler;
     public ObservableInt solutionTextVisible;
+    private  boolean isExpandText = false;
+    public ObservableInt progress = new ObservableInt(View.VISIBLE);
 
     public List<Answer> getAnswers() {
         return answers;
     }
 
+    public ObservableInt getProgress()
+    {
+        return progress;
+    }
+
+    public void setProgress(boolean isProgress)
+    {
+        if (isProgress)
+        {
+            progress.set(View.VISIBLE);
+        }
+        else
+        {
+            progress.set(View.GONE);
+        }
+        notifyObservers();
+    }
+
+    public boolean checkExpandable()
+    {
+        return isExpandText;
+    }
+
+    public boolean isExpandText()
+    {
+        return isExpandText;
+    }
+
+    public void setExpandText(boolean expandText)
+    {
+        isExpandText = expandText;
+        notifyObservers();
+    }
 
     public TestFragmentViewModel(Context context, Question test, FragmentActivity fragmentActivity)
     {

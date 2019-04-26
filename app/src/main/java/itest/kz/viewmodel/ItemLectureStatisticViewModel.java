@@ -95,7 +95,7 @@ public class ItemLectureStatisticViewModel extends BaseObservable
             points += t.getResult().getPoints();
         }
         String text = "<font color=#68DA78>" + points + "</font>"
-                + "<font color=#FFAAAAAA>" + "/" + all + "</font>";
+                + "<font color=#AAAAAA>" + "/" + all + "</font>";
         return Html.fromHtml(text, HtmlCompat.FROM_HTML_MODE_LEGACY);
     }
 

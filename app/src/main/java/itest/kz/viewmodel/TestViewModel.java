@@ -1,17 +1,29 @@
 package itest.kz.viewmodel;
 
+import android.app.Activity;
 import android.app.Application;
+import android.app.Dialog;
 import android.arch.lifecycle.AndroidViewModel;
 import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.MutableLiveData;
 import android.arch.lifecycle.ViewModel;
 import android.arch.lifecycle.ViewModelProvider;
 import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.SharedPreferences;
+import android.databinding.ObservableInt;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.view.View;
+import android.view.Window;
+import android.widget.Button;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
@@ -30,6 +42,7 @@ import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.functions.Action;
 import io.reactivex.functions.Consumer;
+import itest.kz.R;
 import itest.kz.app.AppController;
 import itest.kz.model.Answer;
 import itest.kz.model.Question;
@@ -42,6 +55,7 @@ import itest.kz.model.Tests;
 import itest.kz.network.SubjectService;
 import itest.kz.util.Constant;
 import itest.kz.util.TestsUtils;
+import itest.kz.view.activity.AuthActivity;
 import itest.kz.view.activity.TestActivity;
 import itest.kz.view.fragments.TestFragment;
 
@@ -52,6 +66,7 @@ public class TestViewModel extends AndroidViewModel
     static final int ITEMS = 20;
 
     private MutableLiveData<Tests> listMutableLiveData;
+    public ObservableInt progress = new ObservableInt(View.VISIBLE);
 
     private Subject subject;
     private String language;
@@ -64,6 +79,9 @@ public class TestViewModel extends AndroidViewModel
     private boolean isStartedFirst;
     public Action onClickForward;
     private Long testIdMain;
+    private TextView dialogTextAuth;
+    private Button buttonYesAuth;
+    private Button buttonNoAuth;
 
     public LiveData<Tests> getTests() {
         if (listMutableLiveData == null) {
@@ -85,6 +103,23 @@ public class TestViewModel extends AndroidViewModel
 
         }
         return listMutableLiveData;
+    }
+
+    public ObservableInt getProgress()
+    {
+        return progress;
+    }
+
+    public void setProgress(boolean isProgress) {
+        if (isProgress)
+        {
+            progress.set(View.VISIBLE);
+        }
+        else
+        {
+            progress.set(View.GONE);
+        }
+//        notify();
     }
 
     public TestViewModel(Application application, Subject subject, String typeTest, boolean isStartedFirst, Long testIdMain)
@@ -249,7 +284,18 @@ public class TestViewModel extends AndroidViewModel
 //                                   setFragment(arrayList);
 
                                }
-                           }
+                           },
+
+                        new Consumer<Throwable>() {
+                            @Override
+                            public void accept(Throwable throwable) throws Exception {
+                                if (throwable.getMessage().contains("401"))
+                                {
+                                    showToastUnauthorized();
+                                }
+                            }
+                        }
+
 //                        new Consumer<JSONObject>() {
 //                    @Override
 //                    public void accept(JSONObject jsonObject) throws Exception
@@ -262,6 +308,7 @@ public class TestViewModel extends AndroidViewModel
 
         compositeDisposable.add(disposable);
     }
+
 
 
 //            if (testItem.has("texts"))
@@ -296,6 +343,88 @@ public class TestViewModel extends AndroidViewModel
 //
 //            }
 //            questionsList.add(obj);
+
+
+//    private TextView dialogTextAuth;
+//    private Button buttonYesAuth;
+//    private Button buttonNoAuth;
+
+    public void showToastUnauthorized()
+    {
+
+//        public void showFinishTimeDialog()
+//        {
+        Dialog dialog = new Dialog(context);
+        dialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
+            @Override
+            public void onDismiss(DialogInterface dialog)
+            {
+                openAuthActivity();
+//                    finishTest(testIdMain);
+                //System.out.println(testIdMain);//103080954
+//                dialog.dismiss();
+            }
+        });
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.setContentView(R.layout.dialog);
+        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        dialogTextAuth = dialog.findViewById(R.id.dialog_text);
+        buttonYesAuth = dialog.findViewById(R.id.buttonOk);
+        buttonNoAuth = dialog.findViewById(R.id.buttonCancel);
+        buttonNoAuth.setVisibility(View.GONE);
+        buttonYesAuth.setText(R.string.ok);
+        if(language.equals(Constant.KZ))
+        {
+//            buttonNo.setText(R.string.noKz);
+
+            dialogTextAuth.setText(R.string.sessionErrorKz);
+
+        }
+        else
+        {
+//            buttonNo.setText(R.string.noRu);
+//            buttonYes.setText(R.string.yesRu);
+            dialogTextAuth.setText(R.string.sessionErrorRu);
+        }
+        buttonYesAuth.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v)
+            {
+                buttonYesAuth.setEnabled(false);
+                dialog.dismiss();
+                openAuthActivity();
+//                    finishTest(testIdMain);
+                //System.out.println(testIdMain);//103080954
+
+            }
+        });
+
+//        buttonNo.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                dialog.dismiss();
+//            }
+//        });
+        dialog.show();
+    }
+
+    public  void openAuthActivity()
+    {
+        Intent intent = new Intent(context, AuthActivity.class);
+        ((Activity)context).startActivity(intent);
+//        if (language.equals(Constant.KZ))
+//
+//            Toast.makeText(this,
+//                    R.string.sessionErrorKz,
+//                    Toast.LENGTH_SHORT).show();
+//        else
+//        {
+//            Toast.makeText(this,
+//                    R.string.sessionErrorRu,
+//                    Toast.LENGTH_SHORT).show();
+//        }
+    }
+
 
     private void updateTestDataList(Tests tests)
     {

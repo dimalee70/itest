@@ -1,10 +1,14 @@
 package itest.kz.view.activity;
 
 import android.app.Activity;
+import android.app.Dialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.databinding.DataBindingUtil;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -19,6 +23,9 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
+import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -45,6 +52,10 @@ public class HomeActivity extends AppCompatActivity
     private String accessToken;
     private String language;
     private BottomNavigationView bottomNavigationView;
+    private TextView dialogText;
+    private Button buttonYes;
+    private Button buttonNo;
+
 
 //    @Override
 //    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater)
@@ -190,6 +201,7 @@ public class HomeActivity extends AppCompatActivity
 
     public void fetchProfileInfo()
     {
+        homeViewModel.setProgress(true);
 //        System.out.println(accessToken);
         AppController appController = new AppController();
         CompositeDisposable compositeDisposable = new CompositeDisposable();
@@ -200,17 +212,109 @@ public class HomeActivity extends AppCompatActivity
                 "Bearer " + accessToken)
                 .subscribeOn(appController.subscribeScheduler())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Consumer<ProfileResponse>()
-                {
-                    @Override
-                    public void accept(ProfileResponse profileResponse) throws Exception
-                    {
-                        openFragment(profileResponse);
+                .subscribe(new Consumer<ProfileResponse>() {
+                               @Override
+                               public void accept(ProfileResponse profileResponse) throws Exception {
+                                   openFragment(profileResponse);
+                                   homeViewModel.setBottomVisible(true);
 
-                    }
-                });
+                               }
+                           },
+                        new Consumer<Throwable>()
+                        {
+                            @Override
+                            public void accept(Throwable throwable) throws Exception
+                            {
+                                homeViewModel.setBottomVisible(false);
+                                if (throwable.getMessage().contains("401"))
+                                {
+                                    showToastUnauthorized();
+                                    homeViewModel.setProgress(false);
+
+                                }
+//                                System.out.println(throwable.getLocalizedMessage());
+//                                System.out.println(throwable.getMessage());
+
+                            }
+                        });
 
         compositeDisposable.add(disposable);
+    }
+
+    public void showToastUnauthorized()
+    {
+
+//        public void showFinishTimeDialog()
+//        {
+        Dialog dialog = new Dialog(this);
+        dialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
+            @Override
+            public void onDismiss(DialogInterface dialog)
+            {
+                openAuthActivity();
+//                    finishTest(testIdMain);
+                //System.out.println(testIdMain);//103080954
+//                dialog.dismiss();
+            }
+        });
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.setContentView(R.layout.dialog);
+        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        dialogText = dialog.findViewById(R.id.dialog_text);
+        buttonYes = dialog.findViewById(R.id.buttonOk);
+        buttonNo = dialog.findViewById(R.id.buttonCancel);
+        buttonNo.setVisibility(View.GONE);
+        buttonYes.setText(R.string.ok);
+        if(language.equals(Constant.KZ))
+        {
+//            buttonNo.setText(R.string.noKz);
+
+            dialogText.setText(R.string.sessionErrorKz);
+
+        }
+        else
+        {
+//            buttonNo.setText(R.string.noRu);
+//            buttonYes.setText(R.string.yesRu);
+            dialogText.setText(R.string.sessionErrorRu);
+        }
+        buttonYes.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v)
+            {
+                buttonYes.setEnabled(false);
+                dialog.dismiss();
+                openAuthActivity();
+//                    finishTest(testIdMain);
+                //System.out.println(testIdMain);//103080954
+
+            }
+        });
+
+//        buttonNo.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                dialog.dismiss();
+//            }
+//        });
+        dialog.show();
+    }
+
+    public  void openAuthActivity()
+    {
+        Intent intent = new Intent(this, AuthActivity.class);
+        ((Activity)this).startActivity(intent);
+//        if (language.equals(Constant.KZ))
+//
+//            Toast.makeText(this,
+//                    R.string.sessionErrorKz,
+//                    Toast.LENGTH_SHORT).show();
+//        else
+//        {
+//            Toast.makeText(this,
+//                    R.string.sessionErrorRu,
+//                    Toast.LENGTH_SHORT).show();
+//        }
     }
 
     @Override
@@ -225,6 +329,7 @@ public class HomeActivity extends AppCompatActivity
         FragmentHelper.openFragment(this,
                 R.id.frame_layout,
                 ProfileFragment.newInstance(profileResponse.getProfile()));
+        homeViewModel.setProgress(false);
 
 
 //        ProfileFragment nextFrag= ProfileFragment.newInstance(profileResponse.getProfile());
@@ -243,8 +348,8 @@ public class HomeActivity extends AppCompatActivity
     @Override
     public void onBackPressed()
     {
-        finish();
-        Intent intent = new Intent(this, MainActivity.class);
-        startActivity(intent);
+        finishAffinity();
+        System.exit(0);
     }
+
 }

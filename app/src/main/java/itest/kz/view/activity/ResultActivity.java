@@ -1,8 +1,13 @@
 package itest.kz.view.activity;
 
+import android.app.Activity;
+import android.app.Dialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.databinding.DataBindingUtil;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.NavUtils;
@@ -11,9 +16,14 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.view.Window;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.TextView;
+import android.widget.Toast;
 
+import com.google.android.flexbox.FlexWrap;
+import com.google.android.flexbox.FlexboxLayoutManager;
 import com.google.gson.JsonObject;
 
 import java.io.Serializable;
@@ -37,7 +47,9 @@ import itest.kz.model.TestGenerateResponse;
 import itest.kz.model.Tests;
 import itest.kz.network.SubjectService;
 import itest.kz.util.Constant;
+import itest.kz.util.DividerItemDecoration;
 import itest.kz.util.TestsUtils;
+import itest.kz.util.VerticalSpaceItemDecoration;
 import itest.kz.view.adapters.ResultAdapter;
 import itest.kz.view.adapters.SubjectAdapter;
 import itest.kz.viewmodel.ResultViewModel;
@@ -57,6 +69,9 @@ public class ResultActivity extends AppCompatActivity implements Observer
     private Toolbar toolbar;
     private ImageButton buttonCloseResult;
     private String typeTest;
+    private TextView dialogTextAuth;
+    private Button buttonYesAuth;
+    private Button buttonNoAuth;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState)
@@ -166,7 +181,18 @@ public class ResultActivity extends AppCompatActivity implements Observer
 //                                   setFragment(arrayList);
 
                                }
-                           }
+                           },
+
+                        new Consumer<Throwable>() {
+                            @Override
+                            public void accept(Throwable throwable) throws Exception {
+                                if (throwable.getMessage().contains("401"))
+                                {
+                                    showToastUnauthorized();
+                                }
+                            }
+                        }
+
 //                        new Consumer<JSONObject>() {
 //                    @Override
 //                    public void accept(JSONObject jsonObject) throws Exception
@@ -179,6 +205,87 @@ public class ResultActivity extends AppCompatActivity implements Observer
 
         compositeDisposable.add(disposable);
     }
+
+//    private TextView dialogTextAuth;
+//    private Button buttonYesAuth;
+//    private Button buttonNoAuth;
+
+    public void showToastUnauthorized()
+    {
+
+//        public void showFinishTimeDialog()
+//        {
+        Dialog dialog = new Dialog(this);
+        dialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
+            @Override
+            public void onDismiss(DialogInterface dialog)
+            {
+                openAuthActivity();
+//                    finishTest(testIdMain);
+                //System.out.println(testIdMain);//103080954
+//                dialog.dismiss();
+            }
+        });
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.setContentView(R.layout.dialog);
+        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        dialogTextAuth = dialog.findViewById(R.id.dialog_text);
+        buttonYesAuth = dialog.findViewById(R.id.buttonOk);
+        buttonNoAuth = dialog.findViewById(R.id.buttonCancel);
+        buttonNoAuth.setVisibility(View.GONE);
+        buttonYesAuth.setText(R.string.ok);
+        if(language.equals(Constant.KZ))
+        {
+//            buttonNo.setText(R.string.noKz);
+
+            dialogTextAuth.setText(R.string.sessionErrorKz);
+
+        }
+        else
+        {
+//            buttonNo.setText(R.string.noRu);
+//            buttonYes.setText(R.string.yesRu);
+            dialogTextAuth.setText(R.string.sessionErrorRu);
+        }
+        buttonYesAuth.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v)
+            {
+                buttonYesAuth.setEnabled(false);
+                dialog.dismiss();
+                openAuthActivity();
+//                    finishTest(testIdMain);
+                //System.out.println(testIdMain);//103080954
+
+            }
+        });
+
+//        buttonNo.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                dialog.dismiss();
+//            }
+//        });
+        dialog.show();
+    }
+
+    public  void openAuthActivity()
+    {
+        Intent intent = new Intent(this, AuthActivity.class);
+        ((Activity)this).startActivity(intent);
+//        if (language.equals(Constant.KZ))
+//
+//            Toast.makeText(this,
+//                    R.string.sessionErrorKz,
+//                    Toast.LENGTH_SHORT).show();
+//        else
+//        {
+//            Toast.makeText(this,
+//                    R.string.sessionErrorRu,
+//                    Toast.LENGTH_SHORT).show();
+//        }
+    }
+
 
     private void updateTestDataList(Tests questions)
     {
@@ -237,7 +344,18 @@ public class ResultActivity extends AppCompatActivity implements Observer
 ////                context.startActivity(intent);
 //            }
 //        });
+//        FlexboxLayoutManager layoutManager = new FlexboxLayoutManager();
+//        layoutManager.setFlexWrap(FlexWrap.WRAP);
+
+
+//        DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(this,
+//                R.dimen.dimen_offset);
+//        recyclerView.addItemDecoration(dividerItemDecoration);
+
+//        VerticalSpaceItemDecoration verticalSpaceItemDecoration = new VerticalSpaceItemDecoration(50);
         recyclerView.setAdapter(resultAdapter);
+//        recyclerView.addItemDecoration(verticalSpaceItemDecoration);
+//        recyclerView.setLayoutManager(layoutManager);
         recyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
 
     }
@@ -254,7 +372,7 @@ public class ResultActivity extends AppCompatActivity implements Observer
 //        Intent parentIntent = NavUtils.getParentActivityIntent(this);
 ////        parentIntent.setFlags(Intent.FLAG_ACTIVITY_BROUGHT_TO_FRONT | Intent.FLAG_ACTIVITY_SINGLE_TOP | Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
 //        startActivity(parentIntent);
-        finish();
+//        finish();
 //        super.onBackPressed();
     }
 }

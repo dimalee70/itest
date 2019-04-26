@@ -55,6 +55,13 @@ public class SubjectFragment extends Fragment implements Observer
 
     }
 
+    public void initContent()
+    {
+//        fragmentEntBinding.loader.showCustomLoading(true,  R.drawable.ic_itest_logo_larger);
+        setUpListOfSbjectsMainView(fragmentEntBinding.listSubjectMain);
+        setUpListOfSbjectsMainView(fragmentEntBinding.listSubject);
+//        fragmentEntBinding.loader.showCustomLoading(false);
+    }
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState)
@@ -66,17 +73,20 @@ public class SubjectFragment extends Fragment implements Observer
         subjectFragmentViewModel.getTests().observe(this, listObserver);
         fragmentEntBinding.setEnt(subjectFragmentViewModel);
 
-        setUpListOfSbjectsMainView(fragmentEntBinding.listSubjectMain);
-//        getListMainSubject();
-
-//        selectedSubects = subjectFragmentViewModel.getSubjectListMain();
-
-        setUpListOfSbjectsMainView(fragmentEntBinding.listSubject);
-
-//        (EntMainAdapter)fragmentEntBinding.listSubjectMain.getAdapter()
+        fragmentEntBinding
+                .buttonReflesh.setOnClickListener
+                (new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        System.out.println("hello");
+                    }
+                });
+        initContent();
 
         setUpObserver(subjectFragmentViewModel);
 
+
+//        fragmentEntBinding.loader.showCustomLoading(true, );
 
 
         fragmentEntBinding.entStartCardview.setOnClickListener(new View.OnClickListener() {
@@ -178,7 +188,7 @@ public class SubjectFragment extends Fragment implements Observer
 //        System.out.println("ent adapter");
 //        System.out.println(entMainAdapter.getSubjectListMain());
 
-        fragmentEntBinding.textView.setOnClickListener(new View.OnClickListener()
+        fragmentEntBinding.entCancelCardview.setOnClickListener(new View.OnClickListener()
         {
             @Override
             public void onClick(View v)
@@ -190,6 +200,7 @@ public class SubjectFragment extends Fragment implements Observer
                     s.setIsSelected(0);
                 }
 
+                fragmentEntBinding.entStartCardview.setVisibility(View.GONE);
 
                 subjectFragmentViewModel.setSubjectList(new ArrayList<Subject>());
                 subjectFragmentViewModel.setSubjectListMain(new ArrayList<Subject>());

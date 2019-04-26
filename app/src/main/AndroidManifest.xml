@@ -106,6 +106,11 @@
             android:name=".view.activity.StatisticActivity"
             android:theme="@style/AppTheme">
         </activity>
+        <activity
+            android:screenOrientation="portrait"
+            android:name=".view.activity.SplashScreensActivity"
+            android:theme="@style/AppTheme">
+        </activity>
     </application>
 
 </manifest>

@@ -15,14 +15,17 @@
         <android.support.v7.widget.CardView
             android:id="@+id/test_result_subject_catdview"
             android:layout_width="match_parent"
-            android:layout_height="60dp"
+            android:layout_height="wrap_content"
             android:layout_marginRight="15dp"
             android:layout_marginLeft="15dp"
             android:foreground="?android:attr/selectableItemBackground"
             android:clickable="true"
+            app:cardElevation="1dp"
             android:onClick="@{item.onClickSubject}"
             app:cardUseCompatPadding="true"
             app:cardCornerRadius="6dp">
+
+            <!--android:layout_height="60dp"-->
 
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -32,7 +35,8 @@
                 <RelativeLayout
                     android:id="@+id/title_subject_relative"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent">
+                    android:layout_height="match_parent"
+                    android:layout_marginBottom="5dp">
                     <!--android:layout_marginRight="100dp"-->
                     <!--android:layout_marginRight="100dp"-->
 
@@ -73,14 +77,15 @@
                     <!--android:layout_width="wrap_content"-->
                     <!--android:layout_height="wrap_content">-->
 
-                    <TextView
+                    <ImageButton
                         android:id="@+id/strelka_text"
-                        android:layout_width="9dp"
+                        android:layout_width="15dp"
                         android:layout_height="15dp"
                         android:layout_marginRight="15dp"
                         android:layout_alignParentRight="true"
                         android:layout_centerInParent="true"
-                        android:background="@drawable/rotate_ic_icon_strelka_black"
+                        android:src="@drawable/rotate_ic_icon_strelka_black"
+                        android:background="@color/colorWhite"
                         android:gravity="left"/>
                     <!--android:layout_alignParentBottom="true"-->
                     <!--android:layout_alignParentTop="true"-->

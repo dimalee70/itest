@@ -27,7 +27,8 @@
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:orientation="horizontal"
-        app:cardCornerRadius="10dp"
+        app:cardCornerRadius="5dp"
+        app:cardElevation="1dp"
         app:cardUseCompatPadding="true"
         tools:layout_marginBottom="16dp"
         android:clickable="false"
@@ -59,26 +60,41 @@
                     android:clickable="false"
                     android:focusable="false"
                     android:textSize="20dp"
-                    android:textStyle="bold" />
+                    android:fontFamily="@font/my_open_sans_semibold"
+                    />
 
                 </RelativeLayout>
 
 
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_toRightOf="@id/letter_relative"
+                    android:background="@color/colorWhite">
+
+
                 <itest.kz.util.AnswerWebView
                     android:id="@+id/answerText"
+                    android:layout_marginTop="7dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
 
                     android:hardwareAccelerated="true"
                     android:clickable="false"
                     android:focusable="false"
-                    android:layout_toRightOf="@id/letter_relative"
+
                     app:loadData="@{answer.answerText}">
 
+
+                    <!--android:layout_centerInParent="true"-->
+                    <!--android:layout_centerVertical="true"-->
+                    <!--android:layout_centerHorizontal="true"-->
                     <!--android:layout_centerHorizontal="true"-->
                     <!--android:layout_centerVertical="true"-->
 
                 </itest.kz.util.AnswerWebView>
+
+                </RelativeLayout>
 
 
                 <!--<WebView-->

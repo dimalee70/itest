@@ -1,9 +1,14 @@
 package itest.kz.view.activity;
 
+import android.app.Activity;
+import android.app.Dialog;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.databinding.DataBindingUtil;
 import android.graphics.Color;
 import android.graphics.Rect;
+import android.graphics.drawable.ColorDrawable;
 import android.media.Image;
 import android.os.Bundle;
 import android.os.CountDownTimer;
@@ -17,6 +22,8 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.View;
+import android.view.Window;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -30,6 +37,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -45,6 +53,7 @@ import itest.kz.model.Question;
 import itest.kz.model.QuestionResponce;
 import itest.kz.model.Subject;
 import itest.kz.model.Test;
+import itest.kz.model.TestFinishResponse;
 import itest.kz.model.TestGenerate;
 import itest.kz.model.TestGenerateCredentials;
 import itest.kz.model.TestGenerateResponse;
@@ -93,6 +102,11 @@ public class FullTestActivity extends AppCompatActivity
     private String resultTag;
     private RecyclerView subjectResycleView;
     private boolean hasActiveTest = false;
+    private TextView dialogText;
+    private Button buttonYes;
+    private Button buttonNo;
+
+
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState)
@@ -118,6 +132,9 @@ public class FullTestActivity extends AppCompatActivity
         this.testIdMain = getIntent().getExtras().getLong(Constant.TEST_MAIN_ID);
         subjectList.get(currentPosition).setOnClickedRecycle(1);
 
+        activityFullTestBinding = DataBindingUtil.setContentView(this, R.layout.activity_full_test);
+        setR(activityFullTestBinding.listSubjects);
+
         if (isStartedFirst)
         {
 //            maxTimeInMilliseconds = 10800000;
@@ -130,8 +147,7 @@ public class FullTestActivity extends AppCompatActivity
             fetchFullTestQuestionsGenerate(testIdMain);
         }
 //        System.out.println(maxTimeInMilliseconds);
-        activityFullTestBinding = DataBindingUtil.setContentView(this, R.layout.activity_full_test);
-        setR(activityFullTestBinding.listSubjects);
+
 //        startTimer(maxTimeInMilliseconds, 1000);
 
 
@@ -159,11 +175,18 @@ public class FullTestActivity extends AppCompatActivity
 
             public void onFinish() {
                 timer.setText("00:00:00");
-                Toast.makeText(FullTestActivity.this, "Finish", Toast.LENGTH_SHORT).show();
+                showFinishTimeDialog();
+//                Toast.makeText(FullTestActivity.this, "Finish", Toast.LENGTH_SHORT).show();
+
+
+
+
 
                 cancel();
             }
         }.start();
+
+
 
 
 //        hourglass = new Hourglass(maxTime, interval) {
@@ -205,7 +228,107 @@ public class FullTestActivity extends AppCompatActivity
 //        }.start();
     }
 
+    public void showFinishTimeDialog()
+    {
+        Dialog dialog = new Dialog(this);
+        dialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
+            @Override
+            public void onDismiss(DialogInterface dialog)
+            {
+                finishTest(testIdMain);
+                //System.out.println(testIdMain);//103080954
+//                dialog.dismiss();
+            }
+        });
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.setContentView(R.layout.dialog);
+        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        dialogText = dialog.findViewById(R.id.dialog_text);
+        buttonYes = dialog.findViewById(R.id.buttonOk);
+        buttonNo = dialog.findViewById(R.id.buttonCancel);
+        buttonNo.setVisibility(View.GONE);
+        buttonYes.setText(R.string.ok);
+        if(language.equals(Constant.KZ))
+        {
+//            buttonNo.setText(R.string.noKz);
 
+            dialogText.setText(R.string.timeIsUpAlertKz);
+
+        }
+        else
+        {
+//            buttonNo.setText(R.string.noRu);
+//            buttonYes.setText(R.string.yesRu);
+            dialogText.setText(R.string.timeIsUpAlertRu);
+        }
+        buttonYes.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v)
+            {
+                buttonYes.setEnabled(false);
+                dialog.dismiss();
+                finishTest(testIdMain);
+                //System.out.println(testIdMain);//103080954
+
+            }
+        });
+
+//        buttonNo.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                dialog.dismiss();
+//            }
+//        });
+        dialog.show();
+    }
+    public void finishTest(Long testIdMain)
+    {
+        //        System.out.println("question");
+//        System.out.println(questionId);
+//        System.out.println(answerId);
+//        System.out.println(tests.getTestId());
+        AppController appController = new AppController();
+        SubjectService subjectService = appController.getSubjectService();
+
+
+//        System.out.println(accessToken);
+        Disposable disposable = subjectService.finishTest(Constant.ACCEPT,
+                language, "Bearer "+ accessToken, testIdMain)
+                .subscribeOn(appController.subscribeScheduler())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Consumer<TestFinishResponse>()
+                           {
+                               @Override
+                               public void accept(TestFinishResponse testFinishResponse) throws Exception
+                               {
+
+                                   if (this != null) {
+//                                       if (resultTag == null) {
+                                       Intent intent = new Intent(FullTestActivity.this, ResultsActivity.class);
+                                       intent.putExtra(Constant.TEST_FINISH_RESPONSE, testFinishResponse);
+                                       intent.putExtra(Constant.TEST_MAIN_ID, testIdMain);
+                                       intent.putExtra(Constant.TYPE, Constant.TYPEFULLTEST);
+//                                       intent.putExtra(Constant.SELECTED_SUBJECT, (Serializable) selectedSubject);
+                                       intent.putExtra(Constant.SUBJECT_LIST, (Serializable) subjectList);
+
+                                       startActivity(intent);
+                                   }
+                               }
+                           },
+                        new Consumer<Throwable>() {
+                            @Override
+                            public void accept(Throwable throwable) throws Exception {
+                                if (throwable.getMessage().contains("401")) {
+                                    showToastUnauthorized();
+                                }
+//                                System.out.println(throwable.getLocalizedMessage());
+//                                System.out.println(throwable.getMessage());
+
+                            }
+                        }
+
+                );
+    }
     @Override
     protected void onDestroy()
     {
@@ -318,6 +441,8 @@ public class FullTestActivity extends AppCompatActivity
     {
 //        System.out.println(getOwnersId());
 
+        fullTestViewModel.setProgress(true);
+
         TestGenerateCredentials credentials = new TestGenerateCredentials("ent", "full", getOwnersId());
         AppController appController = new AppController();
         CompositeDisposable compositeDisposable = new CompositeDisposable();
@@ -335,13 +460,105 @@ public class FullTestActivity extends AppCompatActivity
                     {
                         setTestIdMain(testGenerateResponse.getTestGenerate().getTestId());
                         setTestGenerateResponse(testGenerateResponse);
+                        testIdMain = testGenerateResponse.getTestGenerate().getTestId();
                         fetchFullTestQuestionsGenerate(testGenerateResponse.getTestGenerate().getTestId());
+//                        fullTestViewModel.setProgress(false);
 
                     }
-                });
+
+                },
+                new Consumer<Throwable>() {
+                    @Override
+                    public void accept(Throwable throwable) throws Exception {
+                        if (throwable.getMessage().contains("401"))
+                        {
+                            showToastUnauthorized();
+//                            fullTestViewModel.setProgress(false);
+                        }
+                    }
+                }
+                );
 
         compositeDisposable.add(disposable);
     }
+
+
+    public void showToastUnauthorized()
+    {
+
+//        public void showFinishTimeDialog()
+//        {
+            Dialog dialog = new Dialog(this);
+            dialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
+                @Override
+                public void onDismiss(DialogInterface dialog)
+                {
+                    openAuthActivity();
+//                    finishTest(testIdMain);
+                    //System.out.println(testIdMain);//103080954
+//                dialog.dismiss();
+                }
+            });
+            dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+            dialog.setContentView(R.layout.dialog);
+            dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+            dialogText = dialog.findViewById(R.id.dialog_text);
+            buttonYes = dialog.findViewById(R.id.buttonOk);
+            buttonNo = dialog.findViewById(R.id.buttonCancel);
+            buttonNo.setVisibility(View.GONE);
+            buttonYes.setText(R.string.ok);
+            if(language.equals(Constant.KZ))
+            {
+//            buttonNo.setText(R.string.noKz);
+
+                dialogText.setText(R.string.sessionErrorKz);
+
+            }
+            else
+            {
+//            buttonNo.setText(R.string.noRu);
+//            buttonYes.setText(R.string.yesRu);
+                dialogText.setText(R.string.sessionErrorRu);
+            }
+            buttonYes.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v)
+                {
+                    buttonYes.setEnabled(false);
+                    dialog.dismiss();
+                    openAuthActivity();
+//                    finishTest(testIdMain);
+                    //System.out.println(testIdMain);//103080954
+
+                }
+            });
+
+//        buttonNo.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                dialog.dismiss();
+//            }
+//        });
+            dialog.show();
+        }
+
+    public  void openAuthActivity()
+    {
+        Intent intent = new Intent(this, AuthActivity.class);
+        ((Activity)this).startActivity(intent);
+//        if (language.equals(Constant.KZ))
+//
+//            Toast.makeText(this,
+//                    R.string.sessionErrorKz,
+//                    Toast.LENGTH_SHORT).show();
+//        else
+//        {
+//            Toast.makeText(this,
+//                    R.string.sessionErrorRu,
+//                    Toast.LENGTH_SHORT).show();
+//        }
+    }
+
 
     private void setTestGenerateResponse(TestGenerateResponse testGenerateResponse)
     {
@@ -358,6 +575,7 @@ public class FullTestActivity extends AppCompatActivity
     public void fetchFullTestQuestionsGenerate(Long id)
     {
 
+        fullTestViewModel.setProgress(true);
         AppController appController = new AppController();
         CompositeDisposable compositeDisposable = new CompositeDisposable();
 //        AppController appController = AppController.create(context);
@@ -392,12 +610,30 @@ public class FullTestActivity extends AppCompatActivity
                                    setArraListArrayListQuestions(questions);
 //
                                    Tests arrayList = questions.get(currentPosition);
-                                   activityFullTestBinding.textViewTitle.setText(arrayList.getTitle());
+                                   String titleText = "ҰБТ";
+                                   if (language.equals(Constant.RU))
+                                   {
+                                       titleText = "ЕНТ";
+                                   }
+                                   activityFullTestBinding.textViewTitle.setText(titleText);
                                    if (resultTag == null)
                                        startTimer(maxTimeInMilliseconds, 1000);
                                    setFragment(arrayList);
+//                                   fullTestViewModel.setProgress(false);
+
                                }
-                           }
+                           },
+
+                        new Consumer<Throwable>() {
+                            @Override
+                            public void accept(Throwable throwable) throws Exception {
+                                if (throwable.getMessage().contains("401"))
+                                {
+                                    showToastUnauthorized();
+//                                    fullTestViewModel.setProgress(false);
+                                }
+                            }
+                        }
                 );
 
         compositeDisposable.add(disposable);
@@ -415,6 +651,8 @@ public class FullTestActivity extends AppCompatActivity
 
     public void setFragment(Tests arrayList)
     {
+
+        fullTestViewModel.setProgress(true);
         this.numbersOFpages = arrayList.getQuestions().size();
         mPager = activityFullTestBinding.pager;
 //        mPager.setOffscreenPageLimit(1);
@@ -429,6 +667,7 @@ public class FullTestActivity extends AppCompatActivity
         PageListener listener = new PageListener();
         mPager.addOnPageChangeListener(listener);
         setPageNumberToFragment();
+//        fullTestViewModel.setProgress(false);
 //        mPager.setOnPageChangeListener(listener);
     }
 
@@ -486,6 +725,8 @@ public class FullTestActivity extends AppCompatActivity
                     mPager.setCurrentItem(--selectedTestPosition, true);
             }
         });
+
+        fullTestViewModel.setProgress(false);
     }
 
     public class PageListener extends ViewPager.SimpleOnPageChangeListener {
@@ -532,6 +773,9 @@ public class FullTestActivity extends AppCompatActivity
 
     }
 
-
-
+    @Override
+    public void onBackPressed()
+    {
+//        super.onBackPressed();
+    }
 }

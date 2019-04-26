@@ -4,9 +4,11 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.databinding.ObservableInt;
 import android.support.v4.text.HtmlCompat;
 import android.text.Html;
 import android.text.Spanned;
+import android.view.View;
 
 import java.io.Serializable;
 import java.util.List;
@@ -33,8 +35,29 @@ public class ResultsFragmentViewModel extends Observable
     private String typeTest;
     private String language;
     private SharedPreferences settings;
+    public ObservableInt progress = new ObservableInt(View.VISIBLE);
+    public ObservableInt nestedVisible = new ObservableInt(View.GONE);
 
-//    private String text = "This is <font color='red'>red</font>. This is <font color='blue'>blue</font>.";
+
+    public ObservableInt getProgress()
+    {
+        return progress;
+    }
+
+    public void setProgress(boolean isProgress)
+    {
+        if (isProgress)
+            progress.set(View.VISIBLE);
+        else
+            {
+                progress.set(View.GONE);
+                nestedVisible.set(View.VISIBLE);
+            }
+
+        notifyObservers();
+    }
+
+    //    private String text = "This is <font color='red'>red</font>. This is <font color='blue'>blue</font>.";
 
     public ResultsFragmentViewModel(Context context, TestFinishResponse testFinishResponse,
                                     List<Subject> subjectList, Subject selectedSubject, String typeTest)
@@ -62,7 +85,7 @@ public class ResultsFragmentViewModel extends Observable
                 Intent intent = new Intent((Activity) context, TestActivity.class);
                 intent.putExtra(Constant.SELECTED_SUBJECT, (Serializable) selectedSubject);
                 intent.putExtra(Constant.TYPE, typeTest);
-                intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+//                intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
 //                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 context.startActivity(intent);
             }
@@ -86,16 +109,30 @@ public class ResultsFragmentViewModel extends Observable
     }
     public Spanned getHtmlText()
     {
-        int all = testFinishResponse.getResult().getAll();
-        int points = testFinishResponse.getResult().getPoints();//style="color:#000000"
-        String text = "<font color=#68DA78>" + points + "</font>"
-                + "/<font color='black'>" + all + "</font>";
-        return Html.fromHtml(text, HtmlCompat.FROM_HTML_MODE_LEGACY);
+        if (testFinishResponse != null)
+        {
+            int all = 0;
+            int points = 0;
+            if(testFinishResponse.getResult()!= null)
+            {
+                all = testFinishResponse.getResult().getAll();
+                points = testFinishResponse.getResult().getPoints();//style="color:#000000"
+            }
+
+            String text = "<font color=#68DA78>" + points + "</font>"
+                    + "/<font color='black'>" + all + "</font>";
+            return Html.fromHtml(text, HtmlCompat.FROM_HTML_MODE_LEGACY);
+        }
+        return Html.fromHtml("", HtmlCompat.FROM_HTML_MODE_LEGACY);
     }
 
     public  int getPercent()
     {
-        return  (int )testFinishResponse.getResult().getPercent();
+        if (testFinishResponse.getResult() != null)
+        {
+            return  (int )testFinishResponse.getResult().getPercent();
+        }
+        return  0;
     }
 
     public int getAgainTestText()

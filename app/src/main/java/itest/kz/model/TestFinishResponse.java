@@ -25,6 +25,11 @@ public class TestFinishResponse implements Serializable
         this.result = result;
     }
 
+    public TestFinishResponse(TestResult result) {
+        this.result = result;
+    }
+
+
     public String getSuccess() {
         return success;
     }

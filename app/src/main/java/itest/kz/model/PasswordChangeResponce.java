@@ -14,6 +14,14 @@ public class PasswordChangeResponce implements Serializable
     @SerializedName("message")
     private String message;
 
+    @SerializedName("error")
+    private String error;
+
+    public String getError()
+    {
+        return error;
+    }
+
     public PasswordChangeResponce(boolean success, String message)
     {
         this.success = success;

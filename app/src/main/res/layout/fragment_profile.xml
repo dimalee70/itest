@@ -35,11 +35,36 @@
 
         </android.support.v7.widget.Toolbar>
 
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/toolbar_profile">
+
+
+            <!--<RelativeLayout-->
+                <!--android:layout_centerInParent="true"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="match_parent">-->
+
+                <!--<ProgressBar-->
+                    <!--android:id="@+id/progressBar1"-->
+                    <!--style="?android:attr/progressBarStyleLarge"-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_centerHorizontal="true"-->
+                    <!--android:layout_centerVertical="true"-->
+                    <!--android:indeterminate="true"-->
+                    <!--android:visibility="@{profile.progress}"/>-->
+
+
+            <!--</RelativeLayout>-->
+
+
         <ScrollView
-            android:layout_below="@+id/toolbar_profile"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@color/colorWhite">
+            android:background="@color/colorBackgroundCardView">
 
         <RelativeLayout
             android:layout_width="wrap_content"
@@ -65,22 +90,22 @@
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:padding="20dp"
-                            android:layout_marginLeft="10dp">
+                            android:background="@color/colorBackgroundCardView">
 
                             <de.hdodenhof.circleimageview.CircleImageView
                                 android:id="@+id/profilePhoto"
-                                android:layout_width="96dp"
-                                android:layout_height="96dp"
-                                android:layout_marginTop="20dp"
-                                android:layout_marginLeft="16dp"
+                                android:layout_width="100dp"
+                                android:layout_height="100dp"
+                                android:layout_centerHorizontal="true"
+                                android:layout_marginTop="30dp"
                                 android:src="@{profile.profileImage}"/>
 
                             <RelativeLayout
                                 android:id="@+id/main_text_relative"
                                 android:layout_width="match_parent"
+                                android:layout_below="@+id/profilePhoto"
                                 android:layout_height="wrap_content"
-                                android:layout_marginTop="30dp"
-                                android:layout_toRightOf="@+id/profilePhoto"
+                                android:layout_marginTop="10dp"
                                 android:layout_centerInParent="true"
                                 android:layout_marginLeft="15dp">
 
@@ -90,16 +115,18 @@
                                     android:layout_height="wrap_content"
                                     android:text="@{profile.name}"
                                     android:textSize="16sp"
+                                    android:textAlignment="center"
                                     android:textColor="@color/colorBlack"
-                                    android:fontFamily="@font/my_open_sans_semibold"/>
+                                    android:fontFamily="@font/my_open_sans_regular"/>
 
                                 <TextView
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:layout_below="@+id/name"
                                     android:text="@{profile.email}"
+                                    android:textAlignment="center"
                                     android:textColor="@color/colorUnselectedTabAuth"
-                                    android:fontFamily="@font/my_open_sans_semibold"
+                                    android:fontFamily="@font/my_open_sans_regular"
                                     android:textSize="14sp"/>
                             </RelativeLayout>
 
@@ -118,7 +145,20 @@
 
                 <RelativeLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:background="@color/colorBackgroundCardView">
+
+                    <RelativeLayout
+                        android:id="@+id/info_relative_2"
+                        android:background="@color/colorWhite"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+                        <View
+                            android:id="@+id/info_divider_top"
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            android:layout_alignParentTop="true"
+                            android:background="@color/colorDivider" />
 
                         <RelativeLayout
                             android:id="@+id/info_relative"
@@ -126,28 +166,37 @@
                             android:layout_height="wrap_content">
 
                             <android.support.v7.widget.CardView
-                                android:layout_marginLeft="25dp"
-                                android:layout_marginTop="20dp"
+                                android:layout_marginLeft="16dp"
+                                android:layout_marginTop="10dp"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 app:cardPreventCornerOverlap="false"
                                 app:cardElevation="0dp"
-                                android:onClick="@{profile.clickInfo}">
+                                android:focusable="false"
+                                android:focusableInTouchMode="false">
 
                                 <RelativeLayout
                                     android:layout_width="match_parent"
-                                    android:layout_height="match_parent">
+                                    android:layout_height="match_parent"
+                                    android:foreground="?android:attr/selectableItemBackground"
+                                    android:clickable="true"
+                                    android:onClick="@{profile.clickInfo}">
+
+                                    <!--android:foreground="?android:attr/selectableItemBackground"-->
+                                    <!--android:clickable="true"-->
 
                                     <ImageView
                                         android:id="@+id/pencil"
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
+                                        android:layout_width="24dp"
+                                        android:layout_height="24dp"
+                                        android:layout_alignParentStart="true"
                                         android:layout_alignParentTop="true"
+                                        android:layout_marginStart="0dp"
                                         android:layout_marginTop="0dp"
                                         android:src="@drawable/ic_pencil_main" />
 
                                     <TextView
-                                        android:layout_width="match_parent"
+                                        android:layout_width="wrap_content"
                                         android:layout_marginLeft="25dp"
                                         android:layout_centerInParent="true"
                                         android:textColor="@color/colorBlack"
@@ -156,6 +205,10 @@
                                         android:textSize="16sp"
                                         android:fontFamily="@font/my_open_sans_regular"
                                         android:text="@{profile.infoText}"/>
+
+                                    <!--android:onClick="@{profile.clickInfo}"-->
+                                    <!--android:foreground="?android:attr/selectableItemBackground"-->
+                                    <!--android:clickable="true"-->
 
                                 </RelativeLayout>
 
@@ -166,37 +219,49 @@
 
                 <View
                     android:id="@+id/info_divider"
-                    android:layout_marginTop="25dp"
+                    android:layout_marginTop="10dp"
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
                     android:layout_below="@+id/info_relative"
-                    android:layout_marginLeft="80dp"
+                    android:layout_marginLeft="16dp"
                     android:background="@color/colorDivider" />
+
+                </RelativeLayout>
+
+                    <RelativeLayout
+                        android:id="@+id/password_relative_2"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/info_relative_2"
+                        android:background="@color/colorWhite">
+
 
                     <RelativeLayout
                         android:id="@+id/password_relative"
-                        android:layout_below="@+id/info_divider"
+
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content">
 
                         <android.support.v7.widget.CardView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:onClick="@{profile.clickPassword}"
-                            android:layout_marginLeft="25dp"
-                            android:layout_marginTop="20dp"
+                            android:layout_marginLeft="16dp"
+                            android:layout_marginTop="10dp"
                             app:cardPreventCornerOverlap="false"
                             app:cardElevation="0dp">
 
                             <RelativeLayout
                                 android:layout_width="match_parent"
-                                android:layout_height="wrap_content">
+                                android:layout_height="wrap_content"
+                                android:foreground="?android:attr/selectableItemBackground"
+                                android:clickable="true"
+                                android:onClick="@{profile.clickPassword}">
 
                                 <ImageView
                                     android:id="@+id/password"
-                                    android:layout_height="wrap_content"
                                     android:layout_width="wrap_content"
-                                    android:src="@drawable/ic_password_main"/>
+                                    android:layout_height="match_parent"
+                                    android:src="@drawable/ic_password_main" />
 
                                 <TextView
                                     android:layout_width="match_parent"
@@ -219,34 +284,48 @@
                         android:id="@+id/password_divider"
                         android:layout_width="match_parent"
                         android:layout_height="1dp"
-                        android:layout_marginTop="25dp"
+                        android:layout_marginTop="10dp"
                         android:layout_below="@+id/password_relative"
-                        android:layout_marginLeft="80dp"
+                        android:layout_marginLeft="16dp"
                         android:background="@color/colorDivider" />
+
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:id="@+id/lang_relative_2"
+                        android:layout_width="match_parent"
+                        android:layout_below="@+id/password_relative_2"
+                        android:layout_height="wrap_content"
+                        android:background="@color/colorWhite">
+
 
                     <RelativeLayout
                         android:id="@+id/lang_relative"
-                        android:layout_below="@+id/password_divider"
+
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content">
 
                         <android.support.v7.widget.CardView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:onClick="@{profile.clickLang}"
-                            android:layout_marginLeft="25dp"
-                            android:layout_marginTop="20dp"
+                            android:layout_marginLeft="16dp"
+                            android:layout_marginTop="10dp"
                             app:cardPreventCornerOverlap="false"
                             app:cardElevation="0dp">
 
                             <RelativeLayout
                                 android:layout_width="match_parent"
-                                android:layout_height="wrap_content">
+                                android:layout_height="wrap_content"
+                                android:foreground="?android:attr/selectableItemBackground"
+                                android:clickable="true"
+                                android:onClick="@{profile.clickLang}">
 
                                 <ImageView
                                     android:id="@+id/lang"
-                                    android:layout_height="wrap_content"
-                                    android:layout_width="wrap_content"
+                                    android:layout_width="24dp"
+                                    android:layout_height="24dp"
+                                    android:layout_alignParentTop="true"
+                                    android:layout_marginTop="0dp"
                                     android:src="@drawable/ic_lang_main" />
 
                                 <TextView
@@ -270,36 +349,56 @@
                         android:id="@+id/lang_divider"
                         android:layout_width="match_parent"
                         android:layout_height="1dp"
-                        android:layout_marginTop="25dp"
+                        android:layout_marginTop="10dp"
                         android:layout_below="@+id/lang_relative"
-                        android:layout_marginLeft="80dp"
+                        android:foreground="?android:attr/selectableItemBackground"
+                        android:clickable="true"
                         android:background="@color/colorDivider"
                         app:cardPreventCornerOverlap="false"
                         app:cardElevation="0dp"/>
 
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:id="@+id/agreement_relative_2"
+                        android:layout_width="match_parent"
+                        android:layout_marginTop="30dp"
+                        android:layout_below="@+id/lang_relative_2"
+                        android:layout_height="wrap_content"
+                        android:background="@color/colorWhite">
+                        <View
+                            android:id="@+id/agreement_divider_top"
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            android:layout_alignParentTop="true"
+                            android:background="@color/colorDivider" />
+
+
                     <RelativeLayout
                         android:id="@+id/agreement_relative"
-                        android:layout_below="@+id/lang_divider"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content">
+
 
                         <android.support.v7.widget.CardView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:onClick="@{profile.clickAgreement}"
-                            android:layout_marginLeft="25dp"
-                            android:layout_marginTop="20dp"
+                            android:layout_marginLeft="16dp"
+                            android:layout_marginTop="10dp"
                             app:cardPreventCornerOverlap="false"
                             app:cardElevation="0dp">
 
                             <RelativeLayout
                                 android:layout_width="match_parent"
-                                android:layout_height="wrap_content">
+                                android:layout_height="wrap_content"
+                                android:foreground="?android:attr/selectableItemBackground"
+                                android:clickable="true"
+                                android:onClick="@{profile.clickAgreement}">
 
                                 <ImageView
                                     android:id="@+id/agreement"
-                                    android:layout_height="wrap_content"
-                                    android:layout_width="wrap_content"
+                                    android:layout_height="24dp"
+                                    android:layout_width="24dp"
                                     android:src="@drawable/ic_agreement_main" />
 
                                 <TextView
@@ -324,17 +423,30 @@
                         android:layout_width="match_parent"
                         android:layout_height="1dp"
                         android:layout_below="@+id/agreement_relative"
-                        android:layout_marginLeft="80dp"
-                        android:layout_marginTop="25dp"
+                        android:layout_marginTop="10dp"
                         android:background="@color/colorDivider" />
 
             </RelativeLayout>
+                </RelativeLayout>
 
         </android.support.v7.widget.CardView>
 
         </RelativeLayout>
 
         </ScrollView>
+
+            <ProgressBar
+                android:id="@+id/progressBar1"
+                style="?android:attr/progressBarStyleLarge"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:foreground="?android:attr/selectableItemBackground"
+                android:clickable="true"
+                android:layout_centerVertical="true"
+                android:indeterminate="true"
+                android:visibility="@{profile.progress}"/>
+        </RelativeLayout>
 
     </RelativeLayout>
 

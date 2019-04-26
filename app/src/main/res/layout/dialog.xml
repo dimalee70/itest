@@ -13,19 +13,18 @@
     <LinearLayout
         android:id="@+id/linearLayout1"
         android:layout_width="match_parent"
-        android:layout_height="220dp"
+        android:layout_height="160dp"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="57dp"
+        android:layout_marginTop="28dp"
         android:background="@color/colorWhite"
         android:orientation="vertical" >
     </LinearLayout>
 
     <ImageView
         android:id="@+id/imageView1"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:layout_alignParentTop="true"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
         android:layout_centerHorizontal="true"
         android:src="@drawable/ic_itest_logo" />
 
@@ -43,7 +42,10 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textColor="@color/colorBlack"
-            android:layout_margin="30dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="15dp"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"
             android:textAlignment="center"
             android:textAppearance="@style/TextAppearance.AppCompat.Medium"
             android:fontFamily="@font/my_open_sans_regular"/>
@@ -65,7 +67,11 @@
             android:background="@drawable/button_yes"
             android:layout_marginRight="15dp"
             android:textColor="@color/colorWhite"
-            android:fontFamily="@font/my_open_sans_regular"/>
+            android:fontFamily="@font/my_open_sans_regular"
+            android:clickable="true"/>
+
+        <!--android:background="?attr/selectableItemBackground"-->
+        <!--android:layout_marginBottom="15dp"-->
         <Button
             android:id="@+id/buttonCancel"
             android:layout_width="wrap_content"
@@ -74,7 +80,9 @@
             android:textColor="@color/colorWhite"
             android:layout_toRightOf="@+id/buttonOk"
             android:layout_marginLeft="15dp"
-            android:fontFamily="@font/my_open_sans_regular" />
+            android:fontFamily="@font/my_open_sans_regular"
+            android:clickable="true"/>
+        <!--android:layout_marginBottom="15dp"-->
 
     </RelativeLayout>
 

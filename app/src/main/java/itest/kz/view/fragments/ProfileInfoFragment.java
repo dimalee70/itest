@@ -2,6 +2,8 @@ package itest.kz.view.fragments;
 
 import android.Manifest;
 import android.app.Activity;
+import android.app.Dialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.databinding.DataBindingUtil;
@@ -9,6 +11,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.Matrix;
+import android.graphics.drawable.ColorDrawable;
 import android.media.ExifInterface;
 import android.os.Build;
 import android.os.Bundle;
@@ -22,6 +25,8 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -46,6 +51,7 @@ import itest.kz.model.RegisterResponse;
 import itest.kz.network.UserService;
 import itest.kz.util.CameraUtils;
 import itest.kz.util.Constant;
+import itest.kz.view.activity.AuthActivity;
 import itest.kz.view.activity.HomeActivity;
 import itest.kz.view.activity.SubjectActivity;
 import itest.kz.viewmodel.ProfileInfoViewModel;
@@ -55,6 +61,7 @@ import okhttp3.RequestBody;
 import pub.devrel.easypermissions.EasyPermissions;
 
 import static android.content.Context.MODE_PRIVATE;
+import static itest.kz.util.InputValidator.hideKeyboard;
 
 public class ProfileInfoFragment extends Fragment implements EasyPermissions.PermissionCallbacks
 {
@@ -65,6 +72,9 @@ public class ProfileInfoFragment extends Fragment implements EasyPermissions.Per
     private TextView mainToolbarText;
     private String accessToken;
     private String language;
+    private TextView dialogTextAuth;
+    private Button buttonYesAuth;
+    private Button buttonNoAuth;
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item)
@@ -260,6 +270,7 @@ public class ProfileInfoFragment extends Fragment implements EasyPermissions.Per
             @Override
             public void onClick(View v)
             {
+                profileInfoViewModel.setProgress(true);
                 TextView name = fragmentProfileInfoBinding.nameInput;
                 TextView surname = fragmentProfileInfoBinding.surnameInput;
                 TextView date = fragmentProfileInfoBinding.dateInput;
@@ -271,6 +282,8 @@ public class ProfileInfoFragment extends Fragment implements EasyPermissions.Per
                         date.getText().toString(),
                         login.getText().toString(), email.getText().toString());
 //                System.out.println(accessToken);
+
+//                profileInfoViewModel.setProgress(true);
 
                 AppController appController = new AppController();
                 CompositeDisposable compositeDisposable = new CompositeDisposable();
@@ -294,21 +307,31 @@ public class ProfileInfoFragment extends Fragment implements EasyPermissions.Per
                                        public void accept(ProfileResponse profileResponse) throws Exception
                                        {
 //                                           System.out.println("Cool");
-                                           fragmentProfileInfoBinding.getProfile();
+//                                           fragmentProfileInfoBinding.getProfile();
+//                                           fragmentProfileInfoBinding.setProfile(profileResponse.getProfile());
+//                                           fragmentProfileInfoBinding.getProfile().setProfile(profileResponse.getProfile());
+
+//                                           profileInfoViewModel.setProfile(profileResponse.getProfile());
+                                           hideKeyboard(getActivity()); //won't work
+
+//                                           profileInfoViewModel.setProgress(false);
+                                           profileInfoViewModel.setProgress(false);
+//                                           fragmentProfileInfoBinding.getProfile().setProfile(profileResponse.getProfile());
 
                                        }
-                                   }
-//                                new Consumer<RegisterResponse>() {
-//                            @Override
-//                            public void accept(RegisterResponse registerResponse) throws Exception
-//                            {
-//                                Toast toast;
-//                                toast = Toast.makeText(context.getApplicationContext(),
-//                                        registerResponse.getMessage(),
-//                                        Toast.LENGTH_LONG);
-//                                toast.show();
-//                            }
-//                        }
+                                   },
+
+                                new Consumer<Throwable>() {
+                                    @Override
+                                    public void accept(Throwable throwable) throws Exception {
+                                        if (throwable.getMessage().contains("401"))
+                                        {
+                                            showToastUnauthorized();
+                                            profileInfoViewModel.setProgress(false);
+                                        }
+                                    }
+                                }
+
                         );
 
                 compositeDisposable.add(disposable);
@@ -316,6 +339,8 @@ public class ProfileInfoFragment extends Fragment implements EasyPermissions.Per
 //                System.out.println(name.getText());
             }
         });
+
+
 
 //        myToolbar.setTitle("Өңдеу");
 //        myToolbar.setTitleTextColor(Color.WHITE);
@@ -326,6 +351,86 @@ public class ProfileInfoFragment extends Fragment implements EasyPermissions.Per
                 .setSupportActionBar(myToolbar);
         ((AppCompatActivity)getActivity())
                 .getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+    }
+
+//        private TextView dialogTextAuth;
+//    private Button buttonYesAuth;
+//    private Button buttonNoAuth;
+
+    public void showToastUnauthorized()
+    {
+
+//        public void showFinishTimeDialog()
+//        {
+        Dialog dialog = new Dialog(getContext());
+        dialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
+            @Override
+            public void onDismiss(DialogInterface dialog)
+            {
+                openAuthActivity();
+//                    finishTest(testIdMain);
+                //System.out.println(testIdMain);//103080954
+//                dialog.dismiss();
+            }
+        });
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.setContentView(R.layout.dialog);
+        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        dialogTextAuth = dialog.findViewById(R.id.dialog_text);
+        buttonYesAuth = dialog.findViewById(R.id.buttonOk);
+        buttonNoAuth = dialog.findViewById(R.id.buttonCancel);
+        buttonNoAuth.setVisibility(View.GONE);
+        buttonYesAuth.setText(R.string.ok);
+        if(language.equals(Constant.KZ))
+        {
+//            buttonNo.setText(R.string.noKz);
+
+            dialogTextAuth.setText(R.string.sessionErrorKz);
+
+        }
+        else
+        {
+//            buttonNo.setText(R.string.noRu);
+//            buttonYes.setText(R.string.yesRu);
+            dialogTextAuth.setText(R.string.sessionErrorRu);
+        }
+        buttonYesAuth.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v)
+            {
+                buttonYesAuth.setEnabled(false);
+                dialog.dismiss();
+                openAuthActivity();
+//                    finishTest(testIdMain);
+                //System.out.println(testIdMain);//103080954
+
+            }
+        });
+
+//        buttonNo.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                dialog.dismiss();
+//            }
+//        });
+        dialog.show();
+    }
+
+    public  void openAuthActivity()
+    {
+        Intent intent = new Intent(getContext(), AuthActivity.class);
+        ((Activity)getContext()).startActivity(intent);
+//        if (language.equals(Constant.KZ))
+//
+//            Toast.makeText(this,
+//                    R.string.sessionErrorKz,
+//                    Toast.LENGTH_SHORT).show();
+//        else
+//        {
+//            Toast.makeText(this,
+//                    R.string.sessionErrorRu,
+//                    Toast.LENGTH_SHORT).show();
+//        }
     }
 
     @Override
@@ -447,6 +552,7 @@ public class ProfileInfoFragment extends Fragment implements EasyPermissions.Per
 //                        ContentBody foto = new InputStreamBody(in, "image/jpeg", "filename");
                     }
 
+                    profileInfoViewModel.setProgress(true);
                     Bitmap bmp = BitmapFactory.decodeFile(file.getAbsolutePath());
                     ByteArrayOutputStream bos = new ByteArrayOutputStream();
 
@@ -494,6 +600,8 @@ public class ProfileInfoFragment extends Fragment implements EasyPermissions.Per
 
                     AppController appController = new AppController();
                     CompositeDisposable compositeDisposable = new CompositeDisposable();
+
+//                    profileInfoViewModel.setProgress(true);
 //        AppController appController = AppController.create(context);
                     UserService userService = appController.getUserService();
 
@@ -512,10 +620,14 @@ public class ProfileInfoFragment extends Fragment implements EasyPermissions.Per
                             .subscribe(new Consumer<ProfileResponse>() {
                                            @Override
                                            public void accept(ProfileResponse profileResponse) throws Exception {
+
                                                profile.setAvatarUrl(profileResponse.getProfile().getAvatarUrl());
                                                profileInfoViewModel.getProfile().setAvatarUrl
                                                        (profileResponse.getProfile().getAvatarUrl());
                                                profileInfoViewModel.getInfoFromProfile();
+
+                                               profileInfoViewModel.setProgress(false);
+
 //                                               profileInfoViewModel.notify();
                                            }
 
@@ -531,9 +643,20 @@ public class ProfileInfoFragment extends Fragment implements EasyPermissions.Per
                                         @Override
                                         public void accept(Throwable throwable) throws Exception
                                         {
-                                            Toast.makeText(getContext(),
-                                                    "size is big",
-                                                    Toast.LENGTH_SHORT).show();
+                                            if (throwable.getMessage().contains("401"))
+                                            {
+                                                showToastUnauthorized();
+
+                                            }
+                                            else
+                                            {
+                                                Toast.makeText(getContext(),
+                                                        "size is big",
+                                                        Toast.LENGTH_SHORT).show();
+                                            }
+
+                                            profileInfoViewModel.setProgress(false);
+
                                         }
                                     }
 

@@ -3,9 +3,11 @@ package itest.kz.viewmodel;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.databinding.ObservableField;
+import android.databinding.ObservableInt;
 import android.support.v4.text.HtmlCompat;
 import android.text.Html;
 import android.text.Spanned;
+import android.view.View;
 
 import java.util.Observable;
 
@@ -26,6 +28,7 @@ public class BottomAnswerDialogViewModel extends Observable
     private String language;
     public ObservableField<String> questionText = new ObservableField<>();
     public ObservableField<String> descriptionText = new ObservableField<>();
+    public ObservableInt whyTextVisibility;
 
 
 //    private Context context;
@@ -50,6 +53,14 @@ public class BottomAnswerDialogViewModel extends Observable
         language = settings.getString(Constant.LANG, "kz");
         questionText.set(Constant.MATHJAX + test.getQuestion());
         descriptionText.set(Constant.MATHJAX + test.getDescription());
+        if (descriptionText.get().contains("null"))
+        {
+            whyTextVisibility = new ObservableInt(View.GONE);
+        }
+        else
+        {
+            whyTextVisibility = new ObservableInt(View.VISIBLE);
+        }
         this.onClickClose = () ->
         {
             bottomAnswerDialogFragment.dismiss();
@@ -69,8 +80,31 @@ public class BottomAnswerDialogViewModel extends Observable
         return R.string.questionAnswerRu;
     }
 
+//    public void setWhyTextVisibility(boolean isWhyTextVisibility)
+//    {
+//        if (descriptionText.get() == null || descriptionText.get().contains("null"))
+////        if (isWhyTextVisibility)
+//            whyTextVisibility.set(View.GONE);
+//        else
+//        {
+//            whyTextVisibility.set(View.VISIBLE);
+//        }
+//        notifyObservers();
+//    }
+
     public Spanned getDescription()
     {
+//        if (test.getDescription() == null || test.getDescription().contains("null"))
+//        {
+//
+//           setWhyTextVisibility(false);
+//        }
+//        else
+//        {
+//            setWhyTextVisibility(true);
+//        }
+//        notifyObservers();
+
         return Html.fromHtml("<font color='white'>" + test.getDescription() + "</font>", HtmlCompat.FROM_HTML_MODE_LEGACY);
     }
 

@@ -19,6 +19,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import java.util.IllegalFormatCodePointException;
@@ -66,10 +67,21 @@ public class QuestionsAdapter extends RecyclerView.Adapter<QuestionsAdapter.Ques
                 .inflate(LayoutInflater.from(viewGroup.getContext()), R.layout.item_questions,viewGroup,false);
 
 
+
+//        view.setLayoutParams(new RecyclerView.LayoutParams(width, height));
 //        String text = answers.get(i).getLetter();
 //        itemQuestionsBinding.btn.setText(letters[i].toString());
 //        System.out.println(i);
 
+        if (answers.size() == 5)
+        {
+            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
+                    LinearLayout.LayoutParams.WRAP_CONTENT,
+                    LinearLayout.LayoutParams.WRAP_CONTENT
+            );
+            params.setMargins(30, 2, 30, 5);
+            itemQuestionsBinding.rl.setLayoutParams(params);
+        }
 
 //        setTextViewDrawableColor(txt, Color.BLACK);
         return new QuestionAdapterViewHolder(itemQuestionsBinding);
@@ -93,6 +105,8 @@ public class QuestionsAdapter extends RecyclerView.Adapter<QuestionsAdapter.Ques
         itemQuestionsBinding.btn.setText(letters[i].toString());
 //        System.out.println("changed");
 //        answers.get(i).getUserAnswer() != null
+
+
 
         StateListDrawable gradientDrawable = (StateListDrawable) itemQuestionsBinding.btn.getBackground();
         DrawableContainer.DrawableContainerState drawableContainerState = (DrawableContainer.DrawableContainerState) gradientDrawable.getConstantState();

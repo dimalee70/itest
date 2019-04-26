@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+    <color name="colorErrorNoInternet">#A8ACAF</color>
+
+    <!--&lt;!&ndash;9B9B9B&ndash;&gt;D8D8D8-->
     <color name="colorButtonShowAnswer">#FF75C634</color>
 
     <color name="colorCancelButton">#FFF58C24</color>
@@ -13,11 +16,17 @@
 
     <color name="colorWhite">#ffffff</color>
 
+    <color name="colorCancelButtonEnt">#AAAAAA</color>
+
     <color name="colorPrimaryLight">#C6E6FC</color>
+
+    <color name="colorAuthTab">#DADADA</color>
 
     <color name="colorFrame">#0D5685</color>
 
     <color name="colorText">#D8D8D8</color>
+
+    <color name="colorTextInside">#A8ACAF</color>
 
     <color name="colorBlack">#FF000000</color>
 
@@ -25,6 +34,7 @@
 
     <color name="colorUnselectedTabSubject">#287FB9</color>
 
+    <!--2DAAFC-->
     <color name="colorUnselectedTabAuth">#9B9B9B</color>
 
     <color name="colorTextForgotPassword">#4A90E2</color>

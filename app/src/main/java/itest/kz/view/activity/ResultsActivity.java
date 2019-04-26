@@ -49,6 +49,8 @@ public class ResultsActivity extends AppCompatActivity
     private ImageButton closeFragment;
     private Context context;
     private String accessToken;
+    private String resultTag;
+    private  String statisticTag;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState)
@@ -58,11 +60,13 @@ public class ResultsActivity extends AppCompatActivity
 //        settings.edit().clear().commit();
         accessToken = accessTok.getString(Constant.ACCESS_TOKEN, "kz");
         context = this;
+        resultTag = getIntent().getExtras().getString(Constant.RESULT_TAG, "");
         testFinishResponse = (TestFinishResponse) getIntent().getExtras().getSerializable(Constant.TEST_FINISH_RESPONSE);
         testIdMain = getIntent().getExtras().getLong(Constant.TEST_MAIN_ID, 0);
         subjectList = getIntent().getParcelableArrayListExtra(Constant.SUBJECT_LIST);
         selectedSubject = (Subject) getIntent().getSerializableExtra(Constant.SELECTED_SUBJECT);
         activityResultsBinding = DataBindingUtil.setContentView(this, R.layout.activity_results);
+        statisticTag = getIntent().getExtras().getString(Constant.STATISTIC_TAG, "");
         typeTest = getIntent().getExtras().getString(Constant.TYPE);
         resultsViewModel = new ResultsViewModel(this);
         activityResultsBinding.setResults(resultsViewModel);
@@ -95,7 +99,7 @@ public class ResultsActivity extends AppCompatActivity
 
 
 
-        mFragments.add(CheckResultFragment.newInstance(testIdMain, subjectList, selectedSubject, Constant.RESULT_TAG, typeTest));
+        mFragments.add(CheckResultFragment.newInstance(testIdMain, subjectList, selectedSubject, Constant.RESULT_TAG, typeTest, statisticTag));
 //        mFragments.add(CheckResultFragment)
         mViewPager = (ViewPager) activityResultsBinding.vpFragmentsContainer;
         ViewPagerAdapter viewPagerAdapter = new ViewPagerAdapter(getSupportFragmentManager(), mFragments);
@@ -191,13 +195,26 @@ public class ResultsActivity extends AppCompatActivity
     {
 //        System.out.println("Close method");
 
-        Intent intent = new Intent(getBaseContext(), SubjectActivity.class);
-        intent.putExtra(Constant.ACCESS_TOKEN, accessToken);
-        startActivity(intent);
+        if (statisticTag.equals(Constant.STATISTIC_TAG))
+        {
+            super.onBackPressed();
+        }
+        else
+        {
+            Intent intent = new Intent(getBaseContext(), SubjectActivity.class);
+            intent.putExtra(Constant.ACCESS_TOKEN, accessToken);
+            startActivity(intent);
+        }
+
 //        finish();
     }
 
-//    @Override
+    @Override
+    public void onBackPressed()
+    {
+    }
+
+    //    @Override
 //    public void onClick(View v)
 //    {
 //        System.out.println("Click on Close");

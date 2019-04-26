@@ -1,11 +1,34 @@
 <resources>
     <string name="app_name">itest</string>
 
+    <string name="tryAgainTextKz">Қайталап көру</string>
+    <string name="tryAgainTextRu">Попробовать еще раз</string>
+
+    <string name="beginKz">Бастау</string>
+    <string name="beginRu">Начать</string>
+
+    <string name="passTextKz">Өткізу</string>
+    <string name="passTextRu">Пропустить</string>
+
+    <string name="oneSplashKz">Тесттерден ыңғайлы уақытта, кез келген құрылғы көмегімен өтіңіз</string>
+    <string name="oneSplashRu">Проходите тесты в удобное время и на любом устройстве</string>
+
+    <string name="twoSplashKz">Алған біліміңізге баға беріп, қаншалықты ілгері басқаныңызды қадағалаңыз</string>
+    <string name="twoSplashRu">Определите уровень своих знаний и отслеживайте прогресс</string>
+
+    <string name="threeSplashKz">iTest ең үздік нәтижелерге жетелейді!</string>
+    <string name="threeSplashRu">Достигайте лучших результатов вместе с iTest</string>
+
+    <string name="sessionErrorKz">Сіздің сассияңыз мәжбүр түрде жабылды. Кайтадан кіріңіз</string>
+    <string name="sessionErrorRu">Ваша сессия была принудительно завершена. Авторизуйтесь заново</string>
     <string name="rus">Руский</string>
     <string name="kaz">Қазақша</string>
 
     <string name="resultKz">Нәтиже</string>
     <string name="resultRu">Результат</string>
+
+    <string name="hasActiveTestDialogKz">Аяқталмаған тестіңіз бар, соны аяқтау қажет</string>
+    <string name="hasActiveTestDialogRu">У вас есть незавершенный тест. Необходимо его завершить</string>
 
     <string name="finishTestDialogKz">Сіз расымен тестілеуді аяқтауды қалайсыз ба?</string>
     <string name="finishTestDialogRu">Вы действительно хотите завершить тест?</string>
@@ -24,6 +47,11 @@
 
     <string name="yesKz">Иә</string>
     <string name="yesRu">Да</string>
+
+    <string name="ok">OK</string>
+
+    <string name="timeIsUpAlertKz">Емтихан тапсыру уақыты аяқталды</string>
+    <string name="timeIsUpAlertRu">Время экзамена вышло</string>
 
     <string name="noKz">Жоқ</string>
     <string name="noRu">Нет</string>
@@ -81,8 +109,8 @@
     <string name="questionAnswerKz">Сұрақ және жауап</string>
     <string name="questionAnswerRu">Вопрос и ответ</string>
 
-    <string name="whyKz">Неге</string>
-    <string name="whyRu">Почему</string>
+    <string name="whyKz">Шешiмi</string>
+    <string name="whyRu">Решение</string>
 
     <string name="selectLanguageKz">ТІЛДІ ТАҢДАҢЫЗ</string>
     <string name="selectLanguageRu">ВЫБЕРИТЕ ЯЗЫК</string>
@@ -189,7 +217,7 @@
     <string name="signUpRu">РЕГИСТРАЦИЯ</string>
 
     <string name="logInKaz">КІРУ</string>
-    <string name="logInRu">ВОЙТИ</string>
+    <string name="logInRu">ВХОД</string>
 
     <string name="test">test</string>
     <string name="statistic">statistic</string>

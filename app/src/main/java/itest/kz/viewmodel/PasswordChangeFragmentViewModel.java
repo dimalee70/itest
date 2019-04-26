@@ -3,6 +3,8 @@ package itest.kz.viewmodel;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.databinding.BaseObservable;
+import android.databinding.ObservableInt;
+import android.view.View;
 
 import io.reactivex.disposables.CompositeDisposable;
 import itest.kz.R;
@@ -15,6 +17,23 @@ public class PasswordChangeFragmentViewModel extends BaseObservable
     private Context context;
     private CompositeDisposable compositeDisposable = new CompositeDisposable();
     private String language;
+    public ObservableInt progress = new ObservableInt(View.GONE);
+
+    public ObservableInt getProgress()
+    {
+        return progress;
+    }
+
+    public void setProgress(boolean isProgress)
+    {
+        if (isProgress)
+            progress.set(View.VISIBLE);
+        else
+        {
+            progress.set(View.GONE);
+        }
+    }
+
     public PasswordChangeFragmentViewModel(Context context)
     {
         this.context = context;

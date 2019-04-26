@@ -51,25 +51,70 @@
                 android:orientation="vertical"
                 tools:showIn="@layout/activity_auth">
 
-                <android.support.design.widget.TabLayout
+                <!--<com.google.android.material.tabs.TabLayout-->
+                    <!--android:id="@+id/sliding_tabs"-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="wrap_content">-->
+
+                    <!--<com.google.android.material.tabs.TabItem-->
+                        <!--android:icon="@drawable/ic_icon_a_24"-->
+                        <!--android:text="@string/tab_a_label"/>-->
+                    <!--<com.google.android.material.tabs.TabItem-->
+                        <!--android:icon="@drawable/ic_icon_b_24"-->
+                        <!--android:text="@string/tab_b_label"/>-->
+                    <!--<com.google.android.material.tabs.TabItem-->
+                        <!--android:icon="@drawable/ic_icon_c_24"-->
+                        <!--android:text="@string/tab_c_label"/>-->
+
+                <!--</com.google.android.material.tabs.TabLayout>-->
+
+                <!--<android.support.design.widget.TabLayout-->
+                    <!--android:id="@+id/sliding_tabs"-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--app:tabIndicatorHeight="0dp"-->
+                    <!--style="@style/styleTabLayoutAuth"-->
+                    <!--app:tabSelectedTextColor="@color/colorPrimaryDark"-->
+                    <!--android:minHeight="?attr/actionBarSize"-->
+                    <!--app:tabTextAppearance="@style/tab_text"-->
+                    <!--android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"/>-->
+
+                <android.support.constraint.ConstraintLayout
                     android:id="@+id/sliding_tabs"
-                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    app:tabIndicatorHeight="0dp"
-                    style="@style/styleTabLayoutAuth"
-                    app:tabSelectedTextColor="@color/colorPrimaryDark"
-                    android:minHeight="?attr/actionBarSize"
-                    app:tabTextAppearance="@style/tab_text"
-                    android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"/>
+                    android:layout_width="match_parent">
 
+                        <TextView
+                            android:id="@+id/tab_text_first"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/my_open_sans_semibold"
+                            android:textSize="18sp"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintHorizontal_chainStyle="packed"
+                            android:layout_marginEnd="60dp"
+                            app:layout_constraintEnd_toStartOf="@id/tab_text_second"
+                            android:textColor="@color/colorAccent" />
 
+                        <TextView
+                            android:id="@+id/tab_text_second"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toEndOf="@id/tab_text_first"
+                            android:fontFamily="@font/my_open_sans_semibold"
+                            android:textSize="18sp"
+                            android:textColor="@color/colorAuthTab" />
 
+                </android.support.constraint.ConstraintLayout>
 
                 <android.support.v4.view.ViewPager
                     android:id="@+id/viewpager"
                     android:layout_width="match_parent"
                     android:layout_height="370dp"
-                    android:layout_below="@id/sliding_tabs"/>
+                    android:layout_below="@+id/sliding_tabs"
+                    />
+                <!---->
 
             </RelativeLayout>
 

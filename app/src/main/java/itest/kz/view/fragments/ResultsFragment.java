@@ -1,9 +1,13 @@
 package itest.kz.view.fragments;
 
+import android.app.Activity;
+import android.app.Dialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.databinding.DataBindingUtil;
 import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -13,7 +17,11 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
+import android.widget.Button;
 import android.widget.ProgressBar;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.gson.JsonObject;
 
@@ -35,6 +43,7 @@ import itest.kz.model.Tests;
 import itest.kz.network.SubjectService;
 import itest.kz.util.Constant;
 import itest.kz.util.TestsUtils;
+import itest.kz.view.activity.AuthActivity;
 import itest.kz.view.activity.FulltestResultActivity;
 import itest.kz.view.activity.ResultActivity;
 import itest.kz.view.activity.ResultsActivity;
@@ -59,6 +68,9 @@ public class ResultsFragment extends Fragment
     private List<Subject> subjectList;
     private String typeTest;
     private Subject selectedSubject;
+    private TextView dialogTextAuth;
+    private Button buttonYesAuth;
+    private Button buttonNoAuth;
 
 
     public static ResultsFragment newInstance(TestFinishResponse testFinishResponse,
@@ -79,6 +91,7 @@ public class ResultsFragment extends Fragment
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState)
     {
+
         setHasOptionsMenu(true);
         SharedPreferences settings = getContext().getSharedPreferences(Constant.MY_LANG, MODE_PRIVATE);
         language = settings.getString(Constant.LANG, "kz");
@@ -94,9 +107,10 @@ public class ResultsFragment extends Fragment
         resultsFragmentViewModel = new ResultsFragmentViewModel(getContext(), testFinishResponse,
                 subjectList, selectedSubject, typeTest);
         fragmentResultsBinding.setResults(resultsFragmentViewModel);
-
-
+        resultsFragmentViewModel.setProgress(true);
+//        resultsFragmentViewModel.setProgress(true);
         fetchFullTestQuestionsGenerate(testIdMain);
+//        resultsFragmentViewModel.setProgress(false);
         progressBar = fragmentResultsBinding.statsProgressbar;
 
         return fragmentResultsBinding.getRoot();
@@ -105,6 +119,8 @@ public class ResultsFragment extends Fragment
     public void fetchFullTestQuestionsGenerate(Long id)
     {
 
+
+//        System.out.println("start");
         AppController appController = new AppController();
         CompositeDisposable compositeDisposable = new CompositeDisposable();
 //        AppController appController = AppController.create(context);
@@ -118,6 +134,7 @@ public class ResultsFragment extends Fragment
                 .subscribe(new Consumer<JsonObject>() {
                                @Override
                                public void accept(JsonObject jsonObject) throws Exception {
+
 
 //                                   System.out.println(jsonObject.toString());
                                    if (typeTest.equals(Constant.TYPEFULLTEST))
@@ -156,7 +173,19 @@ public class ResultsFragment extends Fragment
 
 
                                }
-                           }
+                           },
+                        new Consumer<Throwable>()
+                        {
+                            @Override
+                            public void accept(Throwable throwable) throws Exception
+                            {
+                                if (throwable.getMessage().contains("401"))
+                                {
+                                    showToastUnauthorized();
+                                    resultsFragmentViewModel.setProgress(false);
+                                }
+                            }
+                        }
 //                        new Consumer<JSONObject>() {
 //                    @Override
 //                    public void accept(JSONObject jsonObject) throws Exception
@@ -168,6 +197,89 @@ public class ResultsFragment extends Fragment
                 );
 
         compositeDisposable.add(disposable);
+    }
+
+//    private TextView dialogTextAuth;
+//    private Button buttonYesAuth;
+//    private Button buttonNoAuth;
+//        private TextView dialogTextAuth;
+//    private Button buttonYesAuth;
+//    private Button buttonNoAuth;
+
+    public void showToastUnauthorized()
+    {
+
+//        public void showFinishTimeDialog()
+//        {
+        Dialog dialog = new Dialog(getContext());
+        dialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
+            @Override
+            public void onDismiss(DialogInterface dialog)
+            {
+                openAuthActivity();
+//                    finishTest(testIdMain);
+                //System.out.println(testIdMain);//103080954
+//                dialog.dismiss();
+            }
+        });
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.setContentView(R.layout.dialog);
+        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        dialogTextAuth = dialog.findViewById(R.id.dialog_text);
+        buttonYesAuth = dialog.findViewById(R.id.buttonOk);
+        buttonNoAuth = dialog.findViewById(R.id.buttonCancel);
+        buttonNoAuth.setVisibility(View.GONE);
+        buttonYesAuth.setText(R.string.ok);
+        if(language.equals(Constant.KZ))
+        {
+//            buttonNo.setText(R.string.noKz);
+
+            dialogTextAuth.setText(R.string.sessionErrorKz);
+
+        }
+        else
+        {
+//            buttonNo.setText(R.string.noRu);
+//            buttonYes.setText(R.string.yesRu);
+            dialogTextAuth.setText(R.string.sessionErrorRu);
+        }
+        buttonYesAuth.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v)
+            {
+                buttonYesAuth.setEnabled(false);
+                dialog.dismiss();
+                openAuthActivity();
+//                    finishTest(testIdMain);
+                //System.out.println(testIdMain);//103080954
+
+            }
+        });
+
+//        buttonNo.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                dialog.dismiss();
+//            }
+//        });
+        dialog.show();
+    }
+
+    public  void openAuthActivity()
+    {
+        Intent intent = new Intent(getContext(), AuthActivity.class);
+        ((Activity)getContext()).startActivity(intent);
+//        if (language.equals(Constant.KZ))
+//
+//            Toast.makeText(this,
+//                    R.string.sessionErrorKz,
+//                    Toast.LENGTH_SHORT).show();
+//        else
+//        {
+//            Toast.makeText(this,
+//                    R.string.sessionErrorRu,
+//                    Toast.LENGTH_SHORT).show();
+//        }
     }
 
     public ResultsSubjectAdapter getResultsSubjectAdapter()
@@ -183,6 +295,8 @@ public class ResultsFragment extends Fragment
                     new ResultsSubjectAdapter(testsList);
             listSubjects.setAdapter(resultsSubjectAdapter);
             listSubjects.setLayoutManager(new LinearLayoutManager(getContext()));
+
+
             resultsSubjectAdapter.setOnItemListener(new ResultsSubjectAdapter.OnItemClickListener()
             {
                 @Override
@@ -223,6 +337,8 @@ public class ResultsFragment extends Fragment
                 }
             });
         }
+
+        resultsFragmentViewModel.setProgress(false);
 
     }
 }

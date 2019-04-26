@@ -14,13 +14,41 @@
         android:background="@color/colorBackgroundCardView">
 
 
-        <android.support.v4.widget.NestedScrollView
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
+
+
+            <RelativeLayout
+                android:layout_centerInParent="true"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <ProgressBar
+                    android:id="@+id/progressBar1"
+                    style="?android:attr/progressBarStyleLarge"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_centerVertical="true"
+                    android:indeterminate="true"
+                    android:visibility="@{results.progress}"/>
+
+
+            </RelativeLayout>
+
+
+
+        <android.support.v4.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="@{results.nestedVisible}">
 
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
+
+
 
             <!--<android.support.v7.widget.CardView-->
                 <!--android:layout_width="wrap_content"-->
@@ -54,6 +82,7 @@
                         android:textSize="18sp"
                         android:fontFamily="@font/my_open_sans_regular"
                         android:layout_marginTop="20dp"
+                        android:focusable="true"
                         />
 
                     <RelativeLayout
@@ -237,5 +266,6 @@
         </RelativeLayout>
 
         </android.support.v4.widget.NestedScrollView>
+        </RelativeLayout>
     </LinearLayout>
 </layout>

@@ -116,6 +116,10 @@ public class BindingUtils {
         view.setVerticalScrollBarEnabled(true);
 //        view.setBackgroundColor(Color.TRANSPARENT);
         view.setHorizontalScrollBarEnabled(true);
+
+//        view.setInitialScale(1);
+//        view.getSettings().setLoadWithOverviewMode(true);
+//        view.getSettings().setUseWideViewPort(true);
 ////        .getSettings().setUseWideViewPort(true);
 //        view.getSettings().setAppCacheEnabled(true);
 //        view.getSettings().setMixedContentMode(WebSettings.MIXED_CONTENT_ALWAYS_ALLOW);

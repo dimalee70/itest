@@ -7,9 +7,11 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.databinding.BaseObservable;
 import android.databinding.ObservableField;
+import android.databinding.ObservableInt;
 import android.graphics.drawable.Drawable;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
 
 import com.squareup.picasso.Picasso;
 
@@ -48,6 +50,40 @@ public class ProfileInfoViewModel extends BaseObservable
     private String language;
     public ObservableField<Boolean> enableSave;
     private static final int REQUEST_GALLERY_CODE = 200;
+    public ObservableInt progress = new ObservableInt(View.GONE);
+
+    public ObservableInt getProgress()
+    {
+        return progress;
+    }
+
+
+    public void setProgress(boolean isProgress, Profile profile)
+    {
+        if (isProgress)
+        {
+            progress.set(View.VISIBLE);
+            setProfile(profile);
+        }
+        else
+        {
+            progress.set(View.GONE);
+        }
+
+//        notifyChange();
+    }
+
+    public void setProgress(boolean isProgress)
+    {
+        if (isProgress)
+            progress.set(View.VISIBLE);
+        else
+        {
+            progress.set(View.GONE);
+        }
+
+//        notifyChange();
+    }
 
     public int getHintEmailText()
     {
@@ -307,8 +343,15 @@ public class ProfileInfoViewModel extends BaseObservable
         return profile;
     }
 
+    public void setProfile(Profile profile)
+    {
+        this.profile = profile;
+        notifyChange();
+    }
+
     public void getInfoFromProfile()
     {
+//        setProgress(true);
         bindableFieldTarget = new BindableFieldTarget(profileImage, context.getResources());
 
         Picasso
@@ -321,6 +364,8 @@ public class ProfileInfoViewModel extends BaseObservable
 //                .centerInside()
 //            .fit()
                 .into(bindableFieldTarget);
+
+//        setProgress(false);
 //        notifyChange();
 //        notifyChange();
     }

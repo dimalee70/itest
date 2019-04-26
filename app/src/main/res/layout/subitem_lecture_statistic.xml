@@ -54,14 +54,15 @@
                 <!--android:layout_width="wrap_content"-->
                 <!--android:layout_height="wrap_content">-->
 
-                <TextView
+                <ImageButton
                     android:id="@+id/strelka_text"
-                    android:layout_width="9dp"
+                    android:layout_width="15dp"
                     android:layout_height="15dp"
                     android:layout_marginRight="15dp"
                     android:layout_alignParentRight="true"
                     android:layout_centerInParent="true"
-                    android:background="@drawable/rotate_ic_icon_strelka_black"
+                    android:src="@drawable/rotate_ic_icon_strelka_gray"
+                    android:background="@color/colorWhite"
                     android:gravity="left"/>
 
                 <!--<View-->

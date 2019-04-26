@@ -12,9 +12,12 @@ import java.io.Serializable;
 import io.reactivex.functions.Action;
 import itest.kz.model.Subject;
 import itest.kz.model.Test;
+import itest.kz.model.TestFinishResponse;
 import itest.kz.model.Tests;
 import itest.kz.util.Constant;
+import itest.kz.view.activity.FullTestActivity;
 import itest.kz.view.activity.ResultActivity;
+import itest.kz.view.activity.ResultsActivity;
 import itest.kz.view.activity.TestActivity;
 
 public class SubItemLectureStatisticViewModel extends BaseObservable
@@ -29,16 +32,32 @@ public class SubItemLectureStatisticViewModel extends BaseObservable
         this.test = test;
         onClickSubItem = () ->
         {
+
+
+
+
+
+
             Subject selectedSubject = new Subject(test.getId(), test.getTitle());
-            Intent intent = new Intent(context, TestActivity.class);
-            intent.putExtra(Constant.SELECTED_TEST_POSITION_ID, 0);
-            intent.putExtra(Constant.SELECTED_SUBJECT, (Serializable) selectedSubject);
-            intent.putExtra(Constant.IS_STARTED_FIRST, false);
-            intent.putExtra(Constant.RESULT_TAG, Constant.RESULT_TAG);
-            intent.putExtra(Constant.TYPE, Constant.TYPELECTURETEST);
-            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-            intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+//            Intent intent = new Intent(context, TestActivity.class);
+//            intent.putExtra(Constant.SELECTED_TEST_POSITION_ID, 0);
+//            intent.putExtra(Constant.SELECTED_SUBJECT, (Serializable) selectedSubject);
+//            intent.putExtra(Constant.IS_STARTED_FIRST, false);
+//            intent.putExtra(Constant.RESULT_TAG, Constant.RESULT_TAG);
+//            intent.putExtra(Constant.TYPE, Constant.TYPELECTURETEST);
+//            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+//            intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+//            intent.putExtra(Constant.TEST_MAIN_ID, test.getId());
+
+
+            TestFinishResponse testFinishResponse = new TestFinishResponse(test.getResult());
+            Intent intent = new Intent(context, ResultsActivity.class);
+            intent.putExtra(Constant.TEST_FINISH_RESPONSE, testFinishResponse);
             intent.putExtra(Constant.TEST_MAIN_ID, test.getId());
+            intent.putExtra(Constant.TYPE, Constant.TYPELECTURETEST);
+            intent.putExtra(Constant.SELECTED_SUBJECT, (Serializable) selectedSubject);
+            intent.putExtra(Constant.SUBJECT_LIST, (Serializable) null);
+            intent.putExtra(Constant.STATISTIC_TAG, Constant.STATISTIC_TAG);
 
             context.startActivity(intent);
         };

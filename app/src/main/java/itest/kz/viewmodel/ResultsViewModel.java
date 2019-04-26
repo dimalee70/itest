@@ -28,7 +28,6 @@ public class ResultsViewModel extends Observable
         language = settings.getString(Constant.LANG, "kz");
         onClickClose = () ->
         {
-            System.out.println("Click Close");
             Intent intent = new Intent(context.getApplicationContext(), SubjectActivity.class);
             context.startActivity(intent);
         };

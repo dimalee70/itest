@@ -30,7 +30,7 @@ public class ItemResultSubject extends BaseObservable
         int all = tests.getTest().getResult().getAll();//style="color:#000000"
         int points = tests.getTest().getResult().getPoints();
         String text = "<font color=#68DA78>" + points + "</font>"
-                + "<font color='black'>/" + all + "</font>";
+                + "<font color=#AAAAAA>/" + all + "</font>";
         return Html.fromHtml(text, HtmlCompat.FROM_HTML_MODE_LEGACY);
     }
 

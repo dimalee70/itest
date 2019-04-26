@@ -1,6 +1,8 @@
 package itest.kz.view.fragments;
 
+import android.app.Activity;
 import android.app.Dialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.databinding.DataBindingUtil;
@@ -58,6 +60,7 @@ import itest.kz.model.TestFinishResponse;
 import itest.kz.model.Tests;
 import itest.kz.network.SubjectService;
 import itest.kz.util.Constant;
+import itest.kz.view.activity.AuthActivity;
 import itest.kz.view.activity.FulltestResultActivity;
 import itest.kz.view.activity.MainActivity;
 import itest.kz.view.activity.ResultActivity;
@@ -104,6 +107,10 @@ public class TestFragment extends Fragment
     private String resultTag;
     private RecyclerView answerListRecycle;
     private TextView dialogText;
+
+    private TextView dialogTextAuth;
+    private Button buttonYesAuth;
+    private Button buttonNoAuth;
 
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater)
@@ -371,11 +378,16 @@ public class TestFragment extends Fragment
                 if (expandableTextView.isExpanded())
                 {
                     expandableTextView.collapse();
+                    fragmentTestBinding.expandedIcon.setBackgroundResource(R.drawable.ic_icon_down_double);
+                    testFragmentViewModel.setExpandText(false);
 //                        buttonToggle.setText(R.string.expand);
                 }
                 else
                 {
                     expandableTextView.expand();
+                    fragmentTestBinding.expandedIcon.setBackgroundResource(R.drawable.ic_icon_up_double);
+
+                    testFragmentViewModel.setExpandText(true);
 //                        buttonToggle.setText(R.string.collapse);
                 }
             }
@@ -411,6 +423,7 @@ public class TestFragment extends Fragment
 
     private void setUpListOfAnswersView(RecyclerView listAnswers)
     {
+            testFragmentViewModel.setProgress(true);
 
 
             answerAdapter = new AnswerAdapter(answers, resultTag);
@@ -424,6 +437,7 @@ public class TestFragment extends Fragment
 //        int index = mList.getFirstVisiblePosition();
 
             listAnswers.setLayoutManager(new LinearLayoutManager(getContext()));
+            testFragmentViewModel.setProgress(false);
 
             if (resultTag == null) {
 
@@ -436,6 +450,7 @@ public class TestFragment extends Fragment
                     }
                 });
             }
+
     }
 
     private void changePricesInTheList(int position) throws CloneNotSupportedException
@@ -531,6 +546,7 @@ public class TestFragment extends Fragment
 //        System.out.println(questionId);
 //        System.out.println(answerId);
 //        System.out.println(tests.getTestId());
+        testFragmentViewModel.setProgress(true);
         AppController appController = new AppController();
         SubjectService subjectService = appController.getSubjectService();
 
@@ -559,6 +575,8 @@ public class TestFragment extends Fragment
     //                                       System.out.println(testFinishResponse.getSuccess());
 
                                            startActivity(intent);
+
+                                           testFragmentViewModel.setProgress(false);
 //                                   }
 
 
@@ -572,9 +590,103 @@ public class TestFragment extends Fragment
 //
 //                                   toast.show();
                                }
-                           }
+                           },
+                        new Consumer<Throwable>() {
+                            @Override
+                            public void accept(Throwable throwable) throws Exception {
+                                if (throwable.getMessage().contains("401")) {
+                                    showToastUnauthorized();
+                                    testFragmentViewModel.setProgress(false);
+                                }
+//                                System.out.println(throwable.getLocalizedMessage());
+//                                System.out.println(throwable.getMessage());
+
+                            }
+                        }
+
                 );
     }
+
+//    private TextView dialogTextAuth;
+//    private Button buttonYesAuth;
+//    private Button buttonNoAuth;
+
+    public void showToastUnauthorized()
+    {
+
+//        public void showFinishTimeDialog()
+//        {
+        Dialog dialog = new Dialog(getContext());
+        dialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
+            @Override
+            public void onDismiss(DialogInterface dialog)
+            {
+                openAuthActivity();
+//                    finishTest(testIdMain);
+                //System.out.println(testIdMain);//103080954
+//                dialog.dismiss();
+            }
+        });
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.setContentView(R.layout.dialog);
+        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        dialogTextAuth = dialog.findViewById(R.id.dialog_text);
+        buttonYesAuth = dialog.findViewById(R.id.buttonOk);
+        buttonNoAuth = dialog.findViewById(R.id.buttonCancel);
+        buttonNoAuth.setVisibility(View.GONE);
+        buttonYesAuth.setText(R.string.ok);
+        if(language.equals(Constant.KZ))
+        {
+//            buttonNo.setText(R.string.noKz);
+
+            dialogTextAuth.setText(R.string.sessionErrorKz);
+
+        }
+        else
+        {
+//            buttonNo.setText(R.string.noRu);
+//            buttonYes.setText(R.string.yesRu);
+            dialogTextAuth.setText(R.string.sessionErrorRu);
+        }
+        buttonYesAuth.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v)
+            {
+                buttonYesAuth.setEnabled(false);
+                dialog.dismiss();
+                openAuthActivity();
+//                    finishTest(testIdMain);
+                //System.out.println(testIdMain);//103080954
+
+            }
+        });
+
+//        buttonNo.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                dialog.dismiss();
+//            }
+//        });
+        dialog.show();
+    }
+
+    public  void openAuthActivity()
+    {
+        Intent intent = new Intent(getContext(), AuthActivity.class);
+        ((Activity)getContext()).startActivity(intent);
+//        if (language.equals(Constant.KZ))
+//
+//            Toast.makeText(this,
+//                    R.string.sessionErrorKz,
+//                    Toast.LENGTH_SHORT).show();
+//        else
+//        {
+//            Toast.makeText(this,
+//                    R.string.sessionErrorRu,
+//                    Toast.LENGTH_SHORT).show();
+//        }
+    }
+
 
     public void saveAnswerTest(Long questionId, String answerId)
     {
@@ -594,12 +706,12 @@ public class TestFragment extends Fragment
                 .subscribe(new Consumer<SaveAnswerResponse>() {
                                @Override
                                public void accept(SaveAnswerResponse saveAnswerResponse) throws Exception {
-                                   Toast toast = Toast.makeText(getContext(),
-//                                    jsonObject.toString(),
-                                    saveAnswerResponse.getMessage(),
-                                    Toast.LENGTH_SHORT);
-
-                                    toast.show();
+//                                   Toast toast = Toast.makeText(getContext(),
+////                                    jsonObject.toString(),
+//                                    saveAnswerResponse.getMessage(),
+//                                    Toast.LENGTH_SHORT);
+//
+//                                    toast.show();
                                }
                            }
 //                        new Consumer<JsonObject>()
@@ -744,6 +856,7 @@ public class TestFragment extends Fragment
 //    {
 //        return (Integer) getArguments().getInt("val") - 1;
 //    }
+
 
 
     @Override

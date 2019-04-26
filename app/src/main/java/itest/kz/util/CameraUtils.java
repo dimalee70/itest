@@ -69,7 +69,7 @@ public class CameraUtils
         galleryIntent.setType("image/*");
         galleryIntent.setAction(Intent.ACTION_PICK);
 
-        Intent chooserIntent = Intent.createChooser(galleryIntent, "Pilih Sumber");
+        Intent chooserIntent = Intent.createChooser(galleryIntent, "");
         chooserIntent
                 .putExtra(Intent.EXTRA_INITIAL_INTENTS, cameraIntents.toArray(new Parcelable[cameraIntents.size()]));
 

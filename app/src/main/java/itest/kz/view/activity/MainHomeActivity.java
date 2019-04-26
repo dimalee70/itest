@@ -96,50 +96,50 @@ public class MainHomeActivity extends AppCompatActivity
         return super.onPrepareOptionsMenu(menu);
     }
 
-    public void fetchProfileInfo()
-    {
-//        System.out.println(accessToken);
-        AppController appController = new AppController();
-        CompositeDisposable compositeDisposable = new CompositeDisposable();
-//        AppController appController = AppController.create(context);
-        UserService userService = appController.getUserService();
+//    public void fetchProfileInfo()
+//    {
+////        System.out.println(accessToken);
+//        AppController appController = new AppController();
+//        CompositeDisposable compositeDisposable = new CompositeDisposable();
+////        AppController appController = AppController.create(context);
+//        UserService userService = appController.getUserService();
+//
+//        Disposable disposable = userService.getProfile("ru", Constant.ACCEPT,
+//                "Bearer " + accessToken)
+//                .subscribeOn(appController.subscribeScheduler())
+//                .observeOn(AndroidSchedulers.mainThread())
+//                .subscribe(new Consumer<ProfileResponse>()
+//                {
+//                    @Override
+//                    public void accept(ProfileResponse profileResponse) throws Exception
+//                    {
+//                        openFragment(profileResponse);
+//
+//                    }
+//                });
+//
+//        compositeDisposable.add(disposable);
+//    }
+//
+//    private void setProfileResponce(ProfileResponse profileResponse)
+//    {
+//        this.profileResponse = profileResponse;
+//    }
 
-        Disposable disposable = userService.getProfile("ru", Constant.ACCEPT,
-                "Bearer " + accessToken)
-                .subscribeOn(appController.subscribeScheduler())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Consumer<ProfileResponse>()
-                {
-                    @Override
-                    public void accept(ProfileResponse profileResponse) throws Exception
-                    {
-                        openFragment(profileResponse);
 
-                    }
-                });
-
-        compositeDisposable.add(disposable);
-    }
-
-    private void setProfileResponce(ProfileResponse profileResponse)
-    {
-        this.profileResponse = profileResponse;
-    }
-
-
-    private void openFragment(ProfileResponse profileResponse)
-    {
-//        System.out.println(profileResponse.getProfile());
-//        FragmentHelper.openFragment(this,
-//                R.id.frame_layout,
-//                ProfileFragment.newInstance(profileResponse.getProfile()));
-
-        ProfileFragment nextFrag= ProfileFragment.newInstance(profileResponse.getProfile());
-        getSupportFragmentManager().beginTransaction()
-                .replace(R.id.viewpager, nextFrag, "findThisFragment")
-                .addToBackStack(null)
-                .commit();
-    }
+//    private void openFragment(ProfileResponse profileResponse)
+//    {
+////        System.out.println(profileResponse.getProfile());
+////        FragmentHelper.openFragment(this,
+////                R.id.frame_layout,
+////                ProfileFragment.newInstance(profileResponse.getProfile()));
+//
+//        ProfileFragment nextFrag= ProfileFragment.newInstance(profileResponse.getProfile());
+//        getSupportFragmentManager().beginTransaction()
+//                .replace(R.id.viewpager, nextFrag, "findThisFragment")
+//                .addToBackStack(null)
+//                .commit();
+//    }
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data)
     {
@@ -149,6 +149,7 @@ public class MainHomeActivity extends AppCompatActivity
     protected void onCreate(@Nullable Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
+
         final FragmentManager fragmentManager = getSupportFragmentManager();
 //        final Fragment testFragment = new SubjectActivity();
 //        final Fragment userFragment = new HomeActivity();

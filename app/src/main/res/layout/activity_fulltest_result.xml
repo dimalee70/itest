@@ -10,6 +10,29 @@
 
 
 
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+
+    <!--<RelativeLayout-->
+        <!--android:layout_centerInParent="true"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent">-->
+
+        <ProgressBar
+            android:id="@+id/progressBar1"
+            style="?android:attr/progressBarStyleLarge"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:indeterminate="true"
+            android:visibility="@{full.progress}"/>
+
+
+    <!--</RelativeLayout>-->
+
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -36,42 +59,153 @@
 
                     <RelativeLayout
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginEnd="40dp">
+                        android:layout_height="match_parent">
 
-                        <TextView
-                            android:id="@+id/text_view_title"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="@{full.title}"
-                            android:textSize="20sp"
-                            android:layout_centerInParent="true"
-                            android:textAlignment="center"
-                            android:textColor="@color/colorWhite"
-                            android:fontFamily="@font/my_open_sans_regular"/>
 
-                        <!--android:layout_marginStart="43dp"-->
-                        <ImageButton
-                            android:id="@+id/buttonCloseResult"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_alignParentRight="true"
-                            android:layout_centerVertical="true"
-                            android:background="@drawable/ic_icon_x"
-                            android:clickable="true"/>
-                        <!--android:layout_gravity="right"-->
+                        <RelativeLayout
+                            android:id="@+id/text_view_relative"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent">
+                            <!--android:layout_marginRight="200dp"-->
+
+
+                            <!--<ImageButton-->
+                                <!--android:id="@+id/imageButtonTitle"-->
+                                <!--android:layout_width="40dp"-->
+                                <!--android:layout_height="40dp"-->
+                                <!--android:layout_gravity="right"-->
+                                <!--android:layout_centerVertical="true"-->
+                                <!--android:background="?attr/selectableItemBackground"-->
+                                <!--android:src="@drawable/ic_iconfinder_connect_direction_path_way_2203530"-->
+                                <!--android:clickable="true"/>-->
+
+                            <TextView
+                                android:id="@+id/text_view_title"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:text="@{full.title}"
+                                android:textAlignment="center"
+                                android:textColor="@color/colorWhite"
+                                android:textSize="20sp"
+                                android:ellipsize="end"
+                                android:layout_marginTop="14dp"
+                                android:layout_marginRight="14dp"
+                                android:maxLines="1"
+                                android:fontFamily="@font/my_open_sans_regular"/>
+
+                            <!--android:layout_centerVertical="true"-->
+                            <!--android:layout_centerHorizontal="true"-->
+                            <!--android:layout_centerInParent="true"-->
+
+
+                            <!--<TextView-->
+                                <!--android:id="@+id/text_view_title"-->
+                                <!--android:layout_width="match_parent"-->
+                                <!--android:layout_height="match_parent"-->
+                                <!--android:textSize="20sp"-->
+                                <!--android:textColor="@color/colorWhite"-->
+                                <!--android:ellipsize="end"-->
+                                <!--android:layout_marginTop="14dp"-->
+                                <!--android:textAlignment="center"-->
+                                <!--android:maxLines="1"-->
+                                <!---->
+                             <!--/>-->
+                            <!---->
+
+
+                            <!--<TextView-->
+                            <!--android:id="@+id/text_view_title"-->
+                            <!--android:layout_width="match_parent"-->
+                            <!--android:layout_height="match_parent"-->
+                            <!--android:textSize="20sp"-->
+                            <!--android:text="@{result.title}"-->
+                            <!--android:textColor="@color/colorWhite"-->
+                            <!--android:ellipsize="end"-->
+                            <!--android:layout_marginTop="14dp"-->
+                            <!--android:textAlignment="center"-->
+                            <!--android:layout_marginEnd="20dp"-->
+                            <!--android:maxLines="1"-->
+                            <!--android:fontFamily="@font/my_open_sans_regular"/>-->
+
+                            <!--android:layout_centerInParent="true"-->
+                            <!--android:layout_marginStart="50dp"-->
+                            <!---->
+
+
+                            <ImageButton
+                                android:id="@+id/buttonCloseResult"
+                                android:layout_width="40dp"
+                                android:layout_alignParentRight="true"
+                                android:layout_height="40dp"
+                                android:layout_centerVertical="true"
+                                android:src="@drawable/ic_icon_x"
+                                android:layout_marginRight="16dp"
+                                android:background="?attr/selectableItemBackground"
+                                android:clickable="true"/>
+                            <!--android:layout_marginRight="30dp"-->
+
+                        </RelativeLayout>
 
                     </RelativeLayout>
 
 
-
                 </android.support.v7.widget.Toolbar>
+
+
+                <!--<android.support.v7.widget.Toolbar-->
+                    <!--android:id="@+id/my_toolbar"-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="?attr/actionBarSize"-->
+                    <!--android:background="?attr/colorPrimary"-->
+                    <!--android:elevation="4dp"-->
+                    <!--android:contentInsetStart="0dp"-->
+                    <!--android:theme="@style/ThemeOverlay.AppCompat.ActionBar"-->
+                    <!--app:popupTheme="@style/ThemeOverlay.AppCompat.Light">-->
+
+                    <!--<RelativeLayout-->
+                        <!--android:layout_width="match_parent"-->
+                        <!--android:layout_height="wrap_content"-->
+                        <!--android:layout_marginEnd="40dp">-->
+
+                        <!--<TextView-->
+                            <!--android:id="@+id/text_view_title"-->
+                            <!--android:layout_width="wrap_content"-->
+                            <!--android:layout_height="wrap_content"-->
+                            <!--android:text="@{full.title}"-->
+                            <!--android:textSize="20sp"-->
+                            <!--android:layout_centerInParent="true"-->
+                            <!--android:textAlignment="center"-->
+                            <!--android:textColor="@color/colorWhite"-->
+                            <!--android:fontFamily="@font/my_open_sans_regular"/>-->
+
+                        <!--&lt;!&ndash;android:layout_marginStart="43dp"&ndash;&gt;-->
+                        <!--<ImageButton-->
+                            <!--android:id="@+id/buttonCloseResult"-->
+                            <!--android:layout_width="40dp"-->
+                            <!--android:layout_height="40dp"-->
+                            <!--android:layout_alignParentRight="true"-->
+                            <!--android:layout_centerVertical="true"-->
+                            <!--android:src="@drawable/ic_icon_x"-->
+                            <!--android:background="?attr/selectableItemBackground"-->
+                            <!--android:clickable="true"/>-->
+                        <!--&lt;!&ndash;android:layout_gravity="right"&ndash;&gt;-->
+
+                    <!--</RelativeLayout>-->
+
+
+
+                <!--</android.support.v7.widget.Toolbar>-->
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="60dp"
-                    android:orientation="horizontal">
+                    android:orientation="horizontal"
+                    android:visibility="@{full.scroll}">
+
+                    <!--<android.support.v7.widget.CardView-->
+                        <!--android:layout_width="match_parent"-->
+                        <!--android:layout_height="wrap_content">-->
 
                     <RelativeLayout
                         android:layout_width="match_parent"
@@ -79,16 +213,17 @@
 
 
 
+
+
                     <android.support.v7.widget.CardView
                         android:id="@+id/subject_cardview"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
+                        android:layout_height="40dp"
+                        app:cardPreventCornerOverlap="false">
 
                         <RelativeLayout
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginBottom="10dp"
-                            android:layout_marginTop="10dp">
+                            android:layout_height="wrap_content">
 
                             <TextView
                                 android:id="@+id/subject_title_text"
@@ -102,20 +237,23 @@
 
                             <ImageButton
                                 android:id="@+id/buttonNextResult"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
+                                android:layout_width="40dp"
+                                android:layout_height="40dp"
+                                android:layout_gravity="right"
+                                android:background="?attr/selectableItemBackground"
+                                android:layout_centerVertical="true"
                                 android:layout_alignParentRight="true"
-                                android:layout_marginRight="20dp"
-                                android:background="@drawable/rotate_ic_icon_strelka"
+                                android:src="@drawable/rotate_ic_icon_strelka"
                                 android:clickable="true"/>
 
                             <ImageButton
                                 android:id="@+id/buttonPrefiousResult"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
                                 android:layout_alignParentLeft="true"
-                                android:layout_marginLeft="20dp"
-                                android:background="@drawable/ic_icon_strelka"
+                                android:layout_width="40dp"
+                                android:layout_height="40dp"
+                                android:layout_gravity="right"
+                                android:background="?attr/selectableItemBackground"
+                                android:src="@drawable/ic_icon_strelka"
                                 android:clickable="true"/>
 
 
@@ -132,7 +270,10 @@
                         android:layout_weight="1" >
                     </itest.kz.util.CustomViewPager>
 
+
                     </RelativeLayout>
+
+                <!--</android.support.v7.widget.CardView>-->
 
                 </LinearLayout>
             </RelativeLayout>
@@ -143,5 +284,7 @@
         </LinearLayout>
 
     </ScrollView>
+
+    </RelativeLayout>
 
 </layout>

@@ -19,6 +19,7 @@ import itest.kz.view.activity.AuthActivity;
 import itest.kz.view.activity.HomeActivity;
 import itest.kz.view.activity.MainActivity;
 import itest.kz.view.activity.MainHomeActivity;
+import itest.kz.view.activity.SplashScreensActivity;
 import itest.kz.view.activity.SubjectActivity;
 import itest.kz.view.fragments.LoginFragment;
 
@@ -101,16 +102,35 @@ public class MainViewModel extends BaseObservable
         SharedPreferences settings = context.getSharedPreferences(Constant.MY_PREF, MODE_PRIVATE);
 //        settings.edit().clear().commit();
         String value = settings.getString(Constant.ACCESS_TOKEN, null);
-        if (value != null && !value.equals(""))
-        {
-            Intent intent = new Intent(context, MainHomeActivity.class);
-            intent.putExtra(Constant.ACCESS_TOKEN, value);
+
+        SharedPreferences isFirst = context
+                .getSharedPreferences(Constant.MY_START, MODE_PRIVATE);
+        String restoredText = isFirst.getString(Constant.MY_START, null);
+
+//        SharedPreferences.Editor editor = getSharedPreferences(MY_PREFS_NAME, MODE_PRIVATE).edit();
+//        editor.putString("name", "Elena");
+//        editor.putInt("idName", 12);
+//        editor.apply();
+        if (restoredText == null) {
+            Intent intent = new Intent(context, SplashScreensActivity.class);
             context.startActivity(intent);
+            isFirst
+                    .edit()
+                    .putString(Constant.MY_START, Constant.MY_START)
+            .commit();
+
         }
-        else
-        {
-            Intent intent = new Intent(context, AuthActivity.class);
-            ((Activity)context).startActivity(intent);
+        else {
+            if (value != null && !value.equals(""))
+            {
+                Intent intent = new Intent(context, MainHomeActivity.class);
+                intent.putExtra(Constant.ACCESS_TOKEN, value);
+                context.startActivity(intent);
+            } else
+                {
+                Intent intent = new Intent(context, AuthActivity.class);
+                ((Activity) context).startActivity(intent);
+            }
         }
 
 

@@ -39,14 +39,15 @@
 
                     <TextView
                         android:id="@+id/title_subject_text"
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
+                        android:layout_marginEnd="100dp"
                         android:layout_height="wrap_content"
                         android:layout_centerVertical="true"
-                        android:textAlignment="center"
                         android:textSize="15sp"
+                        android:ellipsize="end"
+                        android:maxLines="1"
                         android:textColor="@color/colorBlack"
-                        android:layout_alignBottom="@id/strelka_text"
-                        android:layout_marginLeft="18dp"
+                        android:layout_marginStart="18dp"
                         android:text="@{item.title}"
                         android:fontFamily="@font/my_open_sans_semibold"
                         />

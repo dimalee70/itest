@@ -34,6 +34,7 @@
             android:clickable="false"
             android:focusable="false"
             android:text="@{result.num}"
+            android:layout_marginLeft="5dp"
             android:textAlignment="center"
             android:textColor="@color/colorBlack"
             android:textSize="20dp">

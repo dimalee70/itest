@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools">
     <dimen name="test">20dp</dimen>
-    <!--<dimen name="design_navigation_icon_size" tools:override="true">10dp</dimen>-->
+    <dimen name="dimen_offset" tools:override="true">40dp</dimen>
 </resources>

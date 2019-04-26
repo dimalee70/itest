@@ -16,9 +16,11 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
+
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
+
 
             <android.support.v4.widget.NestedScrollView
                 android:layout_width="match_parent"
@@ -27,9 +29,9 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:paddingRight="10dp"
-                android:paddingLeft="10dp">
+                android:orientation="vertical">
+                <!--android:paddingRight="10dp"-->
+                <!--android:paddingLeft="10dp"-->
 
                 <RelativeLayout
                     android:layout_width="match_parent"
@@ -41,8 +43,9 @@
                         android:id="@+id/text_text"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp"
                         android:text="@{test.textTest}"
-                        android:layout_marginLeft="16dp"
+                        android:layout_marginLeft="18dp"
                         android:visibility="gone"
                         android:textColor="@color/colorBlack"
                         android:textStyle="bold" />
@@ -56,6 +59,7 @@
                         android:orientation="vertical"
                         app:cardBackgroundColor="@color/colorWhite"
                         app:cardCornerRadius="5dp"
+                        app:cardElevation="6dp"
                         android:layout_marginRight="16dp"
                         android:layout_marginLeft="16dp"
                         app:cardUseCompatPadding="true"
@@ -83,7 +87,7 @@
                                 android:layout_below="@+id/expandableTextView"
                                 android:layout_centerInParent="true"
                                 android:layout_margin="10dp"
-                                android:background="@drawable/ic_icon_down_double"
+                                android:background="@{test.isExpandText() ? @drawable/ic_icon_up_double : @drawable/ic_icon_down_double}"
                                 />
 
                         </RelativeLayout>
@@ -106,8 +110,9 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@{test.questionText}"
-                    android:textStyle="bold"
-                    android:layout_marginLeft="16dp"
+                    android:layout_marginTop="20dp"
+                    android:fontFamily="@font/my_open_sans_semibold"
+                    android:layout_marginLeft="18dp"
                     android:textColor="@color/colorBlack"/>
 
 
@@ -120,13 +125,15 @@
                     app:cardBackgroundColor="@color/colorWhite"
                     app:cardCornerRadius="5dp"
                     android:layout_marginLeft="16dp"
+                    app:cardElevation="1dp"
                     android:layout_marginRight="16dp"
                     app:cardUseCompatPadding="true"
                     tools:layout_marginBottom="16dp">
 
                 <RelativeLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent">
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="10dp">
 
 
                     <WebView
@@ -150,6 +157,7 @@
                         android:visibility="@{test.solutionTextVisible}"
                         android:textColor="@color/colorButtonShowAnswer"
                         android:textSize="14sp"
+                        android:fontFamily="@font/my_open_sans_regular"
                         android:onClick="@{test.onClickShowAnswer}"/>
                 </RelativeLayout>
             </android.support.v7.widget.CardView>
@@ -170,8 +178,9 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:text="@{test.answersText}"
-                            android:textStyle="bold"
-                            android:layout_marginLeft="16dp"
+                            android:fontFamily="@font/my_open_sans_semibold"
+                            android:layout_marginLeft="18dp"
+                            android:layout_marginTop="20dp"
                             android:textColor="@color/colorBlack"/>
 
                         <android.support.v7.widget.RecyclerView
@@ -215,6 +224,16 @@
             </LinearLayout>
 
             </android.support.v4.widget.NestedScrollView>
+
+            <ProgressBar
+                android:id="@+id/progressBar1"
+                style="?android:attr/progressBarStyleLarge"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:indeterminate="true"
+                android:visibility="@{test.progress}"/>
 
         </RelativeLayout>
 

@@ -8,27 +8,126 @@
             type="itest.kz.viewmodel.SubjectFragmentViewModel"/>
     </data>
 
+    <id.co.flipbox.sosoito.LoadingLayout
+        android:id="@+id/loading"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:background="@color/colorBackgroundCardView">
+
+        <RelativeLayout
+            android:layout_centerInParent="true"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ProgressBar
+                android:id="@+id/progressBar1"
+                style="?android:attr/progressBarStyleLarge"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:indeterminate="true"
+                android:visibility="@{ent.progress}"/>
+        </RelativeLayout>
+
+        <android.support.v7.widget.CardView
+            android:id="@+id/button_reflesh"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginEnd="52dp"
+            android:layout_marginStart="52dp"
+            android:layout_centerVertical="true"
+            android:layout_centerHorizontal="true"
+            app:cardBackgroundColor="@color/colorErrorNoInternet"
+            app:cardCornerRadius="5dp"
+            android:visibility="@{ent.imageButtonVisibility}"
+            app:cardElevation="0dp"
+            >
+            <!--android:onClick="@{ent::clickTryAgain}"-->
+            <android.support.v7.widget.CardView
+                android:id="@+id/errorCardView"
+                android:layout_margin="1dp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:cardBackgroundColor="@color/colorText"
+                app:cardCornerRadius="5dp"
+                app:cardPreventCornerOverlap="false"
+                app:cardElevation="0dp"
+                >
+
+                <RelativeLayout
+                    android:id="@+id/subject_list_relative"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@color/colorBackgroundCardView">
 
 
-    <!--<NestedScrollView-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:orientation = "vertical">-->
+                    <TextView
+                        android:id="@+id/title_subject_text"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:layout_marginLeft="5dp"
+                        android:layout_marginRight="5dp"
+                        android:text="@{ent.serverErrorText}"
+                        android:textAlignment="center"
+                        android:textSize="16sp"
+                        android:textColor="@color/colorTextInside"
+                        android:fontFamily="@font/my_open_sans_regular"/>
+
+                </RelativeLayout>
+            </android.support.v7.widget.CardView>
+
+        </android.support.v7.widget.CardView>
+
+        <!--<ImageButton-->
+            <!--android:id="@+id/button_reflesh"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="50dp"-->
+            <!--android:layout_centerVertical="true"-->
+            <!--android:layout_centerHorizontal="true"-->
+            <!--android:text="dsdcsdcsdcdscdcds"-->
+            <!--android:visibility="@{ent.imageButtonVisibility}"/>-->
 
     <ScrollView android:id="@+id/scroll_view"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:visibility="@{ent.relativeVisibility}">
 
-    <LinearLayout
+    <id.co.flipbox.sosoito.LoadingLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
 
 
 
+        <!--<ImageButton-->
+            <!--android:id="@+id/button_reflesh"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="50dp"-->
+            <!--android:text="dsdcsdcsdcdscdcds"-->
+            <!--android:layout_centerInParent="true"-->
+            <!--android:visibility="@{ent.imageButtonVisibility}"/>-->
+
+        <!--android:layout_centerVertical="true"-->
+        <!--android:layout_centerHorizontal="true"-->
+
+
+
+
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="match_parent">
+
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/activity_main_relative">
+
+
 
             <RelativeLayout
                 android:id="@+id/text_main_relative"
@@ -66,6 +165,12 @@
                     android:focusable="true"
                     android:background="@color/colorWhite"
                     >
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+
                     <android.support.v7.widget.RecyclerView
                         android:id="@+id/list_subject_main"
                         android:layout_width="match_parent"
@@ -77,6 +182,15 @@
                         tools:listitem="@layout/item_ent"
                         app:visibility="@{ent.subjectRecycler}"
                         android:clickable="true"/>
+
+                    <!--<View-->
+                        <!--android:layout_below="@+id/list_subject_main"-->
+                        <!--android:layout_width="match_parent"-->
+                        <!--android:layout_height="0.5dp"-->
+                        <!--android:background="@color/colorGray"-->
+                        <!--android:layout_marginTop="1"/>-->
+
+                    </RelativeLayout>
 
                     <!--android:scrollbars="vertical"-->
                 </android.support.v7.widget.CardView>
@@ -149,6 +263,7 @@
                             <!--android:layout_below="@+id/list_subject"-->
                             <!--&gt;-->
                         <android.support.v7.widget.CardView
+                            android:id="@+id/ent_cancel_cardview"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_below="@+id/list_subject"
@@ -167,6 +282,7 @@
                                     android:layout_height="wrap_content"
                                     android:textAlignment="center"
                                     android:text="@{ent.cancel}"
+                                    android:textColor="@color/colorCancelButtonEnt"
                                     android:textSize="16sp"
                                     android:fontFamily="@font/my_open_sans_semibold"
                                     android:layout_centerInParent="true"
@@ -229,43 +345,14 @@
 
         </RelativeLayout>
 
+        </RelativeLayout>
 
-        <!--android:onClick="@{ent.showHideButtons}"-->
-        <!--app:visibility="@{ent.subjectRecycler}"-->
-
-        <!--<itest.kz.view.customviews.CustomTextView-->
-            <!--style="@style/TextViewParagraph"-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:layout_gravity="center_horizontal"-->
-            <!--android:text="-->
-        <!--This is your blank fragment. Extend it with anything you see fit.-->
-        <!--\n \n-->
-        <!--Please notice that this haven't been initialized using Data Binding Library.-->
-        <!--\n \n-->
-        <!--Initialize it with proper ViewModel and such.-->
-        <!--\n \n-->
-        <!--You can refer to https://docs.google.com/presentation/d/1IyzTFO4-vBxSd-mog7k6yUKP8wVOGFqx7SuUfwY93bk for the style guide"-->
-            <!--android:textAlignment="center"/>-->
-
-        <!--<itest.kz.view.customviews.CustomTextView-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:layout_gravity="center"-->
-            <!--android:gravity="center"-->
-            <!--android:text="below are some sample of utils class usage"/>-->
-
-        <!--<Button-->
-            <!--android:id="@+id/btn_get_image"-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:layout_gravity="center"-->
-            <!--android:text="GET IMAGE"/>-->
-
-    </LinearLayout>
+    </id.co.flipbox.sosoito.LoadingLayout>
 
     <!--</NestedScrollView>-->
 
     </ScrollView>
+
+    </id.co.flipbox.sosoito.LoadingLayout>
 
 </layout>

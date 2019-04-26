@@ -2,6 +2,14 @@ package itest.kz.util;
 
 public interface Constant
 {
+    public final String MY_START = "MY_START";
+
+    public final String STATISTIC_TAG = "STATISTIC_TAG";
+
+    public final String SERVER_ERROR_ALERT_KZ = "Белгісіз қате. Тағы да бір рет көріңіз";
+
+    public final String SERVER_ERROR_ALERT_RU = "Проблемы с сервером. Попробуйте еще раз";
+
     public final String hasActiveTest = "test";
     public final  String ANSWER_CHECK_LIST = "ANSWER_CHECK_LIST";
 

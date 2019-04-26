@@ -223,7 +223,8 @@ public class AnswerAdapter extends RecyclerView.Adapter<AnswerAdapter.AnswerAdpt
                     {
                         itemAnswerBinding.cardview1
                                 .setCardBackgroundColor(
-                                        Color.parseColor("#ff68da78")
+                                        Color.parseColor("#68DA78")
+
 //                                Color.GREEN
                                 );
                     }
@@ -231,7 +232,7 @@ public class AnswerAdapter extends RecyclerView.Adapter<AnswerAdapter.AnswerAdpt
                     {
                         itemAnswerBinding.cardview1
                                 .setCardBackgroundColor(
-                                        Color.parseColor("#ffff6969")
+                                        Color.parseColor("#F75C5B")
 //                                Color.GREEN
                                 );
                     }
@@ -251,8 +252,8 @@ public class AnswerAdapter extends RecyclerView.Adapter<AnswerAdapter.AnswerAdpt
                 {
                     itemAnswerBinding.cardview1
                             .setCardBackgroundColor(
-//                                    Color.parseColor("#ff68da78")
-                                    Color.GREEN
+                                    Color.parseColor("#68DA78")
+//                                    Color.GREEN
                             );
 //                    System.out.println("inside if ");
                     itemAnswerBinding.textview1.setTextColor

@@ -1,17 +1,27 @@
 package itest.kz.view.fragments;
 
+import android.app.Activity;
+import android.app.Dialog;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.databinding.DataBindingUtil;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
+import android.support.v7.widget.CardView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.gson.JsonObject;
 
@@ -32,6 +42,7 @@ import itest.kz.network.SubjectService;
 import itest.kz.util.Constant;
 import itest.kz.util.CustomViewPager;
 import itest.kz.util.TestsUtils;
+import itest.kz.view.activity.AuthActivity;
 import itest.kz.view.activity.FulltestResultActivity;
 import itest.kz.view.adapters.FullTestResultAdapter;
 import itest.kz.view.adapters.ResultAdapter;
@@ -58,9 +69,15 @@ public class CheckResultFragment extends Fragment
     private TextView subjectTitleText;
     private ImageButton buttonNext;
     private ImageButton buttonPrevious;
+    private CardView subjectCardview;
+    private String statisticTag;
+    private TextView dialogTextAuth;
+    private Button buttonYesAuth;
+    private Button buttonNoAuth;
+
 
     public static CheckResultFragment newInstance(Long testIdMain, List<Subject> subjectList, Subject selectedSubject,
-                                                  String tag, String typeTest)
+                                                  String tag, String typeTest, String statisticTag)
     {
 
         Bundle args = new Bundle();
@@ -69,12 +86,15 @@ public class CheckResultFragment extends Fragment
         args.putString(Constant.RESULT_TAG, tag);
         args.putString(Constant.TYPE, typeTest);
         args.putSerializable(Constant.SELECTED_SUBJECT, selectedSubject);
+        args.putString(Constant.STATISTIC_TAG, statisticTag);
 //        System.out.println("tag");
 //        System.out.println(tag);
         CheckResultFragment fragment = new CheckResultFragment();
         fragment.setArguments(args);
         return fragment;
     }
+
+
 
     public static CheckResultFragment newInstance(Long testIdMain, List<Subject> subjectList)
     {
@@ -104,6 +124,7 @@ public class CheckResultFragment extends Fragment
 //        settings.edit().clear().commit();
 //        maxTimeInMilliseconds = time.getLong(Constant.CURRENT_TIME, 10800000);
 
+        statisticTag = getArguments().getString(Constant.STATISTIC_TAG, "");
         this.typeTest = getArguments().getString(Constant.TYPE);
         this.testIdMain = getActivity().getIntent().getExtras().getLong(Constant.TEST_MAIN_ID);
         this.subjectsList = getActivity().getIntent().getExtras().getParcelableArrayList(Constant.SUBJECT_LIST);
@@ -118,6 +139,15 @@ public class CheckResultFragment extends Fragment
                 R.layout.fragment_check_results, container, false);
         checkResultViewMoel = new CheckResultViewMoel(getContext());
         fragmentCheckResultsBinding.setCheck(checkResultViewMoel);
+        if (typeTest.equals(Constant.TYPELECTURETEST) ||
+                typeTest.equals(Constant.TYPESUBJECTTEST))
+        {
+            checkResultViewMoel.setCardView(false);
+        }else
+        {
+            checkResultViewMoel.setCardView(true);
+        }
+        subjectCardview = fragmentCheckResultsBinding.subjectCardview;
         subjectTitleText = fragmentCheckResultsBinding
                 .subjectTitleText;
         buttonNext = fragmentCheckResultsBinding
@@ -131,6 +161,7 @@ public class CheckResultFragment extends Fragment
 
     private void fetchTestsByTestId(Long testIdMain)
     {
+        checkResultViewMoel.setProgress(true);
         AppController appController = new AppController();
         CompositeDisposable compositeDisposable = new CompositeDisposable();
 //        AppController appController = AppController.create(context);
@@ -173,10 +204,12 @@ public class CheckResultFragment extends Fragment
                                                subjectsList,
                                                currentPosition, resultTag, typeTest,selectedSubject);
                                        mPager.setAdapter(fullTestResultAdapter);
+                                       subjectCardview.setVisibility(View.VISIBLE);
                                    }
 
                                    else if (typeTest.equals(Constant.TYPESUBJECTTEST))
                                    {
+                                       subjectCardview.setVisibility(View.GONE);
                                        subjectsList = new ArrayList<>();
                                        subjectsList.add(selectedSubject);
                                        fullTestResultAdapter = new FullTestResultAdapter(getActivity().getSupportFragmentManager()
@@ -191,6 +224,7 @@ public class CheckResultFragment extends Fragment
 
                                    else if (typeTest.equals(Constant.TYPELECTURETEST))
                                    {
+                                       subjectCardview.setVisibility(View.GONE);
                                        subjectsList = new ArrayList<>();
                                        subjectsList.add(selectedSubject);
                                        fullTestResultAdapter = new FullTestResultAdapter(getActivity().getSupportFragmentManager()
@@ -229,11 +263,106 @@ public class CheckResultFragment extends Fragment
                                                mPager.setCurrentItem(--currentPosition, true);
                                        }
                                    });
+
+                                   checkResultViewMoel.setProgress(false);
                                }
-                           }
+                           },
+
+                        new Consumer<Throwable>() {
+                            @Override
+                            public void accept(Throwable throwable) throws Exception {
+                                if (throwable.getMessage().contains("401"))
+                                {
+                                    showToastUnauthorized();
+                                    checkResultViewMoel.setProgress(false);
+                                }
+                            }
+                        }
+
                 );
 
         compositeDisposable.add(disposable);
+    }
+
+
+//    private TextView dialogTextAuth;
+//    private Button buttonYesAuth;
+//    private Button buttonNoAuth;
+
+    public void showToastUnauthorized()
+    {
+
+//        public void showFinishTimeDialog()
+//        {
+        Dialog dialog = new Dialog(getContext());
+        dialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
+            @Override
+            public void onDismiss(DialogInterface dialog)
+            {
+                openAuthActivity();
+//                    finishTest(testIdMain);
+                //System.out.println(testIdMain);//103080954
+//                dialog.dismiss();
+            }
+        });
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.setContentView(R.layout.dialog);
+        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        dialogTextAuth = dialog.findViewById(R.id.dialog_text);
+        buttonYesAuth = dialog.findViewById(R.id.buttonOk);
+        buttonNoAuth = dialog.findViewById(R.id.buttonCancel);
+        buttonNoAuth.setVisibility(View.GONE);
+        buttonYesAuth.setText(R.string.ok);
+        if(language.equals(Constant.KZ))
+        {
+//            buttonNo.setText(R.string.noKz);
+
+            dialogTextAuth.setText(R.string.sessionErrorKz);
+
+        }
+        else
+        {
+//            buttonNo.setText(R.string.noRu);
+//            buttonYes.setText(R.string.yesRu);
+            dialogTextAuth.setText(R.string.sessionErrorRu);
+        }
+        buttonYesAuth.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v)
+            {
+                buttonYesAuth.setEnabled(false);
+                dialog.dismiss();
+                openAuthActivity();
+//                    finishTest(testIdMain);
+                //System.out.println(testIdMain);//103080954
+
+            }
+        });
+
+//        buttonNo.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                dialog.dismiss();
+//            }
+//        });
+        dialog.show();
+    }
+
+    public  void openAuthActivity()
+    {
+        Intent intent = new Intent(getContext(), AuthActivity.class);
+        ((Activity)getContext()).startActivity(intent);
+//        if (language.equals(Constant.KZ))
+//
+//            Toast.makeText(this,
+//                    R.string.sessionErrorKz,
+//                    Toast.LENGTH_SHORT).show();
+//        else
+//        {
+//            Toast.makeText(this,
+//                    R.string.sessionErrorRu,
+//                    Toast.LENGTH_SHORT).show();
+//        }
     }
 
     public void setmPager(CustomViewPager mPager)

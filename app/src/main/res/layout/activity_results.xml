@@ -20,6 +20,24 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
+
+            <!--<RelativeLayout-->
+                <!--android:layout_centerInParent="true"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content">-->
+
+                <!--<ProgressBar-->
+                    <!--android:id="@+id/progressBar1"-->
+                    <!--style="?android:attr/progressBarStyleLarge"-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_centerHorizontal="true"-->
+                    <!--android:layout_centerVertical="true"-->
+                    <!--android:indeterminate="true" />-->
+
+
+            <!--</RelativeLayout>-->
+
             <android.support.design.widget.AppBarLayout
                 android:id="@+id/app_bar_layout"
                 android:layout_width="match_parent"
@@ -39,28 +57,76 @@
 
                     <RelativeLayout
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
+                        android:layout_height="match_parent">
+
+                        <!--<TextView-->
+                            <!--android:id="@+id/text_view_title"-->
+                            <!--android:layout_width="match_parent"-->
+                            <!--android:layout_height="match_parent"-->
+                            <!--android:textSize="20sp"-->
+                            <!--android:textColor="@color/colorWhite"-->
+                            <!--android:ellipsize="end"-->
+                            <!--android:layout_marginTop="14dp"-->
+                            <!--android:textAlignment="center"-->
+                            <!--android:layout_marginEnd="20dp"-->
+                            <!--android:maxLines="1"-->
+                            <!--android:fontFamily="@font/my_open_sans_regular"/>-->
+
+
+                        <!--<TextView-->
+                        <!--android:id="@+id/text_view_title"-->
+                        <!--android:layout_width="match_parent"-->
+                        <!--android:layout_height="match_parent"-->
+                        <!--android:textSize="20sp"-->
+                        <!--android:text="@{result.title}"-->
+                        <!--android:textColor="@color/colorWhite"-->
+                        <!--android:ellipsize="end"-->
+                        <!--android:layout_marginTop="14dp"-->
+                        <!--android:textAlignment="center"-->
+                        <!--android:layout_marginEnd="20dp"-->
+                        <!--android:maxLines="1"-->
+                        <!--android:fontFamily="@font/my_open_sans_regular"/>-->
+
+                        <!--android:layout_centerInParent="true"-->
+                        <!--android:layout_marginStart="50dp"-->
+                        <!---->
+
+
+                        <!--<ImageButton-->
+                            <!--android:id="@+id/buttonFinishTest"-->
+                            <!--android:layout_width="40dp"-->
+                            <!--android:layout_alignParentRight="true"-->
+                            <!--android:layout_height="40dp"-->
+                            <!--android:layout_centerVertical="true"-->
+                            <!--android:src="@drawable/ic_icon_x"-->
+                            <!--android:layout_marginRight="16dp"-->
+                            <!--android:background="?attr/selectableItemBackground"-->
+                            <!--android:clickable="true"/>-->
 
                         <TextView
                             android:id="@+id/text_view_title"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
                             android:text="@{results.title}"
-                            android:textAlignment="center"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
                             android:textSize="20sp"
-                            android:layout_marginStart="120dp"
                             android:textColor="@color/colorWhite"
+                            android:ellipsize="end"
+                            android:layout_marginTop="14dp"
+                            android:textAlignment="center"
+                            android:layout_marginEnd="20dp"
+                            android:maxLines="1"
                             android:fontFamily="@font/my_open_sans_regular"/>
 
                         <ImageButton
                             android:id="@+id/buttonCloseFragment"
-                            android:layout_width="wrap_content"
+                            android:layout_width="40dp"
                             android:layout_alignParentRight="true"
+                            android:layout_height="40dp"
                             android:layout_centerVertical="true"
-                            android:layout_height="wrap_content"
-                            android:background="@drawable/ic_icon_x"
-                            android:layout_marginEnd="30dp"
-                            android:clickable="true"/>
+                            android:src="@drawable/ic_icon_x"
+                            android:layout_marginRight="16dp"
+                            android:background="?attr/selectableItemBackground"
+                            android:clickable="true"/>/>
                         <!--android:layout_toRightOf="@+id/text_view_title"-->
 
                     </RelativeLayout>

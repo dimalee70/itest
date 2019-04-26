@@ -27,7 +27,7 @@
         app:showAsAction="always" />
     <item
         android:id="@+id/menu_logout"
-        android:icon="@drawable/ic_exit"
+        android:icon="@drawable/ic_combined_shape"
         android:visible="false"
         android:orderInCategory="1"
         android:title=""

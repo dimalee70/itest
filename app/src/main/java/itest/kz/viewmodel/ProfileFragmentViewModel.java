@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.databinding.BaseObservable;
 import android.databinding.ObservableField;
+import android.databinding.ObservableInt;
 import android.graphics.drawable.Drawable;
 import android.view.View;
 import android.widget.FrameLayout;
@@ -47,8 +48,27 @@ public class ProfileFragmentViewModel extends BaseObservable
     public Action clickLang;
     public Action clickAgreement;
     private String language;
+    public ObservableInt progress = new ObservableInt(View.GONE);
+    public ObservableInt scroll = new ObservableInt(View.GONE);
 
-//    infoText
+    public ObservableInt getProgress()
+    {
+        return progress;
+    }
+
+    public void setProgress(boolean isProgress)
+    {
+        if (isProgress)
+            progress.set(View.VISIBLE);
+        else
+        {
+            progress.set(View.GONE);
+            scroll.set(View.VISIBLE);
+        }
+        notifyChange();
+    }
+
+    //    infoText
 //    passwordText
 //    langText
 //    agreementText
@@ -73,8 +93,8 @@ public class ProfileFragmentViewModel extends BaseObservable
     public int getAgreementText()
     {
         if (language.equals(Constant.KZ))
-            return R.string.agreementKz;
-        return R.string.agreementRu;
+            return R.string.helpCenterKz;
+        return R.string.helpCenterRu;
     }
 
     public int getLangText()
@@ -182,6 +202,10 @@ public class ProfileFragmentViewModel extends BaseObservable
         return clickInfo;
     }
 
+//    public void setProfileImage(ObservableField<Drawable> profileImage) {
+//        this.profileImage = profileImage;
+//    }
+
     public ObservableField<Drawable> getProfileImage()
     {
         return profileImage;
@@ -197,7 +221,7 @@ public class ProfileFragmentViewModel extends BaseObservable
         return profile.getEmail();
     }
 
-    private void getInfoFromProfile()
+    public void getInfoFromProfile()
     {
         bindableFieldTarget = new BindableFieldTarget(profileImage, context.getResources());
 

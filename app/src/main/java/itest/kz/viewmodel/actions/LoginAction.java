@@ -1,12 +1,20 @@
 package itest.kz.viewmodel.actions;
 
 import android.app.Activity;
+import android.app.Dialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.databinding.ObservableBoolean;
 import android.databinding.ObservableField;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.view.View;
+import android.view.Window;
+import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
@@ -37,6 +45,7 @@ import itest.kz.network.UserService;
 import itest.kz.util.CheckUtility;
 import itest.kz.util.Constant;
 import itest.kz.util.TestsUtils;
+import itest.kz.view.activity.AuthActivity;
 import itest.kz.view.activity.FullTestActivity;
 import itest.kz.view.activity.HomeActivity;
 import itest.kz.view.activity.MainHomeActivity;
@@ -56,6 +65,9 @@ public class LoginAction implements Action
     public String accessToken;
     private Long testIdMain;
     private SharedPreferences sharedPreferences;
+    private TextView dialogText;
+    private Button buttonYes;
+    private Button buttonNo;
 //    ObservableBoolean mIsLoading;
 
     public LoginAction(Context context,
@@ -125,7 +137,7 @@ public class LoginAction implements Action
 
                                        if (loginResponse.getAccessToken() == null
                                                || loginResponse.getAccessToken() == "") {
-//                                           loginLayout.showCustomLoading(false);
+                                           loginLayout.showCustomLoading(false);
                                            Toast toast = Toast.makeText(context,
                                                    loginResponse.getError(), Toast.LENGTH_SHORT);
                                            toast.show();
@@ -148,9 +160,15 @@ public class LoginAction implements Action
                             new Consumer<Throwable>() {
                                 @Override
                                 public void accept(Throwable throwable) throws Exception {
+                                    if (throwable.getMessage().contains("401")) {
+                                        showToastUnauthorized();
+                                    }
+//                                System.out.println(throwable.getLocalizedMessage());
+//                                System.out.println(throwable.getMessage());
 
                                 }
-                            });
+                            }
+                            );
             compositeDisposable.add(disposable);
         }
 
@@ -163,6 +181,82 @@ public class LoginAction implements Action
         }
 
 
+    }
+
+    public void showToastUnauthorized()
+    {
+
+//        public void showFinishTimeDialog()
+//        {
+        Dialog dialog = new Dialog(context);
+        dialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
+            @Override
+            public void onDismiss(DialogInterface dialog)
+            {
+                openAuthActivity();
+//                    finishTest(testIdMain);
+                //System.out.println(testIdMain);//103080954
+//                dialog.dismiss();
+            }
+        });
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.setContentView(R.layout.dialog);
+        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        dialogText = dialog.findViewById(R.id.dialog_text);
+        buttonYes = dialog.findViewById(R.id.buttonOk);
+        buttonNo = dialog.findViewById(R.id.buttonCancel);
+        buttonNo.setVisibility(View.GONE);
+        buttonYes.setText(R.string.ok);
+        if(language.equals(Constant.KZ))
+        {
+//            buttonNo.setText(R.string.noKz);
+
+            dialogText.setText(R.string.sessionErrorKz);
+
+        }
+        else
+        {
+//            buttonNo.setText(R.string.noRu);
+//            buttonYes.setText(R.string.yesRu);
+            dialogText.setText(R.string.sessionErrorRu);
+        }
+        buttonYes.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v)
+            {
+                buttonYes.setEnabled(false);
+                dialog.dismiss();
+                openAuthActivity();
+//                    finishTest(testIdMain);
+                //System.out.println(testIdMain);//103080954
+
+            }
+        });
+
+//        buttonNo.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                dialog.dismiss();
+//            }
+//        });
+        dialog.show();
+    }
+
+    public  void openAuthActivity()
+    {
+        Intent intent = new Intent(context, AuthActivity.class);
+        ((Activity)context).startActivity(intent);
+//        if (language.equals(Constant.KZ))
+//
+//            Toast.makeText(this,
+//                    R.string.sessionErrorKz,
+//                    Toast.LENGTH_SHORT).show();
+//        else
+//        {
+//            Toast.makeText(this,
+//                    R.string.sessionErrorRu,
+//                    Toast.LENGTH_SHORT).show();
+//        }
     }
 
     public void checkActiveTest()
@@ -208,7 +302,7 @@ public class LoginAction implements Action
                                             Intent intent = new Intent(context, MainHomeActivity.class);
                                             intent.putExtra(Constant.ACCESS_TOKEN, accessToken);
                                             context.startActivity(intent);
-                                            loginLayout.showCustomLoading(false);
+
                                         }
 
 
@@ -222,6 +316,7 @@ public class LoginAction implements Action
                                     }
                                     }
                                 }
+
 //                            ,
 //                            new Consumer<Throwable>() {
 //                                        @Override
@@ -232,6 +327,7 @@ public class LoginAction implements Action
 //                                        }
 //                                    }
                     );
+            loginLayout.showCustomLoading(false);
             compositeDisposable.add(disposable);
         }
 
@@ -274,17 +370,9 @@ public class LoginAction implements Action
                                    {
                                        subjectList.add(t.getSubject());
                                    }
+                                   showToastHaveActiveTest(subjectList);
 
-                                   Intent intent = new Intent(context, FullTestActivity.class);
-                                   sharedPreferences = context.getSharedPreferences(Constant.MY_PREF, MODE_PRIVATE);
-                                   setAccessToken();
-                                   intent.putExtra(Constant.IS_STARTED_FIRST, false);
-                                   intent.putExtra(Constant.SUBJECT_LIST, (ArrayList<Subject>) subjectList);
-                                   intent.putExtra(Constant.TEST_MAIN_ID, testIdMain);
-                                   intent.putExtra(Constant.hasActiveTest, true);
-//                intent.setFlags(Intent.FLAG_ACTIVITY_BROUGHT_TO_FRONT | Intent.FLAG_ACTIVITY_SINGLE_TOP | Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
-                                   context.startActivity(intent);
-                                   loginLayout.showCustomLoading(false);
+
 //                                   loginLayout.showCustomLoading(false);
 //
                                }
@@ -294,6 +382,79 @@ public class LoginAction implements Action
         compositeDisposable.add(disposable);
 
 
+    }
+
+    public void showToastHaveActiveTest(List<Subject> subjectList)
+    {
+
+//        public void showFinishTimeDialog()
+//        {
+        Dialog dialog = new Dialog(context);
+        dialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
+            @Override
+            public void onDismiss(DialogInterface dialog)
+            {
+                openTestActivity(subjectList);
+//                    finishTest(testIdMain);
+                //System.out.println(testIdMain);//103080954
+//                dialog.dismiss();
+            }
+        });
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.setContentView(R.layout.dialog);
+        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        dialogText = dialog.findViewById(R.id.dialog_text);
+        buttonYes = dialog.findViewById(R.id.buttonOk);
+        buttonNo = dialog.findViewById(R.id.buttonCancel);
+        buttonNo.setVisibility(View.GONE);
+        buttonYes.setText(R.string.ok);
+        if(language.equals(Constant.KZ))
+        {
+//            buttonNo.setText(R.string.noKz);
+
+            dialogText.setText(R.string.hasActiveTestDialogKz);
+
+        }
+        else
+        {
+//            buttonNo.setText(R.string.noRu);
+//            buttonYes.setText(R.string.yesRu);
+            dialogText.setText(R.string.hasActiveTestDialogRu);
+        }
+        buttonYes.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v)
+            {
+                buttonYes.setEnabled(false);
+                dialog.dismiss();
+                openTestActivity(subjectList);
+//                    finishTest(testIdMain);
+                //System.out.println(testIdMain);//103080954
+
+            }
+        });
+
+//        buttonNo.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                dialog.dismiss();
+//            }
+//        });
+        dialog.show();
+    }
+
+    private void openTestActivity(List<Subject> subjectList)
+    {
+        Intent intent = new Intent(context, FullTestActivity.class);
+        sharedPreferences = context.getSharedPreferences(Constant.MY_PREF, MODE_PRIVATE);
+        setAccessToken();
+        intent.putExtra(Constant.IS_STARTED_FIRST, false);
+        intent.putExtra(Constant.SUBJECT_LIST, (ArrayList<Subject>) subjectList);
+        intent.putExtra(Constant.TEST_MAIN_ID, testIdMain);
+        intent.putExtra(Constant.hasActiveTest, true);
+//                intent.setFlags(Intent.FLAG_ACTIVITY_BROUGHT_TO_FRONT | Intent.FLAG_ACTIVITY_SINGLE_TOP | Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+        context.startActivity(intent);
+        loginLayout.showCustomLoading(false);
     }
 
     public void setAccessToken()

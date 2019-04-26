@@ -140,19 +140,6 @@ public class SubjectActivity extends AppCompatActivity
                         switch (menuItem.getItemId())
                         {
                             case R.id.item_test:
-//                                if (testFragment.isAdded())
-//                                {
-//                                    fragmentManager.beginTransaction().remove(testFragment).commit();
-//                                    System.out.println("Added");
-//                                }
-
-//                                else
-//                                fragmentManager.beginTransaction().replace(R.id.viewpager, testFragment)
-//                                        .commit();
-//                                finish();
-//                                intent = new Intent(SubjectActivity.this,SubjectActivity.class);
-//                                intent.putExtra(Constant.ACCESS_TOKEN, accessToken);
-//                                startActivity(intent);
                                 break;
                             case R.id.item_statistic:
                                 finish();
@@ -220,58 +207,57 @@ public class SubjectActivity extends AppCompatActivity
         setSupportActionBar(myToolbar);
     }
 
-    public void fetchProfileInfo()
-    {
-//        System.out.println(accessToken);
-        AppController appController = new AppController();
-        CompositeDisposable compositeDisposable = new CompositeDisposable();
-//        AppController appController = AppController.create(context);
-        UserService userService = appController.getUserService();
+//    public void fetchProfileInfo()
+//    {
+////        System.out.println(accessToken);
+//        AppController appController = new AppController();
+//        CompositeDisposable compositeDisposable = new CompositeDisposable();
+////        AppController appController = AppController.create(context);
+//        UserService userService = appController.getUserService();
+//
+//        Disposable disposable = userService.getProfile("ru", Constant.ACCEPT,
+//                "Bearer " + accessToken)
+//                .subscribeOn(appController.subscribeScheduler())
+//                .observeOn(AndroidSchedulers.mainThread())
+//                .subscribe(new Consumer<ProfileResponse>()
+//                {
+//                    @Override
+//                    public void accept(ProfileResponse profileResponse) throws Exception
+//                    {
+//                        openFragment(profileResponse);
+//
+//                    }
+//                });
+//
+//        compositeDisposable.add(disposable);
+//    }
 
-        Disposable disposable = userService.getProfile("ru", Constant.ACCEPT,
-                "Bearer " + accessToken)
-                .subscribeOn(appController.subscribeScheduler())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Consumer<ProfileResponse>()
-                {
-                    @Override
-                    public void accept(ProfileResponse profileResponse) throws Exception
-                    {
-                        openFragment(profileResponse);
-
-                    }
-                });
-
-        compositeDisposable.add(disposable);
-    }
-
-    private void openFragment(ProfileResponse profileResponse)
-    {
-//        System.out.println(profileResponse.getProfile());
-//        FragmentHelper.openFragment(this,
-//                R.id.frame_layout,
-//                ProfileFragment.newInstance(profileResponse.getProfile()));
-
-
-        FrameLayout frameLayout = (FrameLayout) findViewById(R.id.viewpager);
-//        activitySubjectBinding.viewpager.setVisibility(View.VISIBLE);
-        frameLayout.setVisibility(View.VISIBLE);
-
-        ProfileFragment nextFrag= ProfileFragment.newInstance(profileResponse.getProfile());
-        getSupportFragmentManager().beginTransaction()
-                .add(R.id.viewpager, nextFrag, "findThisFragment")
-                .addToBackStack(null)
-                .commit();
-    }
+//    private void openFragment(ProfileResponse profileResponse)
+//    {
+////        System.out.println(profileResponse.getProfile());
+////        FragmentHelper.openFragment(this,
+////                R.id.frame_layout,
+////                ProfileFragment.newInstance(profileResponse.getProfile()));
+//
+//
+//        FrameLayout frameLayout = (FrameLayout) findViewById(R.id.viewpager);
+////        activitySubjectBinding.viewpager.setVisibility(View.VISIBLE);
+//        frameLayout.setVisibility(View.VISIBLE);
+//
+//        ProfileFragment nextFrag= ProfileFragment.newInstance(profileResponse.getProfile());
+//        getSupportFragmentManager().beginTransaction()
+//                .add(R.id.viewpager, nextFrag, "findThisFragment")
+//                .addToBackStack(null)
+//                .commit();
+//    }
 
     @Override
     public void onBackPressed()
     {
-        super.onBackPressed();
-        finish();
-        Intent intent = new Intent(this, MainActivity.class);
-        startActivity(intent);
+        finishAffinity();
+        System.exit(0);
     }
+
 
     public class PageListener extends ViewPager.SimpleOnPageChangeListener {
 

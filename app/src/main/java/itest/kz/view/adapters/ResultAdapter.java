@@ -20,6 +20,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.google.android.flexbox.FlexWrap;
+import com.google.android.flexbox.FlexboxLayoutManager;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -169,6 +172,17 @@ public class ResultAdapter extends RecyclerView.Adapter<ResultAdapter.ResultAdap
         ItemResultBinding itemResultBinding = DataBindingUtil
                 .inflate(LayoutInflater.from(viewGroup.getContext())
                         , R.layout.item_result, viewGroup, false );
+
+//        FlexboxLayoutManager layoutManager = new FlexboxLayoutManager();
+//        layoutManager.setFlexWrap(FlexWrap.WRAP);
+//
+//        recyclerView.setLayoutManager(layoutManager);
+//        int height = viewGroup.getMeasuredHeight() / 4;
+//        int width = viewGroup.getMeasuredWidth();
+//
+//        itemResultBinding.getRoot().setLayoutParams
+//                (new RecyclerView.LayoutParams(width, ViewGroup.LayoutParams.WRAP_CONTENT));
+
         return new ResultAdapterViewHolder(itemResultBinding);
     }
 
@@ -191,6 +205,13 @@ public class ResultAdapter extends RecyclerView.Adapter<ResultAdapter.ResultAdap
         this.answerList = testList.getQuestions().get(i).getAnswers();
 
         RecyclerView recyclerView = resultAdapterViewHolder.recyclerView;
+
+//        ViewGroup.LayoutParams lp = recyclerView.getLayoutParams();
+//        if (lp instanceof FlexboxLayoutManager.LayoutParams) {
+//            FlexboxLayoutManager.LayoutParams flexboxLp = (FlexboxLayoutManager.LayoutParams)
+//                    recyclerView.getLayoutParams();
+//            flexboxLp.setFlexGrow(1.0f);
+//        }
 //        RecyclerView.OnItemTouchListener onItemTouchListener
 //                = new RecyclerView.OnItemTouchListener() {
 //            @Override
@@ -236,8 +257,9 @@ public class ResultAdapter extends RecyclerView.Adapter<ResultAdapter.ResultAdap
                     intent.putExtra(Constant.TEST_MAIN_ID, testIdMain);
                     intent.putExtra(Constant.RESULT_TAG, resultTag);
                     intent.putExtra(Constant.TYPE, typeTest);
-                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                    intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
+//                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+//                    intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
 //                    intent.putExtra("list", testList);
                 }
                 else
@@ -252,9 +274,9 @@ public class ResultAdapter extends RecyclerView.Adapter<ResultAdapter.ResultAdap
                     intent.putExtra(Constant.RESULT_TAG, resultTag);
                     intent.putExtra(Constant.TYPE, typeTest);
                     intent.putExtra(Constant.TEST_MAIN_ID, testIdMain);
-                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                    intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
-//                    intent.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
+//                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+//                    intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
 //                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 }
 

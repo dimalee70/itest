@@ -1,16 +1,97 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:tools="http://schemas.android.com/tools"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
     <data>
         <import type="android.view.View" />
         <variable
             name="certification"
             type="itest.kz.viewmodel.CertificationFragmentViewModel"/>
     </data>
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    <id.co.flipbox.sosoito.LoadingLayout
+        android:id="@+id/loading"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:background="@color/colorBackgroundCardView">
+
+        <RelativeLayout
+            android:layout_centerInParent="true"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ProgressBar
+                android:id="@+id/progressBar1"
+                style="?android:attr/progressBarStyleLarge"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:indeterminate="true"
+                android:visibility="@{certification.progress}"/>
+        </RelativeLayout>
+
+
+        <android.support.v7.widget.CardView
+            android:id="@+id/button_reflesh"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginEnd="52dp"
+            android:layout_marginStart="52dp"
+            android:layout_centerVertical="true"
+            android:layout_centerHorizontal="true"
+            app:cardBackgroundColor="@color/colorErrorNoInternet"
+            app:cardCornerRadius="5dp"
+            android:visibility="@{certification.imageButtonVisibility}"
+            app:cardElevation="0dp"
+            android:onClick="@{certification.clickTryAgain}"
+            >
+
+            <android.support.v7.widget.CardView
+                android:id="@+id/ent_start_cardview"
+                android:layout_margin="1dp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:cardBackgroundColor="@color/colorText"
+                app:cardCornerRadius="5dp"
+                app:cardPreventCornerOverlap="false"
+                app:cardElevation="0dp"
+                >
+
+                <RelativeLayout
+                    android:id="@+id/subject_list_relative"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@color/colorBackgroundCardView">
+
+
+                    <TextView
+                        android:id="@+id/title_subject_text"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:layout_marginLeft="5dp"
+                        android:layout_marginRight="5dp"
+                        android:text="@{certification.serverErrorText}"
+                        android:textAlignment="center"
+                        android:textSize="16sp"
+                        android:textColor="@color/colorTextInside"
+                        android:fontFamily="@font/my_open_sans_regular"/>
+
+                </RelativeLayout>
+            </android.support.v7.widget.CardView>
+
+        </android.support.v7.widget.CardView>
+
+
+        <!--<ImageButton-->
+            <!--android:id="@+id/button_reflesh"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="50dp"-->
+            <!--android:layout_centerVertical="true"-->
+            <!--android:layout_centerHorizontal="true"-->
+            <!--android:text="dsdcsdcsdcdscdcds"-->
+            <!--android:visibility="@{certification.imageButtonVisibility}"/>-->
 
         <android.support.v7.widget.CardView
             android:layout_width="match_parent"
@@ -19,6 +100,7 @@
             android:layout_marginLeft="16dp"
             android:layout_marginTop="20dp"
             android:background="@color/colorWhite"
+            android:visibility="@{certification.cardViewVisibility}"
             >
             <!--android:layout_margin="10dp"-->
             <android.support.v7.widget.RecyclerView
@@ -39,5 +121,5 @@
 
 
 
-    </LinearLayout>
+    </id.co.flipbox.sosoito.LoadingLayout>
 </layout>

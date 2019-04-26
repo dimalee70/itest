@@ -20,6 +20,7 @@
             android:layout_marginLeft="15dp"
             android:foreground="?android:attr/selectableItemBackground"
             android:clickable="true"
+            app:cardElevation="1dp"
             app:cardUseCompatPadding="true"
             app:cardCornerRadius="6dp">
             <!--android:onClick="@{item.onClickSubject}"-->
@@ -80,14 +81,15 @@
                     <!--android:layout_width="wrap_content"-->
                     <!--android:layout_height="wrap_content">-->
 
-                    <TextView
+                    <ImageButton
                         android:id="@+id/strelka_text"
-                        android:layout_width="9dp"
-                        android:layout_height="15dp"
+                        android:layout_width="15dp"
+                        android:layout_height="match_parent"
                         android:layout_marginRight="15dp"
                         android:layout_alignParentRight="true"
                         android:layout_centerInParent="true"
-                        android:background="@{item.checkSubLectureRecylle() ? @drawable/ic_icon_strelka_top : @drawable/ic_icon_strelka_bottom }"
+                        android:background="@color/colorWhite"
+                        android:src="@{item.checkSubLectureRecylle() ? @drawable/ic_icon_strelka_top : @drawable/ic_icon_strelka_bottom }"
                         android:gravity="left"/>
                     <!--android:layout_alignParentBottom="true"-->
                     <!--android:layout_alignParentTop="true"-->

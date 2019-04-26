@@ -27,38 +27,42 @@
                 android:background="?attr/colorPrimary">
 
                 <RelativeLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content">
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
 
 
                     <RelativeLayout
                         android:id="@+id/title_relative"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginRight="100dp">
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
 
-                        <ImageButton
-                            android:id="@+id/imageButtonTitle"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="left"
-                            android:background="@drawable/ic_iconfinder_connect_direction_path_way_2203530"
-                            android:clickable="true"/>
+                        <!--android:layout_marginRight="100dp"-->
+
+                        <!--<ImageButton-->
+                            <!--android:id="@+id/imageButtonTitle"-->
+                            <!--android:layout_width="wrap_content"-->
+                            <!--android:layout_height="wrap_content"-->
+                            <!--android:layout_gravity="left"-->
+                            <!--android:background="@drawable/ic_iconfinder_connect_direction_path_way_2203530"-->
+                            <!--android:clickable="true"/>-->
 
                         <TextView
                             android:id="@+id/text_view_title"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:textSize="20sp"
                             android:text="@{result.title}"
-                            android:layout_marginStart="40dp"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:textSize="20sp"
                             android:textColor="@color/colorWhite"
-                            android:layout_toRightOf="@+id/imageButtonTitle"
-                            android:textAlignment="center"
                             android:ellipsize="end"
-                            android:layout_marginRight="100dp"
+                            android:layout_marginTop="14dp"
+                            android:textAlignment="center"
+                            android:layout_marginEnd="20dp"
                             android:maxLines="1"
                             android:fontFamily="@font/my_open_sans_regular"/>
+                        <!--android:layout_centerVertical="true"-->
+                        <!--android:layout_centerHorizontal="true"-->
+                        <!--android:textAlignment="center"-->
+                        <!--android:layout_marginStart="40dp"-->
 
 
 
@@ -67,11 +71,12 @@
 
                     <ImageButton
                         android:id="@+id/button_close_result"
-                        android:layout_width="wrap_content"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
                         android:layout_alignParentRight="true"
-                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
                         android:src="@drawable/ic_icon_x"
-                        android:layout_marginRight="30dp"
+                        android:layout_marginRight="16dp"
                         android:background="?attr/selectableItemBackground"
                         android:clickable="true"/>
 
@@ -92,7 +97,9 @@
             app:layout_behavior="@string/appbar_scrolling_view_behavior"
             tools:listitem="@layout/item_result"
             android:clickable="true"
-            android:focusable="true" />
+            android:focusable="true"
+           />
+            <!--app:layoutManager="com.google.android.flexbox.FlexboxLayout"-->
 
         </RelativeLayout>
 
