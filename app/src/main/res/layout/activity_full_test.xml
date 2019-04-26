@@ -20,9 +20,9 @@
             android:orientation="horizontal">
 
             <RelativeLayout
-                android:layout_centerInParent="true"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true">
 
                 <ProgressBar
                     android:id="@+id/progressBar1"
@@ -32,7 +32,7 @@
                     android:layout_centerHorizontal="true"
                     android:layout_centerVertical="true"
                     android:indeterminate="true"
-                    android:visibility="@{full.progress}"/>
+                    android:visibility="@{full.progress}" />
             </RelativeLayout>
 
             <android.support.v7.widget.Toolbar
@@ -40,8 +40,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
                 android:background="?attr/colorPrimary"
-                android:elevation="4dp"
                 android:contentInsetStart="0dp"
+                android:elevation="4dp"
                 android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
                 app:popupTheme="@style/ThemeOverlay.AppCompat.Light">
 
@@ -61,39 +61,39 @@
                             android:id="@+id/imageButtonTitle"
                             android:layout_width="40dp"
                             android:layout_height="40dp"
-                            android:layout_gravity="right"
                             android:layout_centerVertical="true"
+                            android:layout_gravity="right"
                             android:background="?attr/selectableItemBackground"
-                            android:src="@drawable/ic_iconfinder_connect_direction_path_way_2203530"
-                            android:clickable="true"/>
+                            android:clickable="true"
+                            android:src="@drawable/ic_iconfinder_connect_direction_path_way_2203530" />
 
                         <TextView
                             android:id="@+id/text_view_title"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:textSize="20sp"
-                            android:textColor="@color/colorWhite"
-                            android:ellipsize="end"
                             android:layout_marginTop="14dp"
-                            android:textAlignment="center"
                             android:layout_marginEnd="20dp"
+                            android:ellipsize="end"
+                            android:fontFamily="@font/my_open_sans_regular"
                             android:maxLines="1"
-                            android:fontFamily="@font/my_open_sans_regular"/>
+                            android:textAlignment="center"
+                            android:textColor="@color/colorWhite"
+                            android:textSize="20sp" />
 
 
                         <!--<TextView-->
-                            <!--android:id="@+id/text_view_title"-->
-                            <!--android:layout_width="match_parent"-->
-                            <!--android:layout_height="match_parent"-->
-                            <!--android:textSize="20sp"-->
-                            <!--android:text="@{result.title}"-->
-                            <!--android:textColor="@color/colorWhite"-->
-                            <!--android:ellipsize="end"-->
-                            <!--android:layout_marginTop="14dp"-->
-                            <!--android:textAlignment="center"-->
-                            <!--android:layout_marginEnd="20dp"-->
-                            <!--android:maxLines="1"-->
-                            <!--android:fontFamily="@font/my_open_sans_regular"/>-->
+                        <!--android:id="@+id/text_view_title"-->
+                        <!--android:layout_width="match_parent"-->
+                        <!--android:layout_height="match_parent"-->
+                        <!--android:textSize="20sp"-->
+                        <!--android:text="@{result.title}"-->
+                        <!--android:textColor="@color/colorWhite"-->
+                        <!--android:ellipsize="end"-->
+                        <!--android:layout_marginTop="14dp"-->
+                        <!--android:textAlignment="center"-->
+                        <!--android:layout_marginEnd="20dp"-->
+                        <!--android:maxLines="1"-->
+                        <!--android:fontFamily="@font/my_open_sans_regular"/>-->
 
                         <!--android:layout_centerInParent="true"-->
                         <!--android:layout_marginStart="50dp"-->
@@ -103,13 +103,13 @@
                         <ImageButton
                             android:id="@+id/buttonFinishTest"
                             android:layout_width="40dp"
-                            android:layout_alignParentRight="true"
                             android:layout_height="40dp"
+                            android:layout_alignParentRight="true"
                             android:layout_centerVertical="true"
-                            android:src="@drawable/ic_icon_x"
                             android:layout_marginRight="16dp"
                             android:background="?attr/selectableItemBackground"
-                            android:clickable="true"/>
+                            android:clickable="true"
+                            android:src="@drawable/ic_icon_x" />
                         <!--android:layout_marginRight="30dp"-->
 
                     </RelativeLayout>
@@ -122,18 +122,18 @@
 
             <android.support.v7.widget.Toolbar
                 android:id="@+id/toolbar"
-                android:layout_alignParentBottom="true"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
+                android:layout_alignParentBottom="true"
+                android:background="@color/colorWhite"
                 android:contentInsetStart="0dp"
-                android:padding="0dp"
                 android:contentInsetLeft="10dp"
                 android:contentInsetRight="10dp"
+                android:minHeight="?attr/actionBarSize"
+                android:padding="0dp"
                 app:contentInsetLeft="0dp"
                 app:contentInsetRight="0dp"
-                app:contentInsetStart="0dp"
-                android:background="@color/colorWhite"
-                android:minHeight="?attr/actionBarSize">
+                app:contentInsetStart="0dp">
 
                 <RelativeLayout
                     android:layout_width="match_parent"
@@ -149,28 +149,28 @@
                             android:id="@+id/buttonBack"
                             android:layout_width="40dp"
                             android:layout_height="40dp"
-                            android:layout_gravity="left"
                             android:layout_alignParentLeft="true"
-                            android:src="@drawable/ic_icon_strelka"
+                            android:layout_gravity="left"
                             android:background="?attr/selectableItemBackground"
-                            android:clickable="true" />
+                            android:clickable="true"
+                            android:src="@drawable/ic_icon_strelka" />
                     </RelativeLayout>
 
                     <RelativeLayout
-                        android:layout_toRightOf="@+id/button_back_relative"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:layout_marginEnd="40dp">
+                        android:layout_marginEnd="40dp"
+                        android:layout_toRightOf="@+id/button_back_relative">
 
                         <TextView
                             android:id="@+id/text_number_pager"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_centerVertical="true"
-                            android:layout_centerHorizontal="true"
-                            android:textColor="@color/colorPrimary"
                             android:layout_centerInParent="true"
-                            android:textSize="18sp"/>
+                            android:layout_centerHorizontal="true"
+                            android:layout_centerVertical="true"
+                            android:textColor="@color/colorPrimary"
+                            android:textSize="18sp" />
                         <!--android:textAlignment="center"-->
 
                     </RelativeLayout>
@@ -184,11 +184,11 @@
                             android:id="@+id/buttonForward"
                             android:layout_width="40dp"
                             android:layout_height="40dp"
-                            android:layout_gravity="right"
                             android:layout_centerVertical="true"
-                            android:src="@drawable/rotate_ic_icon_strelka"
+                            android:layout_gravity="right"
                             android:background="?attr/selectableItemBackground"
                             android:clickable="true"
+                            android:src="@drawable/rotate_ic_icon_strelka"
 
                             />
                     </RelativeLayout>
@@ -198,26 +198,24 @@
             </android.support.v7.widget.Toolbar>
 
 
-
             <RelativeLayout
                 android:id="@+id/list_subject_relative"
                 android:layout_width="match_parent"
-                android:layout_below="@+id/my_toolbar"
-                android:layout_height="wrap_content">
-
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/my_toolbar">
 
 
                 <android.support.v7.widget.RecyclerView
                     android:id="@+id/list_subjects"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginEnd="10dp"
                     android:background="@color/colorBackgroundCardView"
                     android:clickable="false"
                     android:clipToPadding="false"
                     android:focusable="false"
                     android:orientation="horizontal"
                     android:scrollbars="vertical"
-                    android:layout_marginEnd="10dp"
                     app:layoutManager="android.support.v7.widget.LinearLayoutManager"
                     app:layout_behavior="@string/appbar_scrolling_view_behavior"
                     tools:listitem="@layout/item_full_subject" />
@@ -228,28 +226,28 @@
                 android:id="@+id/timer"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_below="@+id/list_subject_relative"
+                android:layout_marginTop="10dp"
                 android:textAlignment="center"
                 android:textColor="@color/colorPrimary"
-                android:visibility="@{full.timeVisibility}"
-                android:layout_marginTop="10dp"
-                android:layout_below="@+id/list_subject_relative"
-                android:textSize="20sp"/>
+                android:textSize="20sp"
+                android:visibility="@{full.timeVisibility}" />
             <!--<android.support.v4.widget.NestedScrollView-->
-                <!--android:layout_width="wrap_content"-->
-                <!--android:layout_height="wrap_content">-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content">-->
 
 
             <RelativeLayout
-                android:layout_below="@+id/timer"
                 android:layout_width="match_parent"
-                android:layout_marginBottom="60dp"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/timer"
+                android:layout_marginBottom="40dp">
 
                 <itest.kz.util.CustomViewPager
                     android:id="@+id/pager"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1" >
+                    android:layout_weight="1">
                 </itest.kz.util.CustomViewPager>
             </RelativeLayout>
 
