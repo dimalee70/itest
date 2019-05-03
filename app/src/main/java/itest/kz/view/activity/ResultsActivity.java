@@ -90,7 +90,7 @@ public class ResultsActivity extends AppCompatActivity
         mFragments = new ArrayList<>();
         ResultsFragment resultsFragment = ResultsFragment.newInstance(testFinishResponse, testIdMain, subjectList,
                 selectedSubject,
-                typeTest);
+                typeTest, statisticTag);
 
         mFragments.add(resultsFragment);
 

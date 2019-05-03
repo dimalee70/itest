@@ -24,6 +24,60 @@ public class TestsUtils
     {
         return  (limit - remaining) * 1000; //* //1000;
     }
+
+//    public static ArrayList<Tests> deserializeSubjectsFromJson(JsonObject jsonObject) throws JSONException {
+////        ArrayList<ArrayList<Question>> arrayListsQuestions =
+////                new ArrayList<>();
+//
+////        System.out.println(accessToken);
+//        ArrayList<Tests> testsArrayList = new ArrayList<>();
+//        JSONObject jsonObject1 = new JSONObject(jsonObject.toString());
+//        JSONObject testMain = jsonObject1.getJSONObject("test");
+//        JSONObject contentType = testMain.getJSONObject("content_type");
+//        String title = contentType.getString("title");
+//        JSONObject data = jsonObject1.getJSONObject("data");
+//        JSONArray tests = data.getJSONArray("tests");
+//
+//        Gson gson = new GsonBuilder()
+//                .setDateFormat("yyyy-mm-dd HH:MM:SS")
+//                .create();
+//        for (int i = 0; i < tests.length(); i++) {
+//            JSONObject testItem = tests.getJSONObject(i);
+//
+//            JSONArray questions = testItem.getJSONArray("questions");
+//            JSONObject test = testItem.getJSONObject("test");
+////            JSONObject subject = testItem.getJSONObject("subject");
+//            Subject subject = gson.fromJson(testItem.getJSONObject("subject").toString(), Subject.class);
+//            Long testId = test.getLong("id");
+//            Test testObject = gson.fromJson(testItem.getJSONObject("test").toString(), Test.class);
+//
+//            ArrayList<Question> questionsList = new ArrayList<>();
+//            for (int j = 0; j < questions.length(); j++) {
+//                Question obj = gson.fromJson(questions.getJSONObject(j).toString(), Question.class);
+//                if (testItem.has("texts")) {
+//                    JSONObject texts = testItem.getJSONObject("texts");
+//
+//                    if (obj.getTextId() != null) {
+//
+//                        if (texts.has(obj.getTextId().toString())) {
+//
+//                            JSONObject textsId = texts.getJSONObject
+//                                    (obj.getTextId().toString());
+//                            String t = textsId.getString("text");
+//                            obj.setText(t);
+//                        }
+//                    }
+//
+//                }
+//                questionsList.add(obj);
+//            }
+//
+//            testsArrayList.add(new Tests(questionsList, testId, subject, testObject, title));
+//        }
+//
+//        return testsArrayList;
+//    }
+
     public static ArrayList<Tests> deserializeFromJson(JsonObject jsonObject) throws JSONException {
 //        ArrayList<ArrayList<Question>> arrayListsQuestions =
 //                new ArrayList<>();

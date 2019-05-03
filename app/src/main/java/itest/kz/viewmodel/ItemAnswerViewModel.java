@@ -72,8 +72,9 @@ public class ItemAnswerViewModel extends BaseObservable
 //        color = new ObservableInt((answer.getAnswerResponce())?
 //                Color.GREEN : Color.WHITE);
 //        notifyChange();
-//        System.out.println(answer.getAnswer());
-        answerText.set(Constant.MATHJAX + answer.getAnswer());
+//        System.out.println((Constant.MATHJAX + answer.getAnswer()).length());
+
+        answerText.set(answer.getAnswer());
 
     }
 

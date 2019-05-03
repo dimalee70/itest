@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 
+import itest.kz.R;
 import itest.kz.util.Constant;
 
 public class SplashActivity extends AppCompatActivity

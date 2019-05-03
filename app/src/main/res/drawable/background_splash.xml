@@ -1,13 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+<layer-list xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
         android:drawable="@color/colorPrimary"/>
 
+
     <item>
         <bitmap
             android:gravity="center"
-            android:src="@mipmap/itest_blue"/>
+            android:src="@mipmap/itest_splash" />
     </item>
 
 </layer-list>
+
+
+    <!--android:gravity="center"-->
+    <!--android:drawable="@drawable/ic_itest_blue_in_circle">-->
+    <!--<bitmap-->
+    <!--android:src="@drawable/e">-->
+
+    <!--<ImageView-->
+    <!--android:gravity="center"-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--app:srcCompat="@drawable/r" />-->

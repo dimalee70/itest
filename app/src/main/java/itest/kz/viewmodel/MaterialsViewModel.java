@@ -49,6 +49,7 @@ public class MaterialsViewModel extends Observable
     private TextView dialogTextAuth;
     private Button buttonYesAuth;
     private Button buttonNoAuth;
+    private String accessToken;
 
 
 
@@ -57,9 +58,9 @@ public class MaterialsViewModel extends Observable
         this.context = context;
         this.subject = subject;
         this.material_list = new ObservableInt(View.GONE);
-//        SharedPreferences settings = context.getSharedPreferences(Constant.MY_PREF, MODE_PRIVATE);
-////        settings.edit().clear().commit();
-//        accessToken = settings.getString(Constant.ACCESS_TOKEN, null);
+        SharedPreferences settings = context.getSharedPreferences(Constant.MY_PREF, MODE_PRIVATE);
+//        settings.edit().clear().commit();
+        accessToken = settings.getString(Constant.ACCESS_TOKEN, null);
 
         SharedPreferences lang = context.getSharedPreferences(Constant.MY_LANG, MODE_PRIVATE);
 //        settings.edit().clear().commit();
@@ -78,7 +79,7 @@ public class MaterialsViewModel extends Observable
 //        if (subject != null) {
         Disposable disposable = subjectService.getNodeBySubject(Constant.ENT,
                 subject.getId(), Constant.ACCEPT, language
-//                , accessToken
+                , "Bearer "+ accessToken
         )
                 .subscribeOn(appController.subscribeScheduler())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -93,11 +94,14 @@ public class MaterialsViewModel extends Observable
                            },
                         new Consumer<Throwable>() {
                             @Override
-                            public void accept(Throwable throwable) throws Exception {
-                                if (throwable.getMessage().contains("401"))
-                                {
-                                    showToastUnauthorized();
-                                }
+                            public void accept(Throwable throwable) throws Exception
+                            {
+
+                                System.out.println(throwable.getMessage());
+//                                if (throwable.getMessage().contains("401"))
+//                                {
+//                                    showToastUnauthorized();
+//                                }
                             }
                         }
 

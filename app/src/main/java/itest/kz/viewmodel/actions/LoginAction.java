@@ -77,6 +77,7 @@ public class LoginAction implements Action
         this.context = context;
         this.login = login;
         this.password = password;
+        sharedPreferences = context.getSharedPreferences(Constant.MY_PREF, MODE_PRIVATE);
 //        this.mIsLoading = mIsLoading;
         settings = context.getSharedPreferences(Constant.MY_LANG, MODE_PRIVATE);
 //        settings.edit().clear().commit();
@@ -146,6 +147,7 @@ public class LoginAction implements Action
 //                            intent.putExtra(Constant.ACCESS_TOKEN, loginResponse.getAccessToken());
 //                            context.startActivity(intent);
                                            accessToken = loginResponse.getAccessToken();
+//                                           setAccessToken();
 //                                           System.out.println(accessToken);
                                            checkActiveTest();
 
@@ -472,6 +474,7 @@ public class LoginAction implements Action
 
             SharedPreferences.Editor editor = sharedPreferences.edit();
             editor.clear();
+            editor.commit();
             editor.putString(Constant.ACCESS_TOKEN, accessToken);
             editor.apply();
             editor.commit();

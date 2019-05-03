@@ -75,11 +75,30 @@ public class QuestionsAdapter extends RecyclerView.Adapter<QuestionsAdapter.Ques
 
         if (answers.size() == 5)
         {
+
             LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
                     LinearLayout.LayoutParams.WRAP_CONTENT,
                     LinearLayout.LayoutParams.WRAP_CONTENT
             );
-            params.setMargins(30, 2, 30, 5);
+            params.setMargins(25, 2, 35, 5);
+            itemQuestionsBinding.rl.setLayoutParams(params);
+        }
+        else if (i == 0)
+        {
+            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
+                    LinearLayout.LayoutParams.WRAP_CONTENT,
+                    LinearLayout.LayoutParams.WRAP_CONTENT
+            );
+            params.setMargins(25, 2, 0, 5);
+            itemQuestionsBinding.rl.setLayoutParams(params);
+        }
+        else
+        {
+            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
+                    LinearLayout.LayoutParams.WRAP_CONTENT,
+                    LinearLayout.LayoutParams.WRAP_CONTENT
+            );
+            params.setMargins(0, 2, 0, 5);
             itemQuestionsBinding.rl.setLayoutParams(params);
         }
 

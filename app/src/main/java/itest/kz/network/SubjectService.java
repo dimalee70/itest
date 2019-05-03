@@ -45,8 +45,8 @@ public interface SubjectService
     Observable<NodeResponse> getNodeBySubject(@Path("tag") String tag,
                                               @Path("id") Long id,
                                               @Header("Accept") String accept,
-                                              @Header("X-Localization") String lang
-//                                              @Header("Authorization") String accessToken
+                                              @Header("X-Localization") String lang,
+                                              @Header("Authorization") String accessToken
                                                 );
 
     @GET("api/{tag}/node/{id}")
@@ -59,7 +59,8 @@ public interface SubjectService
     Observable<LectureResponse> getLecture(@Path("tag") String tag,
                                            @Path("id") int id,
                                            @Header("Accept") String accept,
-                                           @Header("X-Localization") String lang);
+                                           @Header("X-Localization") String lang,
+                                           @Header("Authorization") String accessToken);
 
     @POST("api/test/generate")
     Observable<TestGenerateResponse> getTestGenerate(@Header("Accept") String accept,

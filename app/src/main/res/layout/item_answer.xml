@@ -40,6 +40,7 @@
         <!--android:onClick="@{() -> answer.onClick()}">-->
 
             <RelativeLayout
+                android:clickable="false"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
@@ -76,15 +77,17 @@
                 <itest.kz.util.AnswerWebView
                     android:id="@+id/answerText"
                     android:layout_marginTop="7dp"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-
-                    android:hardwareAccelerated="true"
                     android:clickable="false"
                     android:focusable="false"
-
+                    android:scrollbarAlwaysDrawVerticalTrack="true"
+                    android:scrollbars="vertical"
+                    android:overScrollMode="always"
                     app:loadData="@{answer.answerText}">
 
+
+                    <!--android:hardwareAccelerated="true"-->
 
                     <!--android:layout_centerInParent="true"-->
                     <!--android:layout_centerVertical="true"-->

@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">itest</string>
+    <string name="app_name">iTest</string>
 
     <string name="tryAgainTextKz">Қайталап көру</string>
     <string name="tryAgainTextRu">Попробовать еще раз</string>
@@ -21,7 +21,7 @@
 
     <string name="sessionErrorKz">Сіздің сассияңыз мәжбүр түрде жабылды. Кайтадан кіріңіз</string>
     <string name="sessionErrorRu">Ваша сессия была принудительно завершена. Авторизуйтесь заново</string>
-    <string name="rus">Руский</string>
+    <string name="rus">Русский</string>
     <string name="kaz">Қазақша</string>
 
     <string name="resultKz">Нәтиже</string>

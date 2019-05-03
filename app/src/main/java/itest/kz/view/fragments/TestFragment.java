@@ -101,11 +101,11 @@ public class TestFragment extends Fragment
     private ImageButton titleButton;
     private Toolbar myToolbar;
     private ImageButton titleButtonClose;
-    private Button buttonYes;
-    private Button buttonNo;
     private Toolbar navigationToolbar;
     private String resultTag;
     private RecyclerView answerListRecycle;
+    private Button buttonYes;
+    private Button buttonNo;
     private TextView dialogText;
 
     private TextView dialogTextAuth;
@@ -241,52 +241,52 @@ public class TestFragment extends Fragment
             @Override
             public void onClick(View v) {
 
-
-                if (resultTag == null)
-                {
-                    Dialog dialog = new Dialog(getContext());
-
-                    dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-                    dialog.setContentView(R.layout.dialog);
-                    dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-                    dialogText = dialog.findViewById(R.id.dialog_text);
-                    buttonYes = dialog.findViewById(R.id.buttonOk);
-                    buttonNo = dialog.findViewById(R.id.buttonCancel);
-                    if(language.equals(Constant.KZ))
-                    {
-                        buttonNo.setText(R.string.noKz);
-                        buttonYes.setText(R.string.yesKz);
-                        dialogText.setText(R.string.finishTestDialogKz);
-
-                    }
-                    else
-                    {
-                        buttonNo.setText(R.string.noRu);
-                        buttonYes.setText(R.string.yesRu);
-                        dialogText.setText(R.string.finishTestDialogRu);
-                    }
-                    buttonYes.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            finishTest(testIdMain);
+                try {
 
 
-                            //System.out.println(testIdMain);//103080954
+                    if (resultTag == null) {
+                        Dialog dialog = new Dialog(getContext());
 
+                        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+                        dialog.setContentView(R.layout.dialog);
+                        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                        dialogText = dialog.findViewById(R.id.dialog_text);
+                        buttonYes = dialog.findViewById(R.id.buttonOk);
+                        buttonNo = dialog.findViewById(R.id.buttonCancel);
+                        if (language.equals(Constant.KZ)) {
+                            buttonNo.setText(R.string.noKz);
+                            buttonYes.setText(R.string.yesKz);
+                            dialogText.setText(R.string.finishTestDialogKz);
+
+                        } else {
+                            buttonNo.setText(R.string.noRu);
+                            buttonYes.setText(R.string.yesRu);
+                            dialogText.setText(R.string.finishTestDialogRu);
                         }
-                    });
+                        buttonYes.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                finishTest(testIdMain);
 
-                    buttonNo.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            dialog.dismiss();
-                        }
-                    });
-                    dialog.show();
-                }
-                else
+
+                                //System.out.println(testIdMain);//103080954
+
+                            }
+                        });
+
+                        buttonNo.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                dialog.dismiss();
+                            }
+                        });
+                        dialog.show();
+                    } else {
+                        getActivity().finish();
+                    }
+                }catch (Exception e)
                 {
-                    getActivity().finish();
+
                 }
             }
         });
@@ -378,14 +378,14 @@ public class TestFragment extends Fragment
                 if (expandableTextView.isExpanded())
                 {
                     expandableTextView.collapse();
-                    fragmentTestBinding.expandedIcon.setBackgroundResource(R.drawable.ic_icon_down_double);
+                    fragmentTestBinding.expandedIcon.setImageResource(R.drawable.ic_icon_down_double);
                     testFragmentViewModel.setExpandText(false);
 //                        buttonToggle.setText(R.string.expand);
                 }
                 else
                 {
                     expandableTextView.expand();
-                    fragmentTestBinding.expandedIcon.setBackgroundResource(R.drawable.ic_icon_up_double);
+                    fragmentTestBinding.expandedIcon.setImageResource(R.drawable.ic_icon_up_double);
 
                     testFragmentViewModel.setExpandText(true);
 //                        buttonToggle.setText(R.string.collapse);
@@ -462,7 +462,8 @@ public class TestFragment extends Fragment
 //        int position = -1;
         String answersId = "";
         int answersRsponseCount = 0;
-        for (Answer model : answers) {
+        for (Answer model : answers)
+        {
             if (model.getUserAnswer() == 1)
             {
                 answersId += model.getAnswerId().toString() + ",";
@@ -471,70 +472,77 @@ public class TestFragment extends Fragment
             models.add(model.clone());
 
         }
-        if (models.get(position).getUserAnswer()==1)
-        {
-//            models.get(position).setUserAnswer(0);
-        }
 
-        else
+        if (models.size() == 8)
+        {
+            if (models.get(position).getUserAnswer() == 1)
             {
-            if (models.size() == 8)
+                models.get(position).setUserAnswer(0);
+            }
+            else
             {
                 if (answersRsponseCount < 3)
                 {
-                    temp = models.get(position);
-                    temp.setUserAnswer(1);
-                    answersId += temp.getAnswerId().toString();
-                    saveAnswerTest(test.getQuestionId(), answersId);
-
+                    models.get(position).setUserAnswer(1);
                 }
+            }
 
+            String answerIds = "";
+            for (Answer m : models)
+            {
+                if (m.getUserAnswer() == 1)
+                {
+                    answerIds += m.getAnswerId() + ",";
+                }
+            }
+
+//            System.out.println(answerIds);
+            if(!answerIds.equals("")  && answerIds.endsWith(","))
+            {
+                answerIds = answerIds.substring(0,answerIds.length() - 1);
+            }
+
+            saveAnswerTest(test.getQuestionId(), answerIds);
+
+        }
+        else
+        {
+            for (Answer m : models)
+            {
+                m.setUserAnswer(0);
+            }
+            models.get(position).setUserAnswer(1);
+            saveAnswerTest(test.getQuestionId(), models.get(position).getAnswerId().toString());
+        }
+
+        for (int i = 0; i < models.size(); i++)
+        {
+            if (models.get(i).getUserAnswer() == 1)
+            {
+                RecyclerView.ViewHolder view = answerListRecycle.findViewHolderForLayoutPosition(i);
+                CardView cardView =  view.itemView.findViewById(R.id.cardview1);
+                TextView textView = view.itemView.findViewById(R.id.textview1);
+                cardView
+                        .setCardBackgroundColor(
+                                        Color.parseColor("#ff2daafc")
+//                                Color.WHITE
+                        );
+                textView.setTextColor(Color.WHITE);
             }
             else
-                {
-//        for (Answer model : answers)
-//        {
-//            models.add(model.clone());
-//        }
-
-//                for (Answer model : models) {
-//                    model.setUserAnswer(0);
-//                }
-                for (int i = 0; i < models.size(); i++)
-                {
-                    if (models.get(i).getUserAnswer() == 1)
-                    {
-                        RecyclerView.ViewHolder view = answerListRecycle.findViewHolderForLayoutPosition(i);
-                        CardView cardView =  view.itemView.findViewById(R.id.cardview1);
-                        TextView textView = view.itemView.findViewById(R.id.textview1);
-                        cardView
-                                .setCardBackgroundColor(
-//                                        Color.parseColor("#ff2daafc")
+            {
+                RecyclerView.ViewHolder view = answerListRecycle.findViewHolderForLayoutPosition(i);
+                CardView cardView =  view.itemView.findViewById(R.id.cardview1);
+                TextView textView = view.itemView.findViewById(R.id.textview1);
+                cardView
+                        .setCardBackgroundColor(
+//                                Color.parseColor("#ff2daafc")
                                 Color.WHITE
-                                );
-                        textView.setTextColor(Color.BLACK);
-                    }
-                    models.get(i).setUserAnswer(0);
-
-                }
-                temp = models.get(position);
-                temp.setUserAnswer(1);
-                saveAnswerTest(test.getQuestionId(), temp.getAnswerId().toString());
+                        );
+                textView.setTextColor(Color.BLACK);
             }
         }
 
-
-        RecyclerView.ViewHolder view = answerListRecycle.findViewHolderForLayoutPosition(position);
-        CardView cardView =  view.itemView.findViewById(R.id.cardview1);
-        TextView textView = view.itemView.findViewById(R.id.textview1);
-        cardView
-                .setCardBackgroundColor(
-                        Color.parseColor("#ff2daafc")
-//                                Color.GREEN
-                );
-        textView.setTextColor(Color.WHITE);
-//                        itemAnswerBinding.textview1.setTextColor
-//                                (Color.WHITE);
         answerAdapter.setData(models);
 //        answerAdapter.setAnswerList(models);
 
@@ -542,10 +550,6 @@ public class TestFragment extends Fragment
 
     public void finishTest(Long testIdMain)
     {
-        //        System.out.println("question");
-//        System.out.println(questionId);
-//        System.out.println(answerId);
-//        System.out.println(tests.getTestId());
         testFragmentViewModel.setProgress(true);
         AppController appController = new AppController();
         SubjectService subjectService = appController.getSubjectService();
@@ -862,8 +866,7 @@ public class TestFragment extends Fragment
     @Override
     public void onDestroyView()
     {
-//        System.out.println("Ondestroy");
-//        System.out.println(currentPosition);
+
         super.onDestroyView();
     }
 

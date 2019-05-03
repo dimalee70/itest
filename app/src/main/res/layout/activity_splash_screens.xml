@@ -45,7 +45,7 @@
                 android:layout_alignParentBottom="true">
                 <TextView
                     android:id="@+id/text_pass"
-                    android:layout_width="100dp"
+                    android:layout_width="match_parent"
                     android:layout_height="25dp"
                     android:layout_centerHorizontal="true"
                     android:text="@{spash.passText}"

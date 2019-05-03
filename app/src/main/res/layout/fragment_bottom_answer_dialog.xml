@@ -105,8 +105,8 @@
                             android:textAlignment="center"
                             android:text="@{answer.questiondAndAnswer}"
                             android:textSize="16sp"
-                            android:textStyle="bold"
-                            android:textColor="@color/colorBlack" />
+                            android:textColor="@color/colorBlack"
+                            android:fontFamily="@font/opensans_semibold"/>
 
 
                         <WebView

@@ -105,12 +105,26 @@ public class FullTestActivity extends AppCompatActivity
     private TextView dialogText;
     private Button buttonYes;
     private Button buttonNo;
+    private TextView dialogTextFinish;
+    private Button buttonYesFinish;
+    private Button buttonNoFinish;
 
 
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState)
     {
+
+
+//        try {
+//
+//        }
+//        System.out.println("Dfsdcds");
+//        catch (Exception)
+//        {}
+
+
+
         super.onCreate(savedInstanceState);
 
         subjectList = getIntent().getParcelableArrayListExtra(Constant.SUBJECT_LIST);
@@ -466,15 +480,17 @@ public class FullTestActivity extends AppCompatActivity
 
                     }
 
-                },
+                }
+                ,
                 new Consumer<Throwable>() {
                     @Override
                     public void accept(Throwable throwable) throws Exception {
                         if (throwable.getMessage().contains("401"))
                         {
                             showToastUnauthorized();
-//                            fullTestViewModel.setProgress(false);
+//
                         }
+                        fullTestViewModel.setProgress(false);
                     }
                 }
                 );
@@ -713,6 +729,11 @@ public class FullTestActivity extends AppCompatActivity
             {
                 if (selectedTestPosition != numbersOFpages - 1)
                     mPager.setCurrentItem(++selectedTestPosition, true);
+                else if (selectedTestPosition == numbersOFpages - 1 &&
+                currentPosition == subjectList.size() - 1)
+                {
+                    showFinishDialog();
+                }
             }
         });
 
@@ -777,5 +798,46 @@ public class FullTestActivity extends AppCompatActivity
     public void onBackPressed()
     {
 //        super.onBackPressed();
+    }
+
+    private void showFinishDialog() {
+        if (resultTag == null) {
+            Dialog dialog = new Dialog(this);
+
+            dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+            dialog.setContentView(R.layout.dialog);
+            dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+            dialogTextFinish = dialog.findViewById(R.id.dialog_text);
+            buttonYesFinish = dialog.findViewById(R.id.buttonOk);
+            buttonNoFinish = dialog.findViewById(R.id.buttonCancel);
+            if (language.equals(Constant.KZ)) {
+                buttonNoFinish.setText(R.string.noKz);
+                buttonYesFinish.setText(R.string.yesKz);
+                dialogTextFinish.setText(R.string.finishTestDialogKz);
+
+            } else {
+                buttonNoFinish.setText(R.string.noRu);
+                buttonYesFinish.setText(R.string.yesRu);
+                dialogTextFinish.setText(R.string.finishTestDialogRu);
+            }
+            buttonYesFinish.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    finishTest(testIdMain);
+
+
+                    //System.out.println(testIdMain);//103080954
+
+                }
+            });
+
+            buttonNoFinish.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    dialog.dismiss();
+                }
+            });
+            dialog.show();
+        }
     }
 }

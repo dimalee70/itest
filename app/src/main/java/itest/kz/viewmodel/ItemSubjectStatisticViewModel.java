@@ -10,6 +10,7 @@ import android.text.Spanned;
 
 import java.io.Serializable;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 
 import io.reactivex.functions.Action;
@@ -46,6 +47,9 @@ public class ItemSubjectStatisticViewModel extends BaseObservable
 
 
                 Subject selectedSubject = new Subject(statisticSubject.getId(), statisticSubject.getTitle());
+                ArrayList<Subject> subjects = new ArrayList<>();
+                subjects.add(selectedSubject);
+
 //                Intent intent = new Intent(context, TestActivity.class);
 //                //////        intent.putExtra()
 //                intent.putExtra(Constant.SELECTED_TEST_POSITION_ID, 0
@@ -77,7 +81,7 @@ public class ItemSubjectStatisticViewModel extends BaseObservable
                 intent.putExtra(Constant.TEST_MAIN_ID, selectedSubject.getId());
                 intent.putExtra(Constant.TYPE, Constant.TYPESUBJECTTEST);
                 intent.putExtra(Constant.SELECTED_SUBJECT, (Serializable) selectedSubject);
-                intent.putExtra(Constant.SUBJECT_LIST, (Serializable) null);
+                intent.putExtra(Constant.SUBJECT_LIST, (Serializable) subjects);
 
                 intent.putExtra(Constant.STATISTIC_TAG, Constant.STATISTIC_TAG);
 
@@ -157,14 +161,14 @@ public class ItemSubjectStatisticViewModel extends BaseObservable
 //            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 //            intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
 //            intent.putExtra(Constant.TEST_MAIN_ID, test.getId());
-
+                Subject selectedSubject = new Subject(statisticSubject.getId(), statisticSubject.getTitle());
 
                 TestFinishResponse testFinishResponse = new TestFinishResponse(statisticSubject.getResult());
                 Intent intent = new Intent(context, ResultsActivity.class);
                 intent.putExtra(Constant.TEST_FINISH_RESPONSE, testFinishResponse);
                 intent.putExtra(Constant.TEST_MAIN_ID, statisticSubject.getId());
                 intent.putExtra(Constant.TYPE, Constant.TYPEFULLTEST);
-                intent.putExtra(Constant.SELECTED_SUBJECT, (Serializable) statisticSubject.getChildren().get(0));
+                intent.putExtra(Constant.SELECTED_SUBJECT, (Serializable) selectedSubject);
                 intent.putExtra(Constant.SUBJECT_LIST, (Serializable) statisticSubject.getChildren());
                 intent.putExtra(Constant.STATISTIC_TAG, Constant.STATISTIC_TAG);
                 context.startActivity(intent);

@@ -139,8 +139,9 @@ public class LectureStatisticViewModel  extends Observable
                                     {
                                         imageButtonVisibility.set(View.GONE);
                                         showToastUnauthorized();
-                                        setProgress(false);
+
                                     }
+                                    setProgress(false);
                                 }
                             }
                     );

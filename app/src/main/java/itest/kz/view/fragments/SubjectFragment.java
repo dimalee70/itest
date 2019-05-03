@@ -208,6 +208,7 @@ public class SubjectFragment extends Fragment implements Observer
                 setUpListOfSbjectsMainView(fragmentEntBinding.listSubject);
                 setUpListOfSbjectsMainView(fragmentEntBinding.listSubjectMain);
                 subjectFragmentViewModel.fetchSubjectList();
+                subjectFragmentViewModel.setCancelCardView(false);
 
 
             }
@@ -223,6 +224,8 @@ public class SubjectFragment extends Fragment implements Observer
                 if (!item.isMain) {
                     List<Subject> sublings = new ArrayList<>();
                     sublings.add(item);
+
+                    subjectFragmentViewModel.setCancelCardView(true);
 
                     if (getSelectedSubects().size() < 5)
                     {

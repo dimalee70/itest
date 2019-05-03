@@ -64,6 +64,7 @@ public class SubjectFragmentViewModel extends Observable
     private Button buttonNoError;
     public Action clickTryAgain;
     private boolean firstTimeDialog = true;
+    public ObservableInt cancelCardView = new ObservableInt(View.GONE);
 
     public void onClickCancel()
     {
@@ -75,6 +76,22 @@ public class SubjectFragmentViewModel extends Observable
     public ObservableInt getImageButtonVisibility()
     {
         return imageButtonVisibility;
+    }
+
+    public ObservableInt getCancelCardView() {
+        return cancelCardView;
+    }
+
+    public void setCancelCardView(boolean isVisible)
+    {
+        if (isVisible)
+            cancelCardView.set(View.VISIBLE);
+        else
+        {
+            cancelCardView.set(View.GONE);
+        }
+
+        notifyObservers();
     }
 
     public void setImageButtonVisibility(boolean isVisibility)

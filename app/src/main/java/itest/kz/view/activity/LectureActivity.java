@@ -45,7 +45,7 @@ public class LectureActivity extends AppCompatActivity implements Observer
     private void getExtrasFromIntent()
     {
         this.lectureResponse = (LectureResponse) getIntent().getSerializableExtra(Constant.SELECTED_LECTURE_RESPONSE);
-        System.out.println(lectureResponse);
+//        System.out.println(lectureResponse);
 
     }
 

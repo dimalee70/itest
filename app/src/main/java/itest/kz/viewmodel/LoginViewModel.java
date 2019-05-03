@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.databinding.ObservableBoolean;
 import android.databinding.ObservableField;
+import android.os.Build;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.text.HtmlCompat;
@@ -132,7 +133,10 @@ public class LoginViewModel
                     "<a href=\"https://itest.kz/"+language+"/terms-of-use\">Пользовательского соглашения </a> " +
                     "и <a href=\"https://itest.kz/"+language+"/privacy-policy\">Политики конфиденциальности</p>";
 //        String text = "<a href=\"https://vk.com\">Google</a>";
-        return Html.fromHtml(text, HtmlCompat.FROM_HTML_MODE_LEGACY);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+            return Html.fromHtml(text, HtmlCompat.FROM_HTML_MODE_LEGACY);
+        }
+        return Html.fromHtml(text);
     }
 
     public int getForgotPassword()

@@ -2,6 +2,7 @@ package itest.kz.view.fragments;
 
 import android.app.Activity;
 import android.app.Dialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -24,6 +25,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.gson.JsonObject;
+
+import org.json.JSONObject;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -71,10 +74,12 @@ public class ResultsFragment extends Fragment
     private TextView dialogTextAuth;
     private Button buttonYesAuth;
     private Button buttonNoAuth;
+    private String statisticTag;
 
 
     public static ResultsFragment newInstance(TestFinishResponse testFinishResponse,
-                                              Long testIdMain, List<Subject> subjectList, Subject selectedSubject, String typeTest)
+                                              Long testIdMain, List<Subject> subjectList, Subject selectedSubject,
+                                              String typeTest, String statisticTag)
     {
 
         Bundle args = new Bundle();
@@ -83,10 +88,13 @@ public class ResultsFragment extends Fragment
         args.putLong(Constant.TEST_MAIN_ID, testIdMain);
         args.putString(Constant.TYPE, typeTest);
         args.putSerializable(Constant.SELECTED_SUBJECT, selectedSubject);
+        args.putString(Constant.STATISTIC_TAG, statisticTag);
         ResultsFragment fragment = new ResultsFragment();
         fragment.setArguments(args);
         return fragment;
     }
+
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState)
@@ -101,11 +109,12 @@ public class ResultsFragment extends Fragment
         testIdMain = getArguments().getLong(Constant.TEST_MAIN_ID, 0);
         subjectList = getArguments().getParcelableArrayList(Constant.SUBJECT_LIST);
         selectedSubject = (Subject) getArguments().getSerializable(Constant.SELECTED_SUBJECT);
+        statisticTag = getArguments().getString(Constant.STATISTIC_TAG, null);
         typeTest = getArguments().getString(Constant.TYPE);
         fragmentResultsBinding = DataBindingUtil
                 .inflate(inflater, R.layout.fragment_results, container, false);
         resultsFragmentViewModel = new ResultsFragmentViewModel(getContext(), testFinishResponse,
-                subjectList, selectedSubject, typeTest);
+                subjectList, selectedSubject, typeTest, statisticTag);
         fragmentResultsBinding.setResults(resultsFragmentViewModel);
         resultsFragmentViewModel.setProgress(true);
 //        resultsFragmentViewModel.setProgress(true);
@@ -115,6 +124,8 @@ public class ResultsFragment extends Fragment
 
         return fragmentResultsBinding.getRoot();
     }
+
+
 
     public void fetchFullTestQuestionsGenerate(Long id)
     {

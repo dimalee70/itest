@@ -70,7 +70,7 @@ public class NodeByNodeViewModel extends Observable
         SubjectService subjectService = appController.getSubjectService();
 
         Disposable disposable = subjectService.getNodeBySubject(Constant.ENT,
-                node.getId(), Constant.ACCEPT, language)
+                node.getId(), Constant.ACCEPT, language, "Bearer "+ accessToken)
                 .subscribeOn(appController.subscribeScheduler())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Consumer<NodeResponse>() {

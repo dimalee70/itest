@@ -23,10 +23,12 @@
 
 
             <RelativeLayout
+                android:gravity="center"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
                 <LinearLayout
+
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_centerHorizontal="false"
@@ -40,7 +42,7 @@
                         android:layout_above="@+id/selectLanguage"
                         android:layout_gravity="center"
                         android:layout_marginTop="65dp"
-                        android:src="@mipmap/itest_blue">
+                        app:srcCompat="@drawable/ic_itest_blue_in_circle">
 
                     </ImageView>
 

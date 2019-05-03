@@ -11,15 +11,15 @@
         android:id="@+id/rl"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:padding="3dp"
+        android:padding="0.5dp"
         android:clickable="false"
         android:focusable="false"
         android:orientation="horizontal">
 
         <itest.kz.view.customviews.CustomTextViewBold
             android:id="@+id/btn"
-            android:layout_width="33dp"
-            android:layout_height="33dp"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
             android:background="@drawable/white_circle"
 
             android:textAlignment="center"

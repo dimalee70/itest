@@ -85,6 +85,11 @@ public class BindingUtils {
         button.setBackground(resource);
     }
 
+    @BindingAdapter("android:src")
+    public static void setImageResource(TextView textView, Drawable resource){
+        textView.setBackground(resource);
+    }
+
 
 //    @BindingAdapter({"bind:imageUrl"})
 //    public static void loadImage(ImageView view, String imageUrl)

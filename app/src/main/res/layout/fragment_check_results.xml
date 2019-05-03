@@ -37,7 +37,7 @@
         <android.support.v7.widget.CardView
             android:id="@+id/subject_cardview"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="40dp"
             android:visibility="@{check.cardView}">
 
             <RelativeLayout
@@ -58,21 +58,23 @@
 
                 <ImageButton
                     android:id="@+id/buttonNextResult"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:background="?attr/selectableItemBackground"
                     android:layout_alignParentRight="true"
-                    android:layout_marginRight="20dp"
-                    android:background="@drawable/rotate_ic_icon_strelka"
+                    android:src="@drawable/rotate_ic_icon_strelka"
                     android:clickable="true"/>
+                <!--android:layout_marginRight="10dp"-->
 
                 <ImageButton
                     android:id="@+id/buttonPrefiousResult"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:background="?attr/selectableItemBackground"
                     android:layout_alignParentLeft="true"
-                    android:layout_marginLeft="20dp"
-                    android:background="@drawable/ic_icon_strelka"
+                    android:src="@drawable/ic_icon_strelka"
                     android:clickable="true"/>
+                <!--android:layout_marginLeft="10dp"-->
 
 
             </RelativeLayout>

@@ -1,9 +1,16 @@
 package itest.kz.view.activity;
 
+import android.app.Activity;
+import android.app.Dialog;
 import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
+import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.databinding.DataBindingUtil;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 
@@ -11,12 +18,14 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.view.Window;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.google.gson.JsonObject;
 
+import java.io.Serializable;
 import java.util.List;
 
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -27,6 +36,7 @@ import itest.kz.R;
 import itest.kz.app.AppController;
 import itest.kz.databinding.ActivityTestBinding;
 import itest.kz.model.Subject;
+import itest.kz.model.TestFinishResponse;
 import itest.kz.model.Tests;
 import itest.kz.network.SubjectService;
 import itest.kz.util.Constant;
@@ -61,13 +71,19 @@ public class TestActivity extends AppCompatActivity
     private String language;
     private String accessToken;
     private Long testIdMain;
-
+    private Button buttonYes;
+    private Button buttonNo;
+    private TextView dialogText;
     public Tests getTests()
     {
         return tests;
     }
     private Toolbar navigationToolbar;
-
+    private TextView dialogTextAuth;
+    private Button buttonYesAuth;
+    private Button buttonNoAuth;
+    private Context context;
+    private boolean lastPageSwipe = false;
 
     private void fetchFullTestQuestionsGenerate(Long testId)
     {
@@ -105,15 +121,15 @@ public class TestActivity extends AppCompatActivity
 //                                   setFragment(arrayList);
 
                                }
-                           }
-//                        new Consumer<JSONObject>() {
-//                    @Override
-//                    public void accept(JSONObject jsonObject) throws Exception
-//                    {
+                           },
+                        new Consumer<Throwable>() {
+                    @Override
+                    public void accept(Throwable jsonObject) throws Exception
+                    {
 //                        System.out.println("json");
 //                        System.out.println(jsonObject.toString());
-//                    }
-//                }
+                    }
+                }
                 );
 
         compositeDisposable.add(disposable);
@@ -124,7 +140,7 @@ public class TestActivity extends AppCompatActivity
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-
+        context = this;
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
             this.SELECTED_TEST_POSITION_ID = extras.getInt(Constant.SELECTED_TEST_POSITION_ID, 0);
@@ -208,6 +224,7 @@ public class TestActivity extends AppCompatActivity
                     }
                     if (tests != null && tests.getQuestions().size() > 0) {
 
+                        testIdMain = tests.getTestId();
                         numbersOFpages = tests.getQuestions().size();
                         mPager = activityTestBinding.pager;
                         mPager.setOffscreenPageLimit(2);
@@ -235,6 +252,9 @@ public class TestActivity extends AppCompatActivity
                             public void onClick(View v) {
                                 if (SELECTED_TEST_POSITION_ID != numbersOFpages - 1)
                                     mPager.setCurrentItem(++SELECTED_TEST_POSITION_ID, true);
+                                else
+                                    {}
+
                             }
                         });
 
@@ -254,9 +274,10 @@ public class TestActivity extends AppCompatActivity
 
 
                     }
+                    testViewModel.setProgress(false);
                     mPager.setCurrentItem(SELECTED_TEST_POSITION_ID);
 
-                    testViewModel.setProgress(false);
+
                 }
 
 
@@ -271,6 +292,110 @@ public class TestActivity extends AppCompatActivity
         }
     }
 
+    private void showFinishDialog() {
+        if (resultTag == null) {
+            Dialog dialog = new Dialog(this);
+
+            dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+            dialog.setContentView(R.layout.dialog);
+            dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+            dialogText = dialog.findViewById(R.id.dialog_text);
+            buttonYes = dialog.findViewById(R.id.buttonOk);
+            buttonNo = dialog.findViewById(R.id.buttonCancel);
+            if (language.equals(Constant.KZ)) {
+                buttonNo.setText(R.string.noKz);
+                buttonYes.setText(R.string.yesKz);
+                dialogText.setText(R.string.finishTestDialogKz);
+
+            } else {
+                buttonNo.setText(R.string.noRu);
+                buttonYes.setText(R.string.yesRu);
+                dialogText.setText(R.string.finishTestDialogRu);
+            }
+            buttonYes.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    finishTest(testIdMain);
+
+
+                    //System.out.println(testIdMain);//103080954
+
+                }
+            });
+
+            buttonNo.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    dialog.dismiss();
+                }
+            });
+            dialog.show();
+        }
+    }
+
+    public void finishTest(Long testIdMain)
+    {
+        testViewModel.setProgress(true);
+        AppController appController = new AppController();
+        SubjectService subjectService = appController.getSubjectService();
+
+
+//        System.out.println(accessToken);
+        Disposable disposable = subjectService.finishTest(Constant.ACCEPT,
+                language, "Bearer "+ accessToken, testIdMain)
+                .subscribeOn(appController.subscribeScheduler())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Consumer<TestFinishResponse>()
+                           {
+                               @Override
+                               public void accept(TestFinishResponse testFinishResponse) throws Exception
+                               {
+
+                                   if (this != null) {
+//                                       if (resultTag == null) {
+                                       Intent intent = new Intent(context, ResultsActivity.class);
+                                       intent.putExtra(Constant.TEST_FINISH_RESPONSE, testFinishResponse);
+                                       intent.putExtra(Constant.TEST_MAIN_ID, testIdMain);
+                                       intent.putExtra(Constant.TYPE, typeTest);
+                                       intent.putExtra(Constant.SELECTED_SUBJECT, (Serializable) selectedSubject);
+//                                       intent.putExtra(Constant.SUBJECT_LIST, (Serializable) subjectList);
+
+                                       //                                       System.out.println("testrespone");
+                                       //                                       System.out.println(testFinishResponse.getSuccess());
+
+                                       startActivity(intent);
+
+                                       testViewModel.setProgress(false);
+//                                   }
+
+
+//                            Intent intent = new Intent(this, MainActivity.class);
+//                            startActivity(intent);
+                                   }
+//                                   Toast toast = Toast.makeText(getContext(),
+////                                    jsonObject.toString(),
+//                                           jsonObject.toString(),
+//                                           Toast.LENGTH_SHORT);
+//
+//                                   toast.show();
+                               }
+                           },
+                        new Consumer<Throwable>() {
+                            @Override
+                            public void accept(Throwable throwable) throws Exception {
+                                if (throwable.getMessage().contains("401")) {
+                                    showToastUnauthorized();
+                                    testViewModel.setProgress(false);
+                                }
+//                                System.out.println(throwable.getLocalizedMessage());
+//                                System.out.println(throwable.getMessage());
+
+                            }
+                        }
+
+                );
+    }
+
     public void getLanguage()
     {
         SharedPreferences settings = this.getSharedPreferences(Constant.MY_LANG, MODE_PRIVATE);
@@ -282,6 +407,7 @@ public class TestActivity extends AppCompatActivity
     {
         SharedPreferences settings = this.getSharedPreferences(Constant.MY_PREF, MODE_PRIVATE);
         accessToken = settings.getString(Constant.ACCESS_TOKEN, null);
+//        System.out.println(accessToken);
     }
 
 //    private void fetchFullTestQuestionsGenerate(Long testId)
@@ -413,6 +539,10 @@ public class TestActivity extends AppCompatActivity
                         public void onClick(View v) {
                             if (SELECTED_TEST_POSITION_ID != numbersOFpages - 1)
                                 mPager.setCurrentItem(++SELECTED_TEST_POSITION_ID, true);
+                            else
+                            {
+                                showFinishDialog();
+                            }
                         }
                     });
 
@@ -472,9 +602,14 @@ public class TestActivity extends AppCompatActivity
 
         public void onPageSelected(int position)
         {
+//            if (SELECTED_TEST_POSITION_ID == numbersOFpages - 1)
+//            {
+//                showFinishDialog();
+//            }
             SELECTED_TEST_POSITION_ID = position;
             TextView tv = activityTestBinding.textNumberPager;
             tv.setText((SELECTED_TEST_POSITION_ID + 1) + " / " + numbersOFpages);
+
         }
     }
 
@@ -484,6 +619,82 @@ public class TestActivity extends AppCompatActivity
     {
 //        super.onBackPressed();
 //        finish();
+    }
+
+    public void showToastUnauthorized()
+    {
+
+//        public void showFinishTimeDialog()
+//        {
+        Dialog dialog = new Dialog(context);
+        dialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
+            @Override
+            public void onDismiss(DialogInterface dialog)
+            {
+                openAuthActivity();
+//                    finishTest(testIdMain);
+                //System.out.println(testIdMain);//103080954
+//                dialog.dismiss();
+            }
+        });
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.setContentView(R.layout.dialog);
+        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        dialogTextAuth = dialog.findViewById(R.id.dialog_text);
+        buttonYesAuth = dialog.findViewById(R.id.buttonOk);
+        buttonNoAuth = dialog.findViewById(R.id.buttonCancel);
+        buttonNoAuth.setVisibility(View.GONE);
+        buttonYesAuth.setText(R.string.ok);
+        if(language.equals(Constant.KZ))
+        {
+//            buttonNo.setText(R.string.noKz);
+
+            dialogTextAuth.setText(R.string.sessionErrorKz);
+
+        }
+        else
+        {
+//            buttonNo.setText(R.string.noRu);
+//            buttonYes.setText(R.string.yesRu);
+            dialogTextAuth.setText(R.string.sessionErrorRu);
+        }
+        buttonYesAuth.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v)
+            {
+                buttonYesAuth.setEnabled(false);
+                dialog.dismiss();
+                openAuthActivity();
+//                    finishTest(testIdMain);
+                //System.out.println(testIdMain);//103080954
+
+            }
+        });
+
+//        buttonNo.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                dialog.dismiss();
+//            }
+//        });
+        dialog.show();
+    }
+
+    public  void openAuthActivity()
+    {
+        Intent intent = new Intent(context, AuthActivity.class);
+        startActivity(intent);
+//        if (language.equals(Constant.KZ))
+//
+//            Toast.makeText(this,
+//                    R.string.sessionErrorKz,
+//                    Toast.LENGTH_SHORT).show();
+//        else
+//        {
+//            Toast.makeText(this,
+//                    R.string.sessionErrorRu,
+//                    Toast.LENGTH_SHORT).show();
+//        }
     }
 }
 

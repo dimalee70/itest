@@ -68,6 +68,8 @@ public class TestViewModel extends AndroidViewModel
     private MutableLiveData<Tests> listMutableLiveData;
     public ObservableInt progress = new ObservableInt(View.VISIBLE);
 
+
+
     private Subject subject;
     private String language;
     private String accessToken;
@@ -82,6 +84,8 @@ public class TestViewModel extends AndroidViewModel
     private TextView dialogTextAuth;
     private Button buttonYesAuth;
     private Button buttonNoAuth;
+
+
 
     public LiveData<Tests> getTests() {
         if (listMutableLiveData == null) {

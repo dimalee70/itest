@@ -93,7 +93,14 @@ public interface Constant
 
     public final String SELECTED_NODE = "SELECTED_NODE";
 
-    public final String MATHJAX = "<script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML' async></script>";
+    public final String MATHJAX = "<script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML' async></script>" +
+            "<script type=\"text/x-mathjax-config\">\n" +
+            "MathJax.Hub.Config({\n" +
+            "  CommonHTML: { linebreaks: { automatic: true } },\n" +
+            "  \"HTML-CSS\": { linebreaks: { automatic: true } },\n" +
+            "         SVG: { linebreaks: { automatic: true } }\n" +
+            "});\n" +
+            "</script>";
 
     public final String ACCESSTOKEN = "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImp0aSI6IjFmN2JiNTU5MjViZDI5MjhkN2Q0Mzc0YTBjOWNkZWZhOTFiZTc1ZjE1N2IzZjRhZGRiZDhmZjU4OWMyYjgyYWQ5ZTMzOTdjZjkxNWUwMmJkIn0.eyJhdWQiOiIxIiwianRpIjoiMWY3YmI1NTkyNWJkMjkyOGQ3ZDQzNzRhMGM5Y2RlZmE5MWJlNzVmMTU3YjNmNGFkZGJkOGZmNTg5YzJiODJhZDllMzM5N2NmOTE1ZTAyYmQiLCJpYXQiOjE1NTU0ODkzNzMsIm5iZiI6MTU1NTQ4OTM3MywiZXhwIjoxNTg3MTExNzczLCJzdWIiOiIxMjA2MjU4Iiwic2NvcGVzIjpbXX0.cgecoiJj6K68tkp42l0tesx_qVseJUWo_fE7lz5ZwB6Znkk78AXyI77dbGfUGR43q-ijGwhvjeUAiPIgqpoxoewJ7yk_Ckv6amwPDnGSh8RO_8kbxZUwVobBqtI-Bs9yDeyZ7wkINHNt410zE0_oDt-hdN8NDhXzkotC3eYXaLOz-bMK3LQOpFhj136CIDvbshtu4AB4GZLB7voFRqYtmS2ge_a-HRSiQcX44GLZ8rbmzx78oMAFIQ8ybuLZfL1XAzILu5qa7jwjsoEHv-GDneiG8EjS0fPgfzj3gwKssGvFL3YRUWvBMEamaII08Ku4CV5P8nTNd8osI9ZOlDX2lT4-WK7TPu5L7qn6IGmGkDuCTd9ePkSj44iqW7ZRJB1CPo8toyiQa57E8XfWzZD2AtraUdpYvfjLQGvxyAbRGZabD_e7TEBArzaCC5Z6eGLhQ0_fhxDNUYH4fGzwXTKkuMxMR9pH9HDoppVGHNarczd353RbBhkE_dkm-TagQAnvbTyD0jbcTWVJTIasT--ALI0J-dALO2Xi4OG-RKvVY3FLSQWyT3YezRsxtFzO89XFltH5kNpojLqNIQ6yo9vRLq9XhC6qZc9f5B-va00l9lYj9TU73t8Dv4xU2V4-GWoehDuDR9qy_q2fZphb_1x5ErEv6z5o2jhSlKugIS7KhGE";
 }

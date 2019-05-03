@@ -108,7 +108,38 @@ public class AnswerAdapter extends RecyclerView.Adapter<AnswerAdapter.AnswerAdpt
 //        {
             setLetter();
             if (resultTag == null)
-                answerAdpterViewHolder.bindAnswer(answerList.get(i),i,  listener);
+            {
+                answerAdpterViewHolder.bindAnswer(answerList.get(i), i, listener);
+//                if (resultTag == null)
+//                {
+                    itemAnswerBinding.cardview1.setOnClickListener
+                            (new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    try {
+                                        listener.onItemClick(answerList.get(i), i);
+                                    } catch (CloneNotSupportedException e) {
+                                        e.printStackTrace();
+                                    }
+//                            if (answer.getAnswerResponce() == null)
+//                            {
+//                                itemAnswerBinding
+//                                        .cardview1
+//                                        .setCardBackgroundColor(Color.WHITE);
+//                            }
+//                            else
+//                            {
+//                                itemAnswerBinding
+//                                        .cardview1
+//                                        .setCardBackgroundColor(Color.GREEN);
+//                            }
+
+                                }
+                            });
+//                }
+            }
+
+
             else
             {
                 answerAdpterViewHolder.bindAnswer(answerList.get(i), i, resultTag, listener);
@@ -260,33 +291,33 @@ public class AnswerAdapter extends RecyclerView.Adapter<AnswerAdapter.AnswerAdpt
                             (Color.WHITE);
                 }
 
-                if (resultTag == null)
-                {
-                    itemAnswerBinding.cardview1.setOnClickListener
-                            (new View.OnClickListener() {
-                                @Override
-                                public void onClick(View v) {
-                                    try {
-                                        listener.onItemClick(answer, getAdapterPosition());
-                                    } catch (CloneNotSupportedException e) {
-                                        e.printStackTrace();
-                                    }
-//                            if (answer.getAnswerResponce() == null)
-//                            {
-//                                itemAnswerBinding
-//                                        .cardview1
-//                                        .setCardBackgroundColor(Color.WHITE);
-//                            }
-//                            else
-//                            {
-//                                itemAnswerBinding
-//                                        .cardview1
-//                                        .setCardBackgroundColor(Color.GREEN);
-//                            }
-
-                                }
-                            });
-                }
+//                if (resultTag == null)
+//                {
+//                    itemAnswerBinding.cardview1.setOnClickListener
+//                            (new View.OnClickListener() {
+//                                @Override
+//                                public void onClick(View v) {
+//                                    try {
+//                                        listener.onItemClick(answer, getAdapterPosition());
+//                                    } catch (CloneNotSupportedException e) {
+//                                        e.printStackTrace();
+//                                    }
+////                            if (answer.getAnswerResponce() == null)
+////                            {
+////                                itemAnswerBinding
+////                                        .cardview1
+////                                        .setCardBackgroundColor(Color.WHITE);
+////                            }
+////                            else
+////                            {
+////                                itemAnswerBinding
+////                                        .cardview1
+////                                        .setCardBackgroundColor(Color.GREEN);
+////                            }
+//
+//                                }
+//                            });
+//                }
 
 //            if (itemAnswerBinding.getAnswer() == null) {
 //                itemAnswerBinding.setAnswer
