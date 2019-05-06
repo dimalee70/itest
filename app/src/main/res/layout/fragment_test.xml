@@ -78,6 +78,7 @@
                                 android:maxLines="5"
                                 android:ellipsize="end"
                                 android:textSize="16sp"
+                                android:autoLink="web"
                                 android:layout_margin="10dp"
                                 app:animation_duration="750"/>
 
@@ -115,7 +116,8 @@
                     android:layout_marginTop="20dp"
                     android:fontFamily="@font/my_open_sans_semibold"
                     android:layout_marginLeft="18dp"
-                    android:textColor="@color/colorBlack"/>
+                    android:textColor="@color/colorBlack"
+                    />
 
 
                 <android.support.v7.widget.CardView

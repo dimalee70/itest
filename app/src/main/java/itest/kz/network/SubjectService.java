@@ -108,4 +108,12 @@ public interface SubjectService
                                          @Header("X-Localization") String lang,
                                          @Header("Authorization") String accessToken);
 
+    @GET("api/test/{testIdMain}/log-visit")
+    Observable<JsonObject> logVisitTest (@Header("Authorization") String accessToken,
+                                         @Path("testIdMain") Long testIdMain);
+
+    @GET("api/ent/lecture/{lectureId}/log-visit")
+    Observable<JsonObject> logVisitLecture (@Header("Authorization") String accessToken,
+                                            @Path("lectureId") int lectureId);
+
 }

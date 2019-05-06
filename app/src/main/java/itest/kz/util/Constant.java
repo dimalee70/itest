@@ -11,6 +11,7 @@ public interface Constant
     public final String SERVER_ERROR_ALERT_RU = "Проблемы с сервером. Попробуйте еще раз";
 
     public final String hasActiveTest = "test";
+
     public final  String ANSWER_CHECK_LIST = "ANSWER_CHECK_LIST";
 
     public final  String QUESTION_FOR_CHECK = "QUESTION_FOR_CHECK";
@@ -96,9 +97,9 @@ public interface Constant
     public final String MATHJAX = "<script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML' async></script>" +
             "<script type=\"text/x-mathjax-config\">\n" +
             "MathJax.Hub.Config({\n" +
-            "  CommonHTML: { linebreaks: { automatic: true } },\n" +
-            "  \"HTML-CSS\": { linebreaks: { automatic: true } },\n" +
-            "         SVG: { linebreaks: { automatic: true } }\n" +
+            "  CommonHTML: { linebreaks: { automatic: true, width: \"90% container\"  } },\n" +
+            "  \"HTML-CSS\": { linebreaks: { automatic: true, width: \"90% container\"  } },\n" +
+            "         SVG: { linebreaks: { automatic: true, width: \"90% container\"  } }\n" +
             "});\n" +
             "</script>";
 

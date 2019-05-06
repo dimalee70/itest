@@ -252,8 +252,10 @@ public class TestActivity extends AppCompatActivity
                             public void onClick(View v) {
                                 if (SELECTED_TEST_POSITION_ID != numbersOFpages - 1)
                                     mPager.setCurrentItem(++SELECTED_TEST_POSITION_ID, true);
-                                else
-                                    {}
+                                else if (SELECTED_TEST_POSITION_ID == numbersOFpages - 1)
+                                {
+                                    showFinishDialog();
+                                }
 
                             }
                         });
@@ -456,9 +458,15 @@ public class TestActivity extends AppCompatActivity
 //        compositeDisposable.add(disposable);
 //    }
 
+
+
     private void updateTestDataList(Tests questions)
     {
         this.tests = questions;
+
+
+
+
 
         //        getAccessToken();
 

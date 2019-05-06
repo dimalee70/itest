@@ -23,8 +23,10 @@ import com.google.gson.JsonObject;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonToken;
 
+import org.json.JSONArray;
 import org.json.JSONObject;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -49,6 +51,7 @@ import itest.kz.view.activity.AuthActivity;
 import itest.kz.view.activity.FullTestActivity;
 import itest.kz.view.activity.HomeActivity;
 import itest.kz.view.activity.MainHomeActivity;
+import itest.kz.view.activity.TestActivity;
 import jp.wasabeef.picasso.transformations.internal.Utils;
 import okhttp3.ResponseBody;
 
@@ -165,6 +168,14 @@ public class LoginAction implements Action
                                     if (throwable.getMessage().contains("401")) {
                                         showToastUnauthorized();
                                     }
+                                    else
+                                    {
+                                        loginLayout.showCustomLoading(false);
+                                        Intent intent = new Intent(context, MainHomeActivity.class);
+                                        intent.putExtra(Constant.ACCESS_TOKEN, accessToken);
+                                    }
+//                                    System.out.println("error");
+
 //                                System.out.println(throwable.getLocalizedMessage());
 //                                System.out.println(throwable.getMessage());
 
@@ -319,15 +330,16 @@ public class LoginAction implements Action
                                     }
                                 }
 
-//                            ,
-//                            new Consumer<Throwable>() {
-//                                        @Override
-//                                        public void accept(Throwable throwable) throws Exception
-//                                        {
-//                                            loginLayout.showCustomLoading(false);
-//                                            System.out.println("error");
-//                                        }
-//                                    }
+                            ,
+                            new Consumer<Throwable>() {
+                                        @Override
+                                        public void accept(Throwable throwable) throws Exception
+                                        {
+                                            loginLayout.showCustomLoading(false);
+                                            Intent intent = new Intent(context, MainHomeActivity.class);
+                                            intent.putExtra(Constant.ACCESS_TOKEN, accessToken);
+                                        }
+                                    }
                     );
             loginLayout.showCustomLoading(false);
             compositeDisposable.add(disposable);
@@ -357,28 +369,58 @@ public class LoginAction implements Action
                 "Bearer " + accessToken, id)
                 .subscribeOn(appController.subscribeScheduler())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Consumer<JsonObject>()
-                           {
+                .subscribe(new Consumer<JsonObject>() {
                                @Override
-                               public void accept(JsonObject jsonObject) throws Exception
-                               {
+                               public void accept(JsonObject jsonObject) throws Exception {
 
 //                                   System.out.println(jsonObject.toString());
                                    List<Subject> subjectList = new ArrayList<>();
                                    JSONObject jsonObject1 = new JSONObject(jsonObject.toString());
-                                   ArrayList<Tests> questions =
-                                           TestsUtils.deserializeFromJson(jsonObject);
-                                   for (Tests t : questions)
+                                   JSONObject data = jsonObject1.getJSONObject("data");
+                                   if (data.has("tests"))
                                    {
-                                       subjectList.add(t.getSubject());
+                                       ArrayList<Tests> questions =
+                                               TestsUtils.deserializeFromJson(jsonObject);
+                                       for (Tests t : questions) {
+                                           subjectList.add(t.getSubject());
+                                       }
+                                       showToastHaveActiveTest(subjectList);
                                    }
-                                   showToastHaveActiveTest(subjectList);
+                                   else
+                                   {
+                                       Intent intent = new Intent(context, MainHomeActivity.class);
+                                       intent.putExtra(Constant.ACCESS_TOKEN, accessToken);
+                                       context.startActivity(intent);
+                                       loginLayout.showCustomLoading(false);
+//                                       Tests questions =
+//                                               TestsUtils.deserializeFromJsonToTests
+//                                                       (jsonObject);
+//                                       Intent intent = new Intent(context, TestActivity.class);
+//                                       intent.putExtra(Constant.SELECTED_SUBJECT, (Serializable) selectedSubject);
+//                                       intent.putExtra(Constant.TYPE, );
+//                                       context.startActivity(intent);
+//
+                                   }
+
 
 
 //                                   loginLayout.showCustomLoading(false);
 //
                                }
-                           }
+                           },
+                        new Consumer<Throwable>() {
+                            @Override
+                            public void accept(Throwable throwable) throws Exception
+                            {
+//                                Tests questions =
+//                                        TestsUtils.deserializeFromJsonToTests
+//                                                ()
+                                Intent intent = new Intent(context, MainHomeActivity.class);
+                                intent.putExtra(Constant.ACCESS_TOKEN, accessToken);
+                                context.startActivity(intent);
+                                loginLayout.showCustomLoading(false);
+                            }
+                        }
                 );
 
         compositeDisposable.add(disposable);

@@ -2,16 +2,19 @@ package itest.kz.view.fragments;
 
 import android.content.Intent;
 import android.databinding.DataBindingUtil;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -194,34 +197,52 @@ public class SubjectFragment extends Fragment implements Observer
             public void onClick(View v)
             {
 
-                for (Subject s : selectedSubects
-                     ) {
+//                if (selectedSubects.size() == 4)
+//                {
+                    for (Subject s : selectedSubects
+                    ) {
 
-                    s.setIsSelected(0);
-                }
+                        s.setIsSelected(0);
+                    }
 
-                fragmentEntBinding.entStartCardview.setVisibility(View.GONE);
+                    fragmentEntBinding.entStartCardview.setVisibility(View.GONE);
 
-                subjectFragmentViewModel.setSubjectList(new ArrayList<Subject>());
-                subjectFragmentViewModel.setSubjectListMain(new ArrayList<Subject>());
-                selectedSubects = new ArrayList<>();
-                setUpListOfSbjectsMainView(fragmentEntBinding.listSubject);
-                setUpListOfSbjectsMainView(fragmentEntBinding.listSubjectMain);
-                subjectFragmentViewModel.fetchSubjectList();
-                subjectFragmentViewModel.setCancelCardView(false);
+                    subjectFragmentViewModel.setSubjectList(new ArrayList<Subject>());
+                    subjectFragmentViewModel.setSubjectListMain(new ArrayList<Subject>());
+                    selectedSubects = new ArrayList<>();
+                    setUpListOfSbjectsMainView(fragmentEntBinding.listSubject);
+                    setUpListOfSbjectsMainView(fragmentEntBinding.listSubjectMain);
+                    subjectFragmentViewModel.fetchSubjectList();
+                    subjectFragmentViewModel.setCancelCardView(false);
+//                }
+//                else
+//                {
+////                    selectedSubects.remove(4);
+////                    subjectFragmentViewModel.setSubjectList();
+////                    subjectFragmentViewModel.setSubjectListMain(new ArrayList<Subject>());
+////                    setUpListOfSbjectsMainView(fragmentEntBinding.listSubject);
+////                    setUpListOfSbjectsMainView(fragmentEntBinding.listSubjectMain);
+////                    subjectFragmentViewModel.fetchSubjectList();
+////                    subjectFragmentViewModel.setCancelCardView(false);
+//
+//
+//                }
+
 
 
             }
         });
 
-        entMainAdapter.setOnItemListener(new EntMainAdapter.OnItemClickListener()
+        entMainAdapter
+                .setOnItemListener(new EntMainAdapter.OnItemClickListener()
         {
             @Override
-            public void onItemClick(Subject item, List<Subject> subjects) {
+            public void onItemClick(Subject item, List<Subject> subjects, int i) {
 //                System.out.println(item.getSublings().toString());
 
 //                System.out.println(item.getSublings().toString());
-                if (!item.isMain) {
+                if (!item.isMain)
+                {
                     List<Subject> sublings = new ArrayList<>();
                     sublings.add(item);
 
@@ -234,6 +255,17 @@ public class SubjectFragment extends Fragment implements Observer
                         {
                             item.setIsSelected(1);
                             addToSelectedList(item);
+//                            RecyclerView.ViewHolder view = fragmentEntBinding.listSubject
+//                                    .findViewHolderForLayoutPosition(i);
+////                           CardView cardView =  view.itemView.findViewById(R.id.cardview1);
+//                            TextView textView = view.itemView.findViewById(R.id.subject_title_text);
+//                            textView.setCompoundDrawablesWithIntrinsicBounds( R.drawable.image, 0, 0, 0);
+//                            cardView
+//                                    .setCardBackgroundColor(
+//                                            Color.parseColor("#ff2daafc")
+////                                Color.WHITE
+//                                    );
+//                            textView.setTextColor(Color.WHITE);
                         }
 
 
@@ -244,12 +276,16 @@ public class SubjectFragment extends Fragment implements Observer
                             }
                         }
 
+                        entMainAdapter.setSubjectList(sublings);
+
 
                         setUpListOfSbjectsMainView(fragmentEntBinding.listSubject);
 
                         EntMainAdapter entMainAdapter2 = (EntMainAdapter) fragmentEntBinding.listSubject
                                 .getAdapter();
                         entMainAdapter2.setSubjectListMain(sublings);
+
+
                     }
 
 

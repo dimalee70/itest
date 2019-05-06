@@ -23,12 +23,18 @@ public class EntMainAdapter extends RecyclerView.Adapter<EntMainAdapter.EntMainA
 {
     public interface OnItemClickListener
     {
-        void onItemClick(Subject item, List<Subject> subjects);
+        void onItemClick(Subject item, List<Subject> subjects, int i);
     }
 
+    private ItemEntViewModel itemEntViewModel;
     private OnItemClickListener listener;
 
     private List<Subject> subjectList;
+
+//    public void setSubjects(Subject subject)
+//    {
+//        itemEntViewModel.se
+//    }
 
     public Subject getItem(int position)
     {
@@ -47,7 +53,7 @@ public class EntMainAdapter extends RecyclerView.Adapter<EntMainAdapter.EntMainA
     @Override
     public void onBindViewHolder(@NonNull EntMainAdapterViewHolder entMainAdapterViewHolder, int i)
     {
-        entMainAdapterViewHolder.bindSubject(subjectList.get(i), subjectList, listener);
+        entMainAdapterViewHolder.bindSubject(subjectList.get(i), subjectList, i, listener);
     }
 
     @Override
@@ -68,6 +74,13 @@ public class EntMainAdapter extends RecyclerView.Adapter<EntMainAdapter.EntMainA
         this.subjectList = subjectList;
         notifyDataSetChanged();
     }
+
+    public void setSubjectList(List<Subject> subjectList)
+    {
+        this.subjectList = subjectList;
+        notifyDataSetChanged();
+    }
+
     public void setOnItemListener(OnItemClickListener listener)
     {
         this.listener = listener;
@@ -79,6 +92,7 @@ public class EntMainAdapter extends RecyclerView.Adapter<EntMainAdapter.EntMainA
     {
 //        ItemSubjectBinding itemSubjectBinding;
 
+        ItemEntViewModel itemEntViewModel;
         ItemEntBinding itemEntBinding;
 
         public EntMainAdapterViewHolder(ItemEntBinding itemEntBinding)
@@ -87,12 +101,15 @@ public class EntMainAdapter extends RecyclerView.Adapter<EntMainAdapter.EntMainA
             this.itemEntBinding = itemEntBinding;
         }
 
-        void bindSubject(Subject subject, List<Subject> subjectList, final OnItemClickListener listener)
+
+        void bindSubject(Subject subject, List<Subject> subjectList, int i, final OnItemClickListener listener)
         {
             if(itemEntBinding.getEnt() == null)
             {
+                itemEntViewModel = new ItemEntViewModel(itemView.getContext(), subject);
+
                 itemEntBinding.setEnt(
-                        new ItemEntViewModel(itemView.getContext(), subject));
+                        itemEntViewModel);
             }
             else
             {
@@ -104,7 +121,7 @@ public class EntMainAdapter extends RecyclerView.Adapter<EntMainAdapter.EntMainA
                         public void onClick(View v)
                         {
 
-                            listener.onItemClick(subject, subjectList);
+                            listener.onItemClick(subject, subjectList, i);
 
                         }
                     });

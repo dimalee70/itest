@@ -50,17 +50,17 @@ public class ItemSubjectStatisticViewModel extends BaseObservable
                 ArrayList<Subject> subjects = new ArrayList<>();
                 subjects.add(selectedSubject);
 
-//                Intent intent = new Intent(context, TestActivity.class);
-//                //////        intent.putExtra()
-//                intent.putExtra(Constant.SELECTED_TEST_POSITION_ID, 0
-//                        );
-//                intent.putExtra(Constant.SELECTED_SUBJECT, (Serializable) selectedSubject);
-//                intent.putExtra(Constant.IS_STARTED_FIRST, false);
-//                intent.putExtra(Constant.RESULT_TAG, Constant.RESULT_TAG);
-//                intent.putExtra(Constant.TYPE, typeTest);
-//                intent.putExtra(Constant.TEST_MAIN_ID, statisticSubject.getId());
-//                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-//                intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+                Intent intent = new Intent(context, TestActivity.class);
+                //////        intent.putExtra()
+                intent.putExtra(Constant.SELECTED_TEST_POSITION_ID, 0
+                        );
+                intent.putExtra(Constant.SELECTED_SUBJECT, (Serializable) selectedSubject);
+                intent.putExtra(Constant.IS_STARTED_FIRST, false);
+                intent.putExtra(Constant.RESULT_TAG, Constant.RESULT_TAG);
+                intent.putExtra(Constant.TYPE, typeTest);
+                intent.putExtra(Constant.TEST_MAIN_ID, statisticSubject.getId());
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
 
 
 
@@ -75,15 +75,15 @@ public class ItemSubjectStatisticViewModel extends BaseObservable
 //            intent.putExtra(Constant.TEST_MAIN_ID, test.getId());
 
 
-                TestFinishResponse testFinishResponse = new TestFinishResponse(statisticSubject.getResult());
-                Intent intent = new Intent(context, ResultsActivity.class);
-                intent.putExtra(Constant.TEST_FINISH_RESPONSE, testFinishResponse);
-                intent.putExtra(Constant.TEST_MAIN_ID, selectedSubject.getId());
-                intent.putExtra(Constant.TYPE, Constant.TYPESUBJECTTEST);
-                intent.putExtra(Constant.SELECTED_SUBJECT, (Serializable) selectedSubject);
-                intent.putExtra(Constant.SUBJECT_LIST, (Serializable) subjects);
-
-                intent.putExtra(Constant.STATISTIC_TAG, Constant.STATISTIC_TAG);
+//                TestFinishResponse testFinishResponse = new TestFinishResponse(statisticSubject.getResult());
+//                Intent intent = new Intent(context, ResultsActivity.class);
+//                intent.putExtra(Constant.TEST_FINISH_RESPONSE, testFinishResponse);
+//                intent.putExtra(Constant.TEST_MAIN_ID, selectedSubject.getId());
+//                intent.putExtra(Constant.TYPE, Constant.TYPESUBJECTTEST);
+//                intent.putExtra(Constant.SELECTED_SUBJECT, (Serializable) selectedSubject);
+//                intent.putExtra(Constant.SUBJECT_LIST, (Serializable) subjects);
+//
+//                intent.putExtra(Constant.STATISTIC_TAG, Constant.STATISTIC_TAG);
 
 
 
@@ -136,18 +136,28 @@ public class ItemSubjectStatisticViewModel extends BaseObservable
 
 //                System.out.println("Statistic ");
 //                System.out.println(statisticSubject.getChildren());
-//                Intent intent = new Intent(context, FullTestActivity.class);
-//                intent.putExtra(Constant.SUBJECT_LIST, (Serializable) statisticSubject.getChildren());
-//                intent.putExtra(Constant.IS_STARTED_FIRST, false);
-////                intent.putExtra("list", testList);
-////                    System.out.println("testList");
-////                    System.out.println(testList);
-//                intent.putExtra(Constant.RESULT_TAG, Constant.RESULT_TAG);
-//                intent.putExtra(Constant.TYPE, typeTest);
-//                intent.putExtra(Constant.RESULT_TAG, Constant.RESULT_TAG);
-//                intent.putExtra(Constant.TEST_MAIN_ID, statisticSubject.getId());
-//                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-//                intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+
+
+
+
+
+
+
+
+
+                Intent intent = new Intent(context, FullTestActivity.class);
+                intent.putExtra(Constant.SUBJECT_LIST, (Serializable) statisticSubject.getChildren());
+                intent.putExtra(Constant.IS_STARTED_FIRST, false);
+//                intent.putExtra("list", testList);
+//                    System.out.println("testList");
+//                    System.out.println(testList);
+                intent.putExtra(Constant.RESULT_TAG, Constant.RESULT_TAG);
+                intent.putExtra(Constant.TYPE, typeTest);
+                intent.putExtra(Constant.RESULT_TAG, Constant.RESULT_TAG);
+                intent.putExtra(Constant.TEST_MAIN_ID, statisticSubject.getId());
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+                intent.putExtra(Constant.STATISTIC_TAG, Constant.STATISTIC_TAG);
 
 
 
@@ -161,54 +171,58 @@ public class ItemSubjectStatisticViewModel extends BaseObservable
 //            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 //            intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
 //            intent.putExtra(Constant.TEST_MAIN_ID, test.getId());
-                Subject selectedSubject = new Subject(statisticSubject.getId(), statisticSubject.getTitle());
 
-                TestFinishResponse testFinishResponse = new TestFinishResponse(statisticSubject.getResult());
-                Intent intent = new Intent(context, ResultsActivity.class);
-                intent.putExtra(Constant.TEST_FINISH_RESPONSE, testFinishResponse);
-                intent.putExtra(Constant.TEST_MAIN_ID, statisticSubject.getId());
-                intent.putExtra(Constant.TYPE, Constant.TYPEFULLTEST);
-                intent.putExtra(Constant.SELECTED_SUBJECT, (Serializable) selectedSubject);
-                intent.putExtra(Constant.SUBJECT_LIST, (Serializable) statisticSubject.getChildren());
-                intent.putExtra(Constant.STATISTIC_TAG, Constant.STATISTIC_TAG);
-                context.startActivity(intent);
+
+
+//                Subject selectedSubject = new Subject(statisticSubject.getId(), statisticSubject.getTitle());
+//
+//                TestFinishResponse testFinishResponse = new TestFinishResponse(statisticSubject.getResult());
+//                Intent intent = new Intent(context, ResultsActivity.class);
+//                intent.putExtra(Constant.TEST_FINISH_RESPONSE, testFinishResponse);
+//                intent.putExtra(Constant.TEST_MAIN_ID, statisticSubject.getId());
+//                intent.putExtra(Constant.TYPE, Constant.TYPEFULLTEST);
+//                intent.putExtra(Constant.SELECTED_SUBJECT, (Serializable) selectedSubject);
+//                intent.putExtra(Constant.SUBJECT_LIST, (Serializable) statisticSubject.getChildren());
+//                intent.putExtra(Constant.STATISTIC_TAG, Constant.STATISTIC_TAG);
+//                context.startActivity(intent);
 
 
 //                Intent intent = new Intent(context, FulltestResultActivity.class);
 //                intent.putExtra(Constant.TEST_MAIN_ID, statisticSubject.getId());
 //                intent.putExtra(Constant.RESULT_TAG, Constant.RESULT_TAG);
 //                intent.putExtra(Constant.SUBJECT_LIST, (Serializable) statisticSubject.getChildren());
-//                context.startActivity(intent);
+                context.startActivity(intent);
             }
             else if (typeTest.equals(Constant.TYPELECTURETEST))
             {
-//                Subject selectedSubject = new Subject(statisticSubject.getId(), statisticSubject.getTitle());
-//                Intent intent = new Intent(context, TestActivity.class);
-//                //////        intent.putExtra()
-//                intent.putExtra(Constant.SELECTED_TEST_POSITION_ID, 0
-//                );
-//                intent.putExtra(Constant.SELECTED_SUBJECT, (Serializable) selectedSubject);
-//                intent.putExtra(Constant.IS_STARTED_FIRST, false);
-////                intent.putExtra("list", testList);
-////                    System.out.println("testList");
-////                    System.out.println(testList);
-//                intent.putExtra(Constant.RESULT_TAG, Constant.RESULT_TAG);
-//                intent.putExtra(Constant.TYPE, typeTest);
-//                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-//                intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
-//                intent.putExtra(Constant.TEST_MAIN_ID, statisticSubject.getId());
-
-
                 Subject selectedSubject = new Subject(statisticSubject.getId(), statisticSubject.getTitle());
-                TestFinishResponse testFinishResponse = new TestFinishResponse(statisticSubject.getResult());
-                Intent intent = new Intent(context, ResultsActivity.class);
-                intent.putExtra(Constant.TEST_FINISH_RESPONSE, testFinishResponse);
-                intent.putExtra(Constant.TEST_MAIN_ID, selectedSubject.getId());
-                intent.putExtra(Constant.TYPE, Constant.TYPESUBJECTTEST);
+                Intent intent = new Intent(context, TestActivity.class);
+                //////        intent.putExtra()
+                intent.putExtra(Constant.SELECTED_TEST_POSITION_ID, 0
+                );
                 intent.putExtra(Constant.SELECTED_SUBJECT, (Serializable) selectedSubject);
-                intent.putExtra(Constant.SUBJECT_LIST, (Serializable) null);
-
+                intent.putExtra(Constant.IS_STARTED_FIRST, false);
+//                intent.putExtra("list", testList);
+//                    System.out.println("testList");
+//                    System.out.println(testList);
+                intent.putExtra(Constant.RESULT_TAG, Constant.RESULT_TAG);
+                intent.putExtra(Constant.TYPE, typeTest);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+                intent.putExtra(Constant.TEST_MAIN_ID, statisticSubject.getId());
                 intent.putExtra(Constant.STATISTIC_TAG, Constant.STATISTIC_TAG);
+
+
+//                Subject selectedSubject = new Subject(statisticSubject.getId(), statisticSubject.getTitle());
+//                TestFinishResponse testFinishResponse = new TestFinishResponse(statisticSubject.getResult());
+//                Intent intent = new Intent(context, ResultsActivity.class);
+//                intent.putExtra(Constant.TEST_FINISH_RESPONSE, testFinishResponse);
+//                intent.putExtra(Constant.TEST_MAIN_ID, selectedSubject.getId());
+//                intent.putExtra(Constant.TYPE, Constant.TYPESUBJECTTEST);
+//                intent.putExtra(Constant.SELECTED_SUBJECT, (Serializable) selectedSubject);
+//                intent.putExtra(Constant.SUBJECT_LIST, (Serializable) null);
+//
+//                intent.putExtra(Constant.STATISTIC_TAG, Constant.STATISTIC_TAG);
 
 
 //                intent.putExtra(Constant.RESULT_TAG, Constant.RESULT_TAG);

@@ -15,6 +15,8 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
+import com.google.gson.JsonObject;
+
 import java.io.Serializable;
 
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -174,6 +176,7 @@ public class ItemNodeByNodeViewModel extends BaseObservable
                                         Intent intent = new Intent(getContext(), LectureActivity.class);
                                         intent.putExtra(Constant.SELECTED_LECTURE_RESPONSE, lectureResponse);
                                         context.startActivity(intent);
+                                        setLogLecture(lectureResponse.getLecture().getId());
                                     }
 
                                }
@@ -184,6 +187,70 @@ public class ItemNodeByNodeViewModel extends BaseObservable
                                 if (throwable.getMessage().contains("401"))
                                 {
                                     showToastUnauthorized();
+                                }
+                            }
+                        }
+                );
+
+        compositeDisposable.add(disposable);
+    }
+
+    private void setLogLecture(int lectureId)
+    {
+        AppController appController = new AppController();
+        CompositeDisposable compositeDisposable = new CompositeDisposable();
+//        AppController appController = AppController.create(context);
+        SubjectService subjectService = appController.getSubjectService();
+
+        Disposable disposable = subjectService.logVisitLecture(
+                "Bearer " + accessToken, lectureId)
+                .subscribeOn(appController.subscribeScheduler())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Consumer<JsonObject>()
+                           {
+                               @Override
+                               public void accept(JsonObject jsonObject) throws Exception
+                               {
+
+//                                   System.out.println(jsonObject.toString());
+//                                   JSONObject jsonObject1 = new JSONObject(jsonObject.toString());
+//                                   JSONObject config = jsonObject1.getJSONObject("config");
+//                                   int limit = config.getInt("time_limit");
+//                                   int remaining = config.getInt("time_remaining");
+//                                   if (isStartedFirst || hasActiveTest)
+//                                   {
+//                                       maxTimeInMilliseconds = TestsUtils.getTimeRemaining(limit, remaining);
+//                                   }
+//                                   ArrayList<Tests> questions =
+//                                           TestsUtils.deserializeFromJson(jsonObject);
+//
+////                                   System.out.println("questions");
+////                                   System.out.println(questions);
+////
+//                                   setArraListArrayListQuestions(questions);
+////
+//                                   Tests arrayList = questions.get(currentPosition);
+//                                   String titleText = "ҰБТ";
+//                                   if (language.equals(Constant.RU))
+//                                   {
+//                                       titleText = "ЕНТ";
+//                                   }
+//                                   activityFullTestBinding.textViewTitle.setText(titleText);
+//                                   if (resultTag == null)
+//                                       startTimer(maxTimeInMilliseconds, 1000);
+//                                   setFragment(arrayList);
+////                                   fullTestViewModel.setProgress(false);
+
+                               }
+                           },
+
+                        new Consumer<Throwable>() {
+                            @Override
+                            public void accept(Throwable throwable) throws Exception {
+                                if (throwable.getMessage().contains("401"))
+                                {
+                                    showToastUnauthorized();
+//                                    fullTestViewModel.setProgress(false);
                                 }
                             }
                         }

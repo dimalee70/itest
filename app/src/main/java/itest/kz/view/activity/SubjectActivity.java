@@ -44,6 +44,8 @@ import itest.kz.view.fragments.ProfileFragment;
 import itest.kz.view.fragments.SubjectFragment;
 import itest.kz.viewmodel.SubjectViewModel;
 
+import static android.content.Context.MODE_PRIVATE;
+
 public class SubjectActivity extends AppCompatActivity
 {
     private SubjectViewModel subjectViewModel;
@@ -88,8 +90,58 @@ public class SubjectActivity extends AppCompatActivity
 ////        return super.onCreateView(inflater, container, savedInstanceState);
 //    }
 
+
+//    @Nullable
+//    @Override
+//    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState)
+//    {
+//        activitySubjectBinding =
+//                DataBindingUtil.inflate
+//                        (inflater, R.layout.activity_subject,
+//                                container, false);
+//
+//        subjectViewModel = new SubjectViewModel(getContext());
+//        activitySubjectBinding.setSubject(subjectViewModel);
+//
+//
+//        mFragments = new ArrayList<>();
+//
+//        mFragments.add(new SubjectFragment());
+//        mFragments.add(new CertificationFragment());
+//
+//        // do we need to implement databinding on each layout? I don't think so. but feel free to bind the layout if you want to.
+//        mViewPager = (ViewPager) activitySubjectBinding.vpFragmentsContainer;
+////        (R.id.vp_fragments_container);
+//        mViewPager.setAdapter(new ViewPagerAdapter(getActivity().getSupportFragmentManager(), mFragments));
+//
+//        PageListener listener = new PageListener();
+//        mViewPager.addOnPageChangeListener(listener);
+//        mTabLayout = activitySubjectBinding.tlTabsContainer;
+////                (TabLayout) findViewById(R.id.tl_tabs_container);
+//        mTabLayout.setupWithViewPager(mViewPager);
+//        mTabLayout.getTabAt(0).setText((subjectViewModel
+//                .getLanguage().equals(Constant.KZ)) ? R.string.fullEntKz
+//                : R.string.fullEntRu);
+//        mTabLayout.getTabAt(1).setText((subjectViewModel
+//                .getLanguage().equals(Constant.KZ)) ? R.string.forSubjectKz
+//                : R.string.forSubjectRu);
+//
+////        setCustomFont();
+//
+//        sharedPreferences =
+//                getActivity()
+//                        .getSharedPreferences(Constant.MY_PREF, MODE_PRIVATE);
+//        setAccessToken();
+//
+//        setMyToolbar();
+//
+//
+//
+//        return activitySubjectBinding.getRoot();
+//    }
+
     @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState)
+    public void onCreate(@Nullable Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
 //        System.out.println("Start");
@@ -106,12 +158,14 @@ public class SubjectActivity extends AppCompatActivity
         mFragments.add(new CertificationFragment());
 
         // do we need to implement databinding on each layout? I don't think so. but feel free to bind the layout if you want to.
-        mViewPager = (ViewPager) findViewById(R.id.vp_fragments_container);
+        mViewPager = (ViewPager) activitySubjectBinding.vpFragmentsContainer;
+//        (R.id.vp_fragments_container);
         mViewPager.setAdapter(new ViewPagerAdapter(getSupportFragmentManager(), mFragments));
 
         PageListener listener = new PageListener();
         mViewPager.addOnPageChangeListener(listener);
-        mTabLayout = (TabLayout) findViewById(R.id.tl_tabs_container);
+        mTabLayout = activitySubjectBinding.tlTabsContainer;
+//                (TabLayout) findViewById(R.id.tl_tabs_container);
         mTabLayout.setupWithViewPager(mViewPager);
         mTabLayout.getTabAt(0).setText((subjectViewModel
                 .getLanguage().equals(Constant.KZ)) ? R.string.fullEntKz
@@ -122,7 +176,8 @@ public class SubjectActivity extends AppCompatActivity
 
 //        setCustomFont();
 
-        sharedPreferences = getSharedPreferences(Constant.MY_PREF, MODE_PRIVATE);
+        sharedPreferences =
+                getSharedPreferences(Constant.MY_PREF, MODE_PRIVATE);
         setAccessToken();
 
         setMyToolbar();
@@ -142,14 +197,14 @@ public class SubjectActivity extends AppCompatActivity
                             case R.id.item_test:
                                 break;
                             case R.id.item_statistic:
-                                finish();
+//                                finish();
                                 intent = new Intent(SubjectActivity.this,StatisticActivity.class);
                                 intent.putExtra(Constant.ACCESS_TOKEN, accessToken);
                                 startActivity(intent);
                                 break;
                             case R.id.item_user:
 //                                fetchProfileInfo();
-                                finish();
+//                                finish();
                                 intent = new Intent(SubjectActivity.this,HomeActivity.class);
                                 intent.putExtra(Constant.ACCESS_TOKEN, accessToken);
                                 startActivity(intent);
@@ -169,7 +224,8 @@ public class SubjectActivity extends AppCompatActivity
 
     public void setAccessToken()
     {
-        this.accessToken = getIntent().getStringExtra(Constant.ACCESS_TOKEN);
+        this.accessToken = getIntent()
+                .getStringExtra(Constant.ACCESS_TOKEN);
         if (accessToken == null || accessToken.equals(""))
         {
             finish();
@@ -205,6 +261,8 @@ public class SubjectActivity extends AppCompatActivity
 
 
         setSupportActionBar(myToolbar);
+//        getActivity()
+//                .setSupportActionBar(myToolbar);
     }
 
 //    public void fetchProfileInfo()

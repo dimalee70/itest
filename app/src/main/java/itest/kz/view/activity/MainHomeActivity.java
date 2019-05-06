@@ -19,6 +19,8 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 
+import java.util.ArrayList;
+
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.disposables.Disposable;
@@ -32,7 +34,10 @@ import itest.kz.util.Constant;
 import itest.kz.util.FragmentHelper;
 import itest.kz.view.adapters.AuthFragmentPagerAdapter;
 import itest.kz.view.adapters.MainHomeActivityPagerAdapter;
+import itest.kz.view.adapters.ViewPagerAdapter;
+import itest.kz.view.fragments.CertificationFragment;
 import itest.kz.view.fragments.ProfileFragment;
+import itest.kz.view.fragments.SubjectFragment;
 import itest.kz.viewmodel.MainHomeViewModel;
 
 public class MainHomeActivity extends AppCompatActivity
@@ -44,6 +49,8 @@ public class MainHomeActivity extends AppCompatActivity
     private String accessToken;
     private ProfileResponse profileResponse;
     private Toolbar toolbar;
+    private ArrayList<Fragment> mFragments;
+    private ViewPager mViewPager;
 
 
     @Override
@@ -91,7 +98,7 @@ public class MainHomeActivity extends AppCompatActivity
             menu.findItem(R.id.menu_github1).setVisible(false);
             menu.findItem(R.id.menu_github2).setVisible(false);
             menu.findItem(R.id.menu_save).setVisible(false);
-            menu.findItem(R.id.menu_logout).setVisible(true);
+            menu.findItem(R.id.menu_logout).setVisible(false);
         }
         return super.onPrepareOptionsMenu(menu);
     }
@@ -152,6 +159,7 @@ public class MainHomeActivity extends AppCompatActivity
 
         final FragmentManager fragmentManager = getSupportFragmentManager();
 //        final Fragment testFragment = new SubjectActivity();
+//        final Fragment statisticFragment = new StatisticActivity();
 //        final Fragment userFragment = new HomeActivity();
         activityMainHomeBinding = DataBindingUtil
                 .setContentView(this, R.layout.activity_main_home);
@@ -161,9 +169,28 @@ public class MainHomeActivity extends AppCompatActivity
         sharedPreferences = getSharedPreferences(Constant.MY_PREF, MODE_PRIVATE);
         setAccessToken();
 
-        toolbar = (Toolbar) activityMainHomeBinding.toolbarProfile;
-        toolbar.setTitle("");
-        setSupportActionBar(toolbar);
+//        toolbar = (Toolbar) activityMainHomeBinding.toolbarProfile;
+//        toolbar.setTitle("");
+//        setSupportActionBar(toolbar);
+
+
+
+
+//        mFragments = new ArrayList<>();
+//
+//        mFragments.add(testFragment);
+//        mFragments.add(statisticFragment);
+//        mFragments.add(userFragment);
+//
+//        // do we need to implement databinding on each layout? I don't think so. but feel free to bind the layout if you want to.
+//        mViewPager = activityMainHomeBinding
+//                .viewpager;
+////                activitySubjectBinding.vpFragmentsContainer;
+////        (R.id.vp_fragments_container);
+//        mViewPager.setAdapter(new ViewPagerAdapter(getSupportFragmentManager(), mFragments));
+
+//        SubjectActivity.PageListener listener = new SubjectActivity.PageListener();
+//        mViewPager.addOnPageChangeListener(listener);
 
 //        ViewPager viewPager =
 //                activityMainHomeBinding.viewpager;
@@ -171,7 +198,7 @@ public class MainHomeActivity extends AppCompatActivity
 //                new MainHomeActivityPagerAdapter(getSupportFragmentManager(), this);
 //        viewPager.setAdapter(mainHomeActivityPagerAdapter);
 
-        bottomNavigationView = (BottomNavigationView) activityMainHomeBinding.bottomNavigationView;
+        bottomNavigationView = activityMainHomeBinding.bottomNavigationView;
 
         bottomNavigationView.setOnNavigationItemSelectedListener(
                 new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -185,18 +212,48 @@ public class MainHomeActivity extends AppCompatActivity
 //                                if (testFragment.isAdded())
 //                                {
 //                                    fragmentManager.beginTransaction().remove(testFragment).commit();
-//                                    System.out.println("Added");
+////                                    System.out.println("Added");
 //                                }
-
+//
 //                                else
-//                                fragmentManager.beginTransaction().replace(R.id.viewpager, testFragment)
-//                                        .commit();
+//                                    fragmentManager
+//                                            .beginTransaction()
+//                                            .replace(R.id.viewpager, testFragment)
+//                                            .commit();
+                                intent = new Intent(getBaseContext(),SubjectActivity.class);
+                                intent.putExtra(Constant.ACCESS_TOKEN, accessToken);
+                                startActivity(intent);
+                                break;
+
+                            case R.id.item_statistic:
+//                                if (statisticFragment.isAdded())
+//                                {
+//                                    fragmentManager.beginTransaction().remove(statisticFragment).commit();
+////                                    System.out.println("Added");
+//                                }
+//
+//                                else
+//                                    fragmentManager
+//                                            .beginTransaction()
+//                                            .replace(R.id.viewpager, statisticFragment)
+//                                            .commit();
                                 intent = new Intent(getBaseContext(),SubjectActivity.class);
                                 intent.putExtra(Constant.ACCESS_TOKEN, accessToken);
                                 startActivity(intent);
                                 break;
 
                             case R.id.item_user:
+//                                if (statisticFragment.isAdded())
+//                                {
+//                                    fragmentManager.beginTransaction().remove(userFragment).commit();
+////                                    System.out.println("Added");
+//                                }
+//
+//                                else
+//                                    fragmentManager
+//                                            .beginTransaction()
+//                                            .replace(R.id.viewpager, userFragment)
+//                                            .commit();
 //                                fetchProfileInfo();
                                 intent = new Intent(getBaseContext(),HomeActivity.class);
                                 intent.putExtra(Constant.ACCESS_TOKEN, accessToken);

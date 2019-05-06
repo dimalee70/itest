@@ -43,7 +43,7 @@
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:layout_gravity="left"
-                android:src="@drawable/ic_iconfinder_connect_direction_path_way_2203530"
+                app:srcCompat="@drawable/ic_iconfinder_connect_direction_path_way_2203530"
                 android:clickable="true"
                 android:layout_centerVertical="true"
                 android:background="?attr/selectableItemBackground"/>
@@ -73,7 +73,7 @@
                 android:layout_width="40dp"
                 android:layout_alignParentRight="true"
                 android:layout_height="40dp"
-                android:src="@drawable/ic_icon_x"
+                app:srcCompat="@drawable/ic_icon_x"
                 android:layout_centerVertical="true"
                 android:layout_marginRight="16dp"
                 android:background="?attr/selectableItemBackground"
@@ -112,7 +112,7 @@
                         android:layout_width="40dp"
                         android:layout_height="40dp"
                         android:layout_alignParentStart="true"
-                        android:src="@drawable/ic_icon_strelka"
+                        app:srcCompat="@drawable/ic_icon_strelka"
                         android:background="?attr/selectableItemBackground"
                         android:clickable="true" />
                 </RelativeLayout>

@@ -281,8 +281,22 @@ public class TestFragment extends Fragment
                             }
                         });
                         dialog.show();
-                    } else {
-                        getActivity().finish();
+                    } else
+                        {
+
+                            finishTest(testIdMain);
+//                            Subject selectedSubject = new Subject(statisticSubject.getId(), statisticSubject.getTitle());
+
+//                            TestFinishResponse testFinishResponse = new TestFinishResponse(statisticSubject.getResult());
+//                            Intent intent = new Intent(getContext(), ResultsActivity.class);
+////                            intent.putExtra(Constant.TEST_FINISH_RESPONSE, testFinishResponse);
+//                            intent.putExtra(Constant.TEST_MAIN_ID, testIdMain);
+//                            intent.putExtra(Constant.TYPE, Constant.TYPEFULLTEST);
+//                            intent.putExtra(Constant.SELECTED_SUBJECT, (Serializable) selectedSubject);
+//                            intent.putExtra(Constant.SUBJECT_LIST, (Serializable) subjectList);
+//                            intent.putExtra(Constant.STATISTIC_TAG, Constant.STATISTIC_TAG);
+//                            getContext().startActivity(intent);
+//                            getActivity().finish();
                     }
                 }catch (Exception e)
                 {
@@ -572,6 +586,11 @@ public class TestFragment extends Fragment
                                            intent.putExtra(Constant.TEST_FINISH_RESPONSE, testFinishResponse);
                                            intent.putExtra(Constant.TEST_MAIN_ID, testIdMain);
                                            intent.putExtra(Constant.TYPE, typeTest);
+                                           if(resultTag != null)
+                                           {
+                                               intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                                               intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+                                           }
                                            intent.putExtra(Constant.SELECTED_SUBJECT, (Serializable) selectedSubject);
                                            intent.putExtra(Constant.SUBJECT_LIST, (Serializable) subjectList);
 

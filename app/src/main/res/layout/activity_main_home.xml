@@ -11,28 +11,34 @@
     <android.support.design.widget.CoordinatorLayout
         android:id="@+id/container"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:background="@color/colorBackgroundCardView">
 
-        <android.support.v7.widget.Toolbar
-            android:id="@+id/toolbar_profile"
+        <RelativeLayout
+            android:id="@+id/activity_main_relative"
             android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            android:background="?attr/colorPrimary"
-            android:elevation="4dp"
-            app:theme="@style/ToolbarColoredBackArrow"
-            android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
-            app:popupTheme="@style/ThemeOverlay.AppCompat.Light">
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text=""
-                android:textColor="@color/colorWhite"
-                android:layout_marginLeft="73dp"
-                android:textSize="20sp"
-                android:layout_gravity="left"
-                android:id="@+id/toolbar_title" />
+            android:layout_height="match_parent">
 
-        </android.support.v7.widget.Toolbar>
+        <!--<android.support.v7.widget.Toolbar-->
+            <!--android:id="@+id/toolbar_profile"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="?attr/actionBarSize"-->
+            <!--android:background="?attr/colorPrimary"-->
+            <!--android:elevation="4dp"-->
+            <!--app:theme="@style/ToolbarColoredBackArrow"-->
+            <!--android:theme="@style/ThemeOverlay.AppCompat.ActionBar"-->
+            <!--app:popupTheme="@style/ThemeOverlay.AppCompat.Light">-->
+            <!--<TextView-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:text=""-->
+                <!--android:textColor="@color/colorWhite"-->
+                <!--android:layout_marginLeft="73dp"-->
+                <!--android:textSize="20sp"-->
+                <!--android:layout_gravity="left"-->
+                <!--android:id="@+id/toolbar_title" />-->
+
+        <!--</android.support.v7.widget.Toolbar>-->
     <!--<LinearLayout-->
         <!--android:layout_width="match_parent"-->
         <!--android:layout_height="match_parent">-->
@@ -59,8 +65,7 @@
             <FrameLayout
                 android:id="@+id/viewpager"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginBottom="20dp" />
+                android:layout_height="match_parent"/>
 
         <!--app:layout_behavior="@string/appbar_scrolling_view_behavior"-->
 
@@ -78,16 +83,17 @@
                 <!--android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"/>-->
 
 
-        <!--</RelativeLayout>-->
+        </RelativeLayout>
 
         <android.support.design.widget.BottomNavigationView
             android:id="@+id/bottom_navigation_view"
-            android:layout_below="@+id/viewpager"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            app:itemIconSize="20dp"
             android:layout_gravity="bottom"
             android:background="@color/colorWhite"
             app:labelVisibilityMode="unlabeled"
+            app:itemIconTint="@drawable/selector"
             android:fitsSystemWindows="true"
             app:menu="@menu/bottom_navigation_view_menu"/>
 

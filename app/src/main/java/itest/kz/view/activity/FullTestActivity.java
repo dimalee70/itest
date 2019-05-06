@@ -634,6 +634,10 @@ public class FullTestActivity extends AppCompatActivity
                                    activityFullTestBinding.textViewTitle.setText(titleText);
                                    if (resultTag == null)
                                        startTimer(maxTimeInMilliseconds, 1000);
+
+                                   setLogTest(arrayList.getTestId());
+
+
                                    setFragment(arrayList);
 //                                   fullTestViewModel.setProgress(false);
 
@@ -701,11 +705,79 @@ public class FullTestActivity extends AppCompatActivity
         mPager.setAdapter(new FullTestAdapter(getSupportFragmentManager(),arrayList, testIdMain,
                 subjectList, currentPosition, resultTag));
 
+
+
         PageListener listener = new PageListener();
         mPager.addOnPageChangeListener(listener);
         selectedTestPosition = pos;
         setPageNumberToFragment();
 
+    }
+
+    private void setLogTest(Long testIdMain)
+    {
+        AppController appController = new AppController();
+        CompositeDisposable compositeDisposable = new CompositeDisposable();
+//        AppController appController = AppController.create(context);
+        SubjectService subjectService = appController.getSubjectService();
+
+        Disposable disposable = subjectService.logVisitTest(
+                "Bearer " + accessToken, testIdMain)
+                .subscribeOn(appController.subscribeScheduler())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Consumer<JsonObject>()
+                           {
+                               @Override
+                               public void accept(JsonObject jsonObject) throws Exception
+                               {
+
+//                                   System.out.println(jsonObject.toString());
+//                                   JSONObject jsonObject1 = new JSONObject(jsonObject.toString());
+//                                   JSONObject config = jsonObject1.getJSONObject("config");
+//                                   int limit = config.getInt("time_limit");
+//                                   int remaining = config.getInt("time_remaining");
+//                                   if (isStartedFirst || hasActiveTest)
+//                                   {
+//                                       maxTimeInMilliseconds = TestsUtils.getTimeRemaining(limit, remaining);
+//                                   }
+//                                   ArrayList<Tests> questions =
+//                                           TestsUtils.deserializeFromJson(jsonObject);
+//
+////                                   System.out.println("questions");
+////                                   System.out.println(questions);
+////
+//                                   setArraListArrayListQuestions(questions);
+////
+//                                   Tests arrayList = questions.get(currentPosition);
+//                                   String titleText = "ҰБТ";
+//                                   if (language.equals(Constant.RU))
+//                                   {
+//                                       titleText = "ЕНТ";
+//                                   }
+//                                   activityFullTestBinding.textViewTitle.setText(titleText);
+//                                   if (resultTag == null)
+//                                       startTimer(maxTimeInMilliseconds, 1000);
+//                                   setFragment(arrayList);
+////                                   fullTestViewModel.setProgress(false);
+
+                               }
+                           },
+
+                        new Consumer<Throwable>() {
+                            @Override
+                            public void accept(Throwable throwable) throws Exception {
+                                if (throwable.getMessage().contains("401"))
+                                {
+                                    showToastUnauthorized();
+//                                    fullTestViewModel.setProgress(false);
+                                }
+
+                                System.out.println("Error wws");
+                            }
+                        }
+                );
+
+        compositeDisposable.add(disposable);
     }
 
     public  void setPageNumberToFragment()

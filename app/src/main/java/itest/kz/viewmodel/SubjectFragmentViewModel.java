@@ -160,7 +160,7 @@ public class SubjectFragmentViewModel extends Observable
 
         clickTryAgain = () ->
         {
-            System.out.println("click");
+//            System.out.println("click");
             fetchSubjectList();
         };
 

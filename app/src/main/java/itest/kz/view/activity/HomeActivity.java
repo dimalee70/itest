@@ -45,6 +45,8 @@ import itest.kz.view.fragments.LoginFragment;
 import itest.kz.view.fragments.ProfileFragment;
 import itest.kz.viewmodel.HomeViewModel;
 
+import static android.content.Context.MODE_PRIVATE;
+
 public class HomeActivity extends AppCompatActivity
 {
     private ActivityHomeBinding activityHomeBinding;
@@ -113,6 +115,32 @@ public class HomeActivity extends AppCompatActivity
             bottomNavigationView.setVisibility(View.VISIBLE);
         }
     }
+
+//
+//    @Nullable
+//    @Override
+//    public View onCreateView(@NonNull LayoutInflater inflater,
+//                             @Nullable ViewGroup container,
+//                             @Nullable Bundle savedInstanceState)
+//    {
+//        SharedPreferences settings = getActivity().getSharedPreferences(Constant.MY_LANG, MODE_PRIVATE);
+////        settings.edit().clear().commit();
+//        language = settings.getString(Constant.LANG, "kz");
+////        activityHomeBinding = DataBindingUtil.setContentView(getActivity(), R.layout.activity_home);
+//        activityHomeBinding = DataBindingUtil
+//                .inflate(inflater,
+//                        R.layout.activity_home,
+//                        container,
+//                        false);
+//        homeViewModel = new HomeViewModel(getContext());
+//        activityHomeBinding.setHome(homeViewModel);
+//        sharedPreferences = getActivity().getSharedPreferences(Constant.MY_PREF, MODE_PRIVATE);
+//        setAccessToken();
+//        fetchProfileInfo();
+////
+//        return activityHomeBinding
+//                .getRoot();
+//    }
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState)
@@ -185,8 +213,7 @@ public class HomeActivity extends AppCompatActivity
         this.accessToken = getIntent().getStringExtra(Constant.ACCESS_TOKEN);
         if (accessToken == null || accessToken.equals(""))
         {
-            finish();
-
+           finish();
         }
         else
         {
@@ -380,7 +407,7 @@ public class HomeActivity extends AppCompatActivity
     public  void openAuthActivity()
     {
         Intent intent = new Intent(this, AuthActivity.class);
-        ((Activity)this).startActivity(intent);
+        startActivity(intent);
 //        if (language.equals(Constant.KZ))
 //
 //            Toast.makeText(this,

@@ -177,7 +177,14 @@ public class ResultsActivity extends AppCompatActivity
 
 //                        System.out.println("Click on Close");
 ////                finish();
-                        openNewActivity();
+//                        if (resultTag != null)
+//                        {
+//                            finish();
+//                        }
+//                        else
+//                        {
+                            openNewActivity();
+//                        }
 
 //                finish();
 //                closeActivity();
@@ -195,9 +202,11 @@ public class ResultsActivity extends AppCompatActivity
     {
 //        System.out.println("Close method");
 
-        if (statisticTag.equals(Constant.STATISTIC_TAG))
+        if (resultTag != null)
         {
-            super.onBackPressed();
+            Intent intent = new Intent(getBaseContext(), StatisticActivity.class);
+            intent.putExtra(Constant.ACCESS_TOKEN, accessToken);
+            startActivity(intent);
         }
         else
         {

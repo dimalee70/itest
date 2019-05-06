@@ -12,7 +12,10 @@ import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.LayoutInflater;
 import android.view.MenuItem;
+import android.view.View;
+import android.view.ViewGroup;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -28,6 +31,8 @@ import itest.kz.view.fragments.LectureStatisticFragment;
 import itest.kz.view.fragments.SubjectStatisticFragment;
 import itest.kz.viewmodel.StatisticViewModel;
 
+import static android.content.Context.MODE_PRIVATE;
+
 public class StatisticActivity extends AppCompatActivity
 {
     private ActivityStatisticBinding activityStatisticBinding;
@@ -41,6 +46,105 @@ public class StatisticActivity extends AppCompatActivity
     private String accessToken;
     private SharedPreferences sharedPreferences;
     private String typeTest;
+
+
+//    @Nullable
+//    @Override
+//    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState)
+//    {
+//        this.typeTest = Constant.TYPEFULLTEST;
+//        activityStatisticBinding =
+//                DataBindingUtil.
+//                        inflate
+//                                (inflater, R.layout.activity_statistic,
+//                                        container, false);
+//
+//        statisticViewModel = new StatisticViewModel(getContext());
+//        activityStatisticBinding.setStatistic(statisticViewModel);
+//        mFragments = new ArrayList<>();
+//        mFragments.add(new SubjectStatisticFragment());
+//        mFragments.add(new LectureStatisticFragment());
+//        mFragments.add(FullTestStatisticFragment.newInstance(typeTest));
+//        mViewPager = (ViewPager) activityStatisticBinding.vpFragmentsContainer;
+//        mViewPager.setOffscreenPageLimit(3);
+//        mViewPager.setAdapter(new ViewPagerAdapter(getActivity().getSupportFragmentManager(), mFragments));
+//
+//        mTabLayout = activityStatisticBinding.tlTabsContainer;
+////                getActivity().findViewById(R.id.tl_tabs_container);
+//        mTabLayout.setupWithViewPager(mViewPager);
+//        mTabLayout.getTabAt(0).setText((statisticViewModel
+//                .getLanguage().equals(Constant.KZ)) ? R.string.subjectKz
+//                : R.string.subjetcRu);
+//        mTabLayout.getTabAt(1).setText((statisticViewModel
+//                .getLanguage().equals(Constant.KZ)) ? R.string.lectureKz
+//                : R.string.lectureRu);
+//        mTabLayout.getTabAt(2).setText((statisticViewModel
+//                .getLanguage().equals(Constant.KZ)) ? R.string.fullKz
+//                : R.string.fullRu);
+//
+//        sharedPreferences = getActivity().getSharedPreferences(Constant.MY_PREF, MODE_PRIVATE);
+//        setAccessToken();
+//
+//        setMyToolbar();
+
+
+
+
+//        bottomNavigationView = (BottomNavigationView) activityStatisticBinding.bottomNavigationView;
+//
+//        bottomNavigationView.setOnNavigationItemSelectedListener(
+//                new BottomNavigationView.OnNavigationItemSelectedListener() {
+//                    @Override
+//                    public boolean onNavigationItemSelected(@NonNull MenuItem menuItem)
+//                    {
+//                        Intent intent = null;
+//                        switch (menuItem.getItemId())
+//                        {
+//                            case R.id.item_test:
+////                                if (testFragment.isAdded())
+////                                {
+////                                    fragmentManager.beginTransaction().remove(testFragment).commit();
+////                                    System.out.println("Added");
+////                                }
+//
+////                                else
+////                                fragmentManager.beginTransaction().replace(R.id.viewpager, testFragment)
+////                                        .commit();
+//                                finish();
+//                                intent = new Intent(StatisticActivity.this,SubjectActivity.class);
+//                                intent.putExtra(Constant.ACCESS_TOKEN, accessToken);
+//                                startActivity(intent);
+//                                break;
+//                            case R.id.item_statistic:
+////                                finish();
+////                                intent = new Intent(StatisticActivity.this,StatisticActivity.class);
+////                                intent.putExtra(Constant.ACCESS_TOKEN, accessToken);
+////                                startActivity(intent);
+//                                break;
+//                            case R.id.item_user:
+////                                fetchProfileInfo();
+//                                finish();
+//                                intent = new Intent(StatisticActivity.this,HomeActivity.class);
+//                                intent.putExtra(Constant.ACCESS_TOKEN, accessToken);
+//                                startActivity(intent);
+////                                fragmentManager.beginTransaction().replace(R.id.viewpager, fragment).commit();
+//                                break;
+//
+//
+//                        }
+//
+//
+//                        return true;
+//                    }
+//                }
+//        );
+
+//        bottomNavigationView.setSelectedItemId(R.id.item_statistic);
+
+//
+//        return activityStatisticBinding
+//                .getRoot();
+//    }
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState)
@@ -75,25 +179,6 @@ public class StatisticActivity extends AppCompatActivity
         setAccessToken();
 
         setMyToolbar();
-
-
-
-
-//        mFragments.add(new SubjectFragment());
-//        mFragments.add(new CertificationFragment());
-
-//        mViewPager = (ViewPager) findViewById(R.id.vp_fragments_container);
-//        mViewPager.setAdapter(new ViewPagerAdapter(getSupportFragmentManager(), mFragments));
-//
-//
-//        mTabLayout = (TabLayout) findViewById(R.id.tl_tabs_container);
-//        mTabLayout.setupWithViewPager(mViewPager);
-//        mTabLayout.getTabAt(0).setText((subjectViewModel
-//                .getLanguage().equals(Constant.KZ)) ? R.string.fullEntKz
-//                : R.string.fullEntRu);
-//        mTabLayout.getTabAt(1).setText((subjectViewModel
-//                .getLanguage().equals(Constant.KZ)) ? R.string.forSubjectKz
-//                : R.string.forSubjectRu);
 
 
 
@@ -158,7 +243,6 @@ public class StatisticActivity extends AppCompatActivity
         if (accessToken == null || accessToken.equals(""))
         {
             finish();
-
         }
         else
         {
