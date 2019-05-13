@@ -78,8 +78,11 @@ public class EntMainAdapter extends RecyclerView.Adapter<EntMainAdapter.EntMainA
     public void setSubjectList(List<Subject> subjectList)
     {
         this.subjectList = subjectList;
+//        itemEntViewModel.setSubject();
         notifyDataSetChanged();
     }
+
+
 
     public void setOnItemListener(OnItemClickListener listener)
     {
@@ -115,6 +118,13 @@ public class EntMainAdapter extends RecyclerView.Adapter<EntMainAdapter.EntMainA
             {
                 itemEntBinding.getEnt().setSubject(subject);
             }
+
+//            if (subject.getIsSelected() == 1)
+//            {
+//                itemEntViewModel
+//                        .setSubject(subject);
+//            }
+
             itemEntBinding.getRoot().findViewById(R.id.cardview_subject).setOnClickListener
                     (new View.OnClickListener() {
                         @Override

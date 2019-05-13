@@ -111,6 +111,7 @@ public class TestFragment extends Fragment
     private TextView dialogTextAuth;
     private Button buttonYesAuth;
     private Button buttonNoAuth;
+    private String statisticTag;
 
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater)
@@ -175,6 +176,7 @@ public class TestFragment extends Fragment
 
 //        tests = savedInstanceState.getParcelableArrayList("tests");
 
+        this.statisticTag = getArguments().getString(Constant.STATISTIC_TAG);
 
         this.tests = (Tests) getArguments().getSerializable("tests");
         this.currentPosition = getArguments().getInt(Constant.CURRENT_POSITION_SUBJECT, 0);
@@ -593,6 +595,7 @@ public class TestFragment extends Fragment
                                            }
                                            intent.putExtra(Constant.SELECTED_SUBJECT, (Serializable) selectedSubject);
                                            intent.putExtra(Constant.SUBJECT_LIST, (Serializable) subjectList);
+                                           intent.putExtra(Constant.STATISTIC_TAG, statisticTag);
 
     //                                       System.out.println("testrespone");
     //                                       System.out.println(testFinishResponse.getSuccess());
@@ -794,7 +797,8 @@ public class TestFragment extends Fragment
                                            String type,
                                            Long testIdMain,
                                            List<Subject> selectedSubects,
-                                           int currentPosition)
+                                           int currentPosition,
+                                           String statisticTag)
     {
 
         Bundle args = new Bundle();
@@ -803,6 +807,7 @@ public class TestFragment extends Fragment
         TestFragment fragment = new TestFragment();
         fragment.setArguments(args);
         args.putString(Constant.TYPE, type);
+        args.putString(Constant.STATISTIC_TAG, statisticTag);
         args.putInt(Constant.CURRENT_POSITION_SUBJECT, currentPosition);
         args.putSerializable(Constant.SUBJECT_LIST, (ArrayList<Subject>) selectedSubects);
         args.putSerializable("test", tests.getQuestions().get(val));
@@ -820,7 +825,8 @@ public class TestFragment extends Fragment
                                            String type,
                                            Long testIdMain,
                                            List<Subject> selectedSubects,
-                                           int currentPosition, String resultTag)
+                                           int currentPosition, String resultTag,
+                                           String statisticTag)
     {
 
         Bundle args = new Bundle();
@@ -834,6 +840,7 @@ public class TestFragment extends Fragment
         args.putSerializable("test", tests.getQuestions().get(val));
         args.putSerializable(Constant.SELECTED_SUBJECT, selectedSubject);
         args.putSerializable("tests", tests);
+        args.putString(Constant.STATISTIC_TAG, statisticTag);
         args.putString(Constant.RESULT_TAG, resultTag);
         args.putLong(Constant.TEST_MAIN_ID, testIdMain);
         fragment.setArguments(args);
@@ -841,7 +848,10 @@ public class TestFragment extends Fragment
         return fragment;
     }
 
-    public static TestFragment newInstance(int val, Tests tests, Subject selectedSubject, String type, Long testIdMain, String resultTag)
+    public static TestFragment newInstance(int val, Tests tests,
+                                           Subject selectedSubject,
+                                           String type, Long testIdMain,
+                                           String resultTag, String statisticTag)
     {
 
         Bundle args = new Bundle();
@@ -855,6 +865,7 @@ public class TestFragment extends Fragment
         args.putSerializable("tests", tests);
         args.putLong(Constant.TEST_MAIN_ID, testIdMain);
         args.putString(Constant.RESULT_TAG, resultTag);
+        args.putString(Constant.STATISTIC_TAG, statisticTag);
         fragment.setArguments(args);
         return fragment;
     }

@@ -61,6 +61,7 @@ public class ItemSubjectStatisticViewModel extends BaseObservable
                 intent.putExtra(Constant.TEST_MAIN_ID, statisticSubject.getId());
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+                intent.putExtra(Constant.STATISTIC_TAG, Constant.STATISTIC_TAG);
 
 
 

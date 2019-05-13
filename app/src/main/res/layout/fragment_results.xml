@@ -38,7 +38,11 @@
             </RelativeLayout>
 
 
-
+        <!--<TextView-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:focusable="true"-->
+            <!--/>-->
         <android.support.v4.widget.NestedScrollView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -80,9 +84,9 @@
                         android:textAlignment="center"
                         android:textColor="@color/colorBlack"
                         android:textSize="18sp"
+                        android:focusableInTouchMode="true"
                         android:fontFamily="@font/my_open_sans_regular"
                         android:layout_marginTop="20dp"
-                        android:focusable="true"
                         />
 
                     <RelativeLayout

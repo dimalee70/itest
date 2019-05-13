@@ -27,9 +27,10 @@ public class FullTestAdapter extends FragmentStatePagerAdapter
     private Integer currentPosition;
     private  Integer selectedTestPosition;
     private String resultTag;
+    private String statisticTag;
 
     public FullTestAdapter(FragmentManager fm, Tests test, Long testIdMain, List<Subject> subjectList,
-                           Integer currentPosition)
+                           Integer currentPosition, String statisticTag)
     {
         super(fm);
         this.test = test;
@@ -39,13 +40,15 @@ public class FullTestAdapter extends FragmentStatePagerAdapter
         this.currentPosition = currentPosition;
         this.testIdMain = testIdMain;
         this.subjectList = subjectList;
+        this.statisticTag = statisticTag;
 //        this.selectedSubjectPosition = selectedSubjectPosition;
 //        this.arrayListArrayListQuestions = arrayListArrayListQuestions;
 
     }
 
     public FullTestAdapter(FragmentManager fm, Tests test, Long testIdMain, List<Subject> subjectList,
-                           Integer currentPosition, String resultTag)
+                           Integer currentPosition, String resultTag,
+                           String statisticTag)
     {
         super(fm);
         this.test = test;
@@ -56,6 +59,7 @@ public class FullTestAdapter extends FragmentStatePagerAdapter
         this.testIdMain = testIdMain;
         this.subjectList = subjectList;
         this.resultTag = resultTag;
+        this.statisticTag = statisticTag;
 //        this.selectedSubjectPosition = selectedSubjectPosition;
 //        this.arrayListArrayListQuestions = arrayListArrayListQuestions;
 
@@ -68,7 +72,9 @@ public class FullTestAdapter extends FragmentStatePagerAdapter
         {
 
             return TestFragment.newInstance(i, test, null, Constant.TYPEFULLTEST,
-                    testIdMain, subjectList, currentPosition, resultTag);
+                    testIdMain, subjectList,
+                    currentPosition, resultTag,
+                    statisticTag);
 
         }
         return null;

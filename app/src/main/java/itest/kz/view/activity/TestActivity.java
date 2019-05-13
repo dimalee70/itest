@@ -84,6 +84,7 @@ public class TestActivity extends AppCompatActivity
     private Button buttonNoAuth;
     private Context context;
     private boolean lastPageSwipe = false;
+    public  String statisticTag;
 
     private void fetchFullTestQuestionsGenerate(Long testId)
     {
@@ -151,6 +152,7 @@ public class TestActivity extends AppCompatActivity
 
             this.selectedSubject = (Subject) getIntent().getSerializableExtra(Constant.SELECTED_SUBJECT);
             this.testIdMain = getIntent().getLongExtra(Constant.TEST_MAIN_ID, 0);
+            this.statisticTag = getIntent().getExtras().getString(Constant.STATISTIC_TAG, null);
 
 
 //            System.out.println("selected pos");
@@ -229,7 +231,10 @@ public class TestActivity extends AppCompatActivity
                         mPager = activityTestBinding.pager;
                         mPager.setOffscreenPageLimit(2);
 
-                        mPager.setAdapter(new MyAdapter(getSupportFragmentManager(), tests, selectedSubject, resultTag, typeTest));
+                        mPager.setAdapter(new MyAdapter(getSupportFragmentManager(),
+                                tests, selectedSubject,
+                                resultTag, typeTest,
+                                statisticTag));
 
                         PageListener listener = new PageListener();
                         mPager.addOnPageChangeListener(listener);
@@ -360,6 +365,7 @@ public class TestActivity extends AppCompatActivity
                                        intent.putExtra(Constant.TEST_MAIN_ID, testIdMain);
                                        intent.putExtra(Constant.TYPE, typeTest);
                                        intent.putExtra(Constant.SELECTED_SUBJECT, (Serializable) selectedSubject);
+
 //                                       intent.putExtra(Constant.SUBJECT_LIST, (Serializable) subjectList);
 
                                        //                                       System.out.println("testrespone");
@@ -524,7 +530,8 @@ public class TestActivity extends AppCompatActivity
                     mPager = activityTestBinding.pager;
                     mPager.setOffscreenPageLimit(2);
 
-                    mPager.setAdapter(new MyAdapter(getSupportFragmentManager(), tests, selectedSubject, resultTag, typeTest));
+                    mPager.setAdapter(new MyAdapter(getSupportFragmentManager(), tests, selectedSubject, resultTag, typeTest,
+                            statisticTag));
 
                     PageListener listener = new PageListener();
                     mPager.addOnPageChangeListener(listener);

@@ -2,6 +2,14 @@ package itest.kz.util;
 
 public interface Constant
 {
+    public final int FULL_TEST_SUBJECT_COUNT_NO_CHOISE = 3;
+
+    public  final  int FULL_TEST_SUBJECT_COUNT_ONE_CHOISE = 4;
+
+    public final int CHOISE_SUBJECT_COUNT = 2;
+
+    public final  int FULL_TEST_SUBJECT_COUNT = 5;
+
     public final String MY_START = "MY_START";
 
     public final String STATISTIC_TAG = "STATISTIC_TAG";

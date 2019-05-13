@@ -38,6 +38,7 @@ public class SubjectFragment extends Fragment implements Observer
     public SubjectFragmentViewModel subjectFragmentViewModel;
     public FragmentEntBinding fragmentEntBinding;
     private List<Subject> selectedSubects = new ArrayList<>();
+    public List<Subject> subjects = new ArrayList<>();
 
 
     final android.arch.lifecycle.Observer<List<Subject>> listObserver = new android.arch.lifecycle.Observer<List<Subject>>() {
@@ -47,6 +48,7 @@ public class SubjectFragment extends Fragment implements Observer
 //            subjectList = selectedSubects;
             if (subjectList != null && subjectList.size() > 0)
             {
+                subjects = subjectList;
 //                System.out.println("CouNt");
 //                System.out.println(subjectList.toString());
             }
@@ -61,8 +63,10 @@ public class SubjectFragment extends Fragment implements Observer
     public void initContent()
     {
 //        fragmentEntBinding.loader.showCustomLoading(true,  R.drawable.ic_itest_logo_larger);
-        setUpListOfSbjectsMainView(fragmentEntBinding.listSubjectMain);
+        setUpListOfSbjectsMainView(fragmentEntBinding.
+                listSubjectMain);
         setUpListOfSbjectsMainView(fragmentEntBinding.listSubject);
+
 //        fragmentEntBinding.loader.showCustomLoading(false);
     }
     @Nullable
@@ -100,7 +104,7 @@ public class SubjectFragment extends Fragment implements Observer
 //                {
 //                    System.out.println("listOf2");
 //                    System.out.println(selectedSubects.toString());
-                if (selectedSubects.size() == 5)
+                if (selectedSubects.size() == Constant.FULL_TEST_SUBJECT_COUNT)
                 {
                     Intent intent = new Intent(getContext(), FullTestActivity.class);
 
@@ -163,11 +167,16 @@ public class SubjectFragment extends Fragment implements Observer
 
     public void addToSelectedList(Subject subject)
     {
+        fragmentEntBinding
+                .entCancelCardview
+                .setVisibility(View.VISIBLE);
         selectedSubects.add(subject);
-        if (selectedSubects.size() == 5)
+        if (selectedSubects.size() == Constant.FULL_TEST_SUBJECT_COUNT)
         {
 //            System.out.println("5");
-            fragmentEntBinding.entStartCardview.setVisibility(View.VISIBLE);
+            fragmentEntBinding
+                    .entStartCardview
+                    .setVisibility(View.VISIBLE);
         }
     }
 
@@ -191,42 +200,92 @@ public class SubjectFragment extends Fragment implements Observer
 //        System.out.println("ent adapter");
 //        System.out.println(entMainAdapter.getSubjectListMain());
 
-        fragmentEntBinding.entCancelCardview.setOnClickListener(new View.OnClickListener()
+        fragmentEntBinding
+                .entCancelCardview
+                .setOnClickListener(new View.OnClickListener()
         {
             @Override
             public void onClick(View v)
             {
 
-//                if (selectedSubects.size() == 4)
-//                {
-                    for (Subject s : selectedSubects
-                    ) {
 
-                        s.setIsSelected(0);
+//                    for (Subject s : selectedSubects
+//                    ) {
+//
+//                        s.setIsSelected(0);
+//                    }
+//
+//                    fragmentEntBinding.entStartCardview.setVisibility(View.GONE);
+//
+//                    subjectFragmentViewModel.setSubjectList(new ArrayList<Subject>());
+//                    subjectFragmentViewModel.setSubjectListMain(new ArrayList<Subject>());
+//                    selectedSubects = new ArrayList<>();
+//                    setUpListOfSbjectsMainView(fragmentEntBinding.listSubject);
+//                    setUpListOfSbjectsMainView(fragmentEntBinding.listSubjectMain);
+
+//                    subjectFragmentViewModel.fetchSubjectList();
+//                    System.out.println("Uodate list");
+//                    System.out.println(subjectFragmentViewModel.getSubjectList());
+
+
+//                    subjectFragmentViewModel.setCancelCardView(false);
+                if (selectedSubects.size() > 3)
+                {
+                    selectedSubects.get
+                            (selectedSubects.size() - 1).setIsSelected(0);
+                    selectedSubects
+                            .remove
+                                    (selectedSubects.size() - 1);
+
+                    if (selectedSubects.size() == Constant.FULL_TEST_SUBJECT_COUNT_ONE_CHOISE)
+                    {
+                        Subject item = selectedSubects
+                                .get(selectedSubects.size() - 1);
+//                        item.setIsSelected(0);
+                        ArrayList<Subject> sublings = new ArrayList<>();
+                        sublings.add(selectedSubects.get(selectedSubects.size() - 1));
+
+                        for (Subject s : subjectFragmentViewModel
+                        .getSubjectList())
+                        {
+                            if (item.getSublings().toString().contains(s.getAlias()) && s != item
+                                    && s.getIsSelected() != 1
+                            ) {
+                                sublings.add(s);
+                            }
+                        }
+                        entMainAdapter.setSubjectList(sublings);
+                    }
+                    else
+                    {
+                        ArrayList<Subject> sublings = new ArrayList<>();
+//                        sublings.add(selectedSubects.get(selectedSubects.size() - 1));
+
+                        for (Subject s : subjectFragmentViewModel
+                                .getSubjectList())
+                        {
+                            if (!s.isMain())
+                            {
+                                s.setIsSelected(0);
+                                sublings.add(s);
+                            }
+
+                        }
+                        entMainAdapter.setSubjectList(sublings);
+                        fragmentEntBinding
+                                .entCancelCardview
+                                .setVisibility(View.GONE);
+
+
                     }
 
-                    fragmentEntBinding.entStartCardview.setVisibility(View.GONE);
+                    System.out.println(selectedSubects);
 
-                    subjectFragmentViewModel.setSubjectList(new ArrayList<Subject>());
-                    subjectFragmentViewModel.setSubjectListMain(new ArrayList<Subject>());
-                    selectedSubects = new ArrayList<>();
-                    setUpListOfSbjectsMainView(fragmentEntBinding.listSubject);
-                    setUpListOfSbjectsMainView(fragmentEntBinding.listSubjectMain);
-                    subjectFragmentViewModel.fetchSubjectList();
-                    subjectFragmentViewModel.setCancelCardView(false);
-//                }
-//                else
-//                {
-////                    selectedSubects.remove(4);
-////                    subjectFragmentViewModel.setSubjectList();
-////                    subjectFragmentViewModel.setSubjectListMain(new ArrayList<Subject>());
-////                    setUpListOfSbjectsMainView(fragmentEntBinding.listSubject);
-////                    setUpListOfSbjectsMainView(fragmentEntBinding.listSubjectMain);
-////                    subjectFragmentViewModel.fetchSubjectList();
-////                    subjectFragmentViewModel.setCancelCardView(false);
-//
-//
-//                }
+                    fragmentEntBinding
+                            .entStartCardview
+                            .setVisibility(View.GONE);
+
+                }
 
 
 
@@ -240,56 +299,86 @@ public class SubjectFragment extends Fragment implements Observer
             public void onItemClick(Subject item, List<Subject> subjects, int i) {
 //                System.out.println(item.getSublings().toString());
 
-//                System.out.println(item.getSublings().toString());
-                if (!item.isMain)
-                {
-                    List<Subject> sublings = new ArrayList<>();
-                    sublings.add(item);
+                List<Subject> sublings = new ArrayList<>();
 
+                for (Subject s : subjects) {
+                    if (s.getIsSelected() == 1) {
+                        sublings.add(s);
+                    }
+                }
+
+//                System.out.println(item.getSublings().toString());
+                if (!item.isMain &&
+                        sublings.size() < Constant.CHOISE_SUBJECT_COUNT
+                )
+                {
+//                    System.out.println("Inside If");
+
+//                    entMainAdapter.setSubject(item);
                     subjectFragmentViewModel.setCancelCardView(true);
 
-                    if (getSelectedSubects().size() < 5)
+                    if (getSelectedSubects().size() == Constant.FULL_TEST_SUBJECT_COUNT_NO_CHOISE)
                     {
-
                         if (item.getIsSelected() != 1)
                         {
+
+                            sublings.add(item);
                             item.setIsSelected(1);
                             addToSelectedList(item);
-//                            RecyclerView.ViewHolder view = fragmentEntBinding.listSubject
-//                                    .findViewHolderForLayoutPosition(i);
-////                           CardView cardView =  view.itemView.findViewById(R.id.cardview1);
-//                            TextView textView = view.itemView.findViewById(R.id.subject_title_text);
-//                            textView.setCompoundDrawablesWithIntrinsicBounds( R.drawable.image, 0, 0, 0);
-//                            cardView
-//                                    .setCardBackgroundColor(
-//                                            Color.parseColor("#ff2daafc")
-////                                Color.WHITE
-//                                    );
-//                            textView.setTextColor(Color.WHITE);
+
                         }
 
 
 
+
                         for (Subject s : subjects) {
-                            if (item.getSublings().toString().contains(s.getAlias()) && s != item) {
+                            if (item.getSublings().toString().contains(s.getAlias()) && s != item
+                                    && s.getIsSelected() != 1
+                            ) {
                                 sublings.add(s);
                             }
                         }
 
                         entMainAdapter.setSubjectList(sublings);
 
+//                        System.out.println("get");
+//                        System.out.println(getSelectedSubects());
 
-                        setUpListOfSbjectsMainView(fragmentEntBinding.listSubject);
+//                        setUpListOfSbjectsMainView(fragmentEntBinding.listSubject);
 
-                        EntMainAdapter entMainAdapter2 = (EntMainAdapter) fragmentEntBinding.listSubject
-                                .getAdapter();
-                        entMainAdapter2.setSubjectListMain(sublings);
+//                        EntMainAdapter entMainAdapter2 = (EntMainAdapter) fragmentEntBinding.listSubject
+//                                .getAdapter();
+//                        entMainAdapter2.setSubjectListMain(sublings);
 
 
                     }
+                    else if (getSelectedSubects().size() == Constant.FULL_TEST_SUBJECT_COUNT_ONE_CHOISE)
+                    {
+                        sublings.clear();
+//
+                        if (item.getIsSelected() != 1) {
+//
+                            sublings.add(getSelectedSubects().get(getSelectedSubects().size() - 1));
+                            item.setIsSelected(1);
+                            addToSelectedList(item);
+                            sublings.add(item);
+//
+//                        }
 
+//                        for (Subject s : subjects) {
+//                            if (!item.isMain
+//                                    && s.getIsSelected() == 1
+//                            ) {
+//                                sublings.add(s);
+//                            }
+//                        }
 
+                            entMainAdapter.setSubjectList(sublings);
+                        }
+                    }
                 }
+
+
             }
 
         });
@@ -301,7 +390,8 @@ public class SubjectFragment extends Fragment implements Observer
     public void update(Observable o, Object arg)
     {
         if(o instanceof SubjectFragmentViewModel) {
-            EntMainAdapter entMainAdapter = (EntMainAdapter) fragmentEntBinding.listSubjectMain
+            EntMainAdapter entMainAdapter = (EntMainAdapter) fragmentEntBinding
+                    .listSubjectMain
                     .getAdapter();
             SubjectFragmentViewModel subjectFragmentViewModel
                     = (SubjectFragmentViewModel) o;
@@ -313,7 +403,8 @@ public class SubjectFragment extends Fragment implements Observer
 //            System.out.println(entMainAdapter.getSubjectListMain().get(0).title);
             selectedSubects.addAll(entMainAdapter.getSubjectListMain());
 //
-            EntMainAdapter entMainAdapter2 = (EntMainAdapter) fragmentEntBinding.listSubject
+            EntMainAdapter entMainAdapter2 = (EntMainAdapter) fragmentEntBinding
+                    .listSubject
                     .getAdapter();
             entMainAdapter2.setSubjectListMain(subjectFragmentViewModel
             .getSubjectList());

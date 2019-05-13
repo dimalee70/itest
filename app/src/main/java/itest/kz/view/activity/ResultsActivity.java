@@ -66,7 +66,7 @@ public class ResultsActivity extends AppCompatActivity
         subjectList = getIntent().getParcelableArrayListExtra(Constant.SUBJECT_LIST);
         selectedSubject = (Subject) getIntent().getSerializableExtra(Constant.SELECTED_SUBJECT);
         activityResultsBinding = DataBindingUtil.setContentView(this, R.layout.activity_results);
-        statisticTag = getIntent().getExtras().getString(Constant.STATISTIC_TAG, "");
+        statisticTag = getIntent().getExtras().getString(Constant.STATISTIC_TAG, null);
         typeTest = getIntent().getExtras().getString(Constant.TYPE);
         resultsViewModel = new ResultsViewModel(this);
         activityResultsBinding.setResults(resultsViewModel);
@@ -202,7 +202,7 @@ public class ResultsActivity extends AppCompatActivity
     {
 //        System.out.println("Close method");
 
-        if (resultTag != null)
+        if (statisticTag != null && statisticTag.equals(Constant.STATISTIC_TAG) )
         {
             Intent intent = new Intent(getBaseContext(), StatisticActivity.class);
             intent.putExtra(Constant.ACCESS_TOKEN, accessToken);

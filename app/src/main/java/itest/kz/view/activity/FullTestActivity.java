@@ -108,6 +108,7 @@ public class FullTestActivity extends AppCompatActivity
     private TextView dialogTextFinish;
     private Button buttonYesFinish;
     private Button buttonNoFinish;
+    private String statisticTag;
 
 
 
@@ -137,6 +138,7 @@ public class FullTestActivity extends AppCompatActivity
         this.isStartedFirst = getIntent().getExtras().getBoolean(Constant.IS_STARTED_FIRST, true);
         this.resultTag = getIntent().getExtras().getString(Constant.RESULT_TAG, null);
         this.hasActiveTest = getIntent().getBooleanExtra(Constant.hasActiveTest, false);
+        this.statisticTag = getIntent().getExtras().getString(Constant.STATISTIC_TAG, null);
 
         language = settings.getString(Constant.LANG, "kz");
         getAccessToken();
@@ -682,7 +684,8 @@ public class FullTestActivity extends AppCompatActivity
 
 //                                   mPager.setAdapter( new MyAdapter(getSupportFragmentManager(), questions.get(0)));u
         mPager.setAdapter(new FullTestAdapter(getSupportFragmentManager(),arrayList, testIdMain,
-                                            subjectList, currentPosition, resultTag));
+                                            subjectList, currentPosition, resultTag,
+                                            statisticTag));
 
         PageListener listener = new PageListener();
         mPager.addOnPageChangeListener(listener);

@@ -3,6 +3,7 @@ package itest.kz.viewmodel;
 import android.content.Context;
 import android.databinding.BaseObservable;
 import android.graphics.drawable.Drawable;
+import android.os.Build;
 
 import itest.kz.R;
 import itest.kz.model.Subject;
@@ -17,8 +18,14 @@ public class ItemEntViewModel  extends BaseObservable
     {
         this.subject = subject;
         this.context = context;
-        this.myDrawabble = (subject.isMain || subject.getIsSelected() == 1)? context.getDrawable( R.drawable.ic_check) :
-                context.getDrawable(R.drawable.ic_plus);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            this.myDrawabble = (subject.isMain || subject.getIsSelected() == 1)? context.getDrawable( R.drawable.ic_check) :
+                    context.getDrawable(R.drawable.ic_plus);
+        }
+        else
+            this.myDrawabble = (subject.isMain || subject.getIsSelected() == 1)? context.getResources()
+                    .getDrawable( R.drawable.ic_check) :
+                    context.getResources().getDrawable(R.drawable.ic_plus);
     }
 
     public void setMyDrawabble(Drawable myDrawabble)
@@ -41,6 +48,15 @@ public class ItemEntViewModel  extends BaseObservable
 
     public Drawable getIcon()
     {
-       return myDrawabble;
+        if (subject.getIsSelected() == 1 || subject.isMain()) {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                return context.getDrawable(R.drawable.ic_check);
+            }
+            return context.getResources().getDrawable(R.drawable.ic_plus);
+        }
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            return context.getDrawable(R.drawable.ic_plus);
+        }
+        return context.getResources().getDrawable(R.drawable.ic_plus);
     }
 }

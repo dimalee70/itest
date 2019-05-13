@@ -24,6 +24,7 @@ public class MyAdapter extends FragmentStatePagerAdapter
     private Subject selectedSubject;
     private String resultTag;
     private String typeTest;
+    private String statisticTag;
 //    public MyAdapter(FragmentManager fm, List<Test> test)
 //    {
 //        super(fm);
@@ -32,7 +33,11 @@ public class MyAdapter extends FragmentStatePagerAdapter
 ////            this.question = question;
 //    }
 
-    public MyAdapter(FragmentManager fm, Tests test, Subject selectedSubject, String resultTAg, String typeTest)
+    public MyAdapter(FragmentManager fm,
+                     Tests test,
+                     Subject selectedSubject,
+                     String resultTAg, String typeTest,
+                     String statisticTag)
     {
         super(fm);
         this.test = test;
@@ -40,6 +45,7 @@ public class MyAdapter extends FragmentStatePagerAdapter
         this.selectedSubject = selectedSubject;
         this.resultTag = resultTAg;
         this.typeTest = typeTest;
+        this.statisticTag = statisticTag;
 //            this.question = question;
     }
 
@@ -58,7 +64,10 @@ public class MyAdapter extends FragmentStatePagerAdapter
 //            if (i == test.size() - 1)
 //                testFragment.setTa
 //            Fragment fragment = TestFragment.newInstance(i, test);
-            return TestFragment.newInstance(i, test, selectedSubject, typeTest , test.getTestId(),resultTag);
+            return TestFragment.newInstance(i, test,
+                    selectedSubject, typeTest ,
+                    test.getTestId(),resultTag,
+                    statisticTag);
 
         }
         return null;
