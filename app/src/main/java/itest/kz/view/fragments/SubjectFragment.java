@@ -198,7 +198,7 @@ public class SubjectFragment extends Fragment implements Observer
         EntMainAdapter entMainAdapter = new EntMainAdapter();
         listSubjectMain.setAdapter(entMainAdapter);
         GridLayoutManager gridLayoutManager = new GridLayoutManager(getContext(), 3);
-        listSubjectMain.addItemDecoration(new EqualSpacingItemDecoration(20));
+        listSubjectMain.addItemDecoration(new EqualSpacingItemDecoration(10));
 
         listSubjectMain.setLayoutManager(gridLayoutManager);
 
@@ -287,7 +287,7 @@ public class SubjectFragment extends Fragment implements Observer
 
                     }
 
-                    System.out.println(selectedSubects);
+//                    System.out.println(selectedSubects);
 
                     fragmentEntBinding
                             .entStartCardview
@@ -300,49 +300,49 @@ public class SubjectFragment extends Fragment implements Observer
             }
         });
 
-//        entMainAdapter
-//                .setOnItemListener(new EntMainAdapter.OnItemClickListener()
-//        {
-//            @Override
-//            public void onItemClick(Subject item, List<Subject> subjects, int i) {
-//
-//                List<Subject> sublings = new ArrayList<>();
-//
-//                for (Subject s : subjects) {
-//                    if (s.getIsSelected() == 1) {
-//                        sublings.add(s);
-//                    }
-//                }
-//
-//                if (!item.isMain &&
-//                        sublings.size() < Constant.CHOISE_SUBJECT_COUNT
-//                )
-//                {
-//                    subjectFragmentViewModel.setCancelCardView(true);
-//
-//                    if (getSelectedSubects().size() == Constant.FULL_TEST_SUBJECT_COUNT_NO_CHOISE)
-//                    {
-//                        if (item.getIsSelected() != 1)
-//                        {
-//
-//                            sublings.add(item);
-//                            item.setIsSelected(1);
-//                            addToSelectedList(item);
-//
-//                        }
-//
-//
-//
-//
-//                        for (Subject s : subjects) {
-//                            if (item.getSublings().toString().contains(s.getAlias()) && s != item
-//                                    && s.getIsSelected() != 1
-//                            ) {
-//                                sublings.add(s);
-//                            }
-//                        }
-//
-//                        entMainAdapter.setSubjectList(sublings);
+        entMainAdapter
+                .setOnItemListener(new EntMainAdapter.OnItemClickListener()
+        {
+            @Override
+            public void onItemClick(Subject item, List<Subject> subjects, int i) {
+
+                List<Subject> sublings = new ArrayList<>();
+
+                for (Subject s : subjects) {
+                    if (s.getIsSelected() == 1) {
+                        sublings.add(s);
+                    }
+                }
+
+                if (!item.isMain &&
+                        sublings.size() < Constant.CHOISE_SUBJECT_COUNT
+                )
+                {
+                    subjectFragmentViewModel.setCancelCardView(true);
+
+                    if (getSelectedSubects().size() == Constant.FULL_TEST_SUBJECT_COUNT_NO_CHOISE)
+                    {
+                        if (item.getIsSelected() != 1)
+                        {
+
+                            sublings.add(item);
+                            item.setIsSelected(1);
+                            addToSelectedList(item);
+
+                        }
+
+
+
+
+                        for (Subject s : subjects) {
+                            if (item.getSublings().toString().contains(s.getAlias()) && s != item
+                                    && s.getIsSelected() != 1
+                            ) {
+                                sublings.add(s);
+                            }
+                        }
+
+                        entMainAdapter.setSubjectList(sublings);
 //
 //                    }
 //                    else if (getSelectedSubects().size() == Constant.FULL_TEST_SUBJECT_COUNT_ONE_CHOISE)

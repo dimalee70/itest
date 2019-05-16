@@ -15,6 +15,7 @@ public class Subject implements Serializable, Parcelable, Comparable, Cloneable
 
     private int isSelected = 0;
     private  int onClickedRecycle = 0;
+    private boolean isSubling;
 
     private boolean isExpand = false;
 
@@ -195,6 +196,16 @@ public class Subject implements Serializable, Parcelable, Comparable, Cloneable
     public void setDate(Date date)
     {
         this.date = date;
+    }
+
+    public boolean isSubling()
+    {
+        return isSubling;
+    }
+
+    public void setSubling(boolean subling)
+    {
+        isSubling = subling;
     }
 
     @Override

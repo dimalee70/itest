@@ -17,8 +17,7 @@
             android:id="@+id/profile_info_relative"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/colorBackgroundCardView"
-            android:layout_marginBottom="28dp">
+            android:background="@color/colorBackgroundCardView">
 
         <android.support.v7.widget.CardView
             android:id="@+id/cardview_subject"
@@ -26,10 +25,11 @@
             android:layout_height="match_parent"
             android:minHeight="95dp"
             android:minWidth="95dp"
+            android:layout_centerInParent="true"
+            android:layout_marginStart="10dp"
+            app:cardElevation="0dp"
             app:cardBackgroundColor="@{ent.backgroundColor}"
             app:cardCornerRadius="5dp">
-
-            <!--android:layout_marginStart="17dp"-->
 
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -46,74 +46,36 @@
                     />
                 <!--android:showSvg="@{ent.svg}"-->
 
-                <TextView
-                    android:id="@+id/subject_title_text"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentBottom="true"
-                    android:ellipsize="end"
-                    android:fontFamily="@font/my_open_sans_regular"
-                    android:maxLines="1"
-                    android:text="@{ent.name}"
-                    android:textAlignment="center"
-                    android:textColor="@color/colorWhite"
-                    android:textSize="10sp"
-                    android:layout_marginBottom="10dp"/>
-                <!--android:layout_marginLeft="15dp"-->
-                <!--android:layout_marginTop="10dp"-->
-                <!--android:layout_marginBottom="10dp"-->
-                <!--android:drawableEnd="@{ent.icon}"-->
-
-                <!--android:drawableEnd="@drawable/ic_check"-->
-                <!--android:drawableEnd="@{end.icon}"-->
-
-
-                <!--<ImageView-->
-                    <!--android:id="@+id/ivMap"-->
-                    <!--android:layout_width="wrap_content"-->
-                    <!--android:layout_height="wrap_content"-->
-                    <!--android:layout_above="@+id/selectLanguage"-->
-                    <!--android:layout_gravity="right"-->
-                    <!--android:src="@drawable/ic_check" -->
-                    <!--/>-->
-
 
 
             </RelativeLayout>
+
+            <TextView
+                android:id="@+id/subject_title_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom"
+                android:layout_alignParentBottom="true"
+                android:ellipsize="end"
+                android:fontFamily="@font/my_open_sans_regular"
+                android:maxLines="1"
+                android:text="@{ent.name}"
+                android:textAlignment="center"
+                android:textColor="@color/colorWhite"
+                android:textSize="10sp"
+                android:layout_marginBottom="10dp"/>
 
         </android.support.v7.widget.CardView>
 
         <ImageView
             android:id="@+id/photo_image_view"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
             android:layout_below="@+id/cardview_subject"
-            android:src="@drawable/ic_tick" />
+            app:srcCompat="@drawable/tick"
+            android:visibility="@{ent.svgVisibility}"/>
 
         </RelativeLayout>
     </LinearLayout>
 
     </layout>
-
-            <!--<RelativeLayout-->
-<!--android:id="@+id/profile_info_relative"-->
-<!--android:layout_width="match_parent"-->
-<!--android:layout_height="wrap_content"-->
-<!--android:layout_marginTop="30dp"-->
-<!--android:layout_marginBottom="28dp">-->
-
-<!--<de.hdodenhof.circleimageview.CircleImageView-->
-    <!--android:id="@+id/profilePhoto"-->
-    <!--android:layout_width="120dp"-->
-    <!--android:layout_height="120dp"-->
-    <!--android:layout_centerInParent="true"-->
-    <!--android:src="@{profile.profileImage}" />-->
-
-<!--<ImageView-->
-    <!--android:id="@+id/photo_image_view"-->
-    <!--android:layout_width="40dp"-->
-    <!--android:layout_height="40dp"-->
-    <!--android:layout_below="@+id/profilePhoto"-->
-    <!--android:layout_centerHorizontal="true"-->
-    <!--android:src="@drawable/ic_add_profile_photo_main" />-->
-<!--</RelativeLayout>-->

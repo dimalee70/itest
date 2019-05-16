@@ -2,6 +2,7 @@ package itest.kz.util;
 
 public interface Constant
 {
+    public final String COLOR_UNSELECTED_SUBJECT = "#6B7983";
     public final int FULL_TEST_SUBJECT_COUNT_NO_CHOISE = 3;
 
     public  final  int FULL_TEST_SUBJECT_COUNT_ONE_CHOISE = 4;

@@ -8,11 +8,13 @@ import android.databinding.ObservableInt;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
+import android.view.View;
 
 import com.ahmadrosid.svgloader.SvgLoader;
 
 import itest.kz.R;
 import itest.kz.model.Subject;
+import itest.kz.util.Constant;
 
 public class ItemEntViewModel  extends BaseObservable
 {
@@ -20,13 +22,17 @@ public class ItemEntViewModel  extends BaseObservable
     private Context context;
     private Subject subject;
     public ObservableInt backgroundColor;
+    public ObservableInt svgVisibility = new ObservableInt(View.INVISIBLE);
 
     public ItemEntViewModel(Context context, Subject subject)
     {
         this.subject = subject;
         this.context = context;
         backgroundColor =  new ObservableInt(Color.parseColor(subject.getColorBg()));
-
+        if (subject.isMain || subject.getIsSelected() == 1)
+        {
+            svgVisibility.set(View.VISIBLE);
+        }
 
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
@@ -37,6 +43,23 @@ public class ItemEntViewModel  extends BaseObservable
             this.myDrawabble = (subject.isMain || subject.getIsSelected() == 1)? context.getResources()
                     .getDrawable( R.drawable.ic_check) :
                     context.getResources().getDrawable(R.drawable.ic_plus);
+    }
+
+    public void setBackgroundColor(boolean isSubling)
+    {
+        if (isSubling)
+            backgroundColor.set(Color.parseColor(subject.getColorBg()));
+        else
+            backgroundColor.set(Color.parseColor(Constant.COLOR_UNSELECTED_SUBJECT));
+        notifyChange();
+    }
+    public void setSvgVisibility(boolean isVisibility)
+    {
+        if (isVisibility)
+            svgVisibility.set(View.VISIBLE);
+        else
+            svgVisibility.set(View.INVISIBLE);
+        notifyChange();
     }
 
     public void setMyDrawabble(Drawable myDrawabble)
@@ -53,6 +76,7 @@ public class ItemEntViewModel  extends BaseObservable
     {
         return subject.getIcon();
     }
+
     public void setSubject(Subject subject)
     {
         this.subject = subject;

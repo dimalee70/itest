@@ -71,8 +71,8 @@ public class EqualSpacingItemDecoration extends RecyclerView.ItemDecoration {
 
                     outRect.left = spacing;
                     outRect.right = spacing;
-                    outRect.top = spacing;
-                    outRect.bottom =  spacing;
+//                    outRect.top = spacing;
+//                    outRect.bottom =  spacing;
                 }
                 break;
         }
