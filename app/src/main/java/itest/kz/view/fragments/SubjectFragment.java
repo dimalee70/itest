@@ -3,12 +3,14 @@ package itest.kz.view.fragments;
 import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.graphics.Color;
+import android.graphics.Rect;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.DividerItemDecoration;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -27,6 +29,7 @@ import itest.kz.databinding.FragmentEntBinding;
 import itest.kz.model.Subject;
 import itest.kz.model.Test;
 import itest.kz.util.Constant;
+import itest.kz.util.EqualSpacingItemDecoration;
 import itest.kz.view.activity.FullTestActivity;
 import itest.kz.view.adapters.EntMainAdapter;
 import itest.kz.viewmodel.SubjectFragmentViewModel;
@@ -194,7 +197,12 @@ public class SubjectFragment extends Fragment implements Observer
     {
         EntMainAdapter entMainAdapter = new EntMainAdapter();
         listSubjectMain.setAdapter(entMainAdapter);
-        listSubjectMain.setLayoutManager(new LinearLayoutManager(getContext()));
+        GridLayoutManager gridLayoutManager = new GridLayoutManager(getContext(), 3);
+        listSubjectMain.addItemDecoration(new EqualSpacingItemDecoration(20));
+
+        listSubjectMain.setLayoutManager(gridLayoutManager);
+
+//        listNodes.setLayoutManager(new GridLayoutManager(this, 2));
 
 
 //        System.out.println("ent adapter");
@@ -292,96 +300,71 @@ public class SubjectFragment extends Fragment implements Observer
             }
         });
 
-        entMainAdapter
-                .setOnItemListener(new EntMainAdapter.OnItemClickListener()
-        {
-            @Override
-            public void onItemClick(Subject item, List<Subject> subjects, int i) {
-//                System.out.println(item.getSublings().toString());
-
-                List<Subject> sublings = new ArrayList<>();
-
-                for (Subject s : subjects) {
-                    if (s.getIsSelected() == 1) {
-                        sublings.add(s);
-                    }
-                }
-
-//                System.out.println(item.getSublings().toString());
-                if (!item.isMain &&
-                        sublings.size() < Constant.CHOISE_SUBJECT_COUNT
-                )
-                {
-//                    System.out.println("Inside If");
-
-//                    entMainAdapter.setSubject(item);
-                    subjectFragmentViewModel.setCancelCardView(true);
-
-                    if (getSelectedSubects().size() == Constant.FULL_TEST_SUBJECT_COUNT_NO_CHOISE)
-                    {
-                        if (item.getIsSelected() != 1)
-                        {
-
-                            sublings.add(item);
-                            item.setIsSelected(1);
-                            addToSelectedList(item);
-
-                        }
-
-
-
-
-                        for (Subject s : subjects) {
-                            if (item.getSublings().toString().contains(s.getAlias()) && s != item
-                                    && s.getIsSelected() != 1
-                            ) {
-                                sublings.add(s);
-                            }
-                        }
-
-                        entMainAdapter.setSubjectList(sublings);
-
-//                        System.out.println("get");
-//                        System.out.println(getSelectedSubects());
-
-//                        setUpListOfSbjectsMainView(fragmentEntBinding.listSubject);
-
-//                        EntMainAdapter entMainAdapter2 = (EntMainAdapter) fragmentEntBinding.listSubject
-//                                .getAdapter();
-//                        entMainAdapter2.setSubjectListMain(sublings);
-
-
-                    }
-                    else if (getSelectedSubects().size() == Constant.FULL_TEST_SUBJECT_COUNT_ONE_CHOISE)
-                    {
-                        sublings.clear();
+//        entMainAdapter
+//                .setOnItemListener(new EntMainAdapter.OnItemClickListener()
+//        {
+//            @Override
+//            public void onItemClick(Subject item, List<Subject> subjects, int i) {
 //
-                        if (item.getIsSelected() != 1) {
+//                List<Subject> sublings = new ArrayList<>();
 //
-                            sublings.add(getSelectedSubects().get(getSelectedSubects().size() - 1));
-                            item.setIsSelected(1);
-                            addToSelectedList(item);
-                            sublings.add(item);
+//                for (Subject s : subjects) {
+//                    if (s.getIsSelected() == 1) {
+//                        sublings.add(s);
+//                    }
+//                }
+//
+//                if (!item.isMain &&
+//                        sublings.size() < Constant.CHOISE_SUBJECT_COUNT
+//                )
+//                {
+//                    subjectFragmentViewModel.setCancelCardView(true);
+//
+//                    if (getSelectedSubects().size() == Constant.FULL_TEST_SUBJECT_COUNT_NO_CHOISE)
+//                    {
+//                        if (item.getIsSelected() != 1)
+//                        {
+//
+//                            sublings.add(item);
+//                            item.setIsSelected(1);
+//                            addToSelectedList(item);
 //
 //                        }
-
+//
+//
+//
+//
 //                        for (Subject s : subjects) {
-//                            if (!item.isMain
-//                                    && s.getIsSelected() == 1
+//                            if (item.getSublings().toString().contains(s.getAlias()) && s != item
+//                                    && s.getIsSelected() != 1
 //                            ) {
 //                                sublings.add(s);
 //                            }
 //                        }
-
-                            entMainAdapter.setSubjectList(sublings);
-                        }
-                    }
-                }
-
-
-            }
-
-        });
+//
+//                        entMainAdapter.setSubjectList(sublings);
+//
+//                    }
+//                    else if (getSelectedSubects().size() == Constant.FULL_TEST_SUBJECT_COUNT_ONE_CHOISE)
+//                    {
+//                        sublings.clear();
+////
+//                        if (item.getIsSelected() != 1) {
+////
+//                            sublings.add(getSelectedSubects().get(getSelectedSubects().size() - 1));
+//                            item.setIsSelected(1);
+//                            addToSelectedList(item);
+//                            sublings.add(item);
+//
+//                            entMainAdapter.setSubjectList(sublings);
+//                        }
+//                    }
+//                }
+//
+//
+//            }
+//
+//        });
     }
 
 

@@ -1,5 +1,6 @@
 package itest.kz.view.adapters;
 
+import android.app.Activity;
 import android.databinding.DataBindingUtil;
 import android.graphics.Color;
 import android.support.annotation.NonNull;
@@ -7,6 +8,9 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+
+import com.ahmadrosid.svgloader.SvgLoader;
 
 import java.util.List;
 
@@ -135,7 +139,10 @@ public class EntMainAdapter extends RecyclerView.Adapter<EntMainAdapter.EntMainA
 
                         }
                     });
-
+//            ImageView imageView = itemEntBinding.imageView1;
+//            SvgLoader.pluck()
+//                    .with((Activity) itemView.getContext())
+//                    .load(subject.getIcon(), imageView);
         }
     }
 }

@@ -1,5 +1,6 @@
 package itest.kz.util;
 
+import android.app.Activity;
 import android.databinding.BindingAdapter;
 import android.databinding.BindingConversion;
 import android.graphics.Color;
@@ -19,6 +20,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.ahmadrosid.svgloader.SvgLoader;
 import com.squareup.picasso.Picasso;
 
 import io.reactivex.functions.Action;
@@ -34,6 +36,15 @@ public class BindingUtils {
             super.updateDrawState(ds);
             ds.setUnderlineText(false);
         }
+    }
+
+    @BindingAdapter("android:showSvg")
+    public static void setSvg(ImageView imageView, String url)
+    {
+
+        SvgLoader.pluck()
+                .with((Activity) imageView.getContext())
+                .load(url, imageView);
     }
 
     @BindingAdapter("android:specText")

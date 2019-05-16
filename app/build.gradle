@@ -25,6 +25,7 @@ project.ext {
     expandableTextViewVerion = "1.0.5"
     hourglassVersion = "2.0.0"
     slidinguppanelVersion = "3.4.0"
+    svgLoaderVersion = "1.0.1"
 //    plainPieVersion = "v0.2.9"
 
 //    daggerVersion = "2.15"
@@ -135,6 +136,7 @@ dependencies {
 //    implementation "com.sothree.slidinguppanel:library:$slidinguppanelVersion"
     implementation 'com.romandanylyk:pageindicatorview:1.0.3@aar'
 
+    implementation "com.github.ar-android:AndroidSvgLoader:$svgLoaderVersion"
 //        implementation 'com.android.support:appcompat-v7:28.0.0'
 //    implementation "com.github.zurche:plain-pie:$plainPieVersion"
 

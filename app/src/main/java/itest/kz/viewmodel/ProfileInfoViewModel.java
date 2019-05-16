@@ -131,7 +131,7 @@ public class ProfileInfoViewModel extends BaseObservable
 
         if (language.equals(Constant.KZ))
             return R.string.surnameKz;
-        return R.string.surnameKz;
+        return R.string.surnameRu;
     }
 
     public int getHintNameText()

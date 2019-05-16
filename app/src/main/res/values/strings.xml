@@ -154,8 +154,9 @@
     <string name="surnameKz">Tегі: </string>
     <string name="surnameRu">Фамилия: </string>
 
-    <string name="hintSurnameKz">Ваша фамилия</string>
-    <string name="hintSurnameRu">Сіздің тегіңіз</string>
+    <string name="hintSurnameKz">Сіздің тегіңіз</string>
+    <string name="hintSurnameRu">Ваша фамилия</string>
+
 
     <string name="dateOfBirthKz">Туған күн, ай, жыл:</string>
     <string name="dateOfBirthRu">Дата рождения: </string>
