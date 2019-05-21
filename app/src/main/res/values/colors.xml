@@ -4,6 +4,8 @@
     <color name="colorErrorNoInternet">#A8ACAF</color>
 
     <!--&lt;!&ndash;9B9B9B&ndash;&gt;D8D8D8-->
+    <color name="colorBackgroundSubject">#CC0068AB</color>
+
     <color name="colorButtonShowAnswer">#FF75C634</color>
 
     <color name="colorCancelButton">#FFF58C24</color>

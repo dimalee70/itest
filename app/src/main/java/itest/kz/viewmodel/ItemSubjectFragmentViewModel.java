@@ -3,6 +3,7 @@ package itest.kz.viewmodel;
 import android.content.Context;
 import android.content.Intent;
 import android.databinding.BaseObservable;
+import android.databinding.ObservableField;
 import android.databinding.ObservableInt;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
@@ -12,6 +13,8 @@ import android.support.v4.content.res.ResourcesCompat;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+
+import com.squareup.picasso.Picasso;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -27,9 +30,11 @@ import itest.kz.app.AppController;
 import itest.kz.model.Subject;
 import itest.kz.model.SubjectResponce;
 import itest.kz.network.SubjectService;
+import itest.kz.util.BindableFieldTarget;
 import itest.kz.util.Constant;
 import itest.kz.view.activity.MaterialsActivity;
 import itest.kz.view.activity.TestActivity;
+import jp.wasabeef.picasso.transformations.CropCircleTransformation;
 
 public class ItemSubjectFragmentViewModel extends BaseObservable
 {
@@ -37,10 +42,12 @@ public class ItemSubjectFragmentViewModel extends BaseObservable
     private Context context;
     private ObservableInt cardColor;
     public  Action clickMat;
+    private ObservableField<Drawable> profileImage;
 //    private ObservableInt colorIcon = new ObservableInt(Color.BLACK);
 //    public ObservableInt buttonVisible;
     public ObservableInt textColor;
     public ObservableInt buttonsVisible;
+    private BindableFieldTarget bindableFieldTarget;
     public boolean isClicked = false;
 //    private List<Subject> subjectList;
 //    private CompositeDisposable compositeDisposable = new CompositeDisposable();
@@ -52,6 +59,8 @@ public class ItemSubjectFragmentViewModel extends BaseObservable
         this.subject = subject;
         this.context = context;
         this.cardColor = new ObservableInt(Color.parseColor("#D8DCE5"));
+        profileImage = new ObservableField<>();
+        getInfoFromProfile();
         if (subject.isExpand())
         {
             this.textColor = new ObservableInt(Color.parseColor("#36ABF9"));
@@ -74,6 +83,11 @@ public class ItemSubjectFragmentViewModel extends BaseObservable
     {
         return subject.isExpand();
 
+    }
+
+    public String getSvg()
+    {
+        return subject.getIcon();
     }
 
     public int getColorIcon()
@@ -196,6 +210,33 @@ public class ItemSubjectFragmentViewModel extends BaseObservable
             }
         }).start();
 
+    }
+
+    public ObservableField<Drawable> getProfileImage()
+    {
+        return profileImage;
+    }
+
+    public void getInfoFromProfile()
+    {
+//        setProgress(true);
+        bindableFieldTarget = new BindableFieldTarget(profileImage, context.getResources());
+
+        Picasso
+                .get()
+                .load(subject.getImage())
+//                .load((profile.getAvatarUrl() == null ||
+//                        profile.getAvatarUrl().equals("")?
+//                        Constant.EMPTY_PHOTO :
+//                        profile.getAvatarUrl()))
+//                .transform(new CropCircleTransformation())
+//                .centerInside()
+//            .fit()
+                .into(bindableFieldTarget);
+
+//        setProgress(false);
+//        notifyChange();
+//        notifyChange();
     }
 
 }

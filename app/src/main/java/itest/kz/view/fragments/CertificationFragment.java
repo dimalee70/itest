@@ -11,6 +11,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.DividerItemDecoration;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
@@ -33,6 +34,8 @@ import itest.kz.databinding.FragmentCertificationBinding;
 
 import itest.kz.model.Subject;
 import itest.kz.util.Constant;
+import itest.kz.util.EqualSpacingItemDecoration;
+import itest.kz.view.adapters.EntMainAdapter;
 import itest.kz.view.adapters.SubjectAdapter;
 import itest.kz.viewmodel.CertificationFragmentViewModel;
 
@@ -153,11 +156,20 @@ public class CertificationFragment extends Fragment implements Observer
     // set up the list of user with recycler view
     private void setUpListOfSbjectsView(RecyclerView listSubject) {
         SubjectAdapter subjectAdapter = new SubjectAdapter();
-        DividerItemDecoration itemDecor = new DividerItemDecoration(getContext(), HORIZONTAL);
-//        itemDecor
-        listSubject.addItemDecoration(itemDecor);
+//        DividerItemDecoration itemDecor = new DividerItemDecoration(getContext(), HORIZONTAL);
+////        itemDecor
+//        listSubject.addItemDecoration(itemDecor);
+
+
+//        listSubject.setAdapter(subjectAdapter);
+
+        GridLayoutManager gridLayoutManager = new GridLayoutManager(getContext(), 3);
+        listSubject.addItemDecoration(new EqualSpacingItemDecoration(10));
+
+        listSubject.setLayoutManager(gridLayoutManager);
+
         listSubject.setAdapter(subjectAdapter);
-        listSubject.setLayoutManager(new LinearLayoutManager(getContext()));
+//        listSubject.setLayoutManager(new LinearLayoutManager(getContext()));
         subjectAdapter.setOnItemListener(
                 new SubjectAdapter.OnItemClickListener() {
                     @Override
