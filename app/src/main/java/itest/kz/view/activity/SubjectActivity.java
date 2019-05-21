@@ -154,8 +154,9 @@ public class SubjectActivity extends AppCompatActivity
 
         mFragments = new ArrayList<>();
 
-        mFragments.add(new SubjectFragment());
         mFragments.add(new CertificationFragment());
+        mFragments.add(new SubjectFragment());
+
 
         // do we need to implement databinding on each layout? I don't think so. but feel free to bind the layout if you want to.
         mViewPager = (ViewPager) activitySubjectBinding.vpFragmentsContainer;
@@ -167,10 +168,10 @@ public class SubjectActivity extends AppCompatActivity
         mTabLayout = activitySubjectBinding.tlTabsContainer;
 //                (TabLayout) findViewById(R.id.tl_tabs_container);
         mTabLayout.setupWithViewPager(mViewPager);
-        mTabLayout.getTabAt(0).setText((subjectViewModel
+        mTabLayout.getTabAt(1).setText((subjectViewModel
                 .getLanguage().equals(Constant.KZ)) ? R.string.fullEntKz
                 : R.string.fullEntRu);
-        mTabLayout.getTabAt(1).setText((subjectViewModel
+        mTabLayout.getTabAt(0).setText((subjectViewModel
                 .getLanguage().equals(Constant.KZ)) ? R.string.forSubjectKz
                 : R.string.forSubjectRu);
 
