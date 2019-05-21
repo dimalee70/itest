@@ -16,6 +16,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -168,11 +169,20 @@ public class SubjectFragment extends Fragment implements Observer
         this.selectedSubects = selectedSubects;
     }
 
+    public void removeFromSelectedList(Subject subject)
+    {
+        selectedSubects.remove(subject);
+
+        fragmentEntBinding
+                .entStartCardview
+                .setVisibility(View.GONE);
+    }
+
     public void addToSelectedList(Subject subject)
     {
-        fragmentEntBinding
-                .entCancelCardview
-                .setVisibility(View.VISIBLE);
+//        fragmentEntBinding
+//                .entCancelCardview
+//                .setVisibility(View.VISIBLE);
         selectedSubects.add(subject);
         if (selectedSubects.size() == Constant.FULL_TEST_SUBJECT_COUNT)
         {
@@ -181,6 +191,7 @@ public class SubjectFragment extends Fragment implements Observer
                     .entStartCardview
                     .setVisibility(View.VISIBLE);
         }
+
     }
 
     private void setUpObserver(Observable observable)
@@ -196,7 +207,9 @@ public class SubjectFragment extends Fragment implements Observer
     private void setUpListOfSbjectsMainView(RecyclerView listSubjectMain)
     {
         EntMainAdapter entMainAdapter = new EntMainAdapter();
+        entMainAdapter.setHasStableIds(true);
         listSubjectMain.setAdapter(entMainAdapter);
+
         GridLayoutManager gridLayoutManager = new GridLayoutManager(getContext(), 3);
         listSubjectMain.addItemDecoration(new EqualSpacingItemDecoration(10));
 
@@ -306,43 +319,200 @@ public class SubjectFragment extends Fragment implements Observer
             @Override
             public void onItemClick(Subject item, List<Subject> subjects, int i) {
 
-                List<Subject> sublings = new ArrayList<>();
-
-                for (Subject s : subjects) {
-                    if (s.getIsSelected() == 1) {
-                        sublings.add(s);
-                    }
-                }
-
-                if (!item.isMain &&
-                        sublings.size() < Constant.CHOISE_SUBJECT_COUNT
-                )
+                if(!item.isMain)
                 {
-                    subjectFragmentViewModel.setCancelCardView(true);
+                    List<Subject> sublings = new ArrayList<>();
 
-                    if (getSelectedSubects().size() == Constant.FULL_TEST_SUBJECT_COUNT_NO_CHOISE)
+                    for (Subject s : subjects)
                     {
-                        if (item.getIsSelected() != 1)
+                        if (s.getIsSelected() == 1)
                         {
-
-                            sublings.add(item);
-                            item.setIsSelected(1);
-                            addToSelectedList(item);
-
+                            sublings.add(s);
                         }
+                    }
 
+                    if (item.getIsSelected() == 1)
+                    {
+                        item.setIsSelected(0);
+//                        removeFromSelectedList(item);
+                        RecyclerView.ViewHolder view = listSubjectMain
+                                .findViewHolderForLayoutPosition(i);
+                        ImageView imageView = view
+                                .itemView
+                                .findViewById(R.id.photo_image_view);
+                        imageView.setVisibility(View.INVISIBLE);
 
+                        if (sublings.size() == Constant.CHOISE_SUBJECT_COUNT)
+                        {
+                            sublings.remove(item);
+                            Subject s = sublings.get(0);
 
+                            for (int j = 0; j < subjects.size(); j++)
+                            {
+                                Subject temp = subjects.get(j);
 
-                        for (Subject s : subjects) {
-                            if (item.getSublings().toString().contains(s.getAlias()) && s != item
-                                    && s.getIsSelected() != 1
-                            ) {
-                                sublings.add(s);
+                                if (s.getSublings().toString().contains(temp.getAlias())
+                                        || s == temp
+                                )
+                                {
+                                    RecyclerView.ViewHolder unselectedView = listSubjectMain
+                                            .findViewHolderForLayoutPosition(j);
+                                    CardView unselecteCardView = unselectedView
+                                            .itemView
+                                            .findViewById(R.id.cardview_subject);
+                                    unselecteCardView
+                                            .setCardBackgroundColor(Color.parseColor(temp.getColorBg()));
+                                    unselecteCardView.setClickable(true);
+                                }
+                                else
+                                {
+                                    RecyclerView.ViewHolder unselectedView = listSubjectMain
+                                            .findViewHolderForLayoutPosition(j);
+                                    CardView unselecteCardView = unselectedView
+                                            .itemView
+                                            .findViewById(R.id.cardview_subject);
+                                    unselecteCardView
+                                            .setCardBackgroundColor(Color.parseColor(Constant.COLOR_UNSELECTED_SUBJECT));
+                                    unselecteCardView.setClickable(false);
+                                }
                             }
                         }
 
-                        entMainAdapter.setSubjectList(sublings);
+                        else
+                        {
+                            for (int j = 0; j < subjects.size(); j++)
+                            {
+                                Subject temp = subjects.get(j);
+
+                                RecyclerView.ViewHolder unselectedView = listSubjectMain
+                                        .findViewHolderForLayoutPosition(j);
+                                CardView unselecteCardView = unselectedView
+                                        .itemView
+                                        .findViewById(R.id.cardview_subject);
+                                unselecteCardView
+                                        .setCardBackgroundColor(Color.parseColor(temp.getColorBg()));
+                                unselecteCardView.setClickable(true);
+
+                            }
+                        }
+                        removeFromSelectedList(item);
+                    }
+                    else
+                    {
+                        item.setIsSelected(1);
+                        addToSelectedList(item);
+                        sublings.add(item);
+
+//                        System.out.println(sublings);
+
+                        RecyclerView.ViewHolder view = listSubjectMain
+                                .findViewHolderForLayoutPosition(i);
+                        ImageView imageView = view
+                                .itemView
+                                .findViewById(R.id.photo_image_view);
+                        imageView.setVisibility(View.VISIBLE);
+
+                        if (sublings.size() == Constant.CHOISE_SUBJECT_COUNT)
+                        {
+                            for (int j = 0; j < subjects.size(); j++)
+                            {
+                                Subject s = subjects.get(j);
+
+                                if (s == sublings.get(0) || s == sublings.get(1)
+                                ) {
+                                    RecyclerView.ViewHolder unselectedView = listSubjectMain
+                                            .findViewHolderForLayoutPosition(j);
+                                    CardView unselectedCardView = unselectedView
+                                            .itemView
+                                            .findViewById(R.id.cardview_subject);
+                                    unselectedCardView
+                                            .setCardBackgroundColor(Color.parseColor(s.getColorBg()));
+                                    unselectedCardView.setClickable(true);
+                                }
+                                else
+                                    {
+                                    RecyclerView.ViewHolder unselectedView = listSubjectMain
+                                            .findViewHolderForLayoutPosition(j);
+                                    CardView unselectedCardView = unselectedView
+                                            .itemView
+                                            .findViewById(R.id.cardview_subject);
+                                    unselectedCardView
+                                            .setCardBackgroundColor(Color.parseColor(Constant.COLOR_UNSELECTED_SUBJECT));
+                                    unselectedCardView.setClickable(false);
+                                }
+                            }
+                        }
+                        else
+                        {
+                            for (int j = 0; j < subjects.size(); j++) {
+                                Subject s = subjects.get(j);
+
+                                if (item.getSublings().toString().contains(s.getAlias())
+                                        || s == item
+                                ) {
+                                    RecyclerView.ViewHolder unselectedView = listSubjectMain
+                                            .findViewHolderForLayoutPosition(j);
+                                    CardView unselecteCardView = unselectedView
+                                            .itemView
+                                            .findViewById(R.id.cardview_subject);
+                                    unselecteCardView
+                                            .setCardBackgroundColor(Color.parseColor(s.getColorBg()));
+                                    unselecteCardView.setClickable(true);
+                                } else {
+                                    RecyclerView.ViewHolder unselectedView = listSubjectMain
+                                            .findViewHolderForLayoutPosition(j);
+                                    CardView unselecteCardView = unselectedView
+                                            .itemView
+                                            .findViewById(R.id.cardview_subject);
+                                    unselecteCardView
+                                            .setCardBackgroundColor(Color.parseColor(Constant.COLOR_UNSELECTED_SUBJECT));
+                                    unselecteCardView.setClickable(false);
+                                }
+                            }
+                        }
+
+                    }
+                }
+
+//                RecyclerView.ViewHolder view = answerListRecycle.findViewHolderForLayoutPosition(i);
+//                CardView cardView =  view.itemView.findViewById(R.id.cardview1);
+//                TextView textView = view.itemView.findViewById(R.id.textview1);
+//                cardView
+//                        .setCardBackgroundColor(
+//                                Color.parseColor("#ff2daafc")
+////                                Color.WHITE
+//                        );
+//                textView.setTextColor(Color.WHITE);
+
+//                if (!item.isMain &&
+//                        sublings.size() < Constant.CHOISE_SUBJECT_COUNT
+//                )
+//                {
+//                    subjectFragmentViewModel.setCancelCardView(true);
+//
+//                    if (getSelectedSubects().size() == Constant.FULL_TEST_SUBJECT_COUNT_NO_CHOISE)
+//                    {
+//                        if (item.getIsSelected() != 1)
+//                        {
+//
+//                            sublings.add(item);
+//                            item.setIsSelected(1);
+//                            addToSelectedList(item);
+//
+//                        }
+//
+//
+//
+//
+//                        for (Subject s : subjects) {
+//                            if (item.getSublings().toString().contains(s.getAlias()) && s != item
+//                                    && s.getIsSelected() != 1
+//                            ) {
+//                                sublings.add(s);
+//                            }
+//                        }
+//
+//                        entMainAdapter.setSubjectList(sublings);
 //
 //                    }
 //                    else if (getSelectedSubects().size() == Constant.FULL_TEST_SUBJECT_COUNT_ONE_CHOISE)
@@ -362,9 +532,9 @@ public class SubjectFragment extends Fragment implements Observer
 //                }
 //
 //
-//            }
+            }
 //
-//        });
+        });
     }
 
 

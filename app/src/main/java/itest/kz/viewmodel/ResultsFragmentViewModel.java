@@ -107,7 +107,7 @@ public class ResultsFragmentViewModel extends Observable
         {
             if (typeTest.equals(Constant.TYPEFULLTEST))
             {
-                if (statisticTag.equals(Constant.STATISTIC_TAG))
+                if ( statisticTag != null && statisticTag.equals(Constant.STATISTIC_TAG))
                 {
                     fetchFullTestEntQuestionsGenerate(selectedSubject.getId());
                 }
@@ -123,6 +123,10 @@ public class ResultsFragmentViewModel extends Observable
             }
             else if (typeTest.equals(Constant.TYPESUBJECTTEST))
             {
+
+
+
+
 
 
 //                Intent intent = new Intent((Activity) context, TestActivity.class);

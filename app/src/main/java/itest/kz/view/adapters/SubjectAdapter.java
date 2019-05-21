@@ -107,20 +107,20 @@ public class SubjectAdapter extends RecyclerView.Adapter<SubjectAdapter.SubjectA
                 itemSubjectBinding.getSubjectFragmentViewModel().setSubject(subject);
             }
 
-            if (subject.isExpand())
-            {
-                itemSubjectBinding.expandCardview.setVisibility(View.VISIBLE);
-//                itemSubjectBinding
-//                        .titleSubject
-//                        .setTextColor(Color.parseColor("#ff2daafc"));
-            }
-            else
-            {
-                itemSubjectBinding.expandCardview.setVisibility(View.GONE);
-//                itemSubjectBinding
-//                        .titleSubject
-//                        .setTextColor(Color.BLACK);
-            }
+//            if (subject.isExpand())
+//            {
+//                itemSubjectBinding.expandCardview.setVisibility(View.VISIBLE);
+////                itemSubjectBinding
+////                        .titleSubject
+////                        .setTextColor(Color.parseColor("#ff2daafc"));
+//            }
+//            else
+//            {
+//                itemSubjectBinding.expandCardview.setVisibility(View.GONE);
+////                itemSubjectBinding
+////                        .titleSubject
+////                        .setTextColor(Color.BLACK);
+//            }
 
             itemSubjectBinding.subjectLinear.setOnClickListener(new View.OnClickListener()
             {

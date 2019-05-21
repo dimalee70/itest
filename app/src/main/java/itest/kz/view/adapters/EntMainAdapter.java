@@ -68,6 +68,12 @@ public class EntMainAdapter extends RecyclerView.Adapter<EntMainAdapter.EntMainA
         return 0;
     }
 
+    @Override
+    public long getItemId(int position)
+    {
+        return position;
+    }
+
     public List<Subject> getSubjectListMain()
     {
         return subjectList;
