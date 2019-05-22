@@ -71,6 +71,13 @@ public class MaterialsViewModel extends Observable
         fetchNodeList();
     }
 
+    public int getStartSubjectTestText()
+    {
+        if(language.equals(Constant.KZ))
+            return R.string.subjectTestKz;
+        return R.string.subjectTestRu;
+    }
+
     public void clickTest(View view)
     {
 

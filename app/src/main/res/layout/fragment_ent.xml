@@ -82,6 +82,43 @@
 
         </android.support.v7.widget.CardView>
 
+        <android.support.v7.widget.CardView
+            android:id="@+id/ent_start_cardview"
+            android:layout_margin="16dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            app:cardBackgroundColor="@color/colorBackgroundEntBtn"
+            app:cardCornerRadius="5dp"
+            android:visibility="gone"
+            >
+
+
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/ent_start_text_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textAlignment="center"
+                    android:text="@{ent.startFullTest}"
+                    android:textSize="16sp"
+                    android:fontFamily="@font/my_open_sans_semibold"
+                    android:textColor="@color/colorWhite"
+                    android:layout_centerInParent="true"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginRight="16dp"
+                    android:layout_marginLeft="16dp"
+                    />
+                <!--android:onClick="@{() ->ent.onClickCancel()}"-->
+                <!--android:onClick="@{ent.onClick}"-->
+            </RelativeLayout>
+
+        </android.support.v7.widget.CardView>
+
         <!--<ImageButton-->
             <!--android:id="@+id/button_reflesh"-->
             <!--android:layout_width="match_parent"-->
@@ -312,42 +349,42 @@
 
             </RelativeLayout>
 
-            <android.support.v7.widget.CardView
-                android:id="@+id/ent_start_cardview"
-                android:layout_margin="16dp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/subject_relative"
-                app:cardBackgroundColor="@color/colorBackgroundEntBtn"
-                app:cardCornerRadius="5dp"
-                android:visibility="gone"
-                >
+            <!--<android.support.v7.widget.CardView-->
+                <!--android:id="@+id/ent_start_cardview"-->
+                <!--android:layout_margin="16dp"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_below="@+id/subject_relative"-->
+                <!--app:cardBackgroundColor="@color/colorBackgroundEntBtn"-->
+                <!--app:cardCornerRadius="5dp"-->
+                <!--android:visibility="gone"-->
+                <!--&gt;-->
 
 
 
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                <!--<RelativeLayout-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="wrap_content">-->
 
-                    <TextView
-                        android:id="@+id/ent_start_text_view"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:textAlignment="center"
-                        android:text="@{ent.startFullTest}"
-                        android:textSize="16sp"
-                        android:fontFamily="@font/my_open_sans_semibold"
-                        android:textColor="@color/colorWhite"
-                        android:layout_centerInParent="true"
-                        android:layout_marginTop="20dp"
-                        android:layout_marginRight="16dp"
-                        android:layout_marginLeft="16dp"
-                        />
-                    <!--android:onClick="@{() ->ent.onClickCancel()}"-->
-                    <!--android:onClick="@{ent.onClick}"-->
-                </RelativeLayout>
+                    <!--<TextView-->
+                        <!--android:id="@+id/ent_start_text_view"-->
+                        <!--android:layout_width="match_parent"-->
+                        <!--android:layout_height="wrap_content"-->
+                        <!--android:textAlignment="center"-->
+                        <!--android:text="@{ent.startFullTest}"-->
+                        <!--android:textSize="16sp"-->
+                        <!--android:fontFamily="@font/my_open_sans_semibold"-->
+                        <!--android:textColor="@color/colorWhite"-->
+                        <!--android:layout_centerInParent="true"-->
+                        <!--android:layout_marginTop="20dp"-->
+                        <!--android:layout_marginRight="16dp"-->
+                        <!--android:layout_marginLeft="16dp"-->
+                        <!--/>-->
+                    <!--&lt;!&ndash;android:onClick="@{() ->ent.onClickCancel()}"&ndash;&gt;-->
+                    <!--&lt;!&ndash;android:onClick="@{ent.onClick}"&ndash;&gt;-->
+                <!--</RelativeLayout>-->
 
-            </android.support.v7.widget.CardView>
+            <!--</android.support.v7.widget.CardView>-->
 
             <!--</ScrollView>-->
 

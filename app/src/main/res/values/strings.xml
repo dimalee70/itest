@@ -1,5 +1,8 @@
 <resources>
     <string name="app_name">iTest</string>
+    
+    <string name="subjectTestKz">Пән бойынша тест</string>
+    <string name="subjectTestRu">Тест по предмету</string>
 
     <string name="tryAgainTextKz">Қайталап көру</string>
     <string name="tryAgainTextRu">Попробовать еще раз</string>

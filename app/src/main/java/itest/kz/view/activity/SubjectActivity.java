@@ -163,8 +163,8 @@ public class SubjectActivity extends AppCompatActivity
 //        (R.id.vp_fragments_container);
         mViewPager.setAdapter(new ViewPagerAdapter(getSupportFragmentManager(), mFragments));
 
-        PageListener listener = new PageListener();
-        mViewPager.addOnPageChangeListener(listener);
+//        PageListener listener = new PageListener();
+//        mViewPager.addOnPageChangeListener(listener);
         mTabLayout = activitySubjectBinding.tlTabsContainer;
 //                (TabLayout) findViewById(R.id.tl_tabs_container);
         mTabLayout.setupWithViewPager(mViewPager);
@@ -253,12 +253,12 @@ public class SubjectActivity extends AppCompatActivity
 //        myToolbar = (Toolbar) activitySubjectBinding.getRoot().findViewById(R.id.toolbar_subject_menu);
         myToolbar = (Toolbar) activitySubjectBinding
                 .toolbarSubjectMenu;
-        mainToolbarText = (TextView) activitySubjectBinding
-                .toolbarTitle;
+//        mainToolbarText = (TextView) activitySubjectBinding
+//                .toolbarTitle;
 //        mainToolbarText.setText("Пәндер");
 //        mainToolbarText.setTextColor(Color.WHITE);
         myToolbar.setTitle("");
-        mainToolbarText.setText(mTabLayout.getTabAt(0).getText());
+//        mainToolbarText.setText(mTabLayout.getTabAt(0).getText());
 
 
         setSupportActionBar(myToolbar);
@@ -318,13 +318,13 @@ public class SubjectActivity extends AppCompatActivity
     }
 
 
-    public class PageListener extends ViewPager.SimpleOnPageChangeListener {
-
-        public void onPageSelected(int position)
-        {
-//            currentPage = position;
-            mainToolbarText.setText(mTabLayout.getTabAt(position).getText());
-        }
-    }
+//    public class PageListener extends ViewPager.SimpleOnPageChangeListener {
+//
+//        public void onPageSelected(int position)
+//        {
+////            currentPage = position;
+//            mainToolbarText.setText(mTabLayout.getTabAt(position).getText());
+//        }
+//    }
 
 }
