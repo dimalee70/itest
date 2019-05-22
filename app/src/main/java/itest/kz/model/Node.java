@@ -25,6 +25,9 @@ public class Node implements Serializable
     @Expose
     private List<Lecture> lectures;
 
+    @SerializedName("lectures_count")
+    @Expose
+    private int lectureCount;
 
     public Node(int id, String title, List<NodeChildren> children, List<Lecture> lectures)
     {
@@ -32,6 +35,16 @@ public class Node implements Serializable
         this.title = title;
         this.children = children;
         this.lectures = lectures;
+    }
+
+    public int getLectureCount()
+    {
+        return lectureCount;
+    }
+
+    public void setLectureCount(int lectureCount)
+    {
+        this.lectureCount = lectureCount;
     }
 
     public int getId()

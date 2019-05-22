@@ -17,10 +17,24 @@ public class NodeChildren implements Serializable
     @Expose
     private String title;
 
+    @SerializedName("lectures_count")
+    @Expose
+    private int lectureCount;
+
     public NodeChildren(Long id, String title)
     {
         this.id = id;
         this.title = title;
+    }
+
+    public int getLectureCount()
+    {
+        return lectureCount;
+    }
+
+    public void setLectureCount(int lectureCount)
+    {
+        this.lectureCount = lectureCount;
     }
 
     public Long getId()

@@ -16,6 +16,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Observable;
@@ -32,6 +33,7 @@ import itest.kz.model.Subject;
 import itest.kz.network.SubjectService;
 import itest.kz.util.Constant;
 import itest.kz.view.activity.AuthActivity;
+import itest.kz.view.activity.TestActivity;
 
 import static android.content.Context.MODE_PRIVATE;
 
@@ -67,6 +69,17 @@ public class MaterialsViewModel extends Observable
         language = lang.getString(Constant.LANG, "kz");
 
         fetchNodeList();
+    }
+
+    public void clickTest(View view)
+    {
+
+        Intent intent = new Intent(getContext().getApplicationContext(), TestActivity.class);
+        intent.putExtra(Constant.SELECTED_SUBJECT,(Serializable) subject);
+        intent.putExtra(Constant.IS_STARTED_FIRST, true);
+        intent.putExtra(Constant.TYPE, Constant.TYPESUBJECTTEST);
+//        context.startActivity(TestActivity.fillSelectedSubject(view.getContext(), subject));
+        context.startActivity(intent);
     }
 
     private void fetchNodeList()

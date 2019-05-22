@@ -61,5 +61,10 @@ public class ItemNodeViewModel extends BaseObservable
 
     }
 
+    public String getLectureCount()
+    {
+        return node.getLectureCount() + " Конспект";
+    }
+
 
 }

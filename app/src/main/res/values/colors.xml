@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+    <color name="colorTestForSubject">#295CA0</color>
+
     <color name="colorErrorNoInternet">#A8ACAF</color>
 
     <!--&lt;!&ndash;9B9B9B&ndash;&gt;D8D8D8-->
@@ -23,6 +25,8 @@
     <color name="colorPrimaryLight">#C6E6FC</color>
 
     <color name="colorAuthTab">#DADADA</color>
+
+    <color name="colorTextCountLecture">#A4A4A4</color>
 
     <color name="colorFrame">#0D5685</color>
 

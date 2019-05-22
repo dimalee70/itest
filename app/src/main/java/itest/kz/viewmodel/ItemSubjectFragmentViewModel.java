@@ -154,16 +154,16 @@ public class ItemSubjectFragmentViewModel extends BaseObservable
 //        Log.d("dcsd","On Item Click");
 //    }
 
-    public void clickTest(View view)
-    {
-
-        Intent intent = new Intent(getContext().getApplicationContext(), TestActivity.class);
-        intent.putExtra(Constant.SELECTED_SUBJECT,(Serializable) subject);
-        intent.putExtra(Constant.IS_STARTED_FIRST, true);
-        intent.putExtra(Constant.TYPE, Constant.TYPESUBJECTTEST);
-//        context.startActivity(TestActivity.fillSelectedSubject(view.getContext(), subject));
-        context.startActivity(intent);
-    }
+//    public void clickTest(View view)
+//    {
+//
+//        Intent intent = new Intent(getContext().getApplicationContext(), TestActivity.class);
+//        intent.putExtra(Constant.SELECTED_SUBJECT,(Serializable) subject);
+//        intent.putExtra(Constant.IS_STARTED_FIRST, true);
+//        intent.putExtra(Constant.TYPE, Constant.TYPESUBJECTTEST);
+////        context.startActivity(TestActivity.fillSelectedSubject(view.getContext(), subject));
+//        context.startActivity(intent);
+//    }
 
     public void clickMat(View view)
     {
