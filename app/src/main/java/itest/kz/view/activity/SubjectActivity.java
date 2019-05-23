@@ -58,6 +58,7 @@ public class SubjectActivity extends AppCompatActivity
     private TextView mainToolbarText;
     private String accessToken;
     private SharedPreferences sharedPreferences;
+    private String language;
 //    public int currentPage = 0;
 
 
@@ -151,6 +152,9 @@ public class SubjectActivity extends AppCompatActivity
         subjectViewModel = new SubjectViewModel(this);
         activitySubjectBinding.setSubject(subjectViewModel);
 
+        SharedPreferences lang = getSharedPreferences(Constant.MY_LANG, MODE_PRIVATE);
+//        settings.edit().clear().commit();
+        language = lang.getString(Constant.LANG, "kz");
 
         mFragments = new ArrayList<>();
 
@@ -186,6 +190,16 @@ public class SubjectActivity extends AppCompatActivity
 
 
         bottomNavigationView = (BottomNavigationView) activitySubjectBinding.bottomNavigationView;
+        if (language.equals(Constant.KZ))
+        {
+            bottomNavigationView.getMenu().getItem(0).setTitle(R.string.mainNavigationKz);
+        }
+        else
+        {
+            bottomNavigationView.getMenu().getItem(0).setTitle(R.string.mainNavigationRu);
+        }
+        bottomNavigationView.getMenu().getItem(1).setTitle(R.string.statisticNavigation);
+        bottomNavigationView.getMenu().getItem(2).setTitle(R.string.profileNavigation);
 
         bottomNavigationView.setOnNavigationItemSelectedListener(
                 new BottomNavigationView.OnNavigationItemSelectedListener() {

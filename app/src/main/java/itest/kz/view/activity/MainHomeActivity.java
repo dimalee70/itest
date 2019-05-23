@@ -51,6 +51,7 @@ public class MainHomeActivity extends AppCompatActivity
     private Toolbar toolbar;
     private ArrayList<Fragment> mFragments;
     private ViewPager mViewPager;
+    private String language;
 
 
     @Override
@@ -161,6 +162,9 @@ public class MainHomeActivity extends AppCompatActivity
 //        final Fragment testFragment = new SubjectActivity();
 //        final Fragment statisticFragment = new StatisticActivity();
 //        final Fragment userFragment = new HomeActivity();
+        SharedPreferences lang = getSharedPreferences(Constant.MY_LANG, MODE_PRIVATE);
+//        settings.edit().clear().commit();
+        language = lang.getString(Constant.LANG, "kz");
         activityMainHomeBinding = DataBindingUtil
                 .setContentView(this, R.layout.activity_main_home);
         mainHomeViewModel = new MainHomeViewModel(this);
@@ -199,6 +203,17 @@ public class MainHomeActivity extends AppCompatActivity
 //        viewPager.setAdapter(mainHomeActivityPagerAdapter);
 
         bottomNavigationView = activityMainHomeBinding.bottomNavigationView;
+
+        if (language.equals(Constant.KZ))
+        {
+            bottomNavigationView.getMenu().getItem(0).setTitle(R.string.mainNavigationKz);
+        }
+        else
+        {
+            bottomNavigationView.getMenu().getItem(0).setTitle(R.string.mainNavigationRu);
+        }
+        bottomNavigationView.getMenu().getItem(1).setTitle(R.string.statisticNavigation);
+        bottomNavigationView.getMenu().getItem(2).setTitle(R.string.profileNavigation);
 
         bottomNavigationView.setOnNavigationItemSelectedListener(
                 new BottomNavigationView.OnNavigationItemSelectedListener() {

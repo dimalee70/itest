@@ -1,6 +1,13 @@
 <resources>
     <string name="app_name">iTest</string>
-    
+
+    <string name="mainNavigationKz">Басты бет</string>
+    <string name="mainNavigationRu">Главная</string>
+
+    <string name="statisticNavigation">Статистика</string>
+
+    <string name="profileNavigation">Профиль</string>
+
     <string name="subjectTestKz">Пән бойынша тест</string>
     <string name="subjectTestRu">Тест по предмету</string>
 

@@ -72,7 +72,7 @@
                     android:layout_height="40dp"
                     android:background="?attr/selectableItemBackground"
                     android:layout_alignParentLeft="true"
-                    android:src="@drawable/ic_icon_strelka"
+                    app:srcCompat="@drawable/ic_icon_strelka"
                     android:clickable="true"/>
                 <!--android:layout_marginLeft="10dp"-->
 

@@ -46,6 +46,7 @@ public class StatisticActivity extends AppCompatActivity
     private String accessToken;
     private SharedPreferences sharedPreferences;
     private String typeTest;
+    private String language;
 
 
 //    @Nullable
@@ -155,6 +156,11 @@ public class StatisticActivity extends AppCompatActivity
                 DataBindingUtil.setContentView(this, R.layout.activity_statistic);
         statisticViewModel = new StatisticViewModel(this);
         activityStatisticBinding.setStatistic(statisticViewModel);
+
+        SharedPreferences lang = getSharedPreferences(Constant.MY_LANG, MODE_PRIVATE);
+//        settings.edit().clear().commit();
+        language = lang.getString(Constant.LANG, "kz");
+
         mFragments = new ArrayList<>();
         mFragments.add(new SubjectStatisticFragment());
         mFragments.add(new LectureStatisticFragment());
@@ -185,6 +191,16 @@ public class StatisticActivity extends AppCompatActivity
 
         bottomNavigationView = (BottomNavigationView) activityStatisticBinding.bottomNavigationView;
 
+        if (language.equals(Constant.KZ))
+        {
+            bottomNavigationView.getMenu().getItem(0).setTitle(R.string.mainNavigationKz);
+        }
+        else
+        {
+            bottomNavigationView.getMenu().getItem(0).setTitle(R.string.mainNavigationRu);
+        }
+        bottomNavigationView.getMenu().getItem(1).setTitle(R.string.statisticNavigation);
+        bottomNavigationView.getMenu().getItem(2).setTitle(R.string.profileNavigation);
         bottomNavigationView.setOnNavigationItemSelectedListener(
                 new BottomNavigationView.OnNavigationItemSelectedListener() {
                     @Override

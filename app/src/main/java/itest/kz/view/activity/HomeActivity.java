@@ -157,6 +157,16 @@ public class HomeActivity extends AppCompatActivity
         fetchProfileInfo();
 
         bottomNavigationView = (BottomNavigationView) activityHomeBinding.bottomNavigationView;
+        if (language.equals(Constant.KZ))
+        {
+            bottomNavigationView.getMenu().getItem(0).setTitle(R.string.mainNavigationKz);
+        }
+        else
+        {
+            bottomNavigationView.getMenu().getItem(0).setTitle(R.string.mainNavigationRu);
+        }
+        bottomNavigationView.getMenu().getItem(1).setTitle(R.string.statisticNavigation);
+        bottomNavigationView.getMenu().getItem(2).setTitle(R.string.profileNavigation);
 
 
         bottomNavigationView.setOnNavigationItemSelectedListener(

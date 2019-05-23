@@ -135,7 +135,7 @@ public class ResultsFragmentViewModel extends Observable
 
 
 
-                if (statisticTag.equals(Constant.STATISTIC_TAG))
+                if (statisticTag != null && statisticTag.equals(Constant.STATISTIC_TAG))
                 {
                     fetchFullTestQuestionsGenerate(selectedSubject.getId());
                 }

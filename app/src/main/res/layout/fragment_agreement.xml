@@ -30,6 +30,12 @@
                 android:layout_marginLeft="20dp"
                 android:textSize="20sp"
                 android:layout_gravity="left"
+                android:ellipsize="end"
+                android:drawableStart="@drawable/ic_toolbar"
+                android:drawablePadding="8dp"
+                android:layout_centerVertical="true"
+                android:layout_centerHorizontal="true"
+                android:maxLines="1"
                 android:fontFamily="@font/my_open_sans_regular"/>
 
         </android.support.v7.widget.Toolbar>
