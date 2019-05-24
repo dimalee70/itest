@@ -118,6 +118,9 @@
             android:name=".view.activity.SplashScreensActivity"
             android:theme="@style/AppTheme">
         </activity>
+        <meta-data
+            android:name="io.fabric.ApiKey"
+            android:value="e644b6c5f9818c9160e873f13c045046e7a80fae" />
     </application>
 
 </manifest>
