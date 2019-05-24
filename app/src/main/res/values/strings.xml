@@ -49,10 +49,10 @@
     <string name="haventTestKz">Әзірге тақырып бойынша тест жоқ</string>
     <string name="haventTestRu">По данной темы теста нет</string>
 
-    <string name="againTestKz">Жаңа тест тапсыру</string>
+    <string name="againTestKz">Қайта тест тапсыру</string>
     <string name="againTestRu">Сдать новый тест</string>
 
-    <string name="resultShowKz">Сіздің көрсеткішіңіз:</string>
+    <string name="resultShowKz">Тест нәтижелерімен танысыңыз:</string>
     <string name="resultShowRu">Ваш показатель:</string>
 
     <string name="yesKz">Иә</string>

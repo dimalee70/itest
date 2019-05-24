@@ -18,7 +18,8 @@
         <RelativeLayout
             android:id="@+id/activity_result_relative"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:background="@color/colorBackgroundResults">
 
 
             <!--<RelativeLayout-->
@@ -38,87 +39,68 @@
 
             <!--</RelativeLayout>-->
 
-            <android.support.design.widget.AppBarLayout
-                android:id="@+id/app_bar_layout"
-                android:layout_width="match_parent"
-                android:theme="@style/AppTheme.AppBarOverlay"
-                android:layout_height="wrap_content">
+            <!--<android.support.design.widget.AppBarLayout-->
+                <!--android:id="@+id/app_bar_layout"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:theme="@style/AppTheme.AppBarOverlay"-->
+                <!--android:layout_height="wrap_content">-->
 
                 <!--android:theme="@style/AppTheme.AppBarOverlay"-->
 
-                <android.support.v7.widget.Toolbar
-                    android:id="@+id/results_toolbar"
-                    android:layout_width="match_parent"
-                    android:layout_height="?attr/actionBarSize"
-                    android:background="?attr/colorPrimary"
-                    app:layout_scrollFlags="scroll|enterAlways"
-                    app:popupTheme="@style/AppTheme.PopupOverlay">
+                <!--<android.support.v7.widget.Toolbar-->
+                    <!--android:id="@+id/results_toolbar"-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="?attr/actionBarSize"-->
+                    <!--android:background="?attr/colorPrimary"-->
+                    <!--app:layout_scrollFlags="scroll|enterAlways"-->
+                    <!--app:popupTheme="@style/AppTheme.PopupOverlay">-->
 
 
-                    <RelativeLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent">
+                    <!--<RelativeLayout-->
+                        <!--android:layout_width="match_parent"-->
+                        <!--android:layout_height="match_parent">-->
 
 
-                        <TextView
-                            android:id="@+id/text_view_title"
-                            android:text="@{results.title}"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:textSize="20sp"
-                            android:textColor="@color/colorWhite"
-                            android:ellipsize="end"
-                            android:drawableStart="@drawable/ic_toolbar"
-                            android:drawablePadding="8dp"
-                            android:layout_centerVertical="true"
-                            android:layout_centerHorizontal="true"
-                            android:maxLines="1"
-                            android:layout_marginRight="80dp"
-                            android:fontFamily="@font/my_open_sans_regular"/>
+                        <!--<TextView-->
+                            <!--android:id="@+id/text_view_title"-->
+                            <!--android:text="@{results.title}"-->
+                            <!--android:layout_width="wrap_content"-->
+                            <!--android:layout_height="wrap_content"-->
+                            <!--android:textSize="20sp"-->
+                            <!--android:textColor="@color/colorWhite"-->
+                            <!--android:ellipsize="end"-->
+                            <!--android:drawableStart="@drawable/ic_toolbar"-->
+                            <!--android:drawablePadding="8dp"-->
+                            <!--android:layout_centerVertical="true"-->
+                            <!--android:layout_centerHorizontal="true"-->
+                            <!--android:maxLines="1"-->
+                            <!--android:layout_marginRight="80dp"-->
+                            <!--android:fontFamily="@font/my_open_sans_regular"/>-->
 
                         <ImageButton
                             android:id="@+id/buttonCloseFragment"
                             android:layout_width="40dp"
                             android:layout_alignParentRight="true"
                             android:layout_height="40dp"
-                            android:layout_centerVertical="true"
                             app:srcCompat="@drawable/ic_icon_x"
                             android:layout_marginRight="16dp"
                             android:background="?attr/selectableItemBackground"
                             android:clickable="true"/>
                         <!--android:layout_toRightOf="@+id/text_view_title"-->
 
-                    </RelativeLayout>
+                    <!--</RelativeLayout>-->
+                    <!---->
+                <!--</android.support.v7.widget.Toolbar>-->
 
-                    <!--<ImageButton-->
-                        <!--android:id="@+id/buttonCloseFragment"-->
-                        <!--android:layout_width="wrap_content"-->
-                        <!--android:layout_height="wrap_content"-->
-                        <!--android:layout_gravity="right"-->
-                        <!--android:background="@drawable/ic_icon_x"-->
-                        <!--android:clickable="true"/>-->
-
-                    <!--android:onClick="@{results.onClickClose}"-->
-
-                </android.support.v7.widget.Toolbar>
-
-                <android.support.design.widget.TabLayout
-                    android:id="@+id/tl_tabs_container"
-                    android:layout_width="match_parent"
-                    app:tabGravity="fill"
-                    app:tabMode="fixed"
-                    style="@style/MyStyle"
-                    app:tabTextColor="@color/colorUnselectedTabSubject"
-                    app:tabTextAppearance="@style/tab_text"
-                    android:layout_height="wrap_content"/>
-
-            </android.support.design.widget.AppBarLayout>
+            <!--</android.support.design.widget.AppBarLayout>-->
 
             <android.support.v4.view.ViewPager
                 android:id="@+id/vp_fragments_container"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_below="@id/app_bar_layout" />
+                android:layout_below="@+id/buttonCloseFragment"/>
+
+            <!--android:layout_below="@id/app_bar_layout"-->
 
         </RelativeLayout>
 

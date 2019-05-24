@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+    <color name="colorButtonResults">#214E89</color>
+
     <color name="colorTestForSubject">#295CA0</color>
+
+    <color name="colorBackgroundResults">#3363A4</color>
 
     <color name="colorErrorNoInternet">#A8ACAF</color>
 
@@ -19,6 +23,8 @@
     <color name="colorAccent">#2DAAFC</color>
 
     <color name="colorWhite">#ffffff</color>
+
+    <color name="colorRedProgress">#ff4000</color>
 
     <color name="colorCancelButtonEnt">#AAAAAA</color>
 

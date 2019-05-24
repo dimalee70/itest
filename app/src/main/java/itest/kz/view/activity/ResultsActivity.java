@@ -4,14 +4,18 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.databinding.DataBindingUtil;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
@@ -70,6 +74,21 @@ public class ResultsActivity extends AppCompatActivity
         typeTest = getIntent().getExtras().getString(Constant.TYPE);
         resultsViewModel = new ResultsViewModel(this);
         activityResultsBinding.setResults(resultsViewModel);
+
+        Window window = getWindow();
+
+// clear FLAG_TRANSLUCENT_STATUS flag:
+        window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+
+// add FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS flag to the window
+        window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+
+// finally change the color
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP)
+        {
+            window.setStatusBarColor(ContextCompat.getColor(this,R.color.colorBackgroundResults));
+        }
+
         setMyToolbar();
         setFragments();
 
@@ -99,7 +118,7 @@ public class ResultsActivity extends AppCompatActivity
 
 
 
-        mFragments.add(CheckResultFragment.newInstance(testIdMain, subjectList, selectedSubject, Constant.RESULT_TAG, typeTest, statisticTag));
+//        mFragments.add(CheckResultFragment.newInstance(testIdMain, subjectList, selectedSubject, Constant.RESULT_TAG, typeTest, statisticTag));
 //        mFragments.add(CheckResultFragment)
         mViewPager = (ViewPager) activityResultsBinding.vpFragmentsContainer;
         ViewPagerAdapter viewPagerAdapter = new ViewPagerAdapter(getSupportFragmentManager(), mFragments);
@@ -108,87 +127,36 @@ public class ResultsActivity extends AppCompatActivity
         setmViewPager(mViewPager);
 
 
-//        resultsFragment.getResultsSubjectAdapter().setOnItemListener(new ResultsSubjectAdapter.OnItemClickListener()
-//        {
-//            @Override
-//            public void onItemClick(Tests item, int position) throws CloneNotSupportedException
-//            {
-//                if (typeTest.equals(Constant.TYPEFULLTEST))
-//                {
-//                    Intent intent = new Intent(ResultsActivity.this, FulltestResultActivity.class);
-//                    intent.putExtra(Constant.TEST_MAIN_ID, testIdMain);
-//                    intent.putExtra(Constant.CURRENT_POSITION_SUBJECT, position);
-//                    intent.putExtra(Constant.RESULT_TAG, Constant.RESULT_TAG);
-//                    intent.putExtra(Constant.SUBJECT_LIST, (Serializable) subjectList);
-//                    intent.putExtra(Constant.SELECTED_SUBJECT, (Serializable) selectedSubject);
-//                    intent.putExtra(Constant.TYPE, typeTest);
-//                    startActivity(intent);
-//                }
-//            }
-//        });
 
-//        ResultsFragment resultsFragment1 = (ResultsFragment) viewPagerAdapter.getItem(0);
-//        resultsFragment1.getResultsSubjectAdapter().setOnItemListener(new ResultsSubjectAdapter.OnItemClickListener() {
-//            @Override
-//            public void onItemClick(Tests item, int position) throws CloneNotSupportedException
-//            {
-//                System.out.println(item);
-//            }
-//        });
 
-        mTabLayout = (TabLayout) findViewById(R.id.tl_tabs_container);
-        mTabLayout.setupWithViewPager(mViewPager);
-        mTabLayout.getTabAt(0).setText((resultsViewModel
-                .getLanguage().equals(Constant.KZ)) ? R.string.checkInFullKz
-                : R.string.checkInFullRu);
-        mTabLayout.getTabAt(1).setText((resultsViewModel
-                .getLanguage().equals(Constant.KZ)) ? R.string.checkInKz
-                : R.string.checkInRu);
+//        mTabLayout = (TabLayout) findViewById(R.id.tl_tabs_container);
+//        mTabLayout.setupWithViewPager(mViewPager);
+//        mTabLayout.getTabAt(0).setText((resultsViewModel
+//                .getLanguage().equals(Constant.KZ)) ? R.string.checkInFullKz
+//                : R.string.checkInFullRu);
+//        mTabLayout.getTabAt(1).setText((resultsViewModel
+//                .getLanguage().equals(Constant.KZ)) ? R.string.checkInKz
+//                : R.string.checkInRu);
 
     }
 
     public void setMyToolbar() {
-//        myToolbar = (Toolbar) activitySubjectBinding.getRoot().findViewById(R.id.toolbar_subject_menu);
-        resultToolbar = (Toolbar) activityResultsBinding
-                .resultsToolbar;
-        mainToolbarText = (TextView) activityResultsBinding
-                .textViewTitle;
-        resultToolbar.setTitle("");
-        setSupportActionBar(resultToolbar);
+//        resultToolbar = (Toolbar) activityResultsBinding
+//                .resultsToolbar;
+//        mainToolbarText = (TextView) activityResultsBinding
+//                .textViewTitle;
+//        resultToolbar.setTitle("");
+//        setSupportActionBar(resultToolbar);
 
-//        resultToolbar.findViewById(R.id.buttonCloseFragment)
-//                .setOnClickListener(new View.OnClickListener() {
-//                    @Override
-//                    public void onClick(View v)
-//                    {
-//                        System.out.println("Click on Close");
-////////                finish();
-//                        openNewActivity();
-//                    }
-//                });
         closeFragment = activityResultsBinding.buttonCloseFragment;
 //
 //
         closeFragment.setOnClickListener(
                 new View.OnClickListener() {
                     @Override
-                    public void onClick(View v) {
-//                finish();
-
-//                        System.out.println("Click on Close");
-////                finish();
-//                        if (resultTag != null)
-//                        {
-//                            finish();
-//                        }
-//                        else
-//                        {
+                    public void onClick(View v)
+                    {
                             openNewActivity();
-//                        }
-
-//                finish();
-//                closeActivity();
-
                     }
                 });
 //

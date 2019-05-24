@@ -11,7 +11,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/colorBackgroundCardView">
+        android:background="@color/colorBackgroundResults">
 
 
         <RelativeLayout
@@ -23,6 +23,7 @@
                 android:layout_centerInParent="true"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
+                <!--android:background="@color/colorBackgroundResults"-->
 
                 <ProgressBar
                     android:id="@+id/progressBar1"
@@ -69,12 +70,11 @@
                 app:cardPreventCornerOverlap="false"
                 app:cardElevation="0dp"
                 android:orientation="vertical"
-                app:cardBackgroundColor="@color/colorWhite">
+                app:cardBackgroundColor="@color/colorBackgroundResults">
 
                 <RelativeLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@color/colorBackgroundCardView">
+                    android:layout_height="wrap_content">
 
                     <TextView
                         android:id="@+id/title_text"
@@ -82,7 +82,7 @@
                         android:layout_height="wrap_content"
                         android:text="@{results.showResultText}"
                         android:textAlignment="center"
-                        android:textColor="@color/colorBlack"
+                        android:textColor="@color/colorWhite"
                         android:textSize="18sp"
                         android:focusableInTouchMode="true"
                         android:fontFamily="@font/my_open_sans_regular"
@@ -122,6 +122,21 @@
                             app:layout_constraintHorizontal_bias="0.5"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent" />
+
+                        <!--<ProgressBar-->
+                            <!--android:id="@+id/background_progressbar2"-->
+                            <!--style="?android:attr/progressBarStyleHorizontal"-->
+                            <!--android:layout_width="50dp"-->
+                            <!--android:layout_height="150dp"-->
+                            <!--android:indeterminate="false"-->
+                            <!--android:max="100"-->
+                            <!--android:progress="100"-->
+                            <!--android:progressDrawable="@drawable/stats_full"-->
+                            <!--app:layout_constraintBottom_toBottomOf="parent"-->
+                            <!--app:layout_constraintEnd_toEndOf="parent"-->
+                            <!--app:layout_constraintHorizontal_bias="0.5"-->
+                            <!--app:layout_constraintStart_toStartOf="parent"-->
+                            <!--app:layout_constraintTop_toTopOf="parent" />-->
 
                         <!-- ProgressBar that represents a chart slice, where "android:progress" is the % value of the slice -->
                         <ProgressBar
@@ -204,15 +219,65 @@
 
             </LinearLayout>
 
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_below="@+id/result_suject_cardview_linear">
+
+
+
+
             <android.support.v7.widget.CardView
-                android:id="@+id/ent_start_cardview"
-                android:layout_margin="16dp"
+                android:id="@+id/work_on_error_cardview"
+                android:layout_marginTop="16dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/result_suject_cardview_linear"
-                app:cardBackgroundColor="@color/colorPrimary"
+                app:cardBackgroundColor="@color/colorButtonResults"
                 app:cardCornerRadius="5dp"
-                android:layout_marginBottom="28dp"
+                android:onClick="@{results.clickAgainTest}"
+                android:foreground="?android:attr/selectableItemBackground"
+                android:clickable="true"
+                >
+
+
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    >
+
+                    <TextView
+                        android:id="@+id/work_on_error_textview"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textAlignment="center"
+                        android:text="@{results.againTestText}"
+                        android:textSize="18sp"
+                        android:textColor="@color/colorWhite"
+                        android:layout_centerInParent="true"
+                        android:layout_margin="10dp"
+                        android:fontFamily="@font/my_open_sans_regular"
+                        />
+                    <!--android:onClick="@{() ->ent.onClickCancel()}"-->
+                    <!--android:onClick="@{ent.onClick}"-->
+                </RelativeLayout>
+
+            </android.support.v7.widget.CardView>
+
+
+            <android.support.v7.widget.CardView
+                android:id="@+id/ent_start_cardview"
+                android:layout_marginTop="15dp"
+                android:layout_marginRight="16dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginBottom="16dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/work_on_error_cardview"
+                app:cardBackgroundColor="@color/colorButtonResults"
+                app:cardCornerRadius="5dp"
                 android:onClick="@{results.clickAgainTest}"
                 android:foreground="?android:attr/selectableItemBackground"
                 android:clickable="true"
@@ -241,6 +306,8 @@
                 </RelativeLayout>
 
             </android.support.v7.widget.CardView>
+
+            </RelativeLayout>
 
 
             <!--<RelativeLayout-->
