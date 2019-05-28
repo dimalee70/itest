@@ -330,6 +330,7 @@ public class CertificationFragmentViewModel extends Observable
 
     public int getServerErrorText()
     {
+        // TODO: update localization to new implementation
         if (language.equals(Constant.KZ))
             return R.string.tryAgainTextKz;
         return R.string.tryAgainTextRu;
