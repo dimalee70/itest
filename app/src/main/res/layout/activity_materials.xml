@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <data>
+        <import type="android.view.View" />
+
+        <variable
+            name="materials"
+            type="itest.kz.viewmodel.MaterialsViewModel"/>
+    </data>
+
+    <android.support.design.widget.CoordinatorLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="55dp"
+        android:clickable="true">
+
+        <FrameLayout
+            android:id="@+id/frame2"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_alignParentBottom="true"
+            tools:context=".view.activity.MaterialsActivity">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/colorBackgroundCardView">
+
+                <android.support.constraint.ConstraintLayout
+                    android:id="@+id/lay"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+
+                    <android.support.v7.widget.Toolbar
+                        android:id="@+id/toolbar_materials"
+                        android:layout_width="match_parent"
+                        android:layout_height="?attr/actionBarSize"
+                        android:background="?attr/colorPrimary"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:theme="@style/ToolbarColoredBackArrow"
+                        android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
+                        app:popupTheme="@style/ThemeOverlay.AppCompat.Light"/>
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        android:paddingStart="50dp"
+                        android:paddingEnd="50dp"
+                        app:layout_constraintBottom_toBottomOf="@id/toolbar_materials"
+                        app:layout_constraintTop_toTopOf="@id/toolbar_materials">
+
+                        <ImageButton
+                            android:id="@+id/ibCustomBack"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="?attr/selectableItemBackground"
+                            android:layout_marginRight="8dp"
+                            app:srcCompat="@drawable/ic_toolbar" />
+
+                        <TextView
+                            android:id="@+id/toolbar_title"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textSize="20sp"
+                            android:text="@{materials.titleText}"
+                            android:textColor="@color/colorWhite"
+                            android:ellipsize="end"
+                            android:gravity="center"
+                            android:maxLines="1"
+                            android:drawablePadding="8dp"
+                            android:fontFamily="@font/my_open_sans_regular"/>
+                    </LinearLayout>
+
+
+                </android.support.constraint.ConstraintLayout>
+
+            <RelativeLayout
+                android:layout_below="@+id/lay"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+
+
+            <android.support.v7.widget.CardView
+                android:id="@+id/ent_start_cardview"
+                android:layout_margin="16dp"
+                android:layout_width="match_parent"
+                android:layout_marginTop="8dp"
+                android:layout_height="wrap_content"
+                app:cardBackgroundColor="@color/colorTestForSubject"
+                app:cardCornerRadius="5dp"
+                android:layout_marginBottom="28dp"
+                android:onClick="@{materials.clickTest}"
+                android:foreground="?android:attr/selectableItemBackground"
+                android:clickable="true">
+
+
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:id="@+id/ent_start_text_view"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textAlignment="center"
+                        android:text="@{materials.startSubjectTestText}"
+                        android:textSize="18sp"
+                        android:textColor="@color/colorWhite"
+                        android:layout_centerInParent="true"
+                        android:layout_margin="10dp"
+                        android:fontFamily="@font/my_open_sans_regular"
+                        />
+                    <!---->
+                    <!--android:onClick="@{() ->ent.onClickCancel()}"-->
+                    <!--android:onClick="@{ent.onClick}"-->
+                </RelativeLayout>
+
+            </android.support.v7.widget.CardView>
+
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/material_list"
+                    android:layout_marginTop="8dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    tools:listitem="@layout/item_node"
+                    android:layout_marginRight="12dp"
+                    android:layout_marginLeft="12dp"
+
+                    android:layout_below="@+id/ent_start_cardview">
+                    <!--android:layout_marginBottom="52dp"-->
+
+                    <!---->
+                </android.support.v7.widget.RecyclerView>
+
+            </RelativeLayout>
+
+        </RelativeLayout>
+
+        <!--<com.ittianyu.bottomnavigationviewex.BottomNavigationViewEx-->
+            <!--android:id="@+id/bottom_navigation_view"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--app:itemIconSize="20dp"-->
+            <!--android:layout_gravity="bottom"-->
+            <!--android:background="@color/colorWhite"-->
+            <!--app:labelVisibilityMode="labeled"-->
+            <!--app:itemIconTint="@drawable/selector"-->
+            <!--app:itemTextColor="@drawable/selector_bottombar_text"-->
+            <!--android:fitsSystemWindows="true"-->
+            <!--app:menu="@menu/bottom_navigation_view_menu"/>-->
+
+    <!--</android.support.design.widget.CoordinatorLayout>-->
+    <!--</RelativeLayout>-->
+        </FrameLayout>
+    </android.support.design.widget.CoordinatorLayout>
+
+</layout>

@@ -1,0 +1,267 @@
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:auto="http://schemas.android.com/apk/res-auto">
+    <data>
+        <variable
+            name="test"
+            type="itest.kz.viewmodel.TestFragmentViewModel"/>
+    </data>
+
+    <!--<android.support.design.widget.CoordinatorLayout-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content">-->
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+
+            <android.support.v4.widget.NestedScrollView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+                <!--android:paddingRight="10dp"-->
+                <!--android:paddingLeft="10dp"-->
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+
+
+                    <TextView
+                        android:id="@+id/text_text"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp"
+                        android:text="@{test.textTest}"
+                        android:visibility="gone"
+                        android:layout_marginLeft="18dp"
+                        android:textColor="@color/colorBlack"
+                        android:fontFamily="@font/my_open_sans_semibold" />
+
+
+                    <android.support.v7.widget.CardView
+                        android:id="@+id/cadview_text"
+                        android:visibility="gone"
+                        android:layout_below="@+id/text_text"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        app:cardBackgroundColor="@color/colorWhite"
+                        app:cardCornerRadius="6dp"
+                        app:cardElevation="1dp"
+                        android:layout_marginRight="16dp"
+                        android:layout_marginLeft="16dp"
+                        app:cardUseCompatPadding="true"
+                        tools:layout_marginBottom="16dp">
+
+                        <RelativeLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content">
+
+
+                            <at.blogc.android.views.ExpandableTextView
+                                android:id="@+id/expandableTextView"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:maxLines="5"
+                                android:ellipsize="end"
+                                android:textSize="16sp"
+                                android:autoLink="web"
+                                android:layout_margin="10dp"
+                                app:animation_duration="750"/>
+
+                            <ImageButton
+                                android:id="@+id/expanded_icon"
+                                android:layout_width="40dp"
+                                android:layout_height="40dp"
+                                android:background="?attr/selectableItemBackground"
+                                android:layout_below="@+id/expandableTextView"
+                                android:layout_centerInParent="true"
+                                android:layout_margin="10dp"
+                                android:src="@{test.isExpandText() ? @drawable/ic_icon_up_double : @drawable/ic_icon_down_double}"
+                                />
+
+                        </RelativeLayout>
+
+                    </android.support.v7.widget.CardView>
+                <!--<android.support.v7.widget.Toolbar-->
+                    <!--android:id="@+id/my_toolbar"-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="?attr/actionBarSize"-->
+                    <!--android:background="?attr/colorPrimary"-->
+                    <!--android:elevation="4dp"-->
+                    <!--android:theme="@style/ThemeOverlay.AppCompat.ActionBar"-->
+                    <!--app:popupTheme="@style/ThemeOverlay.AppCompat.Light"/>-->
+
+
+
+                <TextView
+                    android:id="@+id/text_question"
+                    android:layout_below="@+id/cadview_text"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@{test.questionText}"
+                    android:layout_marginTop="20dp"
+                    android:fontFamily="@font/my_open_sans_semibold"
+                    android:layout_marginLeft="18dp"
+                    android:textColor="@color/colorBlack"
+                    />
+
+
+                <android.support.v7.widget.CardView
+                    android:id="@+id/cardview1"
+                    android:layout_below="@+id/text_question"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    app:cardBackgroundColor="@color/colorWhite"
+                    app:cardCornerRadius="5dp"
+                    android:layout_marginLeft="16dp"
+                    app:cardElevation="1dp"
+                    android:layout_marginRight="16dp"
+                    app:cardUseCompatPadding="true"
+                    tools:layout_marginBottom="16dp">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="10dp">
+
+
+                    <WebView
+                        android:id="@+id/webview"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:loadData="@{test.data}"
+                        android:clickable="false"
+                        android:longClickable="false"
+                        tools:ignore="MissingConstraints" />
+
+                    <Button
+                        android:id="@+id/showAnswerText"
+                        android:layout_below="@+id/webview"
+                        android:layout_width="wrap_content"
+                        android:gravity="center"
+                        android:layout_centerVertical="true"
+                        android:layout_centerHorizontal="true"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginBottom="14dp"
+                        android:background="?android:attr/selectableItemBackground"
+                        android:text="@{test.answerDialogText}"
+                        android:visibility="@{test.solutionTextVisible}"
+                        android:textColor="@color/colorButtonShowAnswer"
+                        android:textSize="14sp"
+                        android:fontFamily="@font/my_open_sans_regular"
+                        android:onClick="@{test.onClickShowAnswer}"/>
+                </RelativeLayout>
+            </android.support.v7.widget.CardView>
+
+
+
+                <LinearLayout
+                    android:layout_below="@+id/cardview1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent">
+
+                    <RelativeLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            android:id="@+id/text_answers"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="@{test.answersText}"
+                            android:fontFamily="@font/my_open_sans_semibold"
+                            android:layout_marginLeft="18dp"
+                            android:layout_marginTop="20dp"
+                            android:textColor="@color/colorBlack"/>
+
+                        <android.support.v7.widget.RecyclerView
+                            android:id="@+id/answer_list"
+                            android:layout_below="@+id/text_answers"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:overScrollMode="never"
+                            tools:listitem="@layout/item_answer">
+
+                            <!--android:nestedScrollingEnabled="false"-->
+
+                        </android.support.v7.widget.RecyclerView>
+
+                    </RelativeLayout>
+
+                    <!--<ListView-->
+                    <!--android:id="@+id/answer_list"-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="match_parent"-->
+                    <!--/>-->
+
+                <!--android:onClick="@{test::onItemClick}"-->
+
+
+
+
+            </LinearLayout>
+
+
+
+
+
+                <!--<WebView-->
+                    <!--android:id="@+id/webview2"-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--app:loadData="@{test.data}"-->
+                    <!--tools:ignore="MissingConstraints" />-->
+            </RelativeLayout>
+
+            </LinearLayout>
+
+            </android.support.v4.widget.NestedScrollView>
+
+            <ProgressBar
+                android:id="@+id/progressBar1"
+                style="?android:attr/progressBarStyleLarge"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:indeterminate="true"
+                android:visibility="@{test.progress}"/>
+
+        </RelativeLayout>
+
+    </LinearLayout>
+
+        <!--<android.support.v7.widget.Toolbar-->
+
+            <!--android:id="@+id/toolbar"-->
+
+            <!--android:gravity="bottom"-->
+
+            <!--android:layout_width="match_parent"-->
+
+            <!--android:layout_height="wrap_content"-->
+
+            <!--android:background="?attr/colorPrimary"-->
+
+            <!--android:minHeight="?attr/actionBarSize" />-->
+
+        <!--&lt;!&ndash;</LinearLayout>&ndash;&gt;-->
+    <!--</android.support.design.widget.CoordinatorLayout>-->
+</layout>
+

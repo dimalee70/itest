@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+    <data>
+        <variable
+            name="item"
+            type="itest.kz.viewmodel.ItemSubjectStatisticViewModel"/>
+    </data>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorBackgroundCardView"
+        >
+
+        <android.support.v7.widget.CardView
+            android:id="@+id/test_result_subject_catdview"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="7dp"
+            android:layout_marginBottom="1dp"
+            android:layout_marginRight="16dp"
+            android:layout_marginLeft="16dp"
+            android:foreground="?android:attr/selectableItemBackground"
+            android:clickable="true"
+            app:cardElevation="1dp"
+            android:onClick="@{item.onClickSubject}"
+            app:cardCornerRadius="6dp">
+            <!--app:cardUseCompatPadding="true"-->
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+
+                <RelativeLayout
+                    android:id="@+id/title_subject_relative"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginBottom="5dp">
+                    <!--android:layout_marginRight="100dp"-->
+                    <!--android:layout_marginRight="100dp"-->
+
+                    <TextView
+                        android:id="@+id/title_subject_text"
+                        android:paddingRight="110dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textSize="16sp"
+                        android:ellipsize="end"
+                        android:layout_marginLeft="18dp"
+                        android:maxLines="1"
+                        android:textColor="@color/colorBlack"
+                        android:text="@{item.title}" />
+
+                    <TextView
+                        android:id="@+id/title_data_text"
+                        android:layout_below="@+id/title_subject_text"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="15sp"
+                        android:textColor="@color/colorDataStatisticText"
+                        android:layout_marginLeft="18dp"
+                        android:text="@{item.finishDate}"
+                        />
+
+                    <!--android:text="@{item.title}"-->
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_toLeftOf="@+id/strelka_text"
+                        android:text="@{item.testResultsSubject}"
+                        android:layout_centerInParent="true"
+                        android:textSize="24sp"
+                        android:layout_marginRight="20dp"/>
+                    <!--android:layout_alignBottom="@id/strelka_text"-->
+                    <!--android:layout_marginBottom="2dp"-->
+
+                    <!--<RelativeLayout-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content">-->
+
+                    <ImageButton
+                        android:id="@+id/strelka_text"
+                        android:layout_width="15dp"
+                        android:layout_height="15dp"
+                        android:layout_marginRight="15dp"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerInParent="true"
+                        android:src="@drawable/rotate_ic_icon_strelka_black"
+                        android:background="@color/colorWhite"
+                        android:gravity="left"/>
+                    <!--android:layout_alignParentBottom="true"-->
+                    <!--android:layout_alignParentTop="true"-->
+
+                    <!--</RelativeLayout>-->
+                    <!--<TextView-->
+                    <!--android:id="@+id/points_subject_text"-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:gravity="right"-->
+                    <!--android:layout_marginRight="100dp"-->
+                    <!--android:text="fdvfvfd" />-->
+
+                </RelativeLayout>
+
+                <!--<RelativeLayout-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_toRightOf="@+id/title_subject_relative">-->
+
+                <!--<TextView-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:background="@drawable/rotate_ic_icon_strelka_black"-->
+                <!--android:gravity="left"/>-->
+
+                <!--</RelativeLayout>-->
+
+
+            </RelativeLayout>
+
+        </android.support.v7.widget.CardView>
+    </LinearLayout>
+</layout>

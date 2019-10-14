@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+    <data>
+        <variable
+            name="auth"
+            type="itest.kz.viewmodel.AuthViewModel"/>
+    </data>
+
+    <android.support.v4.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <!--android:fillViewport="true">-->
+
+
+
+    <!--<ScrollView-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content">-->
+
+    <!--<id.co.flipbox.sosoito.LoadingLayout-->
+        <!--android:id="@+id/loginLoading"-->
+    <id.co.flipbox.sosoito.LoadingLayout
+        android:id="@+id/loginLoading"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <ImageView
+            android:id="@+id/ivMap"
+            android:layout_width="97dp"
+            android:layout_height="98dp"
+            android:layout_above="@+id/selectLanguage"
+            android:layout_gravity="center"
+            android:layout_marginTop="63dp"
+            app:srcCompat="@drawable/ic_itest_logo"
+            />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:paddingTop="60dp"
+                android:layout_height="wrap_content"
+                android:fitsSystemWindows="false"
+                android:orientation="vertical"
+                tools:showIn="@layout/activity_auth">
+
+                <!--<com.google.android.material.tabs.TabLayout-->
+                    <!--android:id="@+id/sliding_tabs"-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="wrap_content">-->
+
+                    <!--<com.google.android.material.tabs.TabItem-->
+                        <!--android:icon="@drawable/ic_icon_a_24"-->
+                        <!--android:text="@string/tab_a_label"/>-->
+                    <!--<com.google.android.material.tabs.TabItem-->
+                        <!--android:icon="@drawable/ic_icon_b_24"-->
+                        <!--android:text="@string/tab_b_label"/>-->
+                    <!--<com.google.android.material.tabs.TabItem-->
+                        <!--android:icon="@drawable/ic_icon_c_24"-->
+                        <!--android:text="@string/tab_c_label"/>-->
+
+                <!--</com.google.android.material.tabs.TabLayout>-->
+
+                <!--<android.support.design.widget.TabLayout-->
+                    <!--android:id="@+id/sliding_tabs"-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--app:tabIndicatorHeight="0dp"-->
+                    <!--style="@style/styleTabLayoutAuth"-->
+                    <!--app:tabSelectedTextColor="@color/colorPrimaryDark"-->
+                    <!--android:minHeight="?attr/actionBarSize"-->
+                    <!--app:tabTextAppearance="@style/tab_text"-->
+                    <!--android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"/>-->
+
+                <android.support.constraint.ConstraintLayout
+                    android:id="@+id/sliding_tabs"
+                    android:layout_height="wrap_content"
+                    android:layout_width="match_parent">
+
+                        <TextView
+                            android:id="@+id/tab_text_first"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/my_open_sans_semibold"
+                            android:textSize="18sp"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintHorizontal_chainStyle="packed"
+                            android:layout_marginEnd="60dp"
+                            app:layout_constraintEnd_toStartOf="@id/tab_text_second"
+                            android:textColor="@color/colorAccent" />
+
+                        <TextView
+                            android:id="@+id/tab_text_second"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toEndOf="@id/tab_text_first"
+                            android:fontFamily="@font/my_open_sans_semibold"
+                            android:textSize="18sp"
+                            android:textColor="@color/colorAuthTab" />
+
+                </android.support.constraint.ConstraintLayout>
+
+                <android.support.v4.view.ViewPager
+                    android:id="@+id/viewpager"
+                    android:layout_width="match_parent"
+                    android:layout_height="370dp"
+                    android:layout_below="@+id/sliding_tabs"
+                    />
+                <!---->
+
+            </RelativeLayout>
+
+            </LinearLayout>
+
+
+    </id.co.flipbox.sosoito.LoadingLayout>
+
+    <!--</ScrollView>-->
+<!---->
+    </android.support.v4.widget.NestedScrollView>
+
+
+
+</layout>

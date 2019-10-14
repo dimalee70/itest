@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+    <data>
+        <variable
+            name="full"
+            type="itest.kz.viewmodel.FulltestResultViewModel"/>
+    </data>
+
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+
+    <!--<RelativeLayout-->
+        <!--android:layout_centerInParent="true"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent">-->
+
+        <ProgressBar
+            android:id="@+id/progressBar1"
+            style="?android:attr/progressBarStyleLarge"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:indeterminate="true"
+            android:visibility="@{full.progress}"/>
+
+
+    <!--</RelativeLayout>-->
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+                <android.support.v7.widget.Toolbar
+                    android:id="@+id/my_toolbar"
+                    android:layout_width="match_parent"
+                    android:layout_height="?attr/actionBarSize"
+                    android:background="?attr/colorPrimary"
+                    android:elevation="4dp"
+                    android:contentInsetStart="0dp"
+                    android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
+                    app:popupTheme="@style/ThemeOverlay.AppCompat.Light">
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+
+                        <RelativeLayout
+                            android:id="@+id/text_view_relative"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent">
+
+                            <TextView
+                                android:id="@+id/text_view_title"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@{full.title}"
+                                android:textColor="@color/colorWhite"
+                                android:textSize="20sp"
+                                android:ellipsize="end"
+                                android:drawableStart="@drawable/ic_toolbar"
+                                android:drawablePadding="8dp"
+                                android:layout_centerVertical="true"
+                                android:layout_centerHorizontal="true"
+                                android:maxLines="1"
+                                android:layout_marginRight="80dp"
+                                android:fontFamily="@font/my_open_sans_regular"/>
+
+                            <!--android:text="@{full.title}"-->
+
+                            <ImageButton
+                                android:id="@+id/buttonCloseResult"
+                                android:layout_width="40dp"
+                                android:layout_alignParentRight="true"
+                                android:layout_height="40dp"
+                                android:layout_centerVertical="true"
+                                android:layout_centerHorizontal="true"
+                                app:srcCompat="@drawable/ic_icon_x"
+                                android:layout_marginRight="6dp"
+                                android:background="?attr/selectableItemBackground"
+                                android:clickable="true"/>
+                            <!--android:layout_marginRight="16dp"-->
+                            <!--android:layout_marginRight="30dp"-->
+
+                        </RelativeLayout>
+
+                    </RelativeLayout>
+
+
+                </android.support.v7.widget.Toolbar>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="60dp"
+                    android:orientation="horizontal"
+                    android:visibility="@{full.scroll}">
+
+                    <!--<android.support.v7.widget.CardView-->
+                        <!--android:layout_width="match_parent"-->
+                        <!--android:layout_height="wrap_content">-->
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+
+
+
+
+                    <android.support.v7.widget.CardView
+                        android:id="@+id/subject_cardview"
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"
+                        app:cardPreventCornerOverlap="false">
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+                            <TextView
+                                android:id="@+id/subject_title_text"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_centerInParent="true"
+                                android:textAlignment="center"
+                                android:fontFamily="@font/my_open_sans_regular"
+                                android:textColor="@color/colorOfTitleSubjectFullTets"
+                                />
+
+                            <ImageButton
+                                android:id="@+id/buttonNextResult"
+                                android:layout_width="40dp"
+                                android:layout_height="40dp"
+                                android:layout_gravity="right"
+                                android:background="?attr/selectableItemBackground"
+                                android:layout_centerVertical="true"
+                                android:layout_alignParentRight="true"
+                                android:src="@drawable/rotate_ic_icon_strelka"
+                                android:clickable="true"/>
+
+                            <ImageButton
+                                android:id="@+id/buttonPrefiousResult"
+                                android:layout_alignParentLeft="true"
+                                android:layout_width="40dp"
+                                android:layout_height="40dp"
+                                android:layout_gravity="right"
+                                android:background="?attr/selectableItemBackground"
+                                app:srcCompat="@drawable/ic_icon_strelka"
+                                android:clickable="true"/>
+
+
+                        </RelativeLayout>
+
+                    </android.support.v7.widget.CardView>
+
+
+                    <itest.kz.util.CustomViewPager
+                        android:id="@+id/pager"
+                        android:layout_below="@+id/subject_cardview"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1" >
+                    </itest.kz.util.CustomViewPager>
+
+
+                    </RelativeLayout>
+
+                <!--</android.support.v7.widget.CardView>-->
+
+                </LinearLayout>
+            </RelativeLayout>
+
+
+
+
+        </LinearLayout>
+
+    </ScrollView>
+
+    </RelativeLayout>
+
+</layout>

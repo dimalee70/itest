@@ -1,0 +1,173 @@
+buildscript {
+    repositories {
+        maven { url 'https://maven.fabric.io/public' }
+    }
+
+    dependencies {
+        classpath 'io.fabric.tools:gradle:1.+'
+    }
+}
+apply plugin: 'com.android.application'
+apply plugin: 'io.fabric'
+
+repositories {
+    maven { url 'https://maven.fabric.io/public' }
+}
+
+
+project.ext {
+
+    supportLibraryVersion = "28.0.0"
+    supportConstraintVersion = "1.1.3"
+    junitTestVersion = "4.12"
+    testRunnerVersion = "1.0.2"
+    testEspressoVersion = "3.0.2"
+    rxJavaVersion = "2.2.0"
+    rxAndroidVersion = "2.1.0"
+    rxBindingVersion = "2.1.1"
+    gsonVersion = "2.8.5"
+    retrofit2Version = "2.3.0"
+    retrofitRxJava2Version = "1.0.0"
+    lifecycleVersion = "1.1.1"
+    katexVersion = "1.0"
+    mathViewVersion = "0.0.6"
+    cardViewVersion = "28.0.0"
+    picassoVersion = "2.71828"
+    picassoTransformationVersion = "2.2.1"
+    gpuimageVersion = "1.4.1"
+    circleImageViewVersion = "3.0.0"
+    easyPermissionVersion = "1.0.1"
+    expandableTextViewVerion = "1.0.5"
+    hourglassVersion = "2.0.0"
+    slidinguppanelVersion = "3.4.0"
+    svgLoaderVersion = "1.0.1"
+//    plainPieVersion = "v0.2.9"
+
+//    daggerVersion = "2.15"
+//    butterKnifeVersion = "8.8.1"
+//    timberVersion = "4.6.0"
+//    lifecycleVersion = "1.1.1"
+//    recycleVersion =  "26.1.0"
+//    circleImageViewVersion = "2.1.0"
+//    glideVersion = "4.7.1"
+
+}
+
+
+android {
+
+    dataBinding {
+        enabled = true
+    }
+
+    defaultConfig {
+        vectorDrawables.useSupportLibrary = true
+    }
+
+
+    lintOptions {
+
+        checkReleaseBuilds false
+
+    }
+
+    compileSdkVersion 28
+    defaultConfig {
+        applicationId "itest.kz"
+        minSdkVersion 19
+        targetSdkVersion 28
+        versionCode 6
+        versionName "1.4"
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+    }
+
+    signingConfigs {
+        release {
+            storeFile file("/Users/dmitriy/AndroidStudioProjects/itest/key")
+            storePassword "123456"
+            keyAlias "key0"
+            keyPassword "123456"
+        }
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.release
+
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility = '1.8'
+        targetCompatibility = '1.8'
+    }
+    sourceSets { main { res.srcDirs = ['src/main/res', 'src/main/res/mipmap/itest_splash'] } }
+}
+
+dependencies {
+
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation "com.android.support:appcompat-v7:$supportLibraryVersion"
+
+    implementation "com.android.support.constraint:constraint-layout:$supportConstraintVersion"
+
+    implementation "com.android.support:design:28.0.0"
+
+    implementation "io.reactivex.rxjava2:rxjava:$rxJavaVersion"
+    implementation "io.reactivex.rxjava2:rxandroid:$rxAndroidVersion"
+    implementation "com.jakewharton.rxbinding2:rxbinding-appcompat-v7:$rxBindingVersion"
+
+    testImplementation "junit:junit:$junitTestVersion"
+    androidTestImplementation "com.android.support.test:runner:$testRunnerVersion"
+    androidTestImplementation "com.android.support.test.espresso:espresso-core:$testEspressoVersion"
+
+    implementation "com.google.code.gson:gson:$gsonVersion"
+    implementation "com.squareup.retrofit2:retrofit:$retrofit2Version"
+    implementation "com.squareup.retrofit2:converter-gson:$retrofit2Version"
+    implementation "com.squareup.retrofit2:converter-scalars:$retrofit2Version"
+    implementation "com.squareup.retrofit2:adapter-rxjava2:$retrofit2Version"
+    implementation "com.jakewharton.retrofit:retrofit2-rxjava2-adapter:$retrofitRxJava2Version"
+
+
+    implementation "android.arch.lifecycle:extensions:$lifecycleVersion"
+    implementation "android.arch.lifecycle:viewmodel:$lifecycleVersion"
+
+    implementation "in.hourglass.mathrender:katexmathview:$katexVersion"
+
+    implementation "io.github.kexanie.library:MathView:$mathViewVersion"
+
+    implementation "com.android.support:cardview-v7:$cardViewVersion"
+
+    implementation "com.squareup.picasso:picasso:$picassoVersion"
+
+    implementation "jp.wasabeef:picasso-transformations:$picassoTransformationVersion"
+    // If you want to use the GPU Filters
+    implementation "jp.co.cyberagent.android.gpuimage:gpuimage-library:$gpuimageVersion"
+
+    implementation "de.hdodenhof:circleimageview:$circleImageViewVersion"
+
+    implementation "pub.devrel:easypermissions:$easyPermissionVersion"
+
+    implementation "at.blogc:expandabletextview:$expandableTextViewVerion"
+
+    implementation "com.ankushgrover:Hourglass:$hourglassVersion"
+
+    implementation "com.github.flipboxstudio:sosoito:v1.0.3"
+
+    implementation "com.squareup.okhttp3:okhttp:3.14.1"
+
+    implementation 'com.google.android:flexbox:0.3.0-alpha3'
+//    implementation "com.sothree.slidinguppanel:library:$slidinguppanelVersion"
+    implementation 'com.romandanylyk:pageindicatorview:1.0.3@aar'
+
+    implementation "com.github.ar-android:AndroidSvgLoader:$svgLoaderVersion"
+//        implementation 'com.android.support:appcompat-v7:28.0.0'
+//    implementation "com.github.zurche:plain-pie:$plainPieVersion"
+    implementation 'com.crashlytics.sdk.android:crashlytics:2.10.1'
+
+
+    implementation 'com.github.cdflynn:checkview:v1.1'
+    implementation 'com.github.ittianyu:BottomNavigationViewEx:2.0.4'
+}

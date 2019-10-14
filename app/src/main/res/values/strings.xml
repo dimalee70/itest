@@ -1,0 +1,176 @@
+<resources>
+
+    <string name="server_error_alert">Белгісіз қате. Тағы да бір рет көріңіз</string>
+    <string name="changeLang">Сіз тілді ауыстырғыңыз келе ме?</string>
+    <string name="choiceError">Пәндер дұрыс таңдалмаган</string>
+    <string name="app_name">iTest</string>
+
+    <string name="time">Уақыт:</string>
+
+    <string name="mainNavigation">Басты бет</string>
+
+    <string name="statisticNavigation">Статистика</string>
+
+    <string name="profileNavigation">Профиль</string>
+
+    <string name="subjectTest">Пән бойынша тест</string>
+
+    <string name="tryAgainText">Қайталап көру</string>
+
+    <string name="begin">Бастау</string>
+
+    <string name="passText">Өткізу</string>
+
+    <string name="oneSplash">Тесттерден ыңғайлы уақытта, кез келген құрылғы көмегімен өтіңіз</string>
+
+    <string name="twoSplash">Алған біліміңізге баға беріп, қаншалықты ілгері басқаныңызды қадағалаңыз</string>
+
+    <string name="threeSplash">iTest ең үздік нәтижелерге жетелейді!</string>
+
+    <string name="sessionError">Сіздің сассияңыз мәжбүр түрде жабылды. Кайтадан кіріңіз</string>
+
+
+    <string name="result">Нәтиже</string>
+
+    <string name="hasActiveTestDialog">Аяқталмаған тестіңіз бар, соны аяқтау қажет</string>
+
+    <string name="finishTestDialog">Сіз расымен тестілеуді аяқтауды қалайсыз ба?</string>
+
+    <string name="chapterTest">Тақырып бойынша тест тапсыру</string>
+
+    <string name="haventTest">Әзірге тақырып бойынша тест жоқ</string>
+
+    <string name="againTest">Қайта тест тапсыру</string>
+
+    <string name="resultShow">Тест нәтижелерімен танысыңыз:</string>
+
+    <string name="yes">Иә</string>
+
+    <string name="ok">OK</string>
+
+    <string name="timeIsUpAlert">Емтихан тапсыру уақыты аяқталды</string>
+
+    <string name="no">Жоқ</string>
+
+    <string name="textDialogCertification">Бул тақырып бойынша конспект жоқ, тестті өтуді қалайсыз ба?</string>
+
+    <string name="toolbarAnswersText">Сіздің жауаптарыңыз</string>
+
+    <string name="questionText">СҰРАҚ</string>
+
+    <string name="answersText">ЖАУАПТАР</string>
+
+    <string name="textTest">МӘТІН</string>
+
+    <string name="solutionText">ШЕШІМ</string>
+
+    <string name="forgotPasswordButoon">Жіберу</string>
+
+    <string name="forgotPassword">Құпиясөзді ұмыттыңыз ба?</string>
+
+    <string name="emailPlaceholder">Сіздің email немесе логин</string>
+
+    <string name="passwordPlaceholder">Құпиясөз</string>
+
+    <string name="passwordConfirmHint">Құпиясөзді растаңыз</string>
+
+    <string name="subject">ПӘН</string>
+
+    <string name="lecture">ТАҚЫРЫП</string>
+
+    <string name="full">ҰБТ</string>
+
+    <string name="statistic">Статистика</string>
+
+    <string name="checkInFull">Толық нәтиже</string>
+
+    <string name="checkIn">Қатемен жұмыс</string>
+
+    <string name="questionAnswer">Сұрақ және жауап</string>
+
+    <string name="why">Шешiмi</string>
+
+    <string name="selectLanguage">ТІЛДІ ТАҢДАҢЫЗ</string>
+
+    <string name="cont">ЖАЛҒАСТЫРУ</string>
+
+    <string name="subjects">Пәндер</string>
+
+    <string name="fullEnt">Толық ҰБТ</string>
+
+    <string name="forSubject">Пән бойынша</string>
+
+    <string name="requiredSubjects">Негізгі пәндер</string>
+
+    <string name="chosedSubjects">Таңдау пәндері</string>
+
+    <string name="fullTestStart">Толық ҰБТ тапсыру</string>
+
+    <string name="cancel">Жою</string>
+
+    <string name="profileInfo">Өңдеу</string>
+
+    <string name="saveTitle">Сақтау</string>
+
+    <string name="name">Аты: </string>
+
+    <string name="hintName">Сіздің атыңыз</string>
+
+    <string name="surname">Tегі: </string>
+
+    <string name="hintSurname">Сіздің тегіңіз</string>
+
+    <string name="dateOfBirth">Туған күн, ай, жыл:</string>
+
+    <string name="hintDateOfBirth">КК.АА.ЖЖЖЖ</string>
+
+    <string name="login">Логин: </string>
+
+    <string name="hintLogin">Сіздің логиніңіз</string>
+
+    <string name="email">Email: </string>
+
+    <string name="hintEmail">Сіздің email-іңіз</string>
+
+    <string name="loginEmailHeader">Логин және Email: </string>
+
+    <string name="passwordChanged">Құпиясөз</string>
+
+    <string name="oldPassText">Ағымдағы құпиясөз: </string>
+
+    <string name="hintOldPassText">Ағымдағы құпиясөзді еңгізіңіз</string>
+
+    <string name="newPassText">Жаңа құпиясөз: </string>
+
+    <string name="hintNewPassText">Жаңа құпиясөзді еңгізіңіз</string>
+
+    <string name="confirmNewPass">Растау: </string>
+
+    <string name="hintConfirmNewPass">Жаңа құпиясөзді растаңыз</string>
+
+    <string name="helpCenter">Анықтама бөлімі</string>
+
+    <string name="policy">Құпиялық саясаты</string>
+
+    <string name="agreement">Қолданушылық келісімі</string>
+
+    <string name="lang">Тіл</string>
+
+
+    <string name="signUp">ТІРКЕЛУ</string>
+
+    <string name="logIn">КІРУ</string>
+
+    <string name="kaz" translatable="false">Қазақша</string>
+
+    <string name="rus" translatable="false">Русский</string>
+
+    <string name="test" translatable="false">test</string>
+    <string name="user">user</string>
+    <string name="permission_granted">Permission granted</string>
+    <string name="permission_denied">Permission denied</string>
+
+    <string name="logout">Шығу</string>
+
+</resources>
+

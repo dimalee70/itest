@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="16dp"
+    android:height="23dp"
+    android:viewportWidth="16"
+    android:viewportHeight="23">
+
+    <group
+            android:translateX="-172.000000"
+            android:translateY="-594.000000">
+        <group
+                android:translateY="589.000000">
+            <group
+                    android:translateX="172.000000"
+                    android:translateY="5.000000">
+                <path
+                    android:fillType="evenOdd"
+                    android:strokeColor="#D2D5D6"
+                    android:strokeWidth="1.2"
+                    android:pathData="M 2 8.68080808 L 2 8.68080808 Q 3.4 8.68080808 3.4 10.08080808 L 3.4 17.19191919 Q 3.4 18.59191919 2 18.59191919 L 2 18.59191919 Q 0.6 18.59191919 0.6 17.19191919 L 0.6 10.08080808 Q 0.6 8.68080808 2 8.68080808 Z" />
+                <path
+                    android:fillType="evenOdd"
+                    android:strokeColor="#D2D5D6"
+                    android:strokeWidth="1.2"
+                    android:pathData="M 14 5.79191919 L 14 5.79191919 Q 15.4 5.79191919 15.4 7.19191919 L 15.4 17.19191919 Q 15.4 18.59191919 14 18.59191919 L 14 18.59191919 Q 12.6 18.59191919 12.6 17.19191919 L 12.6 7.19191919 Q 12.6 5.79191919 14 5.79191919 Z" />
+                <path
+                    android:fillType="evenOdd"
+                    android:strokeColor="#D2D5D6"
+                    android:strokeWidth="1.2"
+                    android:pathData="M 8 0.791919192 L 8 0.791919192 Q 9.4 0.791919192 9.4 2.191919192 L 9.4 17.191919192 Q 9.4 18.591919192 8 18.591919192 L 8 18.591919192 Q 6.6 18.591919192 6.6 17.191919192 L 6.6 2.191919192 Q 6.6 0.791919192 8 0.791919192 Z" />
+                <path
+                    android:fillColor="#D1D4D6"
+                    android:fillType="evenOdd"
+                    android:strokeColor="#D2D5D6"
+                    android:strokeWidth="1"
+                    android:pathData="M 1.01010101 20.69 L 14.98989899 20.69 Q 15.5 20.69 15.5 21.20010101 L 15.5 21.20010101 Q 15.5 21.71020202 14.98989899 21.71020202 L 1.01010101 21.71020202 Q 0.5 21.71020202 0.5 21.20010101 L 0.5 21.20010101 Q 0.5 20.69 1.01010101 20.69 Z" />
+            </group>
+        </group>
+    </group>
+</vector>

@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+    <data>
+        <variable
+            name="subitem"
+            type="itest.kz.viewmodel.SubjectFragmentActivityViewModel"/>
+    </data>
+
+
+    <FrameLayout
+        android:id="@+id/frame"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentBottom="true"
+        tools:context=".view.activity.SubjectFragmentActivity">
+
+    <RelativeLayout
+            android:id="@+id/activity_main_relative"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            >
+
+
+
+            <android.support.design.widget.AppBarLayout
+                android:id="@+id/app_bar_layout"
+                android:layout_width="match_parent"
+                android:theme="@style/AppTheme.AppBarOverlay"
+                app:elevation="0dp"
+                android:layout_height="wrap_content">
+
+                <!--android:theme="@style/AppTheme.AppBarOverlay"-->
+
+                <android.support.v7.widget.Toolbar
+                    android:id="@+id/toolbar_subject_menu"
+                    android:layout_width="match_parent"
+                    android:layout_height="?attr/actionBarSize"
+                    android:background="?attr/colorPrimary"
+                    app:layout_scrollFlags="scroll|enterAlways"
+                    app:popupTheme="@style/AppTheme.PopupOverlay">
+
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+
+                        <TextView
+                            android:id="@+id/toolbar_title"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textAlignment="center"
+                            android:layout_centerVertical="true"
+                            android:layout_centerHorizontal="true"
+                            android:textSize="20sp"
+                            android:text="@string/app_name"
+                            android:drawableStart="@drawable/ic_toolbar"
+                            android:drawablePadding="8dp"
+                            android:textColor="@color/colorWhite" />
+                    </RelativeLayout>
+                    <!--android:text="@{subject.toolbarTitle}"-->
+
+                </android.support.v7.widget.Toolbar>
+
+                <!--<FrameLayout-->
+                    <!--android:id="@+id/frame"-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="match_parent"-->
+                    <!--tools:context=".view.activity.SubjectFragmentActivity">-->
+                <!--</FrameLayout>-->
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/colorTabBachgroundSelected">
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="10dp"
+                        android:background="@color/colorPrimary"/>
+
+                    <android.support.design.widget.TabLayout
+                        android:id="@+id/tl_tabs_container"
+                        android:layout_width="match_parent"
+                        app:tabGravity="fill"
+                        app:tabMode="fixed"
+                        style="@style/MyStyle"
+                        app:tabIndicatorHeight="0dp"
+                        app:tabTextColor="@color/colorWhite"
+                        app:tabTextAppearance="@style/tab_text"
+                        android:layout_height="wrap_content"/>
+
+                </RelativeLayout>
+
+
+            </android.support.design.widget.AppBarLayout>
+
+
+
+            <android.support.v4.view.ViewPager
+                android:id="@+id/vp_fragments_container"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/app_bar_layout"
+                android:layout_marginBottom="55dp"
+                />
+        <!--android:layout_marginBottom="55dp"-->
+
+
+
+            <!--android:layout_below="@id/app_bar_layout"-->
+        </RelativeLayout>
+    </FrameLayout>
+
+</layout>

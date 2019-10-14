@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="CustomTextView">
+        <attr name="fontPath" format="string"/>
+    </declare-styleable>
+    <declare-styleable name="CustomTextViewBold">
+        <attr name="fontPathBold" format="string"/>
+    </declare-styleable>
+    <!--<?xml version="1.0" encoding="utf-8"?>-->
+    <!--<resources>-->
+        <!--<declare-styleable name="CustomTextView">-->
+            <!--<attr name="customFont" format="string"/>-->
+        <!--</declare-styleable>-->
+    <!--</resources>-->
+</resources>

@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <data>
+        <variable
+            name="item"
+            type="itest.kz.viewmodel.ItemResultSubject"/>
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        >
+
+        <android.support.v7.widget.CardView
+            android:id="@+id/test_result_subject_catdview"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_marginRight="15dp"
+            android:layout_marginLeft="15dp"
+            android:foreground="?android:attr/selectableItemBackground"
+            android:clickable="false"
+            app:cardUseCompatPadding="true"
+            app:cardCornerRadius="6dp">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+
+                <RelativeLayout
+                    android:id="@+id/title_subject_relative"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+                    <!--android:layout_marginRight="100dp"-->
+                    <!--android:layout_marginRight="100dp"-->
+
+                    <TextView
+                        android:id="@+id/title_subject_text"
+                        android:layout_width="match_parent"
+                        android:layout_marginEnd="100dp"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:textSize="15sp"
+                        android:ellipsize="end"
+                        android:maxLines="1"
+                        android:textColor="@color/colorBlack"
+                        android:layout_marginStart="18dp"
+                        android:text="@{item.title}"
+                        android:fontFamily="@font/my_open_sans_regular"
+                        />
+                    <!--android:layout_marginBottom="15dp"-->
+                    <!--android:layout_marginTop="14dp"-->
+                    <!---->
+                    <!--@{item.title}-->
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="15dp"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                    android:text="@{item.testResultsSubject}"
+                    android:textSize="20sp" />
+
+                    <!--android:layout_centerInParent="true"-->
+                <!--android:layout_alignBottom="@id/strelka_text"-->
+                    <!--android:layout_marginBottom="2dp"-->
+
+                    <!--<RelativeLayout-->
+                        <!--android:layout_width="wrap_content"-->
+                        <!--android:layout_height="wrap_content">-->
+
+
+                    <!--<ImageButton-->
+                        <!--android:id="@+id/strelka_text"-->
+                        <!--android:layout_width="15dp"-->
+                        <!--android:layout_height="15dp"-->
+                        <!--android:layout_marginRight="15dp"-->
+                        <!--android:layout_alignParentRight="true"-->
+                        <!--android:layout_centerInParent="true"-->
+                        <!--android:src="@drawable/rotate_ic_icon_strelka_black"-->
+                        <!--android:background="@color/colorWhite"-->
+                        <!--android:gravity="left"/>-->
+
+                    <!--<TextView-->
+                        <!--android:id="@+id/strelka_text"-->
+                        <!--android:layout_width="9dp"-->
+                        <!--android:layout_height="15dp"-->
+                        <!--android:layout_marginRight="15dp"-->
+                        <!--android:layout_alignParentRight="true"-->
+                        <!--android:layout_centerInParent="true"-->
+                        <!--android:src="@drawable/rotate_ic_icon_strelka_black"-->
+                        <!--android:gravity="left"/>-->
+                    <!--android:layout_alignParentBottom="true"-->
+                    <!--android:layout_alignParentTop="true"-->
+
+                    <!--</RelativeLayout>-->
+                    <!--<TextView-->
+                        <!--android:id="@+id/points_subject_text"-->
+                        <!--android:layout_width="match_parent"-->
+                        <!--android:layout_height="wrap_content"-->
+                        <!--android:gravity="right"-->
+                        <!--android:layout_marginRight="100dp"-->
+                        <!--android:text="fdvfvfd" />-->
+
+                </RelativeLayout>
+
+                <!--<RelativeLayout-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_toRightOf="@+id/title_subject_relative">-->
+
+                    <!--<TextView-->
+                        <!--android:layout_width="wrap_content"-->
+                        <!--android:layout_height="wrap_content"-->
+                        <!--android:background="@drawable/rotate_ic_icon_strelka_black"-->
+                        <!--android:gravity="left"/>-->
+
+                <!--</RelativeLayout>-->
+
+
+            </RelativeLayout>
+
+        </android.support.v7.widget.CardView>
+    </LinearLayout>
+
+</layout>

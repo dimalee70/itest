@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="mainViewModel"
+            type="itest.kz.viewmodel.MainViewModel" />
+    </data>
+    <ScrollView
+        tools:context=".view.activity.MainActivity"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true">
+        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+            android:orientation="vertical"
+            android:background="@color/colorPrimary"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+
+
+            <RelativeLayout
+                android:gravity="center"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <LinearLayout
+
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="false"
+                    android:layout_centerVertical="false"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:id="@+id/ivMap"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_above="@+id/selectLanguage"
+                        android:layout_gravity="center"
+                        android:layout_marginTop="65dp"
+                        app:srcCompat="@drawable/ic_itest_blue_in_circle">
+
+                    </ImageView>
+
+                    <itest.kz.view.customviews.CustomTextView
+                        android:id="@+id/selectLanguage"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_alignLeft="@+id/ivMap"
+                        android:layout_alignRight="@+id/ivMap"
+                        android:layout_alignParentBottom="true"
+                        android:layout_marginTop="50dp"
+                        android:gravity="center"
+                        android:text="@{mainViewModel.selectLanguage}"
+                        android:textColor="@color/colorWhite"
+                        android:textSize="18dp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintRight_toRightOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <Button
+                            android:id="@+id/buttonKaz"
+                            style="@style/Widget.AppCompat.Button.Colored"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerInParent="true"
+                            android:layout_marginTop="100dp"
+                            android:width="221dp"
+                            android:height="50dp"
+                            android:alpha="0.91"
+                            android:src="@{mainViewModel.colorKz}"
+                            android:enabled="true"
+                            android:fontFamily="@font/opensans_regular"
+                            android:text="@string/kaz"
+                            android:textSize="16dp"
+                            android:onClick="@{mainViewModel.buttonKaz}"/>
+                        <!--android:background="@drawable/button_kaz"-->
+
+                        <Button
+                            android:id="@+id/buttonRus"
+                            style="@style/Widget.AppCompat.Button.Colored"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerHorizontal="true"
+                            android:layout_marginTop="110dp"
+                            android:width="221dp"
+                            android:height="50dp"
+                            android:alpha="0.91"
+                            android:src="@{mainViewModel.colorRu}"
+                            android:enabled="true"
+                            android:fontFamily="@font/opensans_regular"
+                            android:text="@string/rus"
+                            android:textSize="16dp"
+                            android:onClick="@{mainViewModel.buttonRus}"/>
+                        <!--android:background="@drawable/button_rus"-->
+
+                    </RelativeLayout>
+
+                    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <itest.kz.view.customviews.CustomTextView
+                            android:id="@+id/sign_up"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentBottom="true"
+                            android:clickable="true"
+                            android:fontFamily="@font/opensans_regular"
+                            android:gravity="center"
+                            android:text="@{mainViewModel.continue}"
+                            android:textColor="@color/colorWhite"
+                            android:textSize="16dp"
+                            android:onClick="@{() -> mainViewModel.clickOnSignUp()}"
+                            android:padding="50dp"/>
+
+                    </RelativeLayout>
+                </LinearLayout>
+            </RelativeLayout>
+            <FrameLayout
+                android:id="@+id/fl_fragment_container"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+            </FrameLayout>
+        </LinearLayout>
+    </ScrollView>
+</layout>

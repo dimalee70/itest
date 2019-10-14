@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/item_test"
+        android:icon="@drawable/graduation_cap2"
+        android:title="@string/mainNavigation"/>
+
+    <item
+        android:id="@+id/item_statistic"
+        android:icon="@drawable/ic_statistic2"
+        android:title="@string/statisticNavigation" />
+
+    <item
+        android:id="@+id/item_user"
+        android:icon="@drawable/ic_user2"
+        android:title="@string/profileNavigation"/>
+
+</menu>

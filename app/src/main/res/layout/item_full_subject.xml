@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <variable
+            name="fullSubject"
+            type="itest.kz.viewmodel.ItemFullEntViewModel"/>
+    </data>
+
+
+    <LinearLayout
+        android:id="@+id/rl3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="1dp"
+        android:clickable="false"
+        android:focusable="false"
+        android:orientation="horizontal">
+
+        <android.support.v7.widget.CardView
+            android:id="@+id/ent_start_cardview_border"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_width="124dp"
+            android:minWidth="124dp"
+            android:layout_height="wrap_content"
+            android:minHeight="45dp"
+            app:cardBackgroundColor="@color/colorPrimary"
+            app:cardCornerRadius="5dp"
+            app:cardPreventCornerOverlap="false"
+            app:cardElevation="0dp"
+            >
+        <android.support.v7.widget.CardView
+            android:id="@+id/ent_start_cardview"
+            android:layout_margin="1dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:minHeight="45dp"
+            app:cardBackgroundColor="@color/colorBackgroundCardView"
+            app:cardCornerRadius="5dp"
+            app:cardPreventCornerOverlap="false"
+            app:cardElevation="0dp"
+            >
+
+            <RelativeLayout
+                android:id="@+id/subject_list_relative"
+                android:layout_width="match_parent"
+                android:gravity="center"
+                android:minHeight="45dp"
+                android:layout_height="match_parent"
+                android:background="@color/colorBackgroundCardView">
+
+
+                <TextView
+                    android:id="@+id/title_subject_text"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
+                    android:minHeight="45dp"
+                    android:maxLines="1"
+                    android:ellipsize="end"
+                    android:text="@{fullSubject.title}"
+                    android:gravity="center"
+                    android:textAlignment="center"
+                    android:textSize="12sp"
+                    android:textColor="@color/colorPrimary" />
+
+            </RelativeLayout>
+        </android.support.v7.widget.CardView>
+
+        </android.support.v7.widget.CardView>
+
+
+
+    </LinearLayout>
+
+
+
+</layout>

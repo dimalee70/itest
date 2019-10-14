@@ -1,0 +1,568 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+    <data>
+        <variable
+            name="profile"
+            type="itest.kz.viewmodel.ProfileInfoViewModel"/>
+    </data>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <android.support.constraint.ConstraintLayout
+            android:id="@+id/lay"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <android.support.v7.widget.Toolbar
+                android:id="@+id/toolbar_profile"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                android:background="?attr/colorPrimary"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:theme="@style/ToolbarColoredBackArrow"
+                android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
+                app:popupTheme="@style/ThemeOverlay.AppCompat.Light"/>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:paddingStart="50dp"
+                    android:paddingEnd="50dp"
+                    app:layout_constraintBottom_toBottomOf="@id/toolbar_profile"
+                    app:layout_constraintTop_toTopOf="@id/toolbar_profile">
+
+                    <ImageButton
+                        android:id="@+id/ibCustomBack"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="?attr/selectableItemBackground"
+                        android:layout_marginRight="8dp"
+                        app:srcCompat="@drawable/ic_toolbar" />
+
+                    <TextView
+                        android:id="@+id/toolbar_title"
+                        android:text="@{profile.titleText}"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="20sp"
+                        android:textColor="@color/colorWhite"
+                        android:ellipsize="end"
+                        android:gravity="center"
+                        android:maxLines="1"
+                        android:drawablePadding="8dp"
+                        android:fontFamily="@font/my_open_sans_regular"/>
+
+                </LinearLayout>
+
+        </android.support.constraint.ConstraintLayout>
+
+        <RelativeLayout
+            android:layout_below="@+id/lay"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+
+
+            <!--<RelativeLayout-->
+                <!--android:layout_centerInParent="true"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="match_parent">-->
+
+
+
+
+            <!--</RelativeLayout>-->
+
+
+            <ScrollView
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <!--android:paddingBottom="50dp"-->
+
+                <RelativeLayout
+                    android:id="@+id/profile_info_relative"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="30dp"
+                    android:layout_marginBottom="28dp">
+
+                    <de.hdodenhof.circleimageview.CircleImageView
+                        android:id="@+id/profilePhoto"
+                        android:layout_width="120dp"
+                        android:layout_height="120dp"
+                        android:layout_centerInParent="true"
+                        android:src="@{profile.profileImage}" />
+
+                    <ImageView
+                        android:id="@+id/photo_image_view"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:layout_below="@+id/profilePhoto"
+                        android:layout_centerHorizontal="true"
+                        android:src="@drawable/ic_add_profile_photo_main" />
+                </RelativeLayout>
+
+                <android.support.v7.widget.CardView
+                    android:id="@+id/info_cardview"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/profile_info_relative"
+                    app:cardPreventCornerOverlap="false"
+                    app:cardElevation="0dp">
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <RelativeLayout
+                            android:id="@+id/name_relative"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+                            <android.support.v7.widget.CardView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                app:cardPreventCornerOverlap="false"
+                                app:cardElevation="0dp">
+
+                                <RelativeLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent">
+
+                                    <RelativeLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content">
+
+                                        <TextView
+                                            android:id="@+id/name_text"
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:layout_marginLeft="22dp"
+                                            android:layout_marginBottom="10dp"
+                                            android:text="@{profile.nameText}"
+                                            android:textColor="@color/colorPrimary"
+                                            android:fontFamily="@font/my_open_sans_regular"
+                                            android:layout_marginTop="10dp"/>
+
+                                        <TextView
+                                            android:id="@+id/name_asterisk"
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:layout_toRightOf="@+id/name_text"
+                                            android:text="\u002A"
+                                            android:layout_marginTop="10dp"
+                                            android:textColor="@color/colorRed"/>
+
+                                        <EditText
+                                            android:id="@+id/name_input"
+                                            android:layout_below="@+id/name_asterisk"
+                                            android:layout_height="wrap_content"
+                                            android:hint="@{profile.hintNameText}"
+                                            android:text="@{profile.name}"
+                                            android:layout_width="match_parent"
+                                            android:inputType="text"
+                                            android:textSize="14sp"
+                                            android:fontFamily="@font/my_open_sans_regular"
+                                            android:layout_marginLeft="20dp"
+                                            android:layout_marginRight="17dp"
+                                            android:backgroundTint="@color/colorText"/>
+
+                                    </RelativeLayout>
+
+
+                                </RelativeLayout>
+
+                            </android.support.v7.widget.CardView>
+
+
+                        </RelativeLayout>
+
+                        <RelativeLayout
+                            android:id="@+id/surname_relative"
+                            android:layout_below="@+id/name_relative"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+                            <android.support.v7.widget.CardView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                app:cardPreventCornerOverlap="false"
+                                app:cardElevation="0dp">
+
+                                <RelativeLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent">
+
+                                    <RelativeLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content">
+
+                                        <TextView
+                                            android:id="@+id/surname_text"
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:text="@{profile.surnameText}"
+                                            android:textColor="@color/colorPrimary"
+                                            android:layout_marginLeft="22dp"
+                                            android:layout_marginBottom="10dp"
+                                            android:fontFamily="@font/my_open_sans_regular"/>
+
+                                        <TextView
+                                            android:id="@+id/surname_asterisk"
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:layout_toRightOf="@+id/surname_text"
+                                            android:text="\u002A"
+                                            android:textColor="@color/colorRed"/>
+
+                                        <EditText
+                                            android:id="@+id/surname_input"
+                                            android:layout_below="@+id/surname_asterisk"
+                                            android:layout_height="wrap_content"
+                                            android:hint="@{profile.hintSurnameText}"
+                                            android:text="@{profile.surname}"
+                                            android:layout_width="match_parent"
+                                            android:inputType="text"
+                                            android:textSize="14sp"
+                                            android:fontFamily="@font/my_open_sans_regular"
+                                            android:layout_marginLeft="20dp"
+                                            android:layout_marginRight="17dp"
+                                            android:backgroundTint="@color/colorText"/>
+
+                                    </RelativeLayout>
+
+
+                                </RelativeLayout>
+
+                            </android.support.v7.widget.CardView>
+
+
+                        </RelativeLayout>
+
+                        <RelativeLayout
+                            android:id="@+id/date_relative"
+                            android:layout_below="@+id/surname_relative"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+                            <android.support.v7.widget.CardView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                app:cardPreventCornerOverlap="false"
+                                app:cardElevation="0dp">
+
+                                <RelativeLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent">
+
+                                    <RelativeLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content">
+
+                                        <TextView
+                                            android:id="@+id/date_text"
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:text="@{profile.dateOfBirthText}"
+                                            android:textColor="@color/colorPrimary"
+                                            android:layout_marginLeft="22dp"
+                                            android:layout_marginBottom="10dp"
+                                            android:fontFamily="@font/my_open_sans_regular"/>
+
+                                        <TextView
+                                            android:id="@+id/date_asterisk"
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:layout_toRightOf="@+id/date_text"
+                                            android:text="\u002A"
+                                            android:textColor="@color/colorRed"/>
+
+                                        <EditText
+                                            android:id="@+id/date_input"
+                                            android:layout_below="@+id/date_asterisk"
+                                            android:layout_height="wrap_content"
+                                            android:hint="@{profile.hintDateOfBirthText}"
+                                            android:text="@{profile.date}"
+                                            android:layout_width="match_parent"
+                                            android:inputType="date"
+                                            android:textSize="14sp"
+                                            android:fontFamily="@font/my_open_sans_regular"
+                                            android:layout_marginLeft="20dp"
+                                            android:layout_marginRight="17dp"
+                                            android:layout_marginBottom="17dp"
+                                            android:backgroundTint="@color/colorText"/>
+
+                                    </RelativeLayout>
+
+
+                                </RelativeLayout>
+
+                            </android.support.v7.widget.CardView>
+
+                        </RelativeLayout>
+
+                    </RelativeLayout>
+
+                </android.support.v7.widget.CardView>
+
+                <TextView
+                    android:id="@+id/login_email_text"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@{profile.loginEmailHeader}"
+                    android:layout_below="@+id/info_cardview"
+                    android:textColor="@color/colorBlack"
+                    android:layout_marginLeft="9dp"
+                    android:layout_marginTop="14dp"/>
+
+                <android.support.v7.widget.CardView
+                    android:id="@+id/login_cardview"
+                    android:layout_marginTop="21dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/login_email_text"
+                    app:cardPreventCornerOverlap="false"
+                    app:cardElevation="0dp">
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <RelativeLayout
+                            android:id="@+id/login_relative"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+                            <android.support.v7.widget.CardView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                app:cardPreventCornerOverlap="false"
+                                app:cardElevation="0dp">
+
+                                <RelativeLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent">
+
+                                    <RelativeLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content">
+
+                                        <TextView
+                                            android:id="@+id/login_text"
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:text="Логин: "
+                                            android:textColor="@color/colorPrimary"
+                                            android:layout_marginLeft="22dp"
+                                            android:layout_marginBottom="10dp"
+                                            android:layout_marginTop="10dp"
+                                            android:fontFamily="@font/my_open_sans_regular"/>
+
+                                        <TextView
+                                            android:id="@+id/login_asterisk"
+                                            android:layout_marginBottom="10dp"
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:layout_toRightOf="@+id/login_text"
+                                            android:text="\u002A"
+                                            android:textColor="@color/colorRed"
+                                            android:layout_marginTop="10dp"/>
+
+                                        <EditText
+                                            android:id="@+id/login_input"
+                                            android:layout_below="@+id/login_asterisk"
+                                            android:layout_height="wrap_content"
+                                            android:hint="@{profile.hintLoginText}"
+                                            android:layout_width="match_parent"
+                                            android:text="@{profile.login}"
+                                            android:inputType="textEmailAddress"
+                                            android:textSize="14sp"
+                                            android:backgroundTint="@color/colorText"
+                                            android:fontFamily="@font/my_open_sans_regular"
+                                            android:layout_marginLeft="20dp"
+                                            android:imeOptions="flagForceAscii"
+                                            android:layout_marginRight="17dp"/>
+                                        <!--android:digits="abcdefghijklmnopqrstuvwxyz ABCDEFGHIJKLMNOPQRSTUVWXYZ"-->
+
+                                    </RelativeLayout>
+
+
+                                </RelativeLayout>
+
+                            </android.support.v7.widget.CardView>
+
+
+                        </RelativeLayout>
+
+                        <RelativeLayout
+                            android:id="@+id/email_relative"
+                            android:layout_below="@+id/login_relative"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+                            <android.support.v7.widget.CardView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                app:cardPreventCornerOverlap="false"
+                                app:cardElevation="0dp">
+
+                                <RelativeLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent">
+
+                                    <RelativeLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content">
+
+                                        <TextView
+                                            android:id="@+id/email_text"
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:text="Email: "
+                                            android:textColor="@color/colorPrimary"
+                                            android:layout_marginLeft="22dp"
+                                            android:layout_marginBottom="10dp"
+                                            android:fontFamily="@font/my_open_sans_regular"/>
+
+                                        <TextView
+                                            android:id="@+id/email_asterisk"
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:layout_toRightOf="@+id/email_text"
+                                            android:text="\u002A"
+                                            android:textColor="@color/colorRed"/>
+
+                                        <EditText
+                                            android:id="@+id/email_input"
+                                            android:layout_below="@+id/email_asterisk"
+                                            android:layout_height="wrap_content"
+                                            android:hint="@{profile.hintEmailText}"
+                                            android:text="@{profile.email}"
+                                            android:layout_width="match_parent"
+                                            android:inputType="textEmailAddress"
+                                            android:fontFamily="@font/my_open_sans_regular"
+                                            android:layout_marginLeft="20dp"
+                                            android:textSize="14sp"
+                                            android:layout_marginRight="17dp"
+                                            android:backgroundTint="@color/colorText"
+                                            android:layout_marginBottom="17dp"/>
+
+                                    </RelativeLayout>
+
+                                </RelativeLayout>
+
+                            </android.support.v7.widget.CardView>
+
+                        </RelativeLayout>
+
+                    </RelativeLayout>
+
+                </android.support.v7.widget.CardView>
+
+                <android.support.v7.widget.CardView
+                    android:id="@+id/toolbar_text_right"
+                    android:layout_marginTop="25dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:cardBackgroundColor="@color/colorPrimary"
+                    app:cardCornerRadius="5dp"
+                    android:layout_marginRight="20dp"
+                    android:layout_marginBottom="20dp"
+                    android:layout_marginLeft="20dp"
+                    android:foreground="?android:attr/selectableItemBackground"
+                    android:clickable="true"
+                    android:layout_below="@+id/login_cardview"
+                    app:cardElevation="0dp">
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            android:id="@+id/signInButton"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_centerInParent="true"
+                            android:layout_marginTop="11dp"
+                            android:layout_marginBottom="11dp"
+                            android:fontFamily="@font/my_open_sans_regular"
+                            android:text="@{profile.saveText}"
+                            android:textAlignment="center"
+                            android:textColor="@color/colorWhite"
+                            android:textSize="16sp"/>
+
+                    </RelativeLayout>
+
+                </android.support.v7.widget.CardView>
+
+            </RelativeLayout>
+
+        </ScrollView>
+
+            <!--<com.dx.dxloadingbutton.lib.LoadingButton-->
+                <!--android:id="@+id/progressBar1"-->
+                <!--style="?android:attr/progressBarStyleLarge"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_centerHorizontal="true"-->
+                <!--android:layout_centerVertical="true"-->
+                <!--app:lb_resetAfterFailed="true"-->
+                <!--app:lb_btnRippleColor="#000000"-->
+                <!--app:lb_btnDisabledColor="#cccccc"-->
+                <!--app:lb_disabledTextColor="#999999"-->
+                <!--app:lb_cornerRadius="32"-->
+                <!--app:lb_btnText="test"-->
+                <!--android:visibility="@{profile.progress}"-->
+                <!--/>-->
+            <ProgressBar
+                android:id="@+id/progressBar1"
+                style="?android:attr/progressBarStyleLarge"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:indeterminate="true"
+                android:visibility="@{profile.progress}">
+
+
+            </ProgressBar>
+
+            <cdflynn.android.library.checkview.CheckView
+                android:id="@+id/check"
+                android:layout_width="65dp"
+                android:layout_height="65dp"
+                app:checkView_strokeColor="@color/colorPrimary"
+                app:checkView_strokeWidth="5dp"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"/>
+
+
+            <!--<ImageView-->
+                <!--android:id="@+id/check_mark"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--app:srcCompat="@drawable/icons8_checkmark"-->
+                <!--android:layout_centerHorizontal="true"-->
+                <!--android:layout_centerVertical="true"-->
+                <!--android:visibility="@{profile.checkMark}" />-->
+        </RelativeLayout>
+
+    </RelativeLayout>
+
+</layout>

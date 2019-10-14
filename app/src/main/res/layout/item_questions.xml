@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <data>
+        <variable
+            name="questions"
+            type="itest.kz.viewmodel.ItemQuestionsViewModel"/>
+    </data>
+    <LinearLayout
+        android:id="@+id/rl"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="0.5dp"
+        android:clickable="false"
+        android:focusable="false"
+        android:orientation="horizontal">
+
+        <itest.kz.view.customviews.CustomTextViewBold
+            android:id="@+id/btn"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:background="@drawable/white_circle"
+            android:textAlignment="center"
+            android:textSize="18sp"
+            android:gravity="center"
+            android:clickable="false"
+            android:focusable="false"
+            android:textColor="@color/colorBlack" />
+        <!--android:text="@{questions.letter}"-->
+
+    </LinearLayout>
+</layout>

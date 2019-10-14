@@ -1,0 +1,12 @@
+{
+  "type": "service_account",
+  "project_id": "api-9115974190133625010-622015",
+  "private_key_id": "f0f01aa9574b02037b092fc65edd25a85402fd2e",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQCsd0kiIs1pJSWr\nBF0s5aeownCZ40dhgbUM95McILJroOPivNaJbUtMV/SAsxHMa7T0dGLwDvbZv+qU\nf+4iiTQTqAGaSH0SLql/lNDCDzGv3Bgy5/Plqy/vTmiBcb4zq9tTFubBRwID+n+U\niqw1mMQ5vTNOkWRF+7EoED5HEfc36wS9Ct/J5JRhyXVyXsLjaEd8GMHldUGZzI5d\nKLqfJfa5hX1pvnzQhAi6kojqsuUGlZJs1LgaXGFgbpUS1j2/9nJrRpowW88YVY5X\nwAgWiCS9AuC7O7hK4tR3LjAzi35y0CbVdBTTPh243SOKQ8raKEondpQH4cavaTUJ\nc94rVAItAgMBAAECggEAUH9YvjsaPxJck4b06mjCqY0fu2QOxB8jX0sK+dz1CjFN\nTF4xkHFX7Ok8sPljvFMlYdgU+dEyPI5MMkXH44zAptAK93UQE3V+HZNbIMiwu1Fy\nZghHmZIeTIb/VjO9wCZdt1mAGQRIl4zLEYzsNhP4uq5pjSllcRi6JmX2e3uSNSGT\nmt0NRy9UJ1gObl4XXe7RsVVE6CYHeZzjmGBu3hKXYIfUcdEcjr9oAYuIPFjCjIXR\nrd7UtVFjpFk+PLPHVVFLS8dUJlvsM4I44NlDgmK8hSUJvbRUi1xozeqO/eMYerJp\nxBes0h2h+o7LxlXcYZvk11YgKm/nAbr9TcCTkpMEDQKBgQDX50elneHVvI/W47WJ\nGxNpvy5cqAt0vXFvQdhOHGWHOHom+tRc710M7GKlWn4E93bYQAS28/nbPb+5UI9C\nFiucmTvCYeRkp3dnOWcL8a9GpC6YE5XGOsyOR9FbZkaspdfxC8s5GF6uYQwY5Kvp\nIarZFynODGMb5pYGZLENTKmn6wKBgQDMftpqptRTyLuq33fKyLTg80w+er30MrrE\n8eu1gm4J7aFvrVwKX06lfwDU7UluMBL725QaQXl9KF/73wzCbTy5X6HyPzJTJ5fs\n0+VFl+kni2V+42cGcals300wuTL9jj6hrUsVi4AV/ELoX+YtIUa2fbvGn0JdVzLh\ntZeULSdQRwKBgFG12zzH0ueUVI/MYDECiUdVLpOsmaFV7S9hKR7uylHxwvErruF5\nSasRb4gLBnSUv2q6V85x6Zba+MuGvKETSPAcYix/5fNeGed8Jw6zKlW+30944g9C\nw5X5gjdoLsk6fs5gW0pBedvfKLfnG1TBBCrjBFRSBdRSYWcMBqH06KR/AoGBAIhl\n4Eec6SjNTiemEF/oyYT1oxhVhFfacmsktcSGr+DdaH1101tzwKBwetyLPRxK4o6t\nIjb1DxSlFoiIeRlCBWvb1sge0PFYCmTD3TwzHCftOZCOG0zYCVr+Ap2KGfG3rBzo\n2pkPSCrh7LrUJFJbzK+yY8oSthBONjkIh4clKwDHAoGAXgsf2I+92Qyi4pKdjJj0\nMnax3hDoJ+nVrOX5jTLc4Janj9vSjaucwUdZeCWez9qjjdga6PO7YUBFsT1vAUqE\ndHaFpApCNBQuQX25DxT23ZTx7M7cjkTB12XeNS/8zlgLBOsxIN+XiovmPe6KDBV1\n9ASPrHjvSL8DR4c0eLCGtYs=\n-----END PRIVATE KEY-----\n",
+  "client_email": "bilim-media-group@api-9115974190133625010-622015.iam.gserviceaccount.com",
+  "client_id": "104782652346499641344",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/bilim-media-group%40api-9115974190133625010-622015.iam.gserviceaccount.com"
+}

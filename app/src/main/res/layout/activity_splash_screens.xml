@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="spash"
+            type="itest.kz.viewmodel.SplashScreensViewModel" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="20dp">
+
+
+            <android.support.v4.view.ViewPager
+                android:id="@+id/vp_fragments_container"
+                android:layout_width="match_parent"
+                android:layout_above="@+id/tabDots"
+                android:layout_height="wrap_content" />
+
+        <android.support.design.widget.TabLayout
+            android:id="@+id/tabDots"
+            android:layout_above="@+id/text_pass_relative"
+            android:layout_marginBottom="30dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:tabBackground="@drawable/tab_selector"
+            app:tabGravity="center"
+            app:tabPaddingEnd="7dp"
+            app:tabPaddingStart="7dp"
+            app:tabRippleColor="@null"
+            app:tabIndicatorHeight="0dp"/>
+
+            <RelativeLayout
+                android:id="@+id/text_pass_relative"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true">
+                <TextView
+                    android:id="@+id/text_pass"
+                    android:layout_width="match_parent"
+                    android:layout_height="25dp"
+                    android:layout_centerHorizontal="true"
+                    android:text="@{spash.passText}"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="16sp"
+                    android:clickable="true"
+                    android:onClick="@{spash.logIn}"
+                    android:background="?attr/selectableItemBackground"
+                    android:layout_marginBottom="10dp"
+                    android:fontFamily="@font/my_open_sans_regular"
+                    android:textAlignment="center"/>
+
+            </RelativeLayout>
+
+            <android.support.v7.widget.CardView
+                android:id="@+id/login_cardview"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                app:cardBackgroundColor="@color/colorPrimary"
+                app:cardCornerRadius="5dp"
+                android:layout_marginRight="39dp"
+                android:layout_alignParentBottom="true"
+                android:layout_marginLeft="37dp"
+                android:onClick="@{spash.logIn}"
+                android:visibility="gone"
+                android:foreground="?android:attr/selectableItemBackground"
+                android:clickable="true">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp">
+
+                    <TextView
+                        android:id="@+id/signInButton"
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"
+                        android:fontFamily="@font/my_open_sans_regular"
+                        android:text="@{spash.beginText}"
+                        android:gravity="center"
+                        android:layout_centerHorizontal="true"
+                        android:layout_centerInParent="true"
+                        android:layout_centerVertical="true"
+                        android:textAlignment="center"
+                        android:textColor="@color/colorWhite"
+                        android:textSize="16sp" />
+                    <!--a-->
+
+                </RelativeLayout>
+
+            </android.support.v7.widget.CardView>
+
+
+        </RelativeLayout>
+
+        <!--<com.rd.PageIndicatorView-->
+            <!--android:id="@+id/pageIndicatorView"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_centerInParent="true"-->
+            <!--app:piv_animationType="scale"-->
+            <!--app:piv_dynamicCount="true"-->
+            <!--app:piv_interactiveAnimation="true"-->
+            <!--app:piv_selectedColor="@color/colorPrimary"-->
+            <!--app:piv_unselectedColor="@color/colorPrimaryLight"-->
+            <!--app:piv_viewPager="@+id/vp_fragments_container"-->
+            <!--app:piv_padding="12dp"-->
+            <!--app:piv_radius="8dp" />-->
+    </LinearLayout>
+</layout>

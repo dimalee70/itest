@@ -1,0 +1,133 @@
+<resources xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!--<style name="Theme_Dialog" parent="android:Theme.Holo.Dialog">-->
+        <!--<item name="android:windowMinWidthMajor">96%</item>-->
+        <!--<item name="android:windowMinWidthMinor">96%</item>-->
+        <!--<item name="android:windowMinH"-->
+    <!--</style>-->
+
+
+    <!--<style name="AppBottomSheetDialogTheme"-->
+        <!--parent="Theme.Design.Light.BottomSheetDialog">-->
+        <!--<item name="bottomSheetStyle">@style/AppModalStyle</item>-->
+    <!--</style>-->
+
+    <!--<style name="AppModalStyle"-->
+        <!--parent="Widget.Design.BottomSheet.Modal">-->
+        <!--<item name="android:background">@drawable/dialog_rounded_bg</item>-->
+    <!--</style>-->
+
+    <style name="DialogAnimation">
+        <item name="android:windowEnterAnimation">@anim/slide_up</item>
+        <item name="android:windowExitAnimation">@anim/slide_down</item>
+    </style>
+
+
+
+    <style name="BottomSheetDialog" parent="Theme.Design.Light.BottomSheetDialog">
+        <item name="bottomSheetStyle">@style/bottomSheetStyleWrapper</item>
+    </style>
+
+    <style name="bottomSheetStyleWrapper" parent="Widget.Design.BottomSheet.Modal">
+        <item name="behavior_peekHeight">1000dp</item>
+    </style>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:itemBackground">@color/colorPrimary</item>
+    </style>
+    <style name="AppTheme.ActionBar" parent="Theme.AppCompat.Light.DarkActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:itemBackground">@color/colorPrimary</item>
+    </style>
+
+    <style name="SplashTheme" parent="Theme.AppCompat.NoActionBar">
+        <item name="android:windowBackground">@drawable/background_splash</item>
+    </style>
+
+    <style name="TextViewParagraph">
+        <item name="android:fontFamily">font/opensans_semibold.ttf</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">#444444</item>
+    </style>
+
+    <!--<style name="AppTabLayout" parent="Widget.Design.TabLayout">-->
+        <!--<item name="tabIndicatorColor">?attr/colorAccent</item>-->
+        <!--<item name="tabIndicatorHeight">4dp</item>-->
+        <!--<item name="tabPaddingStart">6dp</item>-->
+        <!--<item name="tabPaddingEnd">6dp</item>-->
+        <!--<item name="tabBackground">?attr/selectableItemBackground</item>-->
+        <!--<item name="tabTextAppearance">@style/AppTabTextAppearance</item>-->
+        <!--<item name="tabSelectedTextColor">@color/colorPrimaryDark</item>-->
+    <!--</style>-->
+
+    <!-- for text -->
+    <style name="AppTabTextAppearance" parent="TextAppearance.Design.Tab">
+        <item name="android:textSize">18dp</item>
+        <item name="android:textColor">@color/colorUnselectedTab</item>
+
+        <item name="textAllCaps">false</item>
+    </style>
+
+    <style name="AppTabTextAppearanceSubject" parent="TextAppearance.Design.Tab">
+        <item name="android:textSize">18dp</item>
+        <item name="android:textColor">@color/colorUnselectedTabSubject</item>
+
+        <item name="textAllCaps">false</item>
+    </style>
+    <!--<style name="Divider">-->
+        <!--<item name="android:layout_width">match_parent</item>-->
+        <!--<item name="android:layout_height">1dp</item>-->
+        <!--<item name="android:color">@color/colorBlack</item>-->
+        <!--<item name="android:background">?android:attr/listDivider</item>-->
+    <!--</style>-->
+
+    <style name="ToolbarColoredBackArrow" parent="AppTheme">
+        <item name="android:textColorSecondary">@color/colorWhite</item>
+    </style>
+
+    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
+
+    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+
+    <style name="MyStyle" parent="Widget.Design.TabLayout">
+        <!--<item name="tabIndicatorColor">#FFFF</item>-->
+
+        <!--<item name="tabIndicatorHeight">2dp</item>-->
+        <!--<item name="tabBackground">@drawable/tab_bg</item>-->
+        <item name="tabPaddingStart">8dp</item>
+        <item name="tabPaddingEnd">8dp</item>
+        <!--<item name="tabBackground">?attr/selectableItemBackground</item>-->
+        <item name="tabSelectedTextColor">@color/colorPrimary</item>
+        <item name="android:textColor">@color/colorWhite</item>
+    </style>
+
+    <style name="styleTabLayoutAuth" parent="Widget.Design.TabLayout">
+        <item name="tabIndicatorColor">#FFFF</item>
+        <item name="tabIndicatorHeight">2dp</item>
+        <item name="tabPaddingStart">8dp</item>
+        <item name="android:textSize">18sp</item>
+        <item name="tabPaddingEnd">8dp</item>
+        <item name="tabBackground">?attr/selectableItemBackground</item>
+        <item name="tabSelectedTextColor">@color/colorPrimary</item>
+        <item name="android:textColor">@color/colorUnselectedTabAuth</item>
+    </style>
+
+    <style name="tab_text" parent="@android:style/TextAppearance.Widget.TabWidget">
+        <item name="android:fontFamily">@font/my_open_sans_semibold</item>
+    </style>
+
+    <!--<style name="DrawerArrowStyle" parent="Widget.AppCompat.DrawerArrowToggle">-->
+        <!--<item name="color">@android:color/black</item>-->
+    <!--</style>-->
+
+</resources>

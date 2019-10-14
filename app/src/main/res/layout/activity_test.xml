@@ -1,0 +1,287 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="test"
+            type="itest.kz.viewmodel.TestViewModel">
+        </variable>
+    </data>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <android.support.constraint.ConstraintLayout
+            android:layout_width="match_parent"
+            android:id="@+id/lay"
+            android:layout_height="wrap_content">
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/my_toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="?attr/colorPrimary"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:theme="@style/ToolbarColoredBackArrow"
+            android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
+            app:popupTheme="@style/ThemeOverlay.AppCompat.Light"/>
+
+        <LinearLayout
+            android:id="@+id/linearLayout1"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            app:layout_constraintStart_toStartOf="parent"
+            android:paddingEnd="50dp"
+            app:layout_constraintBottom_toBottomOf="@id/my_toolbar"
+            app:layout_constraintTop_toTopOf="@id/my_toolbar">
+
+            <ImageButton
+                android:id="@+id/imageButtonTitle"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:background="?attr/selectableItemBackground"
+                android:clickable="true"
+                android:gravity="right"
+                android:layout_marginLeft="6dp"
+                app:srcCompat="@drawable/ic_iconfinder_connect_direction_path_way_2203530" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:paddingEnd="50dp"
+            android:paddingStart="50dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+        <ImageButton
+            android:id="@+id/ibCustomBack"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:background="?attr/selectableItemBackground"
+            android:layout_marginRight="8dp"
+            app:srcCompat="@drawable/ic_toolbar" />
+
+        <TextView
+            android:id="@+id/text_view_title"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:textSize="20sp"
+            android:textColor="@color/colorWhite"
+            android:ellipsize="end"
+            android:gravity="center"
+            android:maxLines="1"
+            android:drawablePadding="8dp"
+            android:fontFamily="@font/my_open_sans_regular"/>
+
+
+        </LinearLayout>
+
+        <ImageButton
+            android:id="@+id/buttonFinishTest"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginRight="6dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:background="?attr/selectableItemBackground"
+            android:clickable="true"
+            app:srcCompat="@drawable/ic_icon_x" />
+
+
+        </android.support.constraint.ConstraintLayout>
+
+    <!--<android.support.v7.widget.Toolbar-->
+        <!--android:id="@+id/my_toolbar"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="?attr/actionBarSize"-->
+        <!--android:background="?attr/colorPrimary">-->
+
+        <!--<RelativeLayout-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="match_parent">-->
+
+
+        <!--<RelativeLayout-->
+            <!--android:id="@+id/title_relative"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="match_parent">-->
+
+            <!--<ImageButton-->
+                <!--android:id="@+id/imageButtonTitle"-->
+                <!--android:layout_width="40dp"-->
+                <!--android:layout_height="40dp"-->
+                <!--android:layout_centerVertical="true"-->
+                <!--android:layout_alignParentStart="true"-->
+                <!--android:background="?attr/selectableItemBackground"-->
+                <!--android:clickable="true"-->
+                <!--android:layout_marginLeft="6dp"-->
+                <!--app:srcCompat="@drawable/ic_iconfinder_connect_direction_path_way_2203530" />-->
+
+            <!--<TextView-->
+                <!--android:id="@+id/text_view_title"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:textSize="20sp"-->
+                <!--android:textColor="@color/colorWhite"-->
+                <!--android:ellipsize="end"-->
+                <!--android:drawableStart="@drawable/ic_toolbar"-->
+                <!--android:drawablePadding="8dp"-->
+                <!--android:layout_centerVertical="true"-->
+                <!--android:layout_centerHorizontal="true"-->
+                <!--android:maxLines="1"-->
+                <!--android:layout_marginRight="80dp"-->
+                <!--android:layout_marginLeft="80dp"-->
+                <!--android:fontFamily="@font/my_open_sans_regular"/>-->
+
+
+
+        <!--</RelativeLayout>-->
+
+
+            <!--<ImageButton-->
+                <!--android:id="@+id/buttonFinishTest"-->
+                <!--android:layout_width="40dp"-->
+                <!--android:layout_alignParentRight="true"-->
+                <!--android:layout_height="40dp"-->
+                <!--app:srcCompat="@drawable/ic_icon_x"-->
+                <!--android:layout_marginRight="6dp"-->
+                <!--android:layout_centerVertical="true"-->
+                <!--android:background="?attr/selectableItemBackground"-->
+                <!--android:clickable="true"/>-->
+            <!--&lt;!&ndash;android:layout_marginRight="16dp"&ndash;&gt;-->
+
+
+        <!--</RelativeLayout>-->
+    <!--</android.support.v7.widget.Toolbar>-->
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_alignParentBottom="true"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:contentInsetStart="0dp"
+            android:padding="0dp"
+            android:contentInsetLeft="10dp"
+            android:contentInsetRight="10dp"
+            app:contentInsetLeft="0dp"
+            app:contentInsetRight="0dp"
+            app:contentInsetStart="0dp"
+            android:background="@color/colorWhite"
+            android:minHeight="?attr/actionBarSize">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <RelativeLayout
+                    android:id="@+id/button_back_relative"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <ImageButton
+                        android:id="@+id/buttonBack"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:layout_alignParentStart="true"
+                        app:srcCompat="@drawable/ic_icon_strelka"
+                        android:background="?attr/selectableItemBackground"
+                        android:clickable="true" />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <TextView
+                        android:id="@+id/text_number_pager"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginTop="8dp"
+                        android:textColor="@color/colorPrimary"
+                        android:textAlignment="center"
+                        android:textSize="18sp"/>
+                    <!--android:text="fvfdfdfnjscbhsdbchsdbchdscdcsdcsdcvgsdvcgsvdgcdsdvcg"-->
+                    <!--android:textAlignment="center"-->
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_alignParentRight="true">
+
+                    <ImageButton
+                        android:id="@+id/buttonForward"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:layout_centerVertical="true"
+                        android:src="@drawable/rotate_ic_icon_strelka"
+                        android:background="?attr/selectableItemBackground"
+                        android:clickable="true"
+
+                        />
+                </RelativeLayout>
+            </RelativeLayout>
+
+
+        </android.support.v7.widget.Toolbar>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/lay"
+            android:layout_above="@+id/toolbar">
+
+
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+                <!--android:layout_marginTop="60dp"-->
+
+
+
+                <itest.kz.util.CustomViewPager
+                    android:id="@+id/pager"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1" >
+                </itest.kz.util.CustomViewPager>
+
+            </LinearLayout>
+        </RelativeLayout>
+
+
+
+        </LinearLayout>
+
+        <ProgressBar
+            android:id="@+id/progressBar1"
+            style="?android:attr/progressBarStyleLarge"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:indeterminate="true"
+            android:visibility="@{test.progress}"/>
+    <!--</ScrollView>-->
+    </RelativeLayout>
+</layout>

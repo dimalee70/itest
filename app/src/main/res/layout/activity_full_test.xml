@@ -1,0 +1,360 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+    <data>
+        <variable
+            name="full"
+            type="itest.kz.viewmodel.FullTestViewModel"/>
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/colorBackgroundCardView">
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true">
+
+                <ProgressBar
+                    android:id="@+id/progressBar1"
+                    style="?android:attr/progressBarStyleLarge"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_centerVertical="true"
+                    android:indeterminate="true"
+                    android:visibility="@{full.progress}" />
+            </RelativeLayout>
+
+            <android.support.constraint.ConstraintLayout
+                android:layout_width="match_parent"
+                android:id="@+id/lay"
+                android:layout_height="wrap_content">
+
+                <android.support.v7.widget.Toolbar
+                    android:id="@+id/my_toolbar"
+                    android:layout_width="match_parent"
+                    android:layout_height="?attr/actionBarSize"
+                    android:background="?attr/colorPrimary"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:theme="@style/ToolbarColoredBackArrow"
+                    android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
+                    app:popupTheme="@style/ThemeOverlay.AppCompat.Light"/>
+
+                <LinearLayout
+                    android:id="@+id/linearLayout1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal"
+                    app:layout_constraintStart_toStartOf="parent"
+                    android:paddingEnd="50dp"
+                    app:layout_constraintBottom_toBottomOf="@id/my_toolbar"
+                    app:layout_constraintTop_toTopOf="@id/my_toolbar">
+
+
+                    <ImageButton
+                        android:id="@+id/imageButtonTitle"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:background="?attr/selectableItemBackground"
+                        android:clickable="true"
+                        android:gravity="right"
+                        android:layout_marginLeft="6dp"
+                        app:srcCompat="@drawable/ic_iconfinder_connect_direction_path_way_2203530" />
+
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:paddingEnd="50dp"
+                    android:paddingStart="50dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <ImageButton
+                        android:id="@+id/ibCustomBack"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:background="?attr/selectableItemBackground"
+                        android:layout_marginRight="8dp"
+                        app:srcCompat="@drawable/ic_toolbar" />
+
+                    <TextView
+                        android:id="@+id/text_view_title"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:textSize="20sp"
+                        android:textColor="@color/colorWhite"
+                        android:ellipsize="end"
+                        android:gravity="center"
+                        android:maxLines="1"
+                        android:drawablePadding="8dp"
+                        android:fontFamily="@font/my_open_sans_regular"/>
+
+
+
+                </LinearLayout>
+
+                <ImageButton
+                    android:id="@+id/buttonFinishTest"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_marginRight="6dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:background="?attr/selectableItemBackground"
+                    android:clickable="true"
+                    app:srcCompat="@drawable/ic_icon_x" />
+
+                <!--<LinearLayout-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="match_parent"-->
+                    <!--android:orientation="horizontal"-->
+                    <!--app:layout_constraintEnd_toEndOf="@+id/linearLayout1"-->
+                    <!--app:layout_constraintBottom_toBottomOf="@id/my_toolbar"-->
+
+                    <!--app:layout_constraintTop_toTopOf="@id/my_toolbar">-->
+                    <!--app:layout_constraintStart_toStartOf="linearLayout1"-->
+
+                    <!--app:layout_constraintEnd_toEndOf="parent"-->
+                    <!--android:paddingEnd="50dp"-->
+
+
+
+                <!--</LinearLayout>-->
+
+
+
+
+            </android.support.constraint.ConstraintLayout>
+
+            <!--<android.support.v7.widget.Toolbar-->
+                <!--android:id="@+id/my_toolbar"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="?attr/actionBarSize"-->
+                <!--android:background="?attr/colorPrimary"-->
+                <!--android:contentInsetStart="0dp"-->
+                <!--android:elevation="4dp"-->
+                <!--android:theme="@style/ThemeOverlay.AppCompat.ActionBar"-->
+                <!--app:popupTheme="@style/ThemeOverlay.AppCompat.Light">-->
+
+
+
+                    <!--<RelativeLayout-->
+                        <!--android:id="@+id/text_view_relative"-->
+                        <!--android:layout_width="match_parent"-->
+                        <!--android:layout_height="match_parent">-->
+                        <!--&lt;!&ndash;android:layout_marginRight="200dp"&ndash;&gt;-->
+
+
+
+                        <!--<ImageButton-->
+                            <!--android:id="@+id/imageButtonTitle"-->
+                            <!--android:layout_width="40dp"-->
+                            <!--android:layout_height="40dp"-->
+                            <!--android:layout_centerVertical="true"-->
+                            <!--android:gravity="right"-->
+                            <!--android:background="?attr/selectableItemBackground"-->
+                            <!--android:clickable="true"-->
+                            <!--app:layout_constraintStart_toStartOf="parent"-->
+                            <!--app:layout_constraintBottom_toBottomOf="parent"-->
+                            <!--app:srcCompat="@drawable/ic_iconfinder_connect_direction_path_way_2203530" />-->
+
+
+
+                        <!--<TextView-->
+                            <!--android:id="@+id/text_view_title"-->
+                            <!--android:layout_width="wrap_content"-->
+                            <!--android:layout_height="wrap_content"-->
+                            <!--android:ellipsize="end"-->
+                            <!--android:fontFamily="@font/my_open_sans_regular"-->
+                            <!--android:maxLines="1"-->
+                            <!--android:drawableStart="@drawable/ic_toolbar"-->
+                            <!--android:drawablePadding="8dp"-->
+                            <!--android:textColor="@color/colorWhite"-->
+                            <!--android:layout_centerHorizontal="true"-->
+                            <!--android:layout_centerVertical="true"-->
+                            <!--android:textSize="20sp" />-->
+
+                        <!--<ImageButton-->
+                            <!--android:id="@+id/buttonFinishTest"-->
+                            <!--android:layout_width="40dp"-->
+                            <!--android:layout_height="40dp"-->
+                            <!--android:layout_alignParentRight="true"-->
+                            <!--android:layout_centerVertical="true"-->
+                            <!--android:layout_marginRight="6dp"-->
+                            <!--android:background="?attr/selectableItemBackground"-->
+                            <!--android:clickable="true"-->
+                            <!--app:srcCompat="@drawable/ic_icon_x" />-->
+                        <!--android:layout_marginRight="16dp"-->
+                        <!--android:layout_marginRight="30dp"-->
+
+                    <!--</RelativeLayout>-->
+                <!---->
+
+
+            <!--</android.support.v7.widget.Toolbar>-->
+
+
+            <android.support.v7.widget.Toolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_alignParentBottom="true"
+                android:background="@color/colorWhite"
+                android:contentInsetStart="0dp"
+                android:contentInsetLeft="10dp"
+                android:contentInsetRight="10dp"
+                android:minHeight="?attr/actionBarSize"
+                android:padding="0dp"
+                app:contentInsetLeft="0dp"
+                app:contentInsetRight="0dp"
+                app:contentInsetStart="0dp">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <RelativeLayout
+                        android:id="@+id/button_back_relative"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_alignParentLeft="true">
+
+                        <ImageButton
+                            android:id="@+id/buttonBack"
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            android:layout_alignParentLeft="true"
+                            android:layout_gravity="left"
+                            android:background="?attr/selectableItemBackground"
+                            android:clickable="true"
+                            app:srcCompat="@drawable/ic_icon_strelka" />
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginEnd="40dp"
+                        android:layout_toRightOf="@+id/button_back_relative">
+
+                        <TextView
+                            android:id="@+id/text_number_pager"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerInParent="true"
+                            android:layout_centerHorizontal="true"
+                            android:layout_centerVertical="true"
+                            android:textColor="@color/colorPrimary"
+                            android:textSize="18sp" />
+                        <!--android:textAlignment="center"-->
+
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_alignParentRight="true">
+
+                        <ImageButton
+                            android:id="@+id/buttonForward"
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            android:layout_centerVertical="true"
+                            android:layout_gravity="right"
+                            android:background="?attr/selectableItemBackground"
+                            android:clickable="true"
+                            android:src="@drawable/rotate_ic_icon_strelka"
+
+                            />
+                    </RelativeLayout>
+                </RelativeLayout>
+
+
+            </android.support.v7.widget.Toolbar>
+
+
+            <RelativeLayout
+                android:id="@+id/list_subject_relative"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/lay">
+
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/list_subjects"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingEnd="10dp"
+                    android:background="@color/colorBackgroundCardView"
+                    android:clickable="false"
+                    android:clipToPadding="false"
+                    android:focusable="false"
+                    android:orientation="horizontal"
+                    android:scrollbars="vertical"
+                    app:layoutManager="android.support.v7.widget.LinearLayoutManager"
+                    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+                    tools:listitem="@layout/item_full_subject" />
+                <!--android:layout_marginEnd="10dp"-->
+
+            </RelativeLayout>
+
+            <TextView
+                android:id="@+id/timer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/list_subject_relative"
+                android:layout_marginTop="10dp"
+                android:textAlignment="center"
+                android:textColor="@color/colorPrimary"
+                android:textSize="20sp"
+                android:visibility="@{full.timeVisibility}" />
+            <!--<android.support.v4.widget.NestedScrollView-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content">-->
+
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/timer"
+                android:layout_marginBottom="40dp">
+
+                <itest.kz.util.CustomViewPager
+                    android:id="@+id/pager"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1">
+                </itest.kz.util.CustomViewPager>
+            </RelativeLayout>
+
+            <!--</android.support.v4.widget.NestedScrollView>-->
+
+        </RelativeLayout>
+
+
+    </LinearLayout>
+
+
+
+
+    <!--</LinearLayout>-->
+<!--</android.support.design.widget.CoordinatorLayout>-->
+    <!--</ScrollView>-->
+</layout>

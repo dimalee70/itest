@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <data>
+        <variable
+            name="answer"
+            type="itest.kz.viewmodel.ItemAnswerViewModel"/>
+    </data>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+
+
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:clickable="false"
+    android:focusable="false"
+    >
+
+    <android.support.v7.widget.CardView
+        android:id="@+id/cardview1"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        app:cardCornerRadius="5dp"
+        app:cardElevation="1dp"
+        app:cardUseCompatPadding="true"
+        tools:layout_marginBottom="16dp"
+        android:clickable="false"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:focusable="false"
+       >
+        <!--app:backgroundColor="@{answer.color}"-->
+        <!--android:onClick="@{() -> answer.onClick()}">-->
+
+            <RelativeLayout
+                android:clickable="false"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <RelativeLayout
+                    android:id="@+id/letter_relative"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:gravity="center">
+
+
+                <TextView
+                    android:id="@+id/textview1"
+                    android:layout_width="33dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@{answer.letter}"
+                    android:textAlignment="center"
+                    android:clickable="false"
+                    android:focusable="false"
+                    android:textSize="20dp"
+                    android:fontFamily="@font/my_open_sans_semibold"
+                    />
+
+                </RelativeLayout>
+
+
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_toRightOf="@id/letter_relative"
+                    android:background="@color/colorWhite">
+
+
+                <itest.kz.util.AnswerWebView
+                    android:id="@+id/answerText"
+                    android:layout_marginTop="7dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:clickable="false"
+                    android:focusable="false"
+                    android:scrollbarAlwaysDrawVerticalTrack="true"
+                    android:scrollbars="vertical"
+                    android:overScrollMode="always"
+                    app:loadData="@{answer.answerText}">
+
+
+                    <!--android:hardwareAccelerated="true"-->
+
+                    <!--android:layout_centerInParent="true"-->
+                    <!--android:layout_centerVertical="true"-->
+                    <!--android:layout_centerHorizontal="true"-->
+                    <!--android:layout_centerHorizontal="true"-->
+                    <!--android:layout_centerVertical="true"-->
+
+                </itest.kz.util.AnswerWebView>
+
+                </RelativeLayout>
+
+
+                <!--<WebView-->
+                    <!--android:id="@+id/answerText"-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_centerHorizontal="true"-->
+                    <!--android:layout_centerVertical="true"-->
+                    <!--android:hardwareAccelerated="true"-->
+                    <!--android:clickable="false"-->
+                    <!--android:focusable="false"-->
+                    <!--android:layout_toRightOf="@id/textview1"-->
+                    <!--app:loadData="@{answer.answerText}" />-->
+
+
+
+            </RelativeLayout>
+
+
+            <!--app:loadData="@{answer.answerText}"-->
+
+            <!--<io.github.kexanie.library.MathView-->
+            <!--android:id="@+id/formula_two"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--app:text="When \\(a \\ne 0\\), there are two solutions to \\(ax^2 + bx + c = 0\\)-->
+            <!--and they are $$x = {-b \\pm \\sqrt{b^2-4ac} \\over 2a}.$$"-->
+            <!--app:engine="MathJax"-->
+            <!--&gt;-->
+            <!--</io.github.kexanie.library.MathView>-->
+
+            <!--<TextView-->
+            <!--android:id="@+id/textView"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:text="@{answer.answerText}"-->
+            <!--/>-->
+        </android.support.v7.widget.CardView>
+    </RelativeLayout>
+
+    </LinearLayout>
+
+
+    <!--</ScrollView>-->
+</layout>
